@@ -1,6 +1,5 @@
-<!doctype html>
-<html lang="ru">
-<head>
+<!DOCTYPE html>
+<html lang="ru"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>СВ · просмотр модели</title>
@@ -78,7 +77,7 @@
 
 @media(max-width:760px){.side{padding:0}.sideHead{padding-top:70px}.modelTree{max-height:none}}
 </style>
-</head>
+<style></style><script id="viewerSavedState" type="application/json">{"schema":1,"source":"a429f7f30fba00b97fd6bc07658c6e7aa762326cf3d6bc98232ea99ff9d7cb30","features":{"outline":false,"section":{"active":false,"axis":"y","position":1258.2326599327232,"reversed":false,"showPlane":true,"chosen":false,"normal":[0,1,0]},"finish":"texture","dimensions":{"size":10,"color":"#102820","unit":false,"box":true},"materials":[{"id":"art:67481","type":"tex","name":"ДСП лам. Swiss Krono U164 PE Антрацитный 2800х2070х18мм","state":{"rot":0,"mode":"tex","texKey":"67481","texData":null,"color":"#800000"}},{"id":"art:Фасады низ 19мм","type":"tex","name":"Краска 19мм  NCS S 7500-N Глубокий Мат двустор.","state":{"rot":0,"mode":"tex","texKey":"Фасады низ 19мм","texData":null,"color":"#800000"}},{"id":"art:173522","type":"tex","name":"ДСП лам. Egger U961 ST7 Чорный графит 2800х2070х18 мм","state":{"rot":0,"mode":"tex","texKey":"173522","texData":null,"color":"#373131"}},{"id":"art:86901","type":"tex","name":"Керамогранит NEOLITH Fusion Beton silk 12 мм 3200Х1600","state":{"rot":0,"mode":"tex","texKey":"86901","texData":null,"color":"#9d9587"}},{"id":"col:#ffff00","type":"col","name":"Фанера шлифованная 1250x2500x18 мм, сорт 3/4","state":{"rot":0,"mode":"col","texKey":null,"texData":null,"color":"#ffff00"}},{"id":"col:#f1f1ef","type":"col","name":"Белый","state":{"rot":0,"mode":"col","texKey":null,"texData":null,"color":"#f1f1ef"}},{"id":"art:-2","type":"tex","name":"Алюминий","state":{"rot":0,"mode":"col","texKey":"-2","texData":null,"color":"#cccccc"}},{"id":"col:#2e3236","type":"col","name":"Врезной проф.- ручка Ferro Fiori M 8030 черный анодир., 18мм","state":{"rot":0,"mode":"col","texKey":null,"texData":null,"color":"#2e3236"}},{"id":"art:110021","type":"tex","name":"Профиль для LED-ленты, ВРЕЗНОЙ, L = 3м, алюминий, черный мат","state":{"rot":0,"mode":"tex","texKey":"110021","texData":null,"color":"#2b2a28"}},{"id":"col:#eaf0ee","type":"col","name":"Линза светорассеивающая для профиля L= 3м, поликарбонат, молочная","state":{"rot":0,"mode":"col","texKey":null,"texData":null,"color":"#eaf0ee"}},{"id":"col:#ffe4a8","type":"col","name":"LED-стрічка 2835 SMD, 120 LEDs/m, 9.6W, 24V, IP20, тепле світло, 3000К NEW","state":{"rot":0,"mode":"col","texKey":null,"texData":null,"color":"#ffe4a8"}}],"texture_fit":{"schema":2,"modes":{}},"material_labels":true,"visibility":{"hidden":[],"objectMode":true},"panel_hardware":{"active":false,"selectedPanelId":null},"assembler":{"active":false,"exploded":false,"separation":250,"unitId":null,"partDimensionsEnabled":false},"hardware_catalog":{"expanded":false}},"controls":{"panels":true,"profiles":true,"edges":true,"textures":true,"imports":true,"hardware":true,"holes":true,"lines":true,"overlay":false,"opacity":"100","guides":false,"holeOverlay":false,"nativeDimensions":true,"manualDimensions":true},"layers":[true,true,true],"camera":{"position":[2962.4576250101936,2466.9560457485077,3135.12583248418],"target":[926.0203384464862,1365.7986412977853,620.1462342933537],"up":[0,1,0]},"dimensions":[]}</script></head>
 <body>
 <aside class="side" id="side" aria-label="Модель и слои">
  <div class="sideHead">
@@ -95,7 +94,7 @@
   <div class="selection hidden" id="holeInfo"><h3>Отверстия фурнитуры</h3><dl id="holeFields"></dl><div class="long">По шаблону фурнитуры. Отверстия не вычтены из панелей.</div></div>
  </div>
 </aside>
-<main id="viewport" aria-label="Интерактивная трёхмерная модель"><canvas id="canvas" tabindex="0" aria-label="Модель: перетаскивание — вращение; колесо — масштаб; правая кнопка — перенос"></canvas><div id="labels"></div><div id="snap" class="hidden"></div><div id="error" class="hidden" role="alert"></div></main>
+<main id="viewport" aria-label="Интерактивная трёхмерная модель"><canvas id="canvas" tabindex="0" aria-label="Модель: перетаскивание — вращение; колесо — масштаб; правая кнопка — перенос" data-engine="three.js r160" width="300" height="150" style="touch-action: none;"></canvas><div id="labels"></div><div id="snap" class="hidden"></div><div id="error" class="hidden" role="alert"></div></main>
 <style>
 /* Верхнее меню разбито на смысловые блоки: Отображение / Выбор и видимость /
    Слои. Модули монтируют свои элементы в #selectionTools и #layerTools. */
@@ -131,19 +130,19 @@ input[type="range"]::-moz-range-thumb{width:15px;height:15px;border-radius:50%;b
  <div class="toolGroup displayTools" id="displayPanel" aria-label="Что отображать">
   <span class="blockLabel">Отображение</span>
   <details class="toolMenu"><summary>Показать</summary><div class="toolPopup">
-   <label class="check"><input type="checkbox" id="panels" checked><span>Панели</span></label>
-   <label class="check"><input type="checkbox" id="profiles" checked><span>Профили</span></label>
-   <label class="check"><input type="checkbox" id="edges" checked><span>Контур (обводка)</span></label>
-   <label class="check"><input type="checkbox" id="textures" checked><span>Текстуры</span></label>
-   <label class="check"><input type="checkbox" id="imports" checked><span>Импорт</span></label>
-   <label class="check"><input type="checkbox" id="hardware" checked><span>Фурнитура</span></label>
-   <label class="check"><input type="checkbox" id="holes" checked><span>Отверстия</span></label>
+   <label class="check"><input type="checkbox" id="panels" checked=""><span>Панели</span></label>
+   <label class="check"><input type="checkbox" id="profiles" checked=""><span>Профили</span></label>
+   <label class="check"><input type="checkbox" id="edges" checked=""><span>Контур (обводка)</span></label>
+   <label class="check"><input type="checkbox" id="textures" checked=""><span>Текстуры</span></label>
+   <label class="check"><input type="checkbox" id="imports" checked=""><span>Импорт</span></label>
+   <label class="check"><input type="checkbox" id="hardware" checked=""><span>Фурнитура</span></label>
+   <label class="check"><input type="checkbox" id="holes" checked=""><span>Отверстия</span></label>
   </div></details>
   <!-- «Линии / 2D» скрыт по просьбе: функционал не нужен. Элементы оставлены в
        DOM (их id используются в line-статистике/overlay и в проверках) — прячем
        весь дропдаун атрибутом hidden, а не удаляем разметку. -->
-  <details class="toolMenu" hidden><summary>Линии / 2D <small id="lineBadge"></small></summary><div class="toolPopup">
-   <label class="check"><input type="checkbox" id="lines" checked><span>Все линии замера</span></label>
+  <details class="toolMenu" hidden=""><summary>Линии / 2D <small id="lineBadge"></small></summary><div class="toolPopup">
+   <label class="check"><input type="checkbox" id="lines" checked=""><span>Все линии замера</span></label>
    <div class="subchecks" id="layerControls"></div>
    <label class="check"><input type="checkbox" id="overlay"><span>Линии поверх поверхностей</span></label>
   </div></details>
@@ -152,7 +151,7 @@ input[type="range"]::-moz-range-thumb{width:15px;height:15px;border-radius:50%;b
    <label class="check"><input type="checkbox" id="guides"><span>Рамки и схемы крепежа</span></label>
    <label class="check"><input type="checkbox" id="holeOverlay"><span>Отверстия сквозь поверхности</span></label>
    <div class="subtle">Голубые цилиндры показывают диаметр, глубину и направление сверления.</div>
-   <span id="featureExtras"></span>
+   <span id="featureExtras"><button id="graphicsMode" type="button" title="Сначала сохраните изменения: переключение перезагрузит этот HTML">Совместимая графика (перезапуск)</button></span>
   </div></details>
  </div>
  <div class="toolGroup" id="selectionPanel" aria-label="Выбор объекта и видимость">
@@ -165,13 +164,13 @@ input[type="range"]::-moz-range-thumb{width:15px;height:15px;border-radius:50%;b
   <details class="toolMenu" id="measureMenu"><summary>Замеры</summary><div class="toolPopup toolPopupRight">
  <h2>Размеры</h2>
  <div class="notice" id="nativeNote">Проверяем сохранённые размеры…</div>
- <div class="tools"><button id="measure" aria-pressed="false">Измерить 2 точки</button><button id="clearMeasures" disabled title="Удалить созданные в просмотрщике размеры">Очистить</button></div>
+ <div class="tools"><button id="measure" aria-pressed="false">Измерить 2 точки</button><button id="clearMeasures" disabled="" title="Удалить созданные в просмотрщике размеры">Очистить</button></div>
  <div class="measureStatus" id="measureStatus" aria-live="polite">Нажмите на объект, чтобы увидеть его параметры.</div>
- <label class="check"><input type="checkbox" id="nativeDimensions" checked><span>Из БАЗИСа</span><small id="nativeMeasureCount">0</small></label>
- <label class="check"><input type="checkbox" id="manualDimensions" checked><span>Созданные в HTML</span><small id="measureCount">0</small></label>
+ <label class="check"><input type="checkbox" id="nativeDimensions" checked=""><span>Из БАЗИСа</span><small id="nativeMeasureCount">0</small></label>
+ <label class="check"><input type="checkbox" id="manualDimensions" checked=""><span>Созданные в HTML</span><small id="measureCount">0</small></label>
   </div></details>
  </div>
- <span id="featureTools" hidden></span>
+ <span id="featureTools" hidden=""></span>
 </div>
 <footer class="footer"><div class="footerHints"><span class="pill hint">ЛКМ — вращение · колесо — масштаб · ПКМ — перенос</span><span id="featureHints"></span></div><span class="pill ok" id="coverage"><span class="statusDot"></span>Загрузка модели…</span></footer>
 <noscript><div role="alert" style="position:fixed;top:80px;left:12px;right:12px;z-index:20;background:#4a2429;padding:20px">Модель требует JavaScript и WebGL. Предпросмотр файла может их не запускать. Откройте ссылку на HTML в Safari или другом браузере с включённым JavaScript.</div></noscript>
@@ -4810,5 +4809,6 @@ let previousFrame=null;function draw(now=0){requestAnimationFrame(draw);const de
 window.__viewer={render:renderFrame,addTreeAction,renderer,scene,camera,controls,groups,stats:meshStats,data:DATA,features:featureInstances,featureHooks,dimensions:dimRecords,addDimension,select,selectId,setView,snaps,screen,treeEntries,highlight,selectedLine,holeMeshes};diag('Сцена','OK',meshStats.panels+' панелей');window.BazisDiagnostics?.complete(window.__viewer);
 }
 </script>
-</body>
-</html>
+
+
+</body></html>
