@@ -1,0 +1,302 @@
+{
+ "schema": 1,
+ "source": "c73ac4c73ac58590f80fa78f95cce14ec348afe0bf40a3ad70d8e704c5c4a81c",
+ "savedAt": "2026-09-23T17:17:14.034Z",
+ "features": {
+  "outline": false,
+  "section": {
+   "active": false,
+   "axis": "y",
+   "position": 659.3339996337891,
+   "reversed": false,
+   "showPlane": true,
+   "chosen": false,
+   "normal": [
+    0,
+    1,
+    0
+   ]
+  },
+  "finish": "texture",
+  "dimension_actions": {
+   "colors": []
+  },
+  "dimensions": {
+   "size": 16,
+   "color": "#e60000",
+   "unit": false,
+   "box": false
+  },
+  "materials": [
+   {
+    "id": "art:ALPI ICE WRABLE 12.09\rШпон",
+    "type": "tex",
+    "name": "ALPI ICE WRABLE 12.09\rШпон",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "ALPI ICE WRABLE 12.09\rШпон",
+     "texData": null,
+     "color": "#ebe5de"
+    }
+   },
+   {
+    "id": "art:ДСП лам. Egger U960 ST9 Оникс серый 2800х2070х18 мм\r33941",
+    "type": "tex",
+    "name": "ДСП лам. Egger U960 ST9 Оникс серый 2800х2070х18 мм\r33941",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "ДСП лам. Egger U960 ST9 Оникс серый 2800х2070х18 мм\r33941",
+     "texData": null,
+     "color": "#746e78"
+    }
+   },
+   {
+    "id": "art:ДСП лам. Egger U960 ST9 Оникс серый 2800х2070х10мм\r92658",
+    "type": "tex",
+    "name": "ДСП лам. Egger U960 ST9 Оникс серый 2800х2070х10мм\r92658",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "ДСП лам. Egger U960 ST9 Оникс серый 2800х2070х10мм\r92658",
+     "texData": null,
+     "color": "#746e78"
+    }
+   },
+   {
+    "id": "art:Фасады крашенные под латунь\rФасады низ 19мм",
+    "type": "tex",
+    "name": "Фасады крашенные под латунь\rФасады низ 19мм",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "Фасады крашенные под латунь\rФасады низ 19мм",
+     "texData": null,
+     "color": "#d7c18b"
+    }
+   },
+   {
+    "id": "art:LAMINAM SLATE ALASKA\rSLATE ALASKA",
+    "type": "tex",
+    "name": "LAMINAM SLATE ALASKA\rSLATE ALASKA",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "LAMINAM SLATE ALASKA\rSLATE ALASKA",
+     "texData": null,
+     "color": "#e8e5e0"
+    }
+   },
+   {
+    "id": "art:Фанера ФСФ влагостойкая В/ВВ продольная 15 мм 2500х1250х15мм\r139198",
+    "type": "tex",
+    "name": "Фанера ФСФ влагостойкая В/ВВ продольная 15 мм 2500х1250х15мм\r139198",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "Фанера ФСФ влагостойкая В/ВВ продольная 15 мм 2500х1250х15мм\r139198",
+     "texData": null,
+     "color": "#cfc99e"
+    }
+   },
+   {
+    "id": "col:#191919",
+    "type": "col",
+    "name": "Пластик черный",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#191919"
+    }
+   },
+   {
+    "id": "col:#ffffff",
+    "type": "col",
+    "name": "Труба вентс 90х220",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#ffffff"
+    }
+   },
+   {
+    "id": "col:#3e3e3e",
+    "type": "col",
+    "name": "Труба 40х20",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#3e3e3e"
+    }
+   },
+   {
+    "id": "art:Латунь\rЛатунь",
+    "type": "tex",
+    "name": "Латунь\rЛатунь",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "Латунь\rЛатунь",
+     "texData": null,
+     "color": "#d7c18b"
+    }
+   },
+   {
+    "id": "col:#c0c0c0",
+    "type": "col",
+    "name": "матовый хром",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#c0c0c0"
+    }
+   },
+   {
+    "id": "art:Алюминий\r-2",
+    "type": "tex",
+    "name": "Алюминий\r-2",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": "Алюминий\r-2",
+     "texData": null,
+     "color": "#cccccc"
+    }
+   }
+  ],
+  "texture_fit": {
+   "schema": 2,
+   "modes": {}
+  },
+  "material_labels": {
+   "enabled": true,
+   "changedAt": null
+  },
+  "notes": {
+   "enabled": true,
+   "notes": [
+    {
+     "id": "nmued6rlxafc3",
+     "text": "Для трубы 90х220 нет настенной панели.\nПока не знаю как ее крепить, разве что печатать детальку.",
+     "point": [
+      1324.034,
+      59.41,
+      998.61
+     ],
+     "objectId": 13398,
+     "local": [
+      6.89,
+      36.82,
+      37.427
+     ],
+     "element": "Коліно горизонтальне 90° Вентс Пластивент 90x220 9291\rЭПИ 30137549",
+     "updated": "2026-09-23T17:16:23.835Z"
+    },
+    {
+     "id": "nmued7l6i8tqp",
+     "text": "Пока нет машинки не решал вопрос с открытием фасада",
+     "point": [
+      2902.817,
+      429.964,
+      985.118
+     ],
+     "objectId": 10713,
+     "local": [
+      354.317,
+      -146.119,
+      17.964
+     ],
+     "element": "Fixed shelf · поз. 1.2.4",
+     "updated": "2026-09-23T17:16:48.419Z"
+    },
+    {
+     "id": "nmued80dp0xqy",
+     "text": "Розетка для ПММ",
+     "point": [
+      2448.592,
+      610.38,
+      609.943
+     ],
+     "objectId": 14115,
+     "local": [
+      -17.268,
+      34.156,
+      38.943
+     ],
+     "element": "Розетка зовнішня VIDEX BINERA",
+     "updated": "2026-09-23T17:17:01.224Z"
+    }
+   ]
+  },
+  "hardware_mono": false,
+  "visibility": {
+   "hidden": [],
+   "objectMode": true
+  },
+  "panel_hardware": {
+   "active": false,
+   "selectedPanelId": null
+  },
+  "assembler": {
+   "active": false,
+   "exploded": false,
+   "separation": 250,
+   "unitId": null,
+   "partDimensionsEnabled": false,
+   "labelPosition": true,
+   "labelName": false
+  },
+  "hardware_catalog": {
+   "expanded": false
+  }
+ },
+ "controls": {
+  "panels": true,
+  "profiles": true,
+  "edges": true,
+  "textures": true,
+  "imports": true,
+  "hardware": true,
+  "holes": true,
+  "lines": true,
+  "overlay": false,
+  "opacity": "100",
+  "guides": false,
+  "holeOverlay": false,
+  "nativeDimensions": true,
+  "manualDimensions": true
+ },
+ "layers": [
+  true
+ ],
+ "layersByName": {
+  "Линии": true
+ },
+ "camera": {
+  "position": [
+   -641.2816053437637,
+   2007.1448326293037,
+   3572.3735194001756
+  ],
+  "target": [
+   1931.2963372992622,
+   309.5773407562247,
+   344.5800950839223
+  ],
+  "up": [
+   0,
+   1,
+   0
+  ]
+ },
+ "dimensions": []
+}
