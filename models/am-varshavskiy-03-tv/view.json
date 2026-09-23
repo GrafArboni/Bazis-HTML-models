@@ -1,0 +1,208 @@
+{
+ "schema": 1,
+ "source": "f34d55cdcba36850a86b4573ce5badacb7d4f936e67268b41e4e9ff190462903",
+ "features": {
+  "outline": false,
+  "section": {
+   "active": false,
+   "axis": "y",
+   "position": 1291.4819987406986,
+   "reversed": false,
+   "showPlane": true,
+   "chosen": false,
+   "normal": [
+    0,
+    1,
+    0
+   ]
+  },
+  "finish": "texture",
+  "dimensions": {
+   "size": 10,
+   "color": "#102820",
+   "unit": false,
+   "box": true
+  },
+  "materials": [
+   {
+    "id": "col:#baa28b",
+    "type": "col",
+    "name": "стена 100",
+    "state": {
+     "rot": 2,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#efe8e2"
+    }
+   },
+   {
+    "id": "art:201251",
+    "type": "tex",
+    "name": "ДСП лам. Kronospan K2739 PW Дуб Кремона Канноло NEW 2800х2070х18мм",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "201251",
+     "texData": null,
+     "color": "#8c7d70"
+    }
+   },
+   {
+    "id": "art:29704",
+    "type": "tex",
+    "name": "ДСП Kronospan 0101 PE Белый фасадный 2800x2070x18 мм",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "29704",
+     "texData": null,
+     "color": "#f7f6f2"
+    }
+   },
+   {
+    "id": "art:44756",
+    "type": "tex",
+    "name": "ЛХДФ Белое 0110 PE Kronospan 2800х2070х3мм",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "44756",
+     "texData": null,
+     "color": "#f7f6f1"
+    }
+   },
+   {
+    "id": "col:#d8ccb4",
+    "type": "col",
+    "name": "МДФ крашенный 22мм RAL 9010",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#d8ccb4"
+    }
+   },
+   {
+    "id": "col:#2e3236",
+    "type": "col",
+    "name": "Скло тоноване графіт",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#2e3236"
+    }
+   },
+   {
+    "id": "col:#8f9398",
+    "type": "col",
+    "name": "# Сірий",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#8f9398"
+    }
+   },
+   {
+    "id": "col:#d5e2e6",
+    "type": "col",
+    "name": "Зеркало Бронза 4 мм",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#d5e2e6"
+    }
+   },
+   {
+    "id": "col:#eaf0ee",
+    "type": "col",
+    "name": "Линза светорассеивающая для профиля L= 2м, поликарбонат, молочная",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#eaf0ee"
+    }
+   },
+   {
+    "id": "col:#f1f1ef",
+    "type": "col",
+    "name": "LED-лента 2835 SMD, 120 LEDs/m, 9.6W, 12V, IP20, теплый белый свет, 3000К",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#f1f1ef"
+    }
+   }
+  ],
+  "texture_fit": {
+   "schema": 2,
+   "modes": {}
+  },
+  "material_labels": false,
+  "visibility": {
+   "hidden": [],
+   "objectMode": true
+  },
+  "panel_hardware": {
+   "active": false,
+   "selectedPanelId": null
+  },
+  "assembler": {
+   "active": false,
+   "exploded": false,
+   "separation": 250,
+   "unitId": null
+  },
+  "hardware_catalog": {
+   "expanded": false
+  }
+ },
+ "controls": {
+  "panels": true,
+  "profiles": true,
+  "edges": true,
+  "textures": true,
+  "imports": true,
+  "hardware": true,
+  "holes": true,
+  "lines": true,
+  "overlay": false,
+  "opacity": "100",
+  "guides": false,
+  "holeOverlay": false,
+  "nativeDimensions": true,
+  "manualDimensions": true
+ },
+ "layers": [
+  true
+ ],
+ "camera": {
+  "position": [
+   8317.297674655878,
+   5159.891788504311,
+   7189.315869469783
+  ],
+  "target": [
+   2365.898000000775,
+   1291.4819999784947,
+   345.2062436164138
+  ],
+  "up": [
+   0,
+   1,
+   0
+  ]
+ },
+ "dimensions": []
+}
