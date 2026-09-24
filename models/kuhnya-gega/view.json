@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "source": "4c0ab3b0f2e8230f3adfcf52a85473e29977c92151eed289e1bebca6ac3355fc",
- "savedAt": "2026-09-24T21:57:46.439Z",
+ "savedAt": "2026-09-24T22:04:08.640Z",
  "features": {
   "outline": false,
   "section": {
@@ -57,7 +57,7 @@
     "type": "tex",
     "name": "ДСП SAVIOLA Vanguard/Vanguard P25 Орех 2800х2120х18 мм\r45791",
     "state": {
-     "rot": 0,
+     "rot": 1,
      "mode": "tex",
      "texKey": "ДСП SAVIOLA Vanguard/Vanguard P25 Орех 2800х2120х18 мм\r45791",
      "texData": null,
@@ -310,10 +310,10 @@
     "name": "Фасад Духового шкафа\rДуховой шкаф",
     "state": {
      "rot": 0,
-     "mode": "tex",
+     "mode": "col",
      "texKey": "Фасад Духового шкафа\rДуховой шкаф",
      "texData": null,
-     "color": "#2f2b29"
+     "color": "#444444"
     }
    },
    {
@@ -379,7 +379,9 @@
   ],
   "texture_fit": {
    "schema": 2,
-   "modes": {}
+   "modes": {
+    "art:ДСП SAVIOLA Vanguard/Vanguard P25 Орех 2800х2120х18 мм\r45791": "fit"
+   }
   },
   "material_labels": {
    "enabled": true,
@@ -455,9 +457,9 @@
  },
  "camera": {
   "position": [
-   -1793.352376894447,
-   3963.220132551358,
-   1913.6378305820813
+   -1094.7875248510104,
+   2405.220598398429,
+   6802.257687853307
   ],
   "target": [
    1677.2592997596666,
