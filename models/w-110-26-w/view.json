@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "source": "c73ac4c73ac58590f80fa78f95cce14ec348afe0bf40a3ad70d8e704c5c4a81c",
- "savedAt": "2026-09-24T19:37:36.519Z",
+ "savedAt": "2026-09-24T19:53:51.146Z",
  "features": {
   "outline": false,
   "section": {
@@ -17,7 +17,7 @@
     0
    ]
   },
-  "finish": "edges",
+  "finish": "texture",
   "dimension_actions": {
    "colors": []
   },
@@ -250,7 +250,7 @@
    "selectedPanelId": null
   },
   "assembler": {
-   "active": true,
+   "active": false,
    "exploded": false,
    "separation": 250,
    "unitId": null,
@@ -302,14 +302,14 @@
  },
  "camera": {
   "position": [
-   6602.375298339237,
-   1140.4776066448023,
-   893.9482128841934
+   3892.3541259156673,
+   2344.848239200026,
+   4779.605387917805
   ],
   "target": [
-   1735.9137313564656,
-   264.61329993408305,
-   822.1218140256092
+   2240.0265573148754,
+   547.8483160865032,
+   1043.4110764740317
   ],
   "up": [
    0,
