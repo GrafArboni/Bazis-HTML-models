@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="bazis-viewer" content="0583c0cfc3be">
+<meta name="bazis-viewer" content="6bb528fa0121">
 <title>Кухня · просмотр модели</title>
 <style>
 :root{color-scheme:dark;--bg:#10171d;--panel:#17232d;--line:#31414b;--text:#e8eef0;--muted:#a6bac4;--accent:#9ee2d0;--popup-border:#526776;--control-border:#46586a;--hover:#304654;--muted-soft:#9fb3bd;--divider:#26343d;--compact-slider:70px}
@@ -1528,30 +1528,6 @@ dialog.assemblerDrawing[open] {
 }
 .assemblerHoleTable td {
   padding: 5px;
-}
-/* кромки детали: номер (цвет толщины слева), толщина, название, артикул */
-.assemblerDrawing .assemblerEdgeLegend table {
-  width: 100%;
-  font-size: 12px;
-  border-collapse: collapse;
-}
-.assemblerEdgeLegend caption {
-  text-align: left;
-  font-weight: 600;
-  padding: 0 0 4px;
-}
-.assemblerEdgeLegend th {
-  background: #21313e;
-  padding: 5px;
-  text-align: left;
-}
-.assemblerEdgeLegend td {
-  padding: 4px 5px;
-  vertical-align: top;
-}
-.assemblerEdgeLegend p {
-  margin: 4px 0 0;
-  font-size: 11px;
 }
 .assemblerHoleTable tbody tr {
   cursor: pointer;
@@ -3965,23 +3941,6 @@ window.OrbitControls = OrbitControls;
     <div class="assemblerDrawingSide">
       <div class="assemblerDrawingMaterial"></div>
       <div class="assemblerOverall"></div>
-      <div class="assemblerEdgeLegend" hidden>
-        <table>
-          <caption>Кромки</caption>
-          <thead>
-            <tr>
-              <th scope="col">№</th>
-              <th scope="col">Толщина</th>
-              <th scope="col">Кромка</th>
-              <th scope="col">Артикул</th>
-              <th scope="col">Сторон</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-        <p class="subtle assemblerEdgeNone" hidden>Сторон без кромки: <span class="assemblerEdgeNoneCount"></span> (красный пунктир).</p>
-        <p class="subtle assemblerEdgeNoNames" hidden>Названия кромок появятся после перевыгрузки модели из БАЗИСа.</p>
-      </div>
       <div class="assemblerHoleProperties" aria-live="polite"></div>
       <div class="assemblerHoleTable">
         <table>
@@ -6348,21 +6307,6 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       return color ? '#' + color.getHexString() : null;
     };
     if (context.services) context.services.monoColor = monoColor;
-    // Стороны детали с кромками — для чертежа детали в сборщике: где какая кромка.
-    // Координаты — локальные 2D контура (как loops записи панели); name — «Название
-    // \rАртикул» кромки (у выгрузок до названий — null), color — цвет толщины,
-    // тот же, что в режиме «Кромки».
-    const edgeSidesOf = id =>
-      (data.edges?.[id] || []).map(e => ({
-        a: e.a,
-        b: e.b,
-        t: e.t ?? null,
-        nb: !!e.nb,
-        ch: !!e.ch,
-        name: e.m != null ? (data.materials?.[e.m] ?? null) : null,
-        color: '#' + edgeColor(T, e).getHexString()
-      }));
-    if (context.services) context.services.edgeSidesOf = edgeSidesOf;
     const monoMat = new Map(),
       originalMat = new Map(); // name->material, mesh->material
     function monoMaterial(name) {
@@ -6438,7 +6382,6 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         const i = hooks.frame?.indexOf(syncEdges);
         if (i >= 0) hooks.frame.splice(i, 1);
         if (context.services?.monoColor === monoColor) delete context.services.monoColor;
-        if (context.services?.edgeSidesOf === edgeSidesOf) delete context.services.edgeSidesOf;
         edgeGroup.removeFromParent();
         setMono(false);
         edgeGroup.traverse(o => {
@@ -10770,170 +10713,6 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     }
     return { cutouts, edges, curves, notches };
   }
-  // Кромки на чертеже: какая кромка на какой стороне (как на чертеже детали в
-  // БАЗИС). Стороны и названия даёт модуль кромок (services.edgeSidesOf); его нет
-  // или у детали нет сторон — чертёж без кромок. Одинаковые кромки (название +
-  // толщина) получают общий номер: на стороне — метка «номер ▽толщина», в таблице
-  // справа — расшифровка. Стороны без кромки — красный пунктир, как в режиме
-  // «Кромки».
-  function edgeLegend(context, panel, part, t) {
-    const sides = context.services?.edgeSidesOf?.(panel.id) || [],
-      box = part('assemblerEdgeLegend'),
-      tbody = box.querySelector('tbody'),
-      kinds = new Map();
-    for (const side of sides) {
-      if (side.nb) continue;
-      const key = (side.name || '') + '\n' + side.t + '\n' + side.ch;
-      if (!kinds.has(key))
-        kinds.set(key, { name: side.name, t: side.t, ch: side.ch, color: side.color, count: 0 });
-      kinds.get(key).count++;
-    }
-    const list = [...kinds.values()].sort(
-      (a, b) => a.t - b.t || String(a.name).localeCompare(String(b.name))
-    );
-    list.forEach((kind, i) => (kind.number = i + 1));
-    const numberOf = side =>
-      list.find(k => k.name === side.name && k.t === side.t && k.ch === side.ch)?.number;
-    for (const kind of list) {
-      const tr = context.document.createElement('tr'),
-        [name, article] = String(kind.name || '').split('\r');
-      for (const [i, text] of [
-        String(kind.number),
-        '▽' + Number(kind.t.toFixed(2)),
-        name.trim() || '—',
-        (article || '').trim() || '—',
-        String(kind.count)
-      ].entries()) {
-        const td = context.document.createElement('td');
-        td.textContent = text;
-        if (i === 0) {
-          td.style.borderLeft = '4px solid ' + kind.color;
-          td.dataset.edgeKind = String(kind.number);
-        }
-        if (i === 2 || i === 3) td.translate = false; // название и артикул — данные
-        tr.append(td);
-      }
-      if (kind.ch) tr.title = t('Фаска 45°');
-      tbody.append(tr);
-    }
-    const unbanded = sides.filter(s => s.nb).length;
-    part('assemblerEdgeNone').hidden = !unbanded;
-    part('assemblerEdgeNoneCount').textContent = String(unbanded);
-    part('assemblerEdgeNoNames').hidden = !list.length || list.some(k => k.name);
-    box.hidden = !sides.length;
-    box.querySelector('table').hidden = !list.length; // одни стороны без кромки — шапка ни к чему
-    return { sides, numberOf };
-  }
-  function drawEdges(edges, { element, occupied, overlaps, scale, fmt, h, min, panel }) {
-    if (!edges.sides.length) return;
-    const px = p => [p[0] - min[0], h - p[1] + min[1]],
-      loops = (panel.loops || []).map(loop => loop.map(px));
-    // точка внутри детали — по чёт-нечёт всех петель (вырезы — дыры)
-    const inside = (x, y) => {
-      let odd = false;
-      for (const loop of loops)
-        for (let i = 0, j = loop.length - 1; i < loop.length; j = i++) {
-          const [xi, yi] = loop[i],
-            [xj, yj] = loop[j];
-          if (yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) odd = !odd;
-        }
-      return odd;
-    };
-    const band = scale * 0.006,
-      font = scale * 0.017;
-    for (const side of edges.sides) {
-      const a = px(side.a),
-        b = px(side.b),
-        dx = b[0] - a[0],
-        dy = b[1] - a[1],
-        length = Math.hypot(dx, dy) || 1,
-        ux = dx / length,
-        uy = dy / length,
-        mid = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
-      // наружу — туда, где нет материала детали
-      let nx = -uy,
-        ny = ux;
-      const probe = scale * 0.004;
-      if (inside(mid[0] + nx * probe, mid[1] + ny * probe)) {
-        nx = -nx;
-        ny = -ny;
-      }
-      if (side.nb) {
-        element('line', {
-          x1: a[0],
-          y1: a[1],
-          x2: b[0],
-          y2: b[1],
-          stroke: side.color,
-          'stroke-width': scale * 0.002,
-          'stroke-dasharray': `${scale * 0.008} ${scale * 0.006}`,
-          'data-edge-none': 'true'
-        });
-        continue;
-      }
-      // полоса кромки — внутри контура, вдоль стороны
-      const inset = band / 2;
-      element('line', {
-        x1: a[0] - nx * inset,
-        y1: a[1] - ny * inset,
-        x2: b[0] - nx * inset,
-        y2: b[1] - ny * inset,
-        stroke: side.color,
-        'stroke-width': band,
-        'stroke-opacity': 0.9,
-        'data-edge': edges.numberOf(side)
-      });
-      // метка «номер ▽толщина» снаружи стороны; занята — сдвигаем вдоль стороны
-      const text = edges.numberOf(side) + ' ▽' + fmt(side.t),
-        w = text.length * font * 0.62 + font * 0.8,
-        hgt = font * 1.5,
-        gap = scale * 0.012 + (Math.abs(nx) > 0.5 ? w / 2 : hgt / 2);
-      let spot = null;
-      for (const shift of [0, 1, -1, 2, -2, 3, -3, 4, -4]) {
-        const cx = mid[0] + nx * gap + ux * shift * hgt * 1.2,
-          cy = mid[1] + ny * gap + uy * shift * hgt * 1.2,
-          r = { x: cx - w / 2, y: cy - hgt / 2, w, h: hgt };
-        if (!occupied.some(o => overlaps(r, o))) {
-          spot = { cx, cy, r };
-          break;
-        }
-      }
-      if (!spot) continue;
-      occupied.push(spot.r);
-      element('line', {
-        x1: mid[0],
-        y1: mid[1],
-        x2: spot.cx - nx * (Math.abs(nx) > 0.5 ? w / 2 : 0),
-        y2: spot.cy - ny * (Math.abs(nx) > 0.5 ? 0 : hgt / 2),
-        stroke: side.color,
-        'stroke-width': scale * 0.0015
-      });
-      element('rect', {
-        x: spot.r.x,
-        y: spot.r.y,
-        width: w,
-        height: hgt,
-        rx: font * 0.3,
-        fill: '#f4f5f2',
-        stroke: side.color,
-        'stroke-width': scale * 0.002,
-        'data-edge-tag': edges.numberOf(side)
-      });
-      element(
-        'text',
-        {
-          x: spot.cx,
-          y: spot.cy + font * 0.35,
-          'font-size': font,
-          'text-anchor': 'middle',
-          fill: '#243842',
-          'data-edge-label': edges.numberOf(side)
-        },
-        text
-      );
-    }
-  }
-
   function open(context, panel) {
     const { THREE: T, data, document: doc } = context,
       info = holesFor(T, panel, data),
@@ -11002,7 +10781,6 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       rowEls.push([h.number, tr]);
     }
     part('assemblerHoleEmpty').hidden = info.rows.length > 0;
-    const edges = edgeLegend(context, panel, part, t);
     doc.body.append(dialog);
     const element = (tag, attrs, text) => {
       const el = doc.createElementNS(ns, tag);
@@ -11092,8 +10870,6 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
           stroke: '#243842',
           'stroke-width': scale * 0.002
         });
-      if (view.value === 'xy')
-        drawEdges(edges, { element, occupied, overlaps, scale, fmt, h, min: info.min, panel });
       const arrow = (tip, toward, color) => {
         const dx = toward[0] - tip[0],
           dy = toward[1] - tip[1],
@@ -12398,7 +12174,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
   else (root.BazisViewerFeatures || (root.BazisViewerFeatures = [])).push({ name: 'assembler', install });
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 
-(globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"(красный пунктир).":{"en":"(red dashed line).","pl":"(czerwona linia przerywana).","uk":"(червоний пунктир)."},", диаметр":{"en":", diameter","pl":", średnica","uk":", діаметр"},"Артикул":{"en":"Article","pl":"Artykuł","uk":"Артикул"},"Без названия":{"en":"Untitled","pl":"Bez nazwy","uk":"Без назви"},"Без позиции":{"en":"No position","pl":"Bez pozycji","uk":"Без позиції"},"В сносках деталей":{"en":"In part labels","pl":"W etykietach elementów","uk":"У виносках деталей"},"Взрыв-схема":{"en":"Exploded view","pl":"Widok rozstrzelony","uk":"Рознесена схема"},"Вписать":{"en":"Fit","pl":"Dopasuj","uk":"Вписати"},"Входящие в эту панель отверстия не найдены.":{"en":"No holes entering this panel were found.","pl":"Nie znaleziono otworów wchodzących w ten panel.","uk":"Отворів, що входять у цю панель, не знайдено."},"Выберите вторую точку":{"en":"Pick the second point","pl":"Wybierz drugi punkt","uk":"Виберіть другу точку"},"Выберите отверстие на чертеже или в таблице.":{"en":"Pick a hole on the drawing or in the table.","pl":"Wybierz otwór na rysunku lub w tabeli.","uk":"Виберіть отвір на кресленні або в таблиці."},"Выберите первую точку":{"en":"Pick the first point","pl":"Wybierz pierwszy punkt","uk":"Виберіть першу точку"},"Выберите первую точку следующего замера":{"en":"Pick the first point of the next measurement","pl":"Wybierz pierwszy punkt następnego pomiaru","uk":"Виберіть першу точку наступного виміру"},"Выбор, скрытие, прозрачность и навигация — общие. Выбранная сборка остаётся в сцене вместе со своим крепежом. «Все сборки» снимает фильтр.":{"en":"Selection, hiding, transparency and navigation are shared. The selected assembly stays in the scene with its fasteners. “All assemblies” clears the filter.","pl":"Wybór, ukrywanie, przezroczystość i nawigacja są wspólne. Wybrany zespół pozostaje w scenie wraz z łącznikami. „Wszystkie zespoły” usuwa filtr.","uk":"Вибір, приховування, прозорість і навігація — спільні. Вибрана збірка залишається в сцені разом зі своїм кріпленням. «Усі збірки» знімає фільтр."},"Габариты выбранной детали":{"en":"Selected part dimensions","pl":"Wymiary wybranego elementu","uk":"Габарити вибраної деталі"},"Габариты:":{"en":"Overall size:","pl":"Wymiary:","uk":"Габарити:"},"Глубина":{"en":"Depth","pl":"Głębokość","uk":"Глибина"},"Закрыть чертёж":{"en":"Close drawing","pl":"Zamknij rysunek","uk":"Закрити креслення"},"Измерить 2 точки":{"en":"Measure 2 points","pl":"Zmierz 2 punkty","uk":"Виміряти 2 точки"},"Кромка":{"en":"Edge band","pl":"Obrzeże","uk":"Кромка"},"Кромки":{"en":"Edge bands","pl":"Obrzeża","uk":"Кромки"},"Материал не указан":{"en":"No material","pl":"Brak materiału","uk":"Матеріал не вказано"},"Миллиметры. База X/Y — минимальные координаты контура, Z — нижняя пласть. Выберите отверстие: появятся размеры до его оси. Глубина — из фурнитуры БАЗИС. Контур соответствует экспортированной геометрии; это обзорный чертёж, не программа сверления.":{"en":"Millimeters. X/Y origin is the minimum contour coordinates, Z is the bottom face. Pick a hole to see dimensions to its axis. Depth comes from BAZIS hardware. The contour matches the exported geometry; this is an overview drawing, not a drilling program.","pl":"Milimetry. Baza X/Y — minimalne współrzędne konturu, Z — dolna płaszczyzna. Wybierz otwór: pojawią się wymiary do jego osi. Głębokość — z okuć BAZIS. Kontur odpowiada wyeksportowanej geometrii; to rysunek poglądowy, nie program wiercenia.","uk":"Міліметри. База X/Y — мінімальні координати контуру, Z — нижня пласть. Виберіть отвір: з'являться розміри до його осі. Глибина — з фурнітури БАЗИС. Контур відповідає експортованій геометрії; це оглядове креслення, не програма свердління."},"Названия кромок появятся после перевыгрузки модели из БАЗИСа.":{"en":"Edge band names will appear after the model is re-exported from BAZIS.","pl":"Nazwy obrzeży pojawią się po ponownym wyeksportowaniu modelu z BAZIS.","uk":"Назви кромок з’являться після повторного вивантаження моделі з БАЗИСу."},"Наименование":{"en":"Name","pl":"Nazwa","uk":"Найменування"},"Настройки":{"en":"Settings","pl":"Ustawienia","uk":"Налаштування"},"Настройки сносок сборщика":{"en":"Assembly label settings","pl":"Ustawienia etykiet montażu","uk":"Налаштування виносок складання"},"Некорректный разнос":{"en":"Invalid spread","pl":"Nieprawidłowe rozsunięcie","uk":"Некоректне рознесення"},"Несовместимый режим сборщика":{"en":"Incompatible assembly mode","pl":"Niezgodny tryb montażu","uk":"Несумісний режим складання"},"Общий вид":{"en":"Overview","pl":"Widok ogólny","uk":"Загальний вид"},"Отверстие":{"en":"Hole","pl":"Otwór","uk":"Отвір"},"Отверстие №":{"en":"Hole #","pl":"Otwór nr","uk":"Отвір №"},"Очистить замеры":{"en":"Clear measurements","pl":"Wyczyść pomiary","uk":"Очистити виміри"},"Пласть XY":{"en":"Face XY","pl":"Płaszczyzna XY","uk":"Пласть XY"},"Позиция":{"en":"Position","pl":"Pozycja","uk":"Позиція"},"При выборе детали её сноска подсвечивается и показывает название.":{"en":"When a part is selected, its label is highlighted and shows the name.","pl":"Po wybraniu elementu jego etykieta jest podświetlona i pokazuje nazwę.","uk":"При виборі деталі її виноска підсвічується і показує назву."},"Проекция чертежа":{"en":"Drawing projection","pl":"Rzut rysunku","uk":"Проєкція креслення"},"Размер детали":{"en":"Part size","pl":"Wymiar elementu","uk":"Розмір деталі"},"Размер шрифта наименований, px":{"en":"Name font size, px","pl":"Rozmiar czcionki nazw, px","uk":"Розмір шрифту найменувань, px"},"Разнос":{"en":"Spread","pl":"Rozsunięcie","uk":"Рознесення"},"Разнос деталей, мм":{"en":"Part spread, mm","pl":"Rozsunięcie elementów, mm","uk":"Рознесення деталей, мм"},"Сборочные единицы":{"en":"Assembly units","pl":"Zespoły montażowe","uk":"Складальні одиниці"},"Сборщик":{"en":"Assembly","pl":"Montaż","uk":"Складання"},"Связи взрыв-схемы":{"en":"Exploded view links","pl":"Powiązania widoku rozstrzelonego","uk":"Зв'язки рознесеної схеми"},"Сторон":{"en":"Sides","pl":"Boków","uk":"Сторін"},"Сторон без кромки:":{"en":"Sides without edge band:","pl":"Boki bez obrzeża:","uk":"Сторін без кромки:"},"Строки со знаком ≈: точка входа не определена, показано начало отверстия из БАЗИС.":{"en":"Rows marked ≈: the entry point is unknown, the hole start from BAZIS is shown.","pl":"Wiersze ze znakiem ≈: punkt wejścia nieokreślony, pokazano początek otworu z BAZIS.","uk":"Рядки зі знаком ≈: точку входу не визначено, показано початок отвору з БАЗИС."},"Толщина":{"en":"Thickness","pl":"Grubość","uk":"Товщина"},"Торец XZ":{"en":"End XZ","pl":"Czoło XZ","uk":"Торець XZ"},"Торец YZ":{"en":"End YZ","pl":"Czoło YZ","uk":"Торець YZ"},"Фаска 45°":{"en":"45° chamfer","pl":"Fazowanie 45°","uk":"Фаска 45°"},"Чертёж":{"en":"Drawing","pl":"Rysunek","uk":"Креслення"},"Чертёж детали":{"en":"Part drawing","pl":"Rysunek elementu","uk":"Креслення деталі"},"Чертёж детали с отверстиями":{"en":"Part drawing with holes","pl":"Rysunek elementu z otworami","uk":"Креслення деталі з отворами"},"Шрифт наименований":{"en":"Name font","pl":"Czcionka nazw","uk":"Шрифт найменувань"},"мм":{"en":"mm","pl":"mm","uk":"мм"},"мм\nНаправление оси:":{"en":"mm\nAxis direction:","pl":"mm\nKierunek osi:","uk":"мм\nНапрямок осі:"},"мм · глубина":{"en":"mm · depth","pl":"mm · głębokość","uk":"мм · глибина"},"≈ Показано начало отверстия, точка входа не определена.":{"en":"≈ The hole start is shown; the entry point is unknown.","pl":"≈ Pokazano początek otworu, punkt wejścia nieokreślony.","uk":"≈ Показано початок отвору, точку входу не визначено."}});
+(globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({", диаметр":{"en":", diameter","pl":", średnica","uk":", діаметр"},"Без названия":{"en":"Untitled","pl":"Bez nazwy","uk":"Без назви"},"Без позиции":{"en":"No position","pl":"Bez pozycji","uk":"Без позиції"},"В сносках деталей":{"en":"In part labels","pl":"W etykietach elementów","uk":"У виносках деталей"},"Взрыв-схема":{"en":"Exploded view","pl":"Widok rozstrzelony","uk":"Рознесена схема"},"Вписать":{"en":"Fit","pl":"Dopasuj","uk":"Вписати"},"Входящие в эту панель отверстия не найдены.":{"en":"No holes entering this panel were found.","pl":"Nie znaleziono otworów wchodzących w ten panel.","uk":"Отворів, що входять у цю панель, не знайдено."},"Выберите вторую точку":{"en":"Pick the second point","pl":"Wybierz drugi punkt","uk":"Виберіть другу точку"},"Выберите отверстие на чертеже или в таблице.":{"en":"Pick a hole on the drawing or in the table.","pl":"Wybierz otwór na rysunku lub w tabeli.","uk":"Виберіть отвір на кресленні або в таблиці."},"Выберите первую точку":{"en":"Pick the first point","pl":"Wybierz pierwszy punkt","uk":"Виберіть першу точку"},"Выберите первую точку следующего замера":{"en":"Pick the first point of the next measurement","pl":"Wybierz pierwszy punkt następnego pomiaru","uk":"Виберіть першу точку наступного виміру"},"Выбор, скрытие, прозрачность и навигация — общие. Выбранная сборка остаётся в сцене вместе со своим крепежом. «Все сборки» снимает фильтр.":{"en":"Selection, hiding, transparency and navigation are shared. The selected assembly stays in the scene with its fasteners. “All assemblies” clears the filter.","pl":"Wybór, ukrywanie, przezroczystość i nawigacja są wspólne. Wybrany zespół pozostaje w scenie wraz z łącznikami. „Wszystkie zespoły” usuwa filtr.","uk":"Вибір, приховування, прозорість і навігація — спільні. Вибрана збірка залишається в сцені разом зі своїм кріпленням. «Усі збірки» знімає фільтр."},"Габариты выбранной детали":{"en":"Selected part dimensions","pl":"Wymiary wybranego elementu","uk":"Габарити вибраної деталі"},"Габариты:":{"en":"Overall size:","pl":"Wymiary:","uk":"Габарити:"},"Глубина":{"en":"Depth","pl":"Głębokość","uk":"Глибина"},"Закрыть чертёж":{"en":"Close drawing","pl":"Zamknij rysunek","uk":"Закрити креслення"},"Измерить 2 точки":{"en":"Measure 2 points","pl":"Zmierz 2 punkty","uk":"Виміряти 2 точки"},"Материал не указан":{"en":"No material","pl":"Brak materiału","uk":"Матеріал не вказано"},"Миллиметры. База X/Y — минимальные координаты контура, Z — нижняя пласть. Выберите отверстие: появятся размеры до его оси. Глубина — из фурнитуры БАЗИС. Контур соответствует экспортированной геометрии; это обзорный чертёж, не программа сверления.":{"en":"Millimeters. X/Y origin is the minimum contour coordinates, Z is the bottom face. Pick a hole to see dimensions to its axis. Depth comes from BAZIS hardware. The contour matches the exported geometry; this is an overview drawing, not a drilling program.","pl":"Milimetry. Baza X/Y — minimalne współrzędne konturu, Z — dolna płaszczyzna. Wybierz otwór: pojawią się wymiary do jego osi. Głębokość — z okuć BAZIS. Kontur odpowiada wyeksportowanej geometrii; to rysunek poglądowy, nie program wiercenia.","uk":"Міліметри. База X/Y — мінімальні координати контуру, Z — нижня пласть. Виберіть отвір: з'являться розміри до його осі. Глибина — з фурнітури БАЗИС. Контур відповідає експортованій геометрії; це оглядове креслення, не програма свердління."},"Наименование":{"en":"Name","pl":"Nazwa","uk":"Найменування"},"Настройки":{"en":"Settings","pl":"Ustawienia","uk":"Налаштування"},"Настройки сносок сборщика":{"en":"Assembly label settings","pl":"Ustawienia etykiet montażu","uk":"Налаштування виносок складання"},"Некорректный разнос":{"en":"Invalid spread","pl":"Nieprawidłowe rozsunięcie","uk":"Некоректне рознесення"},"Несовместимый режим сборщика":{"en":"Incompatible assembly mode","pl":"Niezgodny tryb montażu","uk":"Несумісний режим складання"},"Общий вид":{"en":"Overview","pl":"Widok ogólny","uk":"Загальний вид"},"Отверстие":{"en":"Hole","pl":"Otwór","uk":"Отвір"},"Отверстие №":{"en":"Hole #","pl":"Otwór nr","uk":"Отвір №"},"Очистить замеры":{"en":"Clear measurements","pl":"Wyczyść pomiary","uk":"Очистити виміри"},"Пласть XY":{"en":"Face XY","pl":"Płaszczyzna XY","uk":"Пласть XY"},"Позиция":{"en":"Position","pl":"Pozycja","uk":"Позиція"},"При выборе детали её сноска подсвечивается и показывает название.":{"en":"When a part is selected, its label is highlighted and shows the name.","pl":"Po wybraniu elementu jego etykieta jest podświetlona i pokazuje nazwę.","uk":"При виборі деталі її виноска підсвічується і показує назву."},"Проекция чертежа":{"en":"Drawing projection","pl":"Rzut rysunku","uk":"Проєкція креслення"},"Размер детали":{"en":"Part size","pl":"Wymiar elementu","uk":"Розмір деталі"},"Размер шрифта наименований, px":{"en":"Name font size, px","pl":"Rozmiar czcionki nazw, px","uk":"Розмір шрифту найменувань, px"},"Разнос":{"en":"Spread","pl":"Rozsunięcie","uk":"Рознесення"},"Разнос деталей, мм":{"en":"Part spread, mm","pl":"Rozsunięcie elementów, mm","uk":"Рознесення деталей, мм"},"Сборочные единицы":{"en":"Assembly units","pl":"Zespoły montażowe","uk":"Складальні одиниці"},"Сборщик":{"en":"Assembly","pl":"Montaż","uk":"Складання"},"Связи взрыв-схемы":{"en":"Exploded view links","pl":"Powiązania widoku rozstrzelonego","uk":"Зв'язки рознесеної схеми"},"Строки со знаком ≈: точка входа не определена, показано начало отверстия из БАЗИС.":{"en":"Rows marked ≈: the entry point is unknown, the hole start from BAZIS is shown.","pl":"Wiersze ze znakiem ≈: punkt wejścia nieokreślony, pokazano początek otworu z BAZIS.","uk":"Рядки зі знаком ≈: точку входу не визначено, показано початок отвору з БАЗИС."},"Торец XZ":{"en":"End XZ","pl":"Czoło XZ","uk":"Торець XZ"},"Торец YZ":{"en":"End YZ","pl":"Czoło YZ","uk":"Торець YZ"},"Чертёж":{"en":"Drawing","pl":"Rysunek","uk":"Креслення"},"Чертёж детали":{"en":"Part drawing","pl":"Rysunek elementu","uk":"Креслення деталі"},"Чертёж детали с отверстиями":{"en":"Part drawing with holes","pl":"Rysunek elementu z otworami","uk":"Креслення деталі з отворами"},"Шрифт наименований":{"en":"Name font","pl":"Czcionka nazw","uk":"Шрифт найменувань"},"мм":{"en":"mm","pl":"mm","uk":"мм"},"мм\nНаправление оси:":{"en":"mm\nAxis direction:","pl":"mm\nKierunek osi:","uk":"мм\nНапрямок осі:"},"мм · глубина":{"en":"mm · depth","pl":"mm · głębokość","uk":"мм · глибина"},"≈ Показано начало отверстия, точка входа не определена.":{"en":"≈ The hole start is shown; the entry point is unknown.","pl":"≈ Pokazano początek otworu, punkt wejścia nieokreślony.","uk":"≈ Показано початок отвору, точку входу не визначено."}});
 (function (root) {
   'use strict';
   function install(context, bundle) {
