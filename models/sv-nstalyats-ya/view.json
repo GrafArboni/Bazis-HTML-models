@@ -1,0 +1,126 @@
+{
+ "schema": 1,
+ "source": "8457eb0a4a635525820c1a8a8cc015ba513858cd2b0a20dac406658356a5e26b",
+ "savedAt": "2026-09-24T09:11:03.686Z",
+ "features": {
+  "outline": false,
+  "section": {
+   "active": false,
+   "axis": "y",
+   "position": 1279.6906416416168,
+   "reversed": false,
+   "showPlane": true,
+   "chosen": false,
+   "normal": [
+    0,
+    1,
+    0
+   ]
+  },
+  "dimension_actions": {
+   "colors": []
+  },
+  "notes": {
+   "enabled": true,
+   "notes": []
+  },
+  "hardware_mono": false,
+  "visibility": {
+   "hidden": [],
+   "objectMode": true
+  }
+ },
+ "controls": {
+  "panels": true,
+  "profiles": true,
+  "edges": true,
+  "textures": true,
+  "imports": true,
+  "hardware": true,
+  "holes": true,
+  "lines": true,
+  "overlay": false,
+  "opacity": "100",
+  "guides": false,
+  "holeOverlay": false,
+  "nativeDimensions": true,
+  "manualDimensions": true
+ },
+ "layers": [
+  true,
+  true,
+  true
+ ],
+ "layersByName": {
+  "Слой 0": true,
+  "Слой LAYER_1": true,
+  "Слой LEICA_3DDISTO_SURFACESCAN": true
+ },
+ "camera": {
+  "position": [
+   1797.50237509436,
+   2843.3729062124544,
+   4301.51861153639
+  ],
+  "target": [
+   1642.824484008,
+   1315.3159164901515,
+   176.57036273463868
+  ],
+  "up": [
+   0,
+   1,
+   0
+  ]
+ },
+ "dimensions": [
+  {
+   "a": [
+    1741.680037336644,
+    1195.226545925671,
+    -11.86727393717501
+   ],
+   "b": [
+    1741.042599987964,
+    2560.089193529797,
+    -11.74878334820914
+   ]
+  },
+  {
+   "a": [
+    1739.820572675267,
+    607.5188113692219,
+    -0.9571599729251828
+   ],
+   "b": [
+    1741.680037336644,
+    1195.226545925671,
+    -11.86727393717501
+   ]
+  },
+  {
+   "a": [
+    934.19016993689,
+    -0.6551352327011517,
+    -4.547e-13
+   ],
+   "b": [
+    937.230471462678,
+    1190.965000359235,
+    0.3401794917454026
+   ]
+  },
+  {
+   "a": [
+    937.230471462678,
+    1190.965000359235,
+    0.3401794917454026
+   ],
+   "b": [
+    941.3698289409813,
+    1190.986928471646,
+    187.4676113022992
+   ]
+  }
+ ]
+}
