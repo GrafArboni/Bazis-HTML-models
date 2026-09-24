@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="bazis-viewer" content="51c293491c54">
+<meta name="bazis-viewer" content="6bb528fa0121">
 <title>W-110.26_W_ · просмотр модели</title>
 <style>
 :root{color-scheme:dark;--bg:#10171d;--panel:#17232d;--line:#31414b;--text:#e8eef0;--muted:#a6bac4;--accent:#9ee2d0;--popup-border:#526776;--control-border:#46586a;--hover:#304654;--muted-soft:#9fb3bd;--divider:#26343d;--compact-slider:70px}
@@ -1690,6 +1690,46 @@ dialog.assemblerDrawing[open] {
 /* иначе строка результата липнет к кнопке */
 #regressionStatus {
   margin-top: 9px;
+}
+</style>
+<style data-feature="viewer_update">
+/* «Обновить просмотрщик» — в верхней строке перед языком и дискетой, в их размер;
+   акцентная, чтобы новую версию заметили */
+#toolbar > .viewerUpdateButton {
+  flex: none;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 32px;
+  margin: 3px;
+  padding: 4px 9px;
+  border: 1px solid #2f8f84;
+  border-radius: 7px;
+  background: #1d4a47;
+  color: #bff3ec;
+  font-size: 12px;
+  font-weight: 600;
+}
+#toolbar > .viewerUpdateButton:hover:not(:disabled) {
+  background: #25605b;
+}
+#toolbar > .viewerUpdateButton[hidden] {
+  display: none;
+}
+#toolbar > .viewerUpdateButton:disabled {
+  opacity: 0.75;
+  cursor: progress;
+}
+/* на телефоне — только значок: строка и так тесная */
+@media (max-width: 760px) {
+  #toolbar > .viewerUpdateButton {
+    margin: 3px 0;
+    padding: 4px 6px;
+  }
+  #viewerUpdateLabel {
+    display: none;
+  }
 }
 </style>
 </head>
@@ -3942,10 +3982,25 @@ window.OrbitControls = OrbitControls;
 <div class="subtle" id="regressionStatus">Проверяет диапазон глубины, целостность геометрии, копланарные грани и ориентацию несущих деталей. Подробности — в консоли браузера.</div>
 </div>
 <div data-feature-markup="viewer_update">
-<!-- Обновление просмотрщика: в меню «☰ → Ещё» (extrasMount). Кнопка видна, только
-     когда на сайте лежит версия кода новее той, из которой собрана страница. -->
+<!-- Обновление просмотрщика. Кнопка — в верхней строке рядом с дискетой и языком
+     (toolbarMount), видна, только когда на сайте лежит версия кода новее той, из
+     которой собрана страница. Подробный статус — в меню «☰ → Ещё» (extrasMount). -->
+<button type="button" class="viewerUpdateButton" id="viewerUpdate" hidden title="Обновить просмотрщик">
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    aria-hidden="true"
+  >
+    <path d="M20 11a8 8 0 1 0-2.3 5.7" />
+    <path d="M20 4v7h-7" />
+  </svg>
+  <span id="viewerUpdateLabel">Обновить</span>
+</button>
 <div class="tools viewerUpdateTools" id="viewerUpdateTools">
-  <button type="button" id="viewerUpdate" hidden>Обновить просмотрщик</button>
   <span role="status" class="subtle" id="viewerUpdateStatus"></span>
 </div>
 </div></div>
@@ -5469,6 +5524,13 @@ window.OrbitControls = OrbitControls;
     function pointVisible(point) {
       return !active || pending || !chosen || plane.distanceToPoint(point) >= -1e-6;
     }
+    // Отпечаток разреза для модулей с лучевыми проверками (shared/view_key.js):
+    // сдвинули или сменили плоскость — выноски и заметки пересчитают видимость.
+    const clipKey = () =>
+      !active || pending || !chosen
+        ? ''
+        : [plane.normal.x, plane.normal.y, plane.normal.z, plane.constant].join(',');
+    if (services) services.clipKey = clipKey;
     function update() {
       if (disposed) return;
       normal.copy(baseNormal).multiplyScalar(reversed ? -1 : 1);
@@ -5673,6 +5735,7 @@ window.OrbitControls = OrbitControls;
       }
       menu.removeEventListener('toggle', placePopup);
       context.window.removeEventListener('resize', placePopup);
+      if (services?.clipKey === clipKey) delete services.clipKey;
       caps.dispose();
       frame.removeFromParent();
       frame.geometry.dispose();
@@ -7792,14 +7855,49 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
   //   board.set('имя', [{key, x, y, box, line}]);  board.layout(w, h);
   // x, y — экранная точка привязки (px от левого верхнего угла viewport); box —
   // карточка, line — линия-сноска (оба absolute-элементы модуля). Карточки, которым
-  // не хватило высоты, прячутся. Прятать записи, не сданные в board, — дело модуля.
+  // не хватило высоты, прячутся. Прятать записи, не сданные в board, — дело модуля;
+  // сданные модуль НЕ трогает: раскладка сама решает, показать их или спрятать.
+  //
+  // Экономия (FPS с десятками выносок на тяжёлой модели): кадр, где ни точки, ни
+  // тексты, ни размер не изменились, пропускается целиком — не пишем стили и не
+  // меряем карточки. Раз в полсекунды раскладка всё равно проходит (фото в
+  // заметке догрузилось — высота карточки изменилась). Высоты меряем пачкой:
+  // сперва все записи стилей, потом все чтения — одна перекладка страницы вместо
+  // перекладки на каждую карточку.
+  const REFRESH_MS = 500;
+  const put = (el, prop, value) => {
+    if (el.style[prop] !== value) el.style[prop] = value;
+  };
   function create() {
     const sources = new Map();
+    let last = '',
+      stamp = 0;
+    const now = () => (typeof performance !== 'undefined' ? performance.now() : Date.now());
     function layout(w, h) {
       const all = [];
       for (const list of sources.values()) all.push(...list);
+      let key = w + 'x' + h;
+      for (const e of all)
+        key +=
+          '|' +
+          e.key +
+          ':' +
+          Math.round(e.x * 2) +
+          ',' +
+          Math.round(e.y * 2) +
+          ':' +
+          (e.box.textContent || '').length;
+      const time = now();
+      if (key === last && time - stamp < REFRESH_MS) return;
+      last = key;
+      stamp = time;
       const width = Math.min(200, Math.max(110, w * 0.37)),
         sides = [[], []];
+      for (const entry of all) {
+        put(entry.box, 'display', 'block');
+        put(entry.box, 'width', width + 'px');
+      }
+      const heights = new Map(all.map(e => [e, e.box.getBoundingClientRect().height]));
       for (const entry of all) sides[entry.x < w / 2 ? 0 : 1].push(entry);
       for (let side = 0; side < 2; side++) {
         const placed = [];
@@ -7808,12 +7906,10 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
           (a, b) => a.y - b.y || String(a.key).localeCompare(String(b.key))
         )) {
           const { box, line } = entry;
-          box.style.display = 'block';
-          box.style.width = width + 'px';
-          const height = box.getBoundingClientRect().height;
+          const height = heights.get(entry);
           if (total + height + 8 > h - 24) {
-            box.style.display = 'none';
-            line.style.display = 'none';
+            put(box, 'display', 'none');
+            put(line, 'display', 'none');
             continue;
           }
           placed.push({ entry, height });
@@ -7827,16 +7923,17 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
           const y = Math.min(Math.max(entry.y - height / 2, last + 8, 8), h - 8 - remaining);
           last = y + height;
           remaining -= height + 8;
-          Object.assign(box.style, { display: 'block', left: x + 'px', top: y + 'px', width: width + 'px' });
+          put(box, 'left', x + 'px');
+          put(box, 'top', y + 'px');
           const endX = side ? x : x + width,
             endY = y + height / 2,
             dx = endX - entry.x,
             dy = endY - entry.y;
-          line.style.display = 'block';
-          line.style.left = entry.x + 'px';
-          line.style.top = entry.y + 'px';
-          line.style.width = Math.hypot(dx, dy) + 'px';
-          line.style.transform = 'rotate(' + Math.atan2(dy, dx) + 'rad)';
+          put(line, 'display', 'block');
+          put(line, 'left', entry.x + 'px');
+          put(line, 'top', entry.y + 'px');
+          put(line, 'width', Math.hypot(dx, dy) + 'px');
+          put(line, 'transform', 'rotate(' + Math.atan2(dy, dx) + 'rad)');
         }
       }
     }
@@ -7846,6 +7943,11 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       },
       remove(name) {
         sources.delete(name);
+      },
+      // Следующий layout() пройдёт полностью, даже если точки не сдвинулись
+      // (модуль сменил вид карточки, не меняя её текста).
+      invalidate() {
+        last = '';
       },
       layout
     };
@@ -7858,6 +7960,49 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
   };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   root.BazisCallouts = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this);
+
+(function (root) {
+  'use strict';
+  // Отпечаток того, что видно на экране: камера, набор видимых деталей и их
+  // положение, разрез. Модули с лучевыми проверками (выноски материалов, заслонение
+  // заметок) сравнивают отпечаток с прошлым и пересчитывают только когда он
+  // изменился: на W-110.26 (3791 деталь) повтор проверки при стоящей камере давал
+  // рывки до 240 мс каждые 0,25 с.
+  //
+  //   const { meshes, key } = BazisViewKey.scan(services, camera, groupName => skip?);
+  //
+  // meshes — видимые меши (заслоны для лучей), key — строка-отпечаток. Обход сцены
+  // один, его всё равно нужно делать ради списка заслонов.
+  function scan(services, camera, skip) {
+    const meshes = [];
+    let hash = 0,
+      shift = 0;
+    for (const [name, group] of Object.entries(services.groups || {})) {
+      if (skip && skip(name)) continue;
+      group.traverse(o => {
+        if (!o.isMesh || !services.visible(o) || o.userData.decorative || !o.layers.test(camera.layers))
+          return;
+        meshes.push(o);
+        const e = o.matrixWorld.elements;
+        hash = (Math.imul(hash, 31) + o.id) | 0;
+        shift += e[12] + e[13] * 3 + e[14] * 7;
+      });
+    }
+    const matrix = m => Array.from(m.elements, x => x.toFixed(4)).join(',');
+    const key = [
+      meshes.length,
+      hash,
+      shift.toFixed(3),
+      matrix(camera.matrixWorld),
+      matrix(camera.projectionMatrix),
+      services.clipKey?.() ?? ''
+    ].join('|');
+    return { meshes, key };
+  }
+  const api = { scan };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  root.BazisViewKey = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 
 (function (root) {
@@ -7923,7 +8068,9 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     // перебивал бы галочку. Выключили после выгрузки и сохранили — уважаем.
     let changedAt = null,
       still = 0,
-      fresh = true;
+      fresh = true,
+      job = null, // проверка порциями (scan), идёт по кадрам
+      viewKey = null; // отпечаток вида, по которому она запущена
     function restore(value) {
       const on = value && typeof value === 'object' ? !!value.enabled : !!value,
         at = value && typeof value === 'object' ? value.changedAt || null : null;
@@ -7935,6 +8082,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       enabled = !!value;
       elapsed = 1;
       fresh = true;
+      job = null;
       if (button) button.checked = enabled;
       if (mark) changedAt = new Date().toISOString();
       if (!enabled) {
@@ -8031,20 +8179,26 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     function inView(p) {
       return p.z >= -1 && p.z <= 1 && Math.abs(p.x) < 0.98 && Math.abs(p.y) < 0.98;
     }
-    function update() {
-      if (!enabled || !overlay || disposed) return;
+    // Заслоны — всё, кроме фурнитуры: её сотни мелких мешей с сотнями тысяч
+    // треугольников (W-110.26) делали проверку ~0.7 с, а ручка или петля перед
+    // точкой выноски погоды не делают. Крупный импорт (ящики, мойка) остаётся.
+    function view() {
       scene.updateMatrixWorld(true);
       camera.updateMatrixWorld(true);
-      // Заслоны — всё, кроме фурнитуры: её сотни мелких мешей с сотнями тысяч
-      // треугольников (W-110.26) делали проверку ~0.7 с, а ручка или петля перед
-      // точкой выноски погоды не делают. Крупный импорт (ящики, мойка) остаётся.
-      const meshes = [];
-      for (const [key, group] of Object.entries(services.groups))
-        if (key !== 'hardware')
-          group.traverse(o => {
-            if (o.isMesh && services.visible(o) && !o.userData.decorative && o.layers.test(camera.layers))
-              meshes.push(o);
-          });
+      return root.BazisViewKey.scan(services, camera, group => group === 'hardware');
+    }
+    // Полная проверка сразу (галочки материалов, внешние вызовы).
+    function update() {
+      if (!enabled || !overlay || disposed) return;
+      const state = view();
+      job = null;
+      viewKey = state.key;
+      for (const step = scan(state.meshes); !step.next().done; );
+    }
+    // Проверка порциями: генератор отдаёт управление после каждого луча, кадр
+    // крутит его не дольше BUDGET_MS. Выноски висят на прежних точках, пока
+    // проверка не дойдёт до конца, — зато нет рывка на весь пересчёт.
+    function* scan(meshes) {
       const found = new Map();
       function probe(point, expected = null) {
         const p = projected(point);
@@ -8058,11 +8212,16 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
           found.set(name, { point: hit.point.clone(), object: hit.object });
         return name === expected;
       }
+      function* probeStep(point, expected) {
+        const ok = probe(point, expected);
+        yield;
+        return ok;
+      }
       // Keep the previous attachment while it remains visible: labels do not jump
       // between shelves on every camera movement.
-      for (const [name, anchor] of anchors)
+      for (const [name, anchor] of [...anchors])
         if (services.visible(anchor.object) && services.pointVisible?.(anchor.point) !== false)
-          probe(anchor.point, name);
+          yield* probeStep(anchor.point, name);
       for (const mesh of meshes) {
         const name = nameOf(mesh);
         if (!name || found.has(name)) continue;
@@ -8088,8 +8247,9 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
             p.add(new T.Vector3().fromBufferAttribute(position, index ? index.getX(offset + j) : offset + j));
           points.push(p.multiplyScalar(1 / 3));
         }
-        for (const p of points) if (probe(p.applyMatrix4(mesh.matrixWorld), name)) break;
+        for (const p of points) if (yield* probeStep(p.applyMatrix4(mesh.matrixWorld), name)) break;
       }
+      if (!enabled || disposed) return;
       anchors.clear();
       for (const [name, anchor] of found) anchors.set(name, anchor);
       layout();
@@ -8221,11 +8381,17 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       const rect = canvas.getBoundingClientRect(),
         w = rect.width,
         h = rect.height;
-      for (const item of labels.values()) {
-        item.box.style.display = 'none';
-        item.line.style.display = 'none';
-      }
+      // Прячем только выноски, которых нет в доске: сданные раскладывает board, и
+      // прятать-показывать их каждый кадр значило бы перекладывать страницу.
+      const hideRest = keep => {
+        for (const [name, item] of labels)
+          if (!keep.has(name)) {
+            if (item.box.style.display !== 'none') item.box.style.display = 'none';
+            if (item.line.style.display !== 'none') item.line.style.display = 'none';
+          }
+      };
       if (mobile()) {
+        hideRest(new Set());
         board?.set('material_labels', []);
         board?.layout(w, h);
         layoutChips();
@@ -8251,13 +8417,19 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
           line: item.line
         });
       }
+      hideRest(new Set(entries.map(e => e.key)));
       board.set('material_labels', entries);
       board.layout(w, h);
     }
     // Пока камера движется, видимость не пересчитываем: выноски едут за прежними
     // точками (layout дешёвый), а лучевая проверка — когда камера замерла на 0.2 с.
     // Иначе при вращении тяжёлой модели кадр каждые 250 мс проседал на всю проверку.
-    const lastCamera = new T.Matrix4();
+    // Когда замерла — проверяем, изменилось ли хоть что-то (камера, видимые детали,
+    // разрез: shared/view_key.js); не изменилось — лучи не пускаем вовсе. Раньше
+    // проверка шла каждые 0,25 с и при стоящей камере: рывки до 240 мс на W-110.26.
+    const lastCamera = new T.Matrix4(),
+      BUDGET_MS = 6,
+      clock = () => (root.performance || Date).now();
     function frame(delta) {
       if (!enabled) return;
       camera.updateMatrixWorld();
@@ -8266,11 +8438,20 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         still = 0;
       } else still += delta;
       elapsed += delta;
-      if (elapsed >= 0.25 && (still >= 0.2 || fresh)) {
+      if (!job && overlay && !disposed && elapsed >= 0.25 && (still >= 0.2 || fresh)) {
         elapsed = 0;
-        fresh = false;
-        update();
-      } else layout();
+        const state = view();
+        if (fresh || state.key !== viewKey) {
+          fresh = false;
+          viewKey = state.key;
+          job = scan(state.meshes);
+        }
+      }
+      if (job) {
+        const start = clock();
+        while (job && clock() - start < BUDGET_MS) if (job.next().done) job = null;
+      }
+      layout();
     }
     hooks.ready.push(ready);
     hooks.frame.push(frame);
@@ -8339,7 +8520,9 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       adding = false,
       disposed = false,
       installed = false,
-      elapsed = 1;
+      elapsed = 1,
+      occlusionKey = null, // отпечаток вида прошлой проверки заслонения (frame)
+      occlusionJob = null;
     let overlay = null,
       tools = null,
       toolItems = null,
@@ -8525,6 +8708,17 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       }
       return { object: null, point: new T.Vector3(...note.point) };
     }
+    // Заметка прячется вместе со своей деталью — как бы её ни скрыли: «Скрыть
+    // выбранное», блок, сборочная единица, «Оставить выбранное», фильтр сборщика,
+    // галочка слоя. Спрашиваем модуль видимости о самой детали и проверяем всю
+    // цепочку родителей: у фурнитуры скрывается группа, а меш внутри неё остаётся
+    // visible — по одному мешу заметка висела бы на невидимой детали.
+    function detailShown(note, object) {
+      if (note.objectId != null && services.objectVisible?.(note.objectId) === false) return false;
+      if (!object) return true;
+      for (let n = object; n; n = n.parent) if (!n.visible) return false;
+      return services.visible ? services.visible(object) : true;
+    }
     function targets() {
       const out = [];
       for (const group of Object.values(services.groups || {}))
@@ -8564,12 +8758,12 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       }
       return note;
     }
-    function occluded(point) {
+    function occluded(point, meshes) {
       const distance = camera.position.distanceTo(point);
       if (distance < 1e-6) return false;
       ray.set(camera.position, point.clone().sub(camera.position).normalize());
       ray.far = distance;
-      const hit = ray.intersectObjects(targets(), false).find(h => pointOk(h.point));
+      const hit = ray.intersectObjects(meshes, false).find(h => pointOk(h.point));
       ray.far = Infinity;
       return !!hit && hit.distance < distance - Math.max(0.5, distance * 0.0005);
     }
@@ -8658,9 +8852,8 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       return item;
     }
     function hide(item) {
-      item.box.style.display = 'none';
-      item.line.style.display = 'none';
-      item.dot.style.display = 'none';
+      for (const el of [item.box, item.line, item.dot])
+        if (el.style.display !== 'none') el.style.display = 'none';
     }
     function render() {
       if (!installed) return;
@@ -8675,6 +8868,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       for (const note of notes) view(note);
       renderList();
       elapsed = 1;
+      occlusionKey = null;
       layout();
     }
     function layout() {
@@ -8683,39 +8877,65 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         w = rect.width,
         h = rect.height,
         entries = [];
+      // Сданные в доску карточки не прячем: их показывает/прячет board, а
+      // прятать-показывать каждый кадр значило бы перекладывать страницу.
+      const put = (el, prop, value) => {
+        if (el.style[prop] !== value) el.style[prop] = value;
+      };
       for (const note of notes) {
         const item = views.get(note.id);
         if (!item) continue;
-        hide(item);
-        if (!enabled || note.hidden) continue;
-        const anchor = anchorOf(note);
-        if (anchor.object && !services.visible(anchor.object)) continue;
-        if (!pointOk(anchor.point)) continue;
-        const p = anchor.point.clone().project(camera);
-        if (p.z < -1 || p.z > 1 || Math.abs(p.x) > 0.98 || Math.abs(p.y) > 0.98) continue;
-        const x = ((p.x + 1) * w) / 2,
-          y = ((1 - p.y) * h) / 2;
+        const shown = where(note);
+        if (!shown) {
+          hide(item);
+          continue;
+        }
+        const { x, y } = shown;
         for (const el of [item.box, item.line, item.dot]) el.classList.toggle('occluded', item.occluded);
-        item.dot.style.display = 'block';
-        item.dot.style.left = x + 'px';
-        item.dot.style.top = y + 'px';
+        put(item.dot, 'display', 'block');
+        put(item.dot, 'left', x + 'px');
+        put(item.dot, 'top', y + 'px');
         entries.push({ key: 'note:' + note.id, x, y, box: item.box, line: item.line });
       }
       board.set('notes', entries);
       board.layout(w, h);
+      function where(note) {
+        if (!enabled || note.hidden) return null;
+        const anchor = anchorOf(note);
+        if (!detailShown(note, anchor.object) || !pointOk(anchor.point)) return null;
+        const p = anchor.point.clone().project(camera);
+        if (p.z < -1 || p.z > 1 || Math.abs(p.x) > 0.98 || Math.abs(p.y) > 0.98) return null;
+        return { x: ((p.x + 1) * w) / 2, y: ((1 - p.y) * h) / 2 };
+      }
     }
-    function checkOcclusion() {
-      for (const note of notes) {
+    // Заслонение пересчитываем, только когда изменился вид (камера, видимые детали,
+    // разрез — shared/view_key.js) или набор заметок. Один обход сцены на все
+    // заметки (раньше — на каждую), лучи порциями не дольше BUDGET_MS за кадр:
+    // с десятком заметок на W-110.26 проверка раз в 0,25 с роняла FPS.
+    const BUDGET_MS = 4,
+      clock = () => (root.performance || Date).now();
+    function* occlusionScan(meshes) {
+      for (const note of notes.slice()) {
         const item = views.get(note.id);
-        if (item) item.occluded = occluded(anchorOf(note).point);
+        if (item) item.occluded = occluded(anchorOf(note).point, meshes);
+        yield;
       }
     }
     function frame(delta) {
       if (!installed || (!notes.length && !views.size)) return;
       elapsed += delta;
-      if (elapsed >= 0.25) {
+      if (enabled && !occlusionJob && elapsed >= 0.25) {
         elapsed = 0;
-        if (enabled) checkOcclusion();
+        const state = root.BazisViewKey.scan(services, camera),
+          key = state.key + '|' + notes.map(n => n.id + ':' + (n.objectId ?? '')).join(',');
+        if (key !== occlusionKey) {
+          occlusionKey = key;
+          occlusionJob = occlusionScan(state.meshes);
+        }
+      }
+      if (occlusionJob) {
+        const start = clock();
+        while (occlusionJob && clock() - start < BUDGET_MS) if (occlusionJob.next().done) occlusionJob = null;
       }
       layout();
     }
@@ -8961,6 +9181,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       enabled = !!value;
       if (showBox) showBox.checked = enabled;
       elapsed = 1;
+      occlusionKey = null;
       layout();
     }
     function keydown(event) {
@@ -10174,8 +10395,46 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     const turn = (a, b, c) => (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
     return turn(a, b, c) * turn(a, b, d) < 0 && turn(c, d, a) * turn(c, d, b) < 0;
   };
+  // Препятствий — сотни (каждая видимая деталь), кандидатов на место — тысячи на
+  // подпись: перебор всех препятствий на каждого кандидата стоил ~95 мс на
+  // W-110.26 каждые 0,15 с. Сетка ячеек CELL px: препятствие записано в ячейки,
+  // которые накрывает, кандидат сверяется только с препятствиями своих ячеек.
+  // Результат тот же, что у полного перебора (проверка сверяет с эталоном).
+  const CELL = 64;
+  const inside = (a, b) => a.x >= b.x && a.y >= b.y && a.x + a.w <= b.x + b.w && a.y + a.h <= b.y + b.h;
+  function grid(rects, width, height) {
+    // Препятствие внутри другого ничего не добавляет: всё, что задевает его,
+    // задевает и внешнее. Габариты полок внутри корпуса — именно такие.
+    const sorted = rects.slice().sort((a, b) => b.w * b.h - a.w * a.h),
+      kept = [];
+    for (const r of sorted) if (!kept.some(k => inside(r, k))) kept.push(r);
+    const cols = Math.ceil(width / CELL) + 3,
+      rows = Math.ceil(height / CELL) + 3,
+      cells = Array.from({ length: cols * rows }, () => []);
+    // ячейки со сдвигом на 1: колонка/строка -1 — всё, что левее/выше экрана
+    const span = (a, b, n) => [
+      Math.max(0, Math.floor(a / CELL) + 1),
+      Math.min(n - 1, Math.floor(b / CELL) + 1)
+    ];
+    for (const o of kept) {
+      const [x0, x1] = span(o.x - 6, o.x + o.w + 6, cols),
+        [y0, y1] = span(o.y - 6, o.y + o.h + 6, rows);
+      for (let cy = y0; cy <= y1; cy++) for (let cx = x0; cx <= x1; cx++) cells[cy * cols + cx].push(o);
+    }
+    return {
+      hit(r) {
+        const [x0, x1] = span(r.x, r.x + r.w, cols),
+          [y0, y1] = span(r.y, r.y + r.h, rows);
+        for (let cy = y0; cy <= y1; cy++)
+          for (let cx = x0; cx <= x1; cx++)
+            for (const o of cells[cy * cols + cx]) if (overlaps(r, o)) return true;
+        return false;
+      }
+    };
+  }
   function layout(points, obstacles, width, height, defaultW = 180, defaultH = 34) {
-    const placed = [];
+    const placed = [],
+      blocked = grid(obstacles, width, height);
     for (const p of points
       .slice()
       .sort((a, b) => Number(!!b.selected) - Number(!!a.selected) || a.y - b.y || a.x - b.x)) {
@@ -10192,7 +10451,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         for (const y of ys) {
           if (y < 8 || y + h > height - 34) continue;
           const r = { x, y, w, h };
-          if (obstacles.some(o => overlaps(r, o)) || placed.some(o => overlaps(r, o))) continue;
+          if (placed.some(o => overlaps(r, o)) || blocked.hit(r)) continue;
           const target = end(p, r),
             distance = Math.hypot(target.x - p.x, target.y - p.y),
             crossings = placed.filter(o => cross(p, target, o.point, o.target)).length;
@@ -11090,8 +11349,23 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       disposed = false,
       ready = false,
       lastVisibility = '',
-      labelElapsed = 1;
+      labelElapsed = 1,
+      labelsDirty = true, // подписи надо пересчитать, даже если вид тот же
+      labelKey = ''; // отпечаток вида прошлого пересчёта подписей
     let disposeSettings = null;
+    // Кэши подписей: меши детали (лучи — только по ним, не по линиям рёбер) и её
+    // габарит на экране-препятствие. Сбрасываются, когда детали двигаются или
+    // меняется их видимость.
+    const meshCache = new Map(),
+      boxCache = new Map();
+    function touchLabels(moved = false) {
+      labelElapsed = 1;
+      labelsDirty = true;
+      if (moved) {
+        meshCache.clear();
+        boxCache.clear();
+      }
+    }
     const items = new Map(),
       labels = new Map(),
       snapBases = [],
@@ -11495,7 +11769,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       for (const fn of hooks.geometryChanged || []) fn();
       for (const fn of hooks.assemblerChanged) fn({ active, exploded, separation, unitId });
       lastVisibility = '';
-      labelElapsed = 1;
+      touchLabels(true);
     }
     function frame(delta = 0.016) {
       if (!ready || !active) return;
@@ -11506,13 +11780,35 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         syncHoles();
         updateLinks();
         lastVisibility = signature;
-        labelElapsed = 1;
+        touchLabels(true);
       }
+      // Подписи пересчитываем, только когда что-то изменилось: камера, размер окна,
+      // разрез, панели интерфейса-препятствия, состав или положение деталей. Раньше
+      // пересчёт шёл каждые 0,15 с и при стоящей камере — ~95 мс на W-110.26.
       labelElapsed += delta;
       if (labelElapsed >= 0.15) {
         labelElapsed = 0;
-        updateLabels();
+        const key = viewKey();
+        if (labelsDirty || key !== labelKey) {
+          labelsDirty = false;
+          labelKey = key;
+          updateLabels();
+        }
       }
+    }
+    function viewKey() {
+      camera.updateMatrixWorld();
+      const matrix = m => Array.from(m.elements, x => x.toFixed(4)).join(',');
+      const ui = [unitBar, ...doc.querySelectorAll('#hardwareCatalog,#hardwareCatalogToggle,.footer')].map(
+        el => (el.hidden ? '-' : el.offsetWidth + 'x' + el.offsetHeight)
+      );
+      return [
+        matrix(camera.matrixWorld),
+        matrix(camera.projectionMatrix),
+        area.clientWidth + 'x' + area.clientHeight,
+        services.clipKey?.() ?? '',
+        ui.join(',')
+      ].join('|');
     }
     function setActive(value) {
       active = !!value;
@@ -11563,7 +11859,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       nameInput.checked = labelName;
       fontInput.value = String(labelFontSize);
       fontValue.textContent = labelFontSize + ' px';
-      labelElapsed = 1;
+      touchLabels();
       if (ready && active) updateLabels();
     }
     function calloutText(rec, selected = false) {
@@ -11587,22 +11883,26 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       selectedId = object?.userData.record.id ?? null;
       preview.disabled = !panels.has(selectedId);
       refreshPartDimensions();
-      labelElapsed = 1;
+      touchLabels();
       if (ready && active) updateLabels();
     }
     function openDrawing(id = selectedId) {
       const panel = panels.get(id);
       return panel ? root.BazisAssemblerDrawing.open(context, panel) : null;
     }
+    function meshesOf(i) {
+      let list = meshCache.get(i.id);
+      if (!list) {
+        list = [];
+        for (const r of i.roots) r.object.traverse(o => o.isMesh && list.push(o));
+        meshCache.set(i.id, list);
+      }
+      return list;
+    }
     function anchor(i) {
       const center = i.center.clone().add(i.offset),
         ray = new T.Raycaster(camera.position, center.clone().sub(camera.position).normalize());
-      const hit = ray
-        .intersectObjects(
-          i.roots.map(r => r.object),
-          true
-        )
-        .find(h => h.object.isMesh && services.pointVisible(h.point));
+      const hit = ray.intersectObjects(meshesOf(i), false).find(h => services.pointVisible(h.point));
       return hit?.point || center;
     }
     function updateLabels() {
@@ -11706,6 +12006,8 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         }
         return l;
       };
+      // Размеры подписей меряем пачкой: сначала все записи стилей, потом все
+      // чтения — одна перекладка страницы, а не по одной на подпись.
       const points = [];
       for (const [id, point, text] of wanted) {
         if (!text) continue;
@@ -11722,17 +12024,27 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         l.style.width = 'max-content';
         l.style.maxWidth = (selected ? Math.min(240, width * 0.65) : labelWidth) + 'px';
         l.style.maxHeight = 'none';
-        const w = Math.ceil(l.getBoundingClientRect().width),
-          h = Math.ceil(l.getBoundingClientRect().height);
-        l.style.display = 'none';
-        points.push({ id, text, selected, w, h, x: ((p.x + 1) * width) / 2, y: ((1 - p.y) * height) / 2 });
+        points.push({ id, text, selected, l, x: ((p.x + 1) * width) / 2, y: ((1 - p.y) * height) / 2 });
+      }
+      for (const point of points) {
+        const r = point.l.getBoundingClientRect();
+        point.w = Math.ceil(r.width);
+        point.h = Math.ceil(r.height);
+      }
+      for (const point of points) {
+        point.l.style.display = 'none';
+        delete point.l;
       }
 
       const obstacles = [];
       for (const i of items.values()) {
         if (i.kind === 'hardware' || !i.roots.some(r => services.visible(r.object))) continue;
-        const box = new T.Box3();
-        for (const r of i.roots) if (services.visible(r.object)) box.expandByObject(r.object);
+        let box = boxCache.get(i.id);
+        if (!box) {
+          box = new T.Box3();
+          for (const r of i.roots) if (services.visible(r.object)) box.expandByObject(r.object);
+          boxCache.set(i.id, box);
+        }
         if (box.isEmpty()) continue;
         const ps = [];
         for (const x of [box.min.x, box.max.x])
@@ -12868,13 +13180,35 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     const { document: doc, window: win } = context;
     if (data?.schema !== 1) throw new Error('Несовместимый модуль обновления просмотрщика');
     const target = context.data.republish;
-    let disposed = false;
+    let disposed = false,
+      updated = false;
 
     // Разметка — markup.html (сборщик кладёт её в #featureMarkup)
     const wrap = doc.getElementById('viewerUpdateTools'),
       button = doc.getElementById('viewerUpdate'),
+      label = doc.getElementById('viewerUpdateLabel'),
       status = doc.getElementById('viewerUpdateStatus');
     (context.extrasMount || context.toolMount).append(wrap);
+    // Кнопка — на виду, в верхней строке перед языком и дискетой (их ставят на
+    // ready модули i18n и github_save, поэтому и мы — на ready). Нет верхней
+    // строки — остаётся рядом со статусом в «Ещё».
+    const place = () => {
+      const bar = context.toolbarMount,
+        anchor = doc.querySelector?.('#langControl') || doc.querySelector?.('#githubSaveTools');
+      if (bar && anchor && anchor.parentElement === bar && bar.insertBefore) bar.insertBefore(button, anchor);
+      else if (bar) bar.append(button);
+      else wrap.prepend?.(button);
+    };
+    const readyHooks = context.hooks?.ready;
+    if (readyHooks) readyHooks.push(place);
+    else place();
+    // Полный текст — в строке статуса «Ещё» и во всплывающей подсказке кнопки,
+    // на самой кнопке — коротко, что происходит.
+    function say(text, short) {
+      status.textContent = text;
+      button.title = text || 'Обновить просмотрщик';
+      if (short && label) label.textContent = short;
+    }
 
     const own = doc.querySelector?.('meta[name="bazis-viewer"]')?.getAttribute('content') || '';
     // Сайт публикации: страница лежит в <сайт>/models/<слаг>/index.html, набор — в <сайт>/viewer/
@@ -12898,13 +13232,16 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         const manifest = await fetchJson(kitUrl('manifest.json'));
         const fresh = manifest.version !== own;
         button.hidden = !fresh;
-        status.textContent = fresh
-          ? 'Есть новая версия просмотрщика: ' +
-            manifest.version +
-            ' (у страницы — ' +
-            (own || 'старая') +
-            ').'
-          : 'Просмотрщик актуален (' + own + ').';
+        say(
+          fresh
+            ? 'Есть новая версия просмотрщика: ' +
+                manifest.version +
+                ' (у страницы — ' +
+                (own || 'старая') +
+                ').'
+            : 'Просмотрщик актуален (' + own + ').',
+          'Обновить'
+        );
         return manifest;
       } catch (error) {
         status.textContent = 'Не удалось проверить версию просмотрщика: ' + error.message;
@@ -12936,34 +13273,37 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       }
       button.disabled = true;
       try {
-        status.textContent = 'Скачиваю новую версию просмотрщика…';
+        say('Скачиваю новую версию просмотрщика…', 'Обновляю…');
         const manifest = await fetchJson(kitUrl('manifest.json'));
         const kit = await fetchJson(kitUrl('kit.json'));
         const response = await win.fetch(win.location.href.replace(/[?#].*$/, ''), { cache: 'no-store' });
         if (!response.ok) throw new Error('Не удалось прочитать эту страницу (' + response.status + ')');
-        status.textContent = 'Собираю страницу…';
+        say('Собираю страницу…');
         const result = await rebuild(await response.text(), kit, manifest.version, codec);
-        status.textContent = 'Записываю на GitHub…';
+        say('Записываю на GitHub…');
         const sha = await saver.commitFile(
           target.path,
           result.text,
           'Обнови просмотрщик ' + target.path + ' до ' + manifest.version
         );
         if (!sha) {
-          status.textContent = 'Отменено.';
+          say('Отменено.', 'Обновить');
           return null;
         }
-        status.textContent =
+        say(
           'Просмотрщик обновлён (коммит ' +
-          sha.slice(0, 7) +
-          (result.added.length ? '; добавлено: ' + result.added.join(', ') : '') +
-          '). GitHub Pages выложит страницу примерно через минуту — затем перезагрузите её.';
+            sha.slice(0, 7) +
+            (result.added.length ? '; добавлено: ' + result.added.join(', ') : '') +
+            '). GitHub Pages выложит страницу примерно через минуту — затем перезагрузите её.',
+          'Обновлено'
+        );
+        updated = true; // второй раз коммитить то же незачем — до перезагрузки кнопка неактивна
         return result;
       } catch (error) {
-        status.textContent = error.message;
+        say(error.message, 'Ошибка');
         return null;
       } finally {
-        if (!disposed) button.disabled = false;
+        if (!disposed && !updated) button.disabled = false;
       }
     }
 
@@ -12977,6 +13317,9 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       update,
       dispose() {
         disposed = true;
+        const i = readyHooks ? readyHooks.indexOf(place) : -1;
+        if (i >= 0) readyHooks.splice(i, 1);
+        button.remove();
         wrap.remove();
         doc.querySelector?.('style[data-feature="viewer_update"]')?.remove();
       }
@@ -12988,7 +13331,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
   else (root.BazisViewerFeatures || (root.BazisViewerFeatures = [])).push({ name: 'viewer_update', install });
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 
-(globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"(у страницы —":{"en":"(page has","pl":"(strona ma","uk":"(у сторінки —"},"). GitHub Pages выложит страницу примерно через минуту — затем перезагрузите её.":{"en":"). GitHub Pages will publish the page in about a minute — then reload it.","pl":"). GitHub Pages opublikuje stronę za około minutę — potem ją odśwież.","uk":"). GitHub Pages опублікує сторінку приблизно за хвилину — потім перезавантажте її."},". Обновление — на опубликованной странице.":{"en":". Updating is available on the published page.","pl":". Aktualizacja — na opublikowanej stronie.","uk":". Оновлення — на опублікованій сторінці."},"; добавлено:":{"en":"; added:","pl":"; dodano:","uk":"; додано:"},"В данных модели нет разделов модулей — обновите страницу локально.":{"en":"The model data has no module sections — update the page locally.","pl":"Dane modelu nie mają sekcji modułów — zaktualizuj stronę lokalnie.","uk":"У даних моделі немає розділів модулів — оновіть сторінку локально."},"В странице нет данных модели.":{"en":"The page has no model data.","pl":"Strona nie zawiera danych modelu.","uk":"На сторінці немає даних моделі."},"Версия просмотрщика":{"en":"Viewer version","pl":"Wersja przeglądarki","uk":"Версія переглядача"},"Данные модели новее набора кода — выпустите новую версию просмотрщика.":{"en":"The model data is newer than the code bundle — release a new viewer version.","pl":"Dane modelu są nowsze niż pakiet kodu — wydaj nową wersję przeglądarki.","uk":"Дані моделі новіші за набір коду — випустіть нову версію переглядача."},"Есть новая версия просмотрщика:":{"en":"A new viewer version is available:","pl":"Dostępna jest nowa wersja przeglądarki:","uk":"Є нова версія переглядача:"},"Записываю на GitHub…":{"en":"Writing to GitHub…","pl":"Zapisuję na GitHub…","uk":"Записую на GitHub…"},"Набор кода другого формата — обновите страницу локально (upgrade_html.py).":{"en":"The code bundle has a different format — update the page locally (upgrade_html.py).","pl":"Pakiet kodu ma inny format — zaktualizuj stronę lokalnie (upgrade_html.py).","uk":"Набір коду іншого формату — оновіть сторінку локально (upgrade_html.py)."},"Не удалось добавить разделы модулей в данные — обновите страницу локально.":{"en":"Could not add module sections to the data — update the page locally.","pl":"Nie udało się dodać sekcji modułów do danych — zaktualizuj stronę lokalnie.","uk":"Не вдалося додати розділи модулів у дані — оновіть сторінку локально."},"Не удалось получить":{"en":"Could not fetch","pl":"Nie udało się pobrać","uk":"Не вдалося отримати"},"Не удалось проверить версию просмотрщика:":{"en":"Could not check the viewer version:","pl":"Nie udało się sprawdzić wersji przeglądarki:","uk":"Не вдалося перевірити версію переглядача:"},"Не удалось прочитать эту страницу (":{"en":"Could not read this page (","pl":"Nie udało się odczytać tej strony (","uk":"Не вдалося прочитати цю сторінку ("},"Несовместимый модуль обновления просмотрщика":{"en":"Incompatible viewer update module","pl":"Niezgodny moduł aktualizacji przeglądarki","uk":"Несумісний модуль оновлення переглядача"},"Нет модуля записи на GitHub — обновите страницу локально.":{"en":"No GitHub write module — update the page locally.","pl":"Brak modułu zapisu na GitHub — zaktualizuj stronę lokalnie.","uk":"Немає модуля запису на GitHub — оновіть сторінку локально."},"Обнови просмотрщик":{"en":"Update viewer","pl":"Zaktualizuj przeglądarkę","uk":"Онови переглядач"},"Обновить просмотрщик":{"en":"Update viewer","pl":"Zaktualizuj przeglądarkę","uk":"Оновити переглядач"},"Отменено.":{"en":"Cancelled.","pl":"Anulowano.","uk":"Скасовано."},"Просмотрщик актуален (":{"en":"The viewer is up to date (","pl":"Przeglądarka jest aktualna (","uk":"Переглядач актуальний ("},"Просмотрщик обновлён (коммит":{"en":"Viewer updated (commit","pl":"Przeglądarka zaktualizowana (commit","uk":"Переглядач оновлено (коміт"},"Скачиваю новую версию просмотрщика…":{"en":"Downloading the new viewer version…","pl":"Pobieram nową wersję przeglądarki…","uk":"Завантажую нову версію переглядача…"},"Собираю страницу…":{"en":"Building the page…","pl":"Buduję stronę…","uk":"Збираю сторінку…"},"Страница собрана в другом режиме сжатия — обновите её локально (upgrade_html.py).":{"en":"The page was built with a different compression mode — update it locally (upgrade_html.py).","pl":"Strona została zbudowana w innym trybie kompresji — zaktualizuj ją lokalnie (upgrade_html.py).","uk":"Сторінку зібрано в іншому режимі стиснення — оновіть її локально (upgrade_html.py)."},"до":{"en":"to","pl":"do","uk":"до"},"неизвестна":{"en":"unknown","pl":"nieznana","uk":"невідома"},"старая":{"en":"old","pl":"stara","uk":"стара"}});</script>
+(globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"(у страницы —":{"en":"(page has","pl":"(strona ma","uk":"(у сторінки —"},"). GitHub Pages выложит страницу примерно через минуту — затем перезагрузите её.":{"en":"). GitHub Pages will publish the page in about a minute — then reload it.","pl":"). GitHub Pages opublikuje stronę za około minutę — potem ją odśwież.","uk":"). GitHub Pages опублікує сторінку приблизно за хвилину — потім перезавантажте її."},". Обновление — на опубликованной странице.":{"en":". Updating is available on the published page.","pl":". Aktualizacja — na opublikowanej stronie.","uk":". Оновлення — на опублікованій сторінці."},"; добавлено:":{"en":"; added:","pl":"; dodano:","uk":"; додано:"},"В данных модели нет разделов модулей — обновите страницу локально.":{"en":"The model data has no module sections — update the page locally.","pl":"Dane modelu nie mają sekcji modułów — zaktualizuj stronę lokalnie.","uk":"У даних моделі немає розділів модулів — оновіть сторінку локально."},"В странице нет данных модели.":{"en":"The page has no model data.","pl":"Strona nie zawiera danych modelu.","uk":"На сторінці немає даних моделі."},"Версия просмотрщика":{"en":"Viewer version","pl":"Wersja przeglądarki","uk":"Версія переглядача"},"Данные модели новее набора кода — выпустите новую версию просмотрщика.":{"en":"The model data is newer than the code bundle — release a new viewer version.","pl":"Dane modelu są nowsze niż pakiet kodu — wydaj nową wersję przeglądarki.","uk":"Дані моделі новіші за набір коду — випустіть нову версію переглядача."},"Есть новая версия просмотрщика:":{"en":"A new viewer version is available:","pl":"Dostępna jest nowa wersja przeglądarki:","uk":"Є нова версія переглядача:"},"Записываю на GitHub…":{"en":"Writing to GitHub…","pl":"Zapisuję na GitHub…","uk":"Записую на GitHub…"},"Набор кода другого формата — обновите страницу локально (upgrade_html.py).":{"en":"The code bundle has a different format — update the page locally (upgrade_html.py).","pl":"Pakiet kodu ma inny format — zaktualizuj stronę lokalnie (upgrade_html.py).","uk":"Набір коду іншого формату — оновіть сторінку локально (upgrade_html.py)."},"Не удалось добавить разделы модулей в данные — обновите страницу локально.":{"en":"Could not add module sections to the data — update the page locally.","pl":"Nie udało się dodać sekcji modułów do danych — zaktualizuj stronę lokalnie.","uk":"Не вдалося додати розділи модулів у дані — оновіть сторінку локально."},"Не удалось получить":{"en":"Could not fetch","pl":"Nie udało się pobrać","uk":"Не вдалося отримати"},"Не удалось проверить версию просмотрщика:":{"en":"Could not check the viewer version:","pl":"Nie udało się sprawdzić wersji przeglądarki:","uk":"Не вдалося перевірити версію переглядача:"},"Не удалось прочитать эту страницу (":{"en":"Could not read this page (","pl":"Nie udało się odczytać tej strony (","uk":"Не вдалося прочитати цю сторінку ("},"Несовместимый модуль обновления просмотрщика":{"en":"Incompatible viewer update module","pl":"Niezgodny moduł aktualizacji przeglądarki","uk":"Несумісний модуль оновлення переглядача"},"Нет модуля записи на GitHub — обновите страницу локально.":{"en":"No GitHub write module — update the page locally.","pl":"Brak modułu zapisu na GitHub — zaktualizuj stronę lokalnie.","uk":"Немає модуля запису на GitHub — оновіть сторінку локально."},"Обнови просмотрщик":{"en":"Update viewer","pl":"Zaktualizuj przeglądarkę","uk":"Онови переглядач"},"Обновить":{"en":"Update","pl":"Aktualizuj","uk":"Оновити"},"Обновить просмотрщик":{"en":"Update viewer","pl":"Zaktualizuj przeglądarkę","uk":"Оновити переглядач"},"Обновлено":{"en":"Updated","pl":"Zaktualizowano","uk":"Оновлено"},"Обновляю…":{"en":"Updating…","pl":"Aktualizuję…","uk":"Оновлюю…"},"Отменено.":{"en":"Cancelled.","pl":"Anulowano.","uk":"Скасовано."},"Ошибка":{"en":"Error","pl":"Błąd","uk":"Помилка"},"Просмотрщик актуален (":{"en":"The viewer is up to date (","pl":"Przeglądarka jest aktualna (","uk":"Переглядач актуальний ("},"Просмотрщик обновлён (коммит":{"en":"Viewer updated (commit","pl":"Przeglądarka zaktualizowana (commit","uk":"Переглядач оновлено (коміт"},"Скачиваю новую версию просмотрщика…":{"en":"Downloading the new viewer version…","pl":"Pobieram nową wersję przeglądarki…","uk":"Завантажую нову версію переглядача…"},"Собираю страницу…":{"en":"Building the page…","pl":"Buduję stronę…","uk":"Збираю сторінку…"},"Страница собрана в другом режиме сжатия — обновите её локально (upgrade_html.py).":{"en":"The page was built with a different compression mode — update it locally (upgrade_html.py).","pl":"Strona została zbudowana w innym trybie kompresji — zaktualizuj ją lokalnie (upgrade_html.py).","uk":"Сторінку зібрано в іншому режимі стиснення — оновіть її локально (upgrade_html.py)."},"до":{"en":"to","pl":"do","uk":"до"},"неизвестна":{"en":"unknown","pl":"nieznana","uk":"невідома"},"старая":{"en":"old","pl":"stara","uk":"стара"}});</script>
 <script>
 'use strict';
 let DATA;
