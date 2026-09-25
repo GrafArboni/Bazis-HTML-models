@@ -1,0 +1,201 @@
+{
+ "schema": 1,
+ "source": "7dff36d190641cf50673d8d87d95500cfbfd8ae6825e732b00e7177c340f36bd",
+ "savedAt": "2026-09-25T09:22:19.938Z",
+ "features": {
+  "outline": false,
+  "section": {
+   "active": false,
+   "axis": "y",
+   "position": 1356.9806790351868,
+   "reversed": false,
+   "showPlane": true,
+   "chosen": false,
+   "normal": [
+    0,
+    1,
+    0
+   ]
+  },
+  "finish": "texture",
+  "dimension_actions": {
+   "colors": []
+  },
+  "materials": [
+   {
+    "id": "art:ДСП Kronospan 7045 SU Шампань/Сатин 2800x2070x18 мм\r31583",
+    "type": "tex",
+    "name": "ДСП Kronospan 7045 SU Шампань/Сатин 2800x2070x18 мм\r31583",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "ДСП Kronospan 7045 SU Шампань/Сатин 2800x2070x18 мм\r31583",
+     "texData": null,
+     "color": "#d9ccbc"
+    }
+   },
+   {
+    "id": "art:44756",
+    "type": "tex",
+    "name": "ЛХДФ Белое 0110 PE Kronospan 2800х2070х3мм",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "44756",
+     "texData": null,
+     "color": "#f6b67f"
+    }
+   },
+   {
+    "id": "art:ДСП лам. Egger H1250 ST36 Ясень Наварра 2800х2070х18,6 мм\r14512",
+    "type": "tex",
+    "name": "ДСП лам. Egger H1250 ST36 Ясень Наварра 2800х2070х18,6 мм\r14512",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "ДСП лам. Egger H1250 ST36 Ясень Наварра 2800х2070х18,6 мм\r14512",
+     "texData": null,
+     "color": "#d4c0a9"
+    }
+   },
+   {
+    "id": "art:Пластмасса белая",
+    "type": "tex",
+    "name": "Пластмасса белая",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "Пластмасса белая",
+     "texData": null,
+     "color": "#000000"
+    }
+   },
+   {
+    "id": "art:Пластік чорний",
+    "type": "tex",
+    "name": "Пластік чорний",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "Пластік чорний",
+     "texData": null,
+     "color": "#291516"
+    }
+   },
+   {
+    "id": "art:Алюминий\r-2",
+    "type": "tex",
+    "name": "Алюминий\r-2",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": "Алюминий\r-2",
+     "texData": null,
+     "color": "#cccccc"
+    }
+   },
+   {
+    "id": "col:#d6d6d6",
+    "type": "col",
+    "name": "Хромк",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#888888"
+    }
+   }
+  ],
+  "texture_fit": {
+   "schema": 2,
+   "modes": {}
+  },
+  "material_labels": {
+   "enabled": false,
+   "changedAt": null
+  },
+  "notes": {
+   "enabled": true,
+   "notes": []
+  },
+  "hardware_mono": false,
+  "visibility": {
+   "hidden": [],
+   "objectMode": true
+  },
+  "panel_hardware": {
+   "active": false,
+   "selectedPanelId": null
+  },
+  "assembler": {
+   "active": true,
+   "exploded": false,
+   "separation": 250,
+   "unitId": null,
+   "partDimensionsEnabled": false,
+   "labelPosition": true,
+   "labelName": null,
+   "labelFontSize": 11
+  },
+  "hardware_catalog": {
+   "expanded": false
+  }
+ },
+ "controls": {
+  "panels": true,
+  "profiles": true,
+  "edges": true,
+  "textures": true,
+  "imports": true,
+  "hardware": true,
+  "holes": true,
+  "lines": true,
+  "overlay": false,
+  "opacity": "91",
+  "guides": false,
+  "holeOverlay": false,
+  "nativeDimensions": true,
+  "manualDimensions": true,
+  "githubTokenRemember": true,
+  "sectionEnabled": false,
+  "sectionShowPlane": true,
+  "sectionPosition": "1357.01033267975",
+  "sectionReverse": false,
+  "notesShow": true,
+  "assemblerSeparation": "250",
+  "assemblerLabelPosition": true,
+  "assemblerLabelName": true,
+  "assemblerLabelFontSize": "11"
+ },
+ "layers": [
+  true,
+  true,
+  true,
+  true
+ ],
+ "layersByName": {
+  "Слой 0": true,
+  "Слой LAYER_1": true,
+  "Слой LEICA_3DDISTO_SURFACESCAN": true,
+  "Линии": true
+ },
+ "camera": {
+  "position": [
+   1625.5541657752756,
+   3167.10704970395,
+   -7077.392217127197
+  ],
+  "target": [
+   1492.2576746695295,
+   1683.5430059641944,
+   -2174.2778513013636
+  ],
+  "up": [
+   0,
+   1,
+   0
+  ]
+ },
+ "dimensions": []
+}
