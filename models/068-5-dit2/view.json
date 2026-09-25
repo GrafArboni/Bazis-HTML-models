@@ -1,0 +1,189 @@
+{
+ "schema": 1,
+ "source": "66ced7434b773ba12ac8d00aed9d993ce7e530a24593a4e66b150e60dc720514",
+ "savedAt": "2026-09-25T09:22:35.312Z",
+ "features": {
+  "outline": false,
+  "section": {
+   "active": false,
+   "axis": "y",
+   "position": 1360.759711265564,
+   "reversed": false,
+   "showPlane": true,
+   "chosen": false,
+   "normal": [
+    0,
+    1,
+    0
+   ]
+  },
+  "finish": "texture",
+  "dimension_actions": {
+   "colors": []
+  },
+  "materials": [
+   {
+    "id": "art:ДСП Kronospan 7045 SU Шампань/Сатин 2800x2070x18 мм\r31583",
+    "type": "tex",
+    "name": "ДСП Kronospan 7045 SU Шампань/Сатин 2800x2070x18 мм\r31583",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "ДСП Kronospan 7045 SU Шампань/Сатин 2800x2070x18 мм\r31583",
+     "texData": null,
+     "color": "#d9ccbc"
+    }
+   },
+   {
+    "id": "art:ДСП лам. Egger H1250 ST36 Ясень Наварра 2800х2070х18,6 мм\r14512",
+    "type": "tex",
+    "name": "ДСП лам. Egger H1250 ST36 Ясень Наварра 2800х2070х18,6 мм\r14512",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "ДСП лам. Egger H1250 ST36 Ясень Наварра 2800х2070х18,6 мм\r14512",
+     "texData": null,
+     "color": "#d4c0a9"
+    }
+   },
+   {
+    "id": "art:44756",
+    "type": "tex",
+    "name": "ЛХДФ Белое 0110 PE Kronospan 2800х2070х3мм",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "44756",
+     "texData": null,
+     "color": "#f6b67f"
+    }
+   },
+   {
+    "id": "art:Пластмасса белая",
+    "type": "tex",
+    "name": "Пластмасса белая",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "Пластмасса белая",
+     "texData": null,
+     "color": "#000000"
+    }
+   },
+   {
+    "id": "art:Алюминий\r-2",
+    "type": "tex",
+    "name": "Алюминий\r-2",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": "Алюминий\r-2",
+     "texData": null,
+     "color": "#cccccc"
+    }
+   },
+   {
+    "id": "art:Пластік чорний",
+    "type": "tex",
+    "name": "Пластік чорний",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "Пластік чорний",
+     "texData": null,
+     "color": "#291516"
+    }
+   }
+  ],
+  "texture_fit": {
+   "schema": 2,
+   "modes": {}
+  },
+  "material_labels": {
+   "enabled": false,
+   "changedAt": null
+  },
+  "notes": {
+   "enabled": true,
+   "notes": []
+  },
+  "hardware_mono": false,
+  "visibility": {
+   "hidden": [],
+   "objectMode": true
+  },
+  "panel_hardware": {
+   "active": false,
+   "selectedPanelId": null
+  },
+  "assembler": {
+   "active": true,
+   "exploded": false,
+   "separation": 250,
+   "unitId": null,
+   "partDimensionsEnabled": false,
+   "labelPosition": true,
+   "labelName": null,
+   "labelFontSize": 11
+  },
+  "hardware_catalog": {
+   "expanded": false
+  }
+ },
+ "controls": {
+  "panels": true,
+  "profiles": true,
+  "edges": true,
+  "textures": true,
+  "imports": true,
+  "hardware": true,
+  "holes": true,
+  "lines": true,
+  "overlay": false,
+  "opacity": "92",
+  "guides": false,
+  "holeOverlay": false,
+  "nativeDimensions": true,
+  "manualDimensions": true,
+  "githubTokenRemember": true,
+  "sectionEnabled": false,
+  "sectionShowPlane": true,
+  "sectionPosition": "1360.755311203",
+  "sectionReverse": false,
+  "notesShow": true,
+  "assemblerSeparation": "250",
+  "assemblerLabelPosition": true,
+  "assemblerLabelName": true,
+  "assemblerLabelFontSize": "11"
+ },
+ "layers": [
+  true,
+  true,
+  true,
+  true
+ ],
+ "layersByName": {
+  "Слой 0": true,
+  "Слой LEICA_3DDISTO_SURFACESCAN": true,
+  "Слой LAYER_2": true,
+  "Линии": true
+ },
+ "camera": {
+  "position": [
+   6514.152743831303,
+   3195.868146100639,
+   -2971.3735840046807
+  ],
+  "target": [
+   1466.4276484251022,
+   1359.759711265564,
+   -2155.504440307617
+  ],
+  "up": [
+   0,
+   1,
+   0
+  ]
+ },
+ "dimensions": []
+}
