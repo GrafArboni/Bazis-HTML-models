@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "source": "e6f7eaed6f8e7410428598ae4edf590479a1075342e6b6bcc94ae114eb984fe4",
- "savedAt": "2026-09-25T10:36:52.855Z",
+ "savedAt": "2026-09-25T11:26:58.067Z",
  "features": {
   "outline": false,
   "section": {
@@ -103,7 +103,7 @@
    {
     "id": "art:ДСП лам. Egger U899 ST9 Космос серый 2800х2070х18 мм\r33940",
     "type": "tex",
-    "name": "ДСП лам. Egger U899 ST9 Космос серый 2800х2070х18 мм\r33940",
+    "name": "ДСП лам. Egger U899 ST9 Космос серый 2800х2070х18 мм",
     "state": {
      "rot": 0,
      "mode": "tex",
@@ -183,6 +183,222 @@
      "texData": null,
      "color": "#c0c0c0"
     }
+   },
+   {
+    "id": "mat:ДСП бук",
+    "type": "col",
+    "name": "ДСП бук",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#c0c0c0"
+    }
+   },
+   {
+    "id": "art:Пластік білий",
+    "type": "tex",
+    "name": "Пластік білий",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "Пластік білий",
+     "texData": null,
+     "color": "#f7f6f2"
+    }
+   },
+   {
+    "id": "mat:Сталь серая",
+    "type": "col",
+    "name": "Сталь серая",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#808080"
+    }
+   },
+   {
+    "id": "mat:Noname",
+    "type": "col",
+    "name": "Noname",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#3b3b3b"
+    }
+   },
+   {
+    "id": "mat:Оріон сірий",
+    "type": "col",
+    "name": "Оріон сірий",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#444444"
+    }
+   },
+   {
+    "id": "mat:grau_220",
+    "type": "col",
+    "name": "grau_220",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#616161"
+    }
+   },
+   {
+    "id": "mat:fa-rwh",
+    "type": "col",
+    "name": "fa-rwh",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00"
+    }
+   },
+   {
+    "id": "mat:far-ob_dg",
+    "type": "col",
+    "name": "far-ob_dg",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00"
+    }
+   },
+   {
+    "id": "mat:# Сірий",
+    "type": "col",
+    "name": "# Сірий",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#c0c0c0"
+    }
+   },
+   {
+    "id": "mat:Скло 20мм",
+    "type": "col",
+    "name": "Скло 20мм",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#444444"
+    }
+   },
+   {
+    "id": "mat:# Чорний",
+    "type": "col",
+    "name": "# Чорний",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#444444"
+    }
+   },
+   {
+    "id": "mat:Зеркало",
+    "type": "col",
+    "name": "Зеркало",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#c0c0c0"
+    }
+   },
+   {
+    "id": "mat:Прозорість",
+    "type": "col",
+    "name": "Прозорість",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00"
+    }
+   },
+   {
+    "id": "art:Алюминий\r-2",
+    "type": "tex",
+    "name": "Алюминий",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": "Алюминий\r-2",
+     "texData": null,
+     "color": "#cccccc"
+    }
+   },
+   {
+    "id": "mat:Сталь",
+    "type": "col",
+    "name": "Сталь",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#c0c0c0"
+    }
+   },
+   {
+    "id": "mat:Никель",
+    "type": "col",
+    "name": "Никель",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#f0dfb0"
+    }
+   },
+   {
+    "id": "mat:Пластик Темн-серый",
+    "type": "col",
+    "name": "Пластик Темн-серый",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#444444"
+    }
+   },
+   {
+    "id": "mat:Белый\r-101",
+    "type": "col",
+    "name": "Белый",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#c0c0c0"
+    }
    }
   ],
   "texture_fit": {
@@ -214,7 +430,10 @@
    "partDimensionsEnabled": false,
    "labelPosition": true,
    "labelName": null,
-   "labelFontSize": 11
+   "labelFontSize": 11,
+   "positionsThrough": false,
+   "unitThrough": {},
+   "hiddenUnits": []
   },
   "hardware_catalog": {
    "expanded": false
@@ -247,7 +466,8 @@
   "assemblerSeparation": "250",
   "assemblerLabelPosition": true,
   "assemblerLabelName": true,
-  "assemblerLabelFontSize": "11"
+  "assemblerLabelFontSize": "11",
+  "assemblerLabelsThrough": false
  },
  "layers": [
   true,
@@ -261,9 +481,9 @@
  },
  "camera": {
   "position": [
-   -2275.4770261793756,
-   1622.6631593843888,
-   -2022.4149034190395
+   -3041.2887983897117,
+   2032.8326093732508,
+   -3036.3965829695762
   ],
   "target": [
    -1672.3412070434485,
