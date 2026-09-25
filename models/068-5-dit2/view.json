@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "source": "66ced7434b773ba12ac8d00aed9d993ce7e530a24593a4e66b150e60dc720514",
- "savedAt": "2026-09-25T09:22:35.312Z",
+ "savedAt": "2026-09-25T11:50:22.167Z",
  "features": {
   "outline": false,
   "section": {
@@ -25,7 +25,7 @@
    {
     "id": "art:ДСП Kronospan 7045 SU Шампань/Сатин 2800x2070x18 мм\r31583",
     "type": "tex",
-    "name": "ДСП Kronospan 7045 SU Шампань/Сатин 2800x2070x18 мм\r31583",
+    "name": "ДСП Kronospan 7045 SU Шампань/Сатин 2800x2070x18 мм",
     "state": {
      "rot": 0,
      "mode": "tex",
@@ -37,7 +37,7 @@
    {
     "id": "art:ДСП лам. Egger H1250 ST36 Ясень Наварра 2800х2070х18,6 мм\r14512",
     "type": "tex",
-    "name": "ДСП лам. Egger H1250 ST36 Ясень Наварра 2800х2070х18,6 мм\r14512",
+    "name": "ДСП лам. Egger H1250 ST36 Ясень Наварра 2800х2070х18,6 мм",
     "state": {
      "rot": 0,
      "mode": "tex",
@@ -73,7 +73,7 @@
    {
     "id": "art:Алюминий\r-2",
     "type": "tex",
-    "name": "Алюминий\r-2",
+    "name": "Алюминий",
     "state": {
      "rot": 0,
      "mode": "col",
@@ -92,6 +92,114 @@
      "texKey": "Пластік чорний",
      "texData": null,
      "color": "#291516"
+    }
+   },
+   {
+    "id": "mat:ДСП бук",
+    "type": "col",
+    "name": "ДСП бук",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#c0c0c0"
+    }
+   },
+   {
+    "id": "mat:[#] Техн. мат., цинк білий []",
+    "type": "col",
+    "name": "[#] Техн. мат., цинк білий []",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00"
+    }
+   },
+   {
+    "id": "mat:# Сірий",
+    "type": "col",
+    "name": "# Сірий",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#c0c0c0"
+    }
+   },
+   {
+    "id": "mat:[#] Техн. мат., прозорий []",
+    "type": "col",
+    "name": "[#] Техн. мат., прозорий []",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00"
+    }
+   },
+   {
+    "id": "mat:[#] Техн. мат., чорний []",
+    "type": "col",
+    "name": "[#] Техн. мат., чорний []",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#b7c4d2"
+    }
+   },
+   {
+    "id": "mat:Прозорість",
+    "type": "col",
+    "name": "Прозорість",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00"
+    }
+   },
+   {
+    "id": "art:Сталь сіра",
+    "type": "tex",
+    "name": "Сталь сіра",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "Сталь сіра",
+     "texData": null,
+     "color": "#909090"
+    }
+   },
+   {
+    "id": "mat:Сталь серая",
+    "type": "col",
+    "name": "Сталь серая",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#808080"
+    }
+   },
+   {
+    "id": "mat:# Нікель браш",
+    "type": "col",
+    "name": "# Нікель браш",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00"
     }
    }
   ],
@@ -124,7 +232,10 @@
    "partDimensionsEnabled": false,
    "labelPosition": true,
    "labelName": null,
-   "labelFontSize": 11
+   "labelFontSize": 11,
+   "positionsThrough": false,
+   "unitThrough": {},
+   "hiddenUnits": []
   },
   "hardware_catalog": {
    "expanded": false
@@ -154,7 +265,8 @@
   "assemblerSeparation": "250",
   "assemblerLabelPosition": true,
   "assemblerLabelName": true,
-  "assemblerLabelFontSize": "11"
+  "assemblerLabelFontSize": "11",
+  "assemblerLabelsThrough": false
  },
  "layers": [
   true,
@@ -170,14 +282,14 @@
  },
  "camera": {
   "position": [
-   6514.152743831303,
-   3195.868146100639,
-   -2971.3735840046807
+   4489.920656785669,
+   2634.9224617849472,
+   -3986.4741494655236
   ],
   "target": [
-   1466.4276484251022,
-   1359.759711265564,
-   -2155.504440307617
+   1465.3794306516647,
+   1364.2320556640625,
+   -2149.5830788632475
   ],
   "up": [
    0,
