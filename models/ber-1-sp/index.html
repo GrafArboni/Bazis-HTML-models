@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="bazis-viewer" content="d9a817a91127">
+<meta name="bazis-viewer" content="773c3d5d49a8">
 <title>Ber_1_Сп_ · просмотр модели</title>
 <style>
 :root{color-scheme:dark;--bg:#10171d;--panel:#17232d;--line:#31414b;--text:#e8eef0;--muted:#a6bac4;--accent:#9ee2d0;--popup-border:#526776;--control-border:#46586a;--hover:#304654;--muted-soft:#9fb3bd;--divider:#26343d;--compact-slider:70px}
@@ -166,14 +166,6 @@
   align-items: center;
   margin: 10px 0;
   font-size: 12px;
-}
-/* «логин» для менеджера паролей браузера — на экране не виден */
-.githubTokenUser {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-  pointer-events: none;
 }
 .githubTokenButtons {
   display: flex;
@@ -3937,21 +3929,15 @@ window.OrbitControls = OrbitControls;
     and write. Он хранится только в этом браузере, в опубликованный файл не попадает и посетителям не виден.
   </p>
   <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Создать токен на GitHub</a>
-  <!-- Своя форма со своим «логином»: без неё браузер, запомнив токен как пароль,
-       считал логином ближайшее поле страницы — поиск по структуре — и вписывал
-       туда запомненное при каждой загрузке. -->
-  <form id="githubTokenForm" class="githubTokenForm" autocomplete="off">
-    <input type="text" id="githubTokenUser" class="githubTokenUser" autocomplete="username" value="github-token" readonly tabindex="-1" aria-hidden="true" data-i18n-skip />
-    <input type="password" id="githubTokenInput" autocomplete="off" placeholder="github_pat_…" />
-    <label class="check">
-      <input type="checkbox" id="githubTokenRemember" checked />
-      <span>Запомнить в этом браузере</span>
-    </label>
-    <div class="githubTokenButtons">
-      <button type="button" id="githubTokenCancel">Отмена</button>
-      <button type="button" id="githubTokenOk">Сохранить</button>
-    </div>
-  </form>
+  <input type="password" id="githubTokenInput" autocomplete="off" placeholder="github_pat_…" />
+  <label class="check">
+    <input type="checkbox" id="githubTokenRemember" checked />
+    <span>Запомнить в этом браузере</span>
+  </label>
+  <div class="githubTokenButtons">
+    <button type="button" id="githubTokenCancel">Отмена</button>
+    <button type="button" id="githubTokenOk">Сохранить</button>
+  </div>
 </dialog>
 </div>
 <div data-feature-markup="toolbar">
@@ -5040,7 +5026,6 @@ window.OrbitControls = OrbitControls;
           input.value = '';
           doc.getElementById('githubTokenOk').onclick = null;
           doc.getElementById('githubTokenCancel').onclick = null;
-          doc.getElementById('githubTokenForm').onsubmit = null;
           dialog.oncancel = null;
           resolve(value);
         };
@@ -5050,11 +5035,6 @@ window.OrbitControls = OrbitControls;
           finish(value);
         };
         doc.getElementById('githubTokenCancel').onclick = () => finish('');
-        // Enter в поле токена — как «Сохранить»; страница не перезагружается
-        doc.getElementById('githubTokenForm').onsubmit = event => {
-          event.preventDefault();
-          doc.getElementById('githubTokenOk').onclick();
-        };
         dialog.oncancel = event => {
           event.preventDefault();
           finish('');
@@ -5613,28 +5593,6 @@ window.OrbitControls = OrbitControls;
     group.visible = false;
     scene.add(group);
     const entries = [];
-    // Крышка разреза — красная, чтобы срез читался сразу (как в БАЗИС), а не
-    // сливался с пластью. Прозрачность — как у детали: материал на каждую
-    // непрозрачность, общий для всех крышек.
-    const CAP_COLOR = 0xe53935,
-      capMaterials = new Map();
-    function capMaterial(source) {
-      const opacity = Math.round((source?.opacity ?? 1) * 100) / 100;
-      let m = capMaterials.get(opacity);
-      if (!m) {
-        // без освещения: срез одного ровного цвета с любой стороны
-        m = new T.MeshBasicMaterial({
-          color: CAP_COLOR,
-          side: T.DoubleSide,
-          transparent: opacity < 1,
-          opacity,
-          depthWrite: opacity >= 1
-        });
-        m.userData.sectionCap = true;
-        capMaterials.set(opacity, m);
-      }
-      return m;
-    }
     function clear() {
       while (group.children.length) {
         const mesh = group.children.pop();
@@ -5642,11 +5600,7 @@ window.OrbitControls = OrbitControls;
       }
       entries.length = 0;
     }
-    // Концы отрезков среза сводятся в узлы с допуском JOIN: грани детали чуть
-    // раздуты наружу (inflate/tieBreak до 0,036 мм, у каждой грани — по своей
-    // нормали), и на рёбрах они расходятся на сотые миллиметра. С допуском в
-    // 1e-4 мм контур не замыкался — у двух деталей из трёх крышки не было.
-    const JOIN = 0.2;
+    const key = (p, t) => Math.round(p.x / t) + ',' + Math.round(p.y / t);
     function crossSection(mesh, plane, u, v, tolerance) {
       const position = mesh.geometry?.attributes?.position;
       if (!position) return [];
@@ -5699,37 +5653,18 @@ window.OrbitControls = OrbitControls;
       return segments;
     }
     function loopsFrom(segments, tolerance) {
-      const join = Math.max(tolerance, JOIN),
-        cells = new Map(),
+      const nodes = new Map(),
         edges = new Map();
-      let count = 0;
-      // ближайший узел в пределах join (соседние ячейки сетки), иначе новый
       const node = p => {
-        const cx = Math.floor(p.x / join),
-          cy = Math.floor(p.y / join);
-        let best = null,
-          bestDistance = join * join;
-        for (let x = cx - 1; x <= cx + 1; x++)
-          for (let y = cy - 1; y <= cy + 1; y++)
-            for (const n of cells.get(x + ',' + y) || []) {
-              const d = n.p.distanceToSquared(p);
-              if (d <= bestDistance) {
-                bestDistance = d;
-                best = n;
-              }
-            }
-        if (best) return best;
-        const created = { key: String(count++), p: p.clone(), edges: [] },
-          k = cx + ',' + cy;
-        if (!cells.has(k)) cells.set(k, []);
-        cells.get(k).push(created);
-        return created;
+        const k = key(p, tolerance);
+        if (!nodes.has(k)) nodes.set(k, { key: k, p: p.clone(), edges: [] });
+        return nodes.get(k);
       };
       for (const segment of segments) {
         const a = node(segment[0]),
           b = node(segment[1]);
         if (a === b) continue;
-        const ek = Number(a.key) < Number(b.key) ? a.key + '|' + b.key : b.key + '|' + a.key;
+        const ek = a.key < b.key ? a.key + '|' + b.key : b.key + '|' + a.key;
         if (edges.has(ek)) continue;
         const edge = { key: ek, a, b, used: false };
         edges.set(ek, edge);
@@ -5757,7 +5692,7 @@ window.OrbitControls = OrbitControls;
           previous = current;
           current = following;
         }
-        if (loop.length >= 4 && loop[0].distanceToSquared(loop.at(-1)) <= join * join) {
+        if (loop.length >= 4 && loop[0].distanceToSquared(loop.at(-1)) <= tolerance * tolerance) {
           loop.pop();
           const clean = loop.filter((p, i) => {
             const before = loop[(i + loop.length - 1) % loop.length],
@@ -5849,7 +5784,7 @@ window.OrbitControls = OrbitControls;
       for (const source of sources()) {
         const geometry = capGeometry(source, plane, normal);
         if (!geometry) continue;
-        const cap = new T.Mesh(geometry, capMaterial(source.material));
+        const cap = new T.Mesh(geometry, source.material);
         cap.userData = { decorative: true, sectionCap: true };
         cap.renderOrder = source.renderOrder + 0.1;
         cap.frustumCulled = false;
@@ -5860,14 +5795,12 @@ window.OrbitControls = OrbitControls;
     }
     function sync() {
       for (const entry of entries) {
-        entry.cap.material = capMaterial(entry.source.material);
+        entry.cap.material = entry.source.material;
         entry.cap.visible = services.visible?.(entry.source) !== false;
       }
     }
     function dispose() {
       clear();
-      for (const m of capMaterials.values()) m.dispose();
-      capMaterials.clear();
       group.removeFromParent();
     }
     return {
