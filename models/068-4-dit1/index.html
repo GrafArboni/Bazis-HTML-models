@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="bazis-viewer" content="72eb93a3ac38">
+<meta name="bazis-viewer" content="773c3d5d49a8">
 <title>068_4_Дит1_ · просмотр модели</title>
 <style>
 :root{color-scheme:dark;--bg:#10171d;--panel:#17232d;--line:#31414b;--text:#e8eef0;--muted:#a6bac4;--accent:#9ee2d0;--popup-border:#526776;--control-border:#46586a;--hover:#304654;--muted-soft:#9fb3bd;--divider:#26343d;--compact-slider:70px}
@@ -412,6 +412,44 @@
   width: 28px;
   height: 28px;
   padding: 0;
+}
+/* Телефон: строка узла — одна полоса во всю ширину, значки внутри неё справа
+   (узел · глаз · вписать · позиции) — без отдельных колонок кнопок. */
+@media (max-width: 760px) {
+  .assemblyUnitRow {
+    gap: 2px;
+    padding: 2px 4px 2px 0;
+    border: 1px solid #415563;
+    border-radius: 7px;
+    background: #21313e;
+  }
+  .assemblyUnitRow:has(> button[data-unit][aria-pressed='true']) {
+    background: #315e5d;
+    border-color: var(--accent);
+  }
+  .assemblyUnitRow > button[data-unit] {
+    order: 0;
+    border: 0;
+    background: transparent;
+  }
+  .assemblyUnitRow > button[data-unit]:first-child {
+    margin-left: 0;
+  }
+  .assemblyUnitRow > [data-tool='eye'] {
+    order: 1;
+  }
+  .assemblyUnitRow > [data-tool='fit'] {
+    order: 2;
+  }
+  .assemblyUnitRow > [data-tool='through'] {
+    order: 3;
+  }
+  .assemblyUnitRow > .assemblyUnitTool {
+    width: 32px;
+    height: 32px;
+    border-color: transparent;
+    background-color: transparent;
+  }
 }
 /* скрытый узел — перечёркнутый глаз */
 .assemblyUnitTool[data-tool='eye'][data-state='off'] {
@@ -8117,7 +8155,9 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         shift += e[12] + e[13] * 3 + e[14] * 7;
       });
     }
-    const matrix = m => Array.from(m.elements, x => x.toFixed(4)).join(',');
+    // Поворот — до 1e-4 (≈0,1 px), сдвиг — до 0,1 мм: доезд камеры по инерции на
+    // доли пикселя отпечаток не меняет, иначе он «менялся» бы секундами.
+    const matrix = m => Array.from(m.elements, (x, i) => x.toFixed(i >= 12 && i <= 14 ? 1 : 4)).join(',');
     const key = [
       meshes.length,
       hash,
@@ -8128,7 +8168,24 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     ].join('|');
     return { meshes, key };
   }
-  const api = { scan };
+  // Камера сдвинулась заметно (больше ~1 px за кадр)? ref — Matrix4 прошлого
+  // положения, обновляется только при заметном сдвиге. После жеста камера с
+  // инерцией (dampingFactor 0,1) ещё секунды «доезжает» на доли пикселя: точное
+  // сравнение матриц считало её движущейся всё это время, и всё, что ждёт
+  // остановки (выноски, позиции сборщика), запаздывало на телефоне на секунды.
+  function moved(ref, camera, distance) {
+    const a = ref.elements,
+      b = camera.matrixWorld.elements;
+    let turn = 0;
+    for (const i of [0, 1, 2, 4, 5, 6, 8, 9, 10]) turn = Math.max(turn, Math.abs(a[i] - b[i]));
+    const shift = Math.hypot(a[12] - b[12], a[13] - b[13], a[14] - b[14]);
+    if (turn > 1e-3 || shift > Math.max(distance, 1) * 1e-3) {
+      ref.copy(camera.matrixWorld);
+      return true;
+    }
+    return false;
+  }
+  const api = { scan, moved };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   root.BazisViewKey = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this);
@@ -8561,10 +8618,15 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     function frame(delta) {
       if (!enabled) return;
       camera.updateMatrixWorld();
-      if (!camera.matrixWorld.equals(lastCamera)) {
-        lastCamera.copy(camera.matrixWorld);
+      if (
+        root.BazisViewKey.moved(
+          lastCamera,
+          camera,
+          camera.position.distanceTo(context.controls?.target || camera.position)
+        )
+      )
         still = 0;
-      } else still += delta;
+      else still += delta;
       elapsed += delta;
       if (!job && overlay && !disposed && elapsed >= 0.25 && (still >= 0.2 || fresh)) {
         elapsed = 0;
@@ -11851,7 +11913,9 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     const unitThrough = new Map(),
       hiddenUnits = new Set(), // «глаз» в списке узлов
       lastCamera = new T.Matrix4();
-    let occlusionCache = null; // id → мировая точка метки или null (перекрыта)
+    let occlusionCache = null, // id → мировая точка метки или null (перекрыта)
+      occlusionAt = 0; // когда построена карта (мс)
+    const clock = () => (root.performance || Date).now();
     let disposeSettings = null;
     // Кэши подписей: меши детали (лучи — только по ним, не по линиям рёбер) и её
     // габарит на экране-препятствие. Сбрасываются, когда детали двигаются или
@@ -11999,12 +12063,16 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       touchLabels();
       if (ready && active) updateLabels();
     }
-    // Вписать узел в экран, не меняя направления взгляда: найти его, если он
-    // потерялся за краем или слишком мелкий. Без узла — всё изделие.
+    // «Вписать»: то же, что нажатие на узел (выбрать его, остальное скрыть,
+    // закрыть список), и вдобавок камера на узел — направление взгляда прежнее,
+    // узел целиком в экране. У «Общего вида» — всё изделие.
     function fitUnit(id) {
+      chooseUnit(id);
+      // габарит — после выбора: взрыв-схема уже разнесла детали узла
       const box = new T.Box3();
       for (const i of items.values())
-        if (i.kind !== 'hardware' && belongs(i.id, id)) for (const r of i.roots) box.expandByObject(r.object);
+        if (i.kind !== 'hardware' && belongs(i.id, id))
+          for (const r of i.roots) if (services.visible(r.object)) box.expandByObject(r.object);
       if (box.isEmpty()) return;
       const sphere = box.getBoundingSphere(new T.Sphere()),
         v = T.MathUtils.degToRad(camera.fov || 50),
@@ -12017,7 +12085,6 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       camera.near = Math.max(0.1, Math.min(camera.near, distance / 100));
       camera.updateProjectionMatrix();
       controls.update();
-      unitMenu.open = false;
     }
     // «Позиции с прозрачностью» для детали или подписи узла ('unit' + id): своя
     // настройка ближайшей сборочной единицы вверх по дереву, иначе общая галочка.
@@ -12408,10 +12475,9 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     function frame(delta = 0.016) {
       if (!ready || !active) return;
       camera.updateMatrixWorld();
-      if (!camera.matrixWorld.equals(lastCamera)) {
-        lastCamera.copy(camera.matrixWorld);
+      if (root.BazisViewKey.moved(lastCamera, camera, camera.position.distanceTo(controls.target)))
         stillFor = 0;
-      } else stillFor += delta;
+      else stillFor += delta;
       // во время вращения подписи шли по старой карте видимости — камера
       // остановилась, строим новую
       if (occlusionStale && stillFor >= 0.2) {
@@ -12447,8 +12513,10 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       const ui = [unitBar, ...doc.querySelectorAll('#hardwareCatalog,#hardwareCatalogToggle,.footer')].map(
         el => (el.hidden ? '-' : el.offsetWidth + 'x' + el.offsetHeight)
       );
+      // положение камеры — «устоявшееся» (lastCamera): доезд по инерции на доли
+      // пикселя подписи не пересчитывает
       return [
-        matrix(camera.matrixWorld),
+        matrix(lastCamera),
         matrix(camera.projectionMatrix),
         area.clientWidth + 'x' + area.clientHeight,
         services.clipKey?.() ?? '',
@@ -12765,7 +12833,10 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         if (p.z < -1 || p.z > 1 || Math.abs(p.x) > 1 || Math.abs(p.y) > 1) return null;
         return { x: ((p.x + 1) * width) / 2, y: ((1 - p.y) * height) / 2 };
       };
-      if (stillFor < 0.2 && occlusionCache && need.every(([id]) => occlusionCache.has(id))) {
+      // Во время вращения — по мировым точкам прошлой карты, но не старше 0,4 с:
+      // иначе за долгий поворот позиции так и оставались от прежней стороны.
+      const fresh = occlusionCache && clock() - occlusionAt < 400;
+      if (stillFor < 0.2 && fresh && need.every(([id]) => occlusionCache.has(id))) {
         for (const [id] of need) {
           const world = occlusionCache.get(id);
           out.set(id, world ? toScreen(world) : null);
@@ -12791,6 +12862,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         hide: o => o.userData?.kind === 'hardware' || Number.isInteger(o.userData?.holeIndex)
       });
       occlusionCache = new Map();
+      occlusionAt = clock();
       const ray = new T.Raycaster(),
         ndc = new T.Vector2();
       for (const t of targets) {
