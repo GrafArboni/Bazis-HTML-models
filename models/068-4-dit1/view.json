@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "source": "7dff36d190641cf50673d8d87d95500cfbfd8ae6825e732b00e7177c340f36bd",
- "savedAt": "2026-09-25T09:22:19.938Z",
+ "savedAt": "2026-09-25T09:29:54.937Z",
  "features": {
   "outline": false,
   "section": {
@@ -135,7 +135,7 @@
    "unitId": null,
    "partDimensionsEnabled": false,
    "labelPosition": true,
-   "labelName": null,
+   "labelName": false,
    "labelFontSize": 11
   },
   "hardware_catalog": {
@@ -165,7 +165,7 @@
   "notesShow": true,
   "assemblerSeparation": "250",
   "assemblerLabelPosition": true,
-  "assemblerLabelName": true,
+  "assemblerLabelName": false,
   "assemblerLabelFontSize": "11"
  },
  "layers": [
@@ -182,14 +182,14 @@
  },
  "camera": {
   "position": [
-   1625.5541657752756,
-   3167.10704970395,
-   -7077.392217127197
+   3848.414971490086,
+   3704.4262169531157,
+   -6060.790978647177
   ],
   "target": [
-   1492.2576746695295,
-   1683.5430059641944,
-   -2174.2778513013636
+   910.7106242599579,
+   1783.1813255692782,
+   -2327.4316406804696
   ],
   "up": [
    0,
