@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="bazis-viewer" content="dc4395df575a">
+<meta name="bazis-viewer" content="0583c0cfc3be">
 <title>068_4_Дит1_ · просмотр модели</title>
 <style>
 :root{color-scheme:dark;--bg:#10171d;--panel:#17232d;--line:#31414b;--text:#e8eef0;--muted:#a6bac4;--accent:#9ee2d0;--popup-border:#526776;--control-border:#46586a;--hover:#304654;--muted-soft:#9fb3bd;--divider:#26343d;--compact-slider:70px}
@@ -1347,59 +1347,6 @@ dialog.matPicker {
   border: 1px solid #9c8545;
   background: #1c1a12;
 }
-
-#notesOpen,
-#notesOpen.viewerIconControl {
-  background: #2b2616;
-  color: #fbf5e3;
-  border-color: #9c8545;
-}
-#notesOpen[aria-pressed='true'],
-html.iconControls #notesOpen[aria-pressed='true'] {
-  background: #514423;
-  color: #ffe49a;
-  border-color: #e2b93b;
-}
-.noteBadge,
-.noteMobileEdit {
-  display: none;
-}
-@media (max-width: 760px) {
-  .noteCallout .noteBadge {
-    display: inline-grid;
-    place-items: center;
-    width: 36px;
-    height: 36px;
-    padding: 6px;
-    border: 0;
-    background: transparent;
-    color: #ffe49a;
-    vertical-align: middle;
-  }
-  .noteBadge svg {
-    width: 24px;
-    height: 24px;
-  }
-  .noteCallout.noteCollapsed {
-    height: 42px;
-    padding: 2px;
-    border-left-width: 1px;
-  }
-  .noteCallout.noteCollapsed .noteText,
-  .noteCallout.noteCollapsed small,
-  .noteCallout.noteCollapsed .noteCardPhotos {
-    display: none;
-  }
-  .noteCallout:not(.noteCollapsed) .noteMobileEdit {
-    display: inline-block;
-    font-size: 11px;
-    padding: 4px;
-  }
-  .noteCallout:not(.noteCollapsed) .noteText {
-    max-height: 45vh;
-    overflow: auto;
-  }
-}
 </style>
 <style data-feature="visibility">
 .visibilityTools {
@@ -1494,13 +1441,13 @@ html.iconControls #notesOpen[aria-pressed='true'] {
   overflow: hidden;
   pointer-events: auto;
   cursor: pointer;
-  background: #193c55f2;
-  border: 1px solid #6db6df;
+  background: #17303de8;
+  border: 1px solid #7895a0;
   color: var(--text);
   overflow-wrap: anywhere;
 }
 #assemblerLabels .assemblerCallout[aria-pressed='true'] {
-  background: #286589;
+  background: #315e5d;
   border: 2px solid var(--accent);
   color: #fff;
   z-index: 1;
@@ -1613,19 +1560,6 @@ dialog.assemblerDrawing[open] {
   inset: 0;
   width: 100%;
   height: 100%;
-}
-
-#assemblerOpen,
-#assemblerOpen.viewerIconControl {
-  background: #193c55;
-  color: #c5eaff;
-  border-color: #6db6df;
-}
-#assemblerOpen[aria-pressed='true'],
-html.iconControls #assemblerOpen[aria-pressed='true'] {
-  background: #286589;
-  color: #fff;
-  border-color: #8dd6ff;
 }
 </style>
 <style data-feature="hardware_catalog">
@@ -1805,111 +1739,6 @@ html.iconControls #assemblerOpen[aria-pressed='true'] {
   #viewerUpdateLabel {
     display: none;
   }
-}
-</style>
-<style data-feature="icon_controls">
-/* Text stays in the DOM for translation, tooltips and accessible names. */
-html.iconControls .viewerIconControl:not([hidden]):not(.hidden) {
-  display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
-  font-size: 0 !important;
-  line-height: 0 !important;
-  gap: 0 !important;
-  width: 40px !important;
-  min-width: 40px !important;
-  max-width: 40px !important;
-  height: 40px;
-  min-height: 40px;
-  padding: 8px !important;
-  box-sizing: border-box;
-  flex: 0 0 40px !important;
-}
-html.iconControls .viewerIconControl::before {
-  content: '';
-  display: block;
-  width: 22px;
-  height: 22px;
-  flex: none;
-  background: currentColor;
-  mask: var(--viewer-control-icon) center/contain no-repeat;
-  -webkit-mask: var(--viewer-control-icon) center/contain no-repeat;
-}
-html.iconControls .viewerIconControl::after,
-html.iconControls .viewerIconControl::-webkit-details-marker {
-  display: none !important;
-  content: none !important;
-}
-html.iconControls .viewerIconControl::marker {
-  content: '';
-}
-html.iconControls .viewerIconControl > * {
-  display: none !important;
-}
-html.iconControls #visibilityMode[aria-pressed='false'] {
-  --viewer-control-icon: var(--viewer-assembly-icon) !important;
-}
-html.iconControls .viewerIconControl[aria-pressed='true'],
-html.iconControls .toolMenu[open] > .viewerIconControl {
-  color: #b9fff0;
-  border-color: #70c7b9;
-  background: #315e5d;
-}
-@media (max-width: 760px) {
-  html.iconControls .viewerIconControl:not([hidden]):not(.hidden) {
-    width: 36px !important;
-    min-width: 36px !important;
-    max-width: 36px !important;
-    height: 40px;
-    flex-basis: 36px !important;
-    padding: 6px !important;
-  }
-}
-
-@container (max-width:700px) {
-  html.iconControls #displayPanel .viewerIconControl:not([hidden]):not(.hidden) {
-    width: 28px !important;
-    min-width: 28px !important;
-    max-width: 28px !important;
-    flex-basis: 28px !important;
-    padding: 3px !important;
-  }
-}
-@container (max-width:400px) {
-  html.iconControls #displayPanel .opacityTool label {
-    display: none;
-  }
-}
-
-@container (max-width:400px) {
-  html.iconControls #displayPanel .opacityTool {
-    flex: 1 1 0;
-    gap: 2px;
-  }
-  html.iconControls #displayPanel .opacityTool .range {
-    min-width: 20px;
-    width: 40px;
-  }
-  html.iconControls #displayPanel .opacityTool span {
-    width: 28px;
-    font-size: 11px;
-  }
-  html.iconControls #langCode {
-    display: none;
-  }
-  html.iconControls #viewerUpdate.viewerIconControl {
-    width: 28px !important;
-    min-width: 28px !important;
-    max-width: 28px !important;
-    flex-basis: 28px !important;
-    padding: 3px !important;
-  }
-}
-
-html.iconControls .viewerColorIcon::before {
-  mask: none;
-  -webkit-mask: none;
-  background: var(--viewer-control-icon) center/contain no-repeat;
 }
 </style>
 </head>
@@ -3909,7 +3738,10 @@ window.OrbitControls = OrbitControls;
      в строку «Материалы» (layersMount), слой выносок и ленту чипов — в #viewport.
      Строки материалов в меню «В сносках…» строятся по данным модели. -->
 
-<span id="materialCalloutsControl"><button type="button" id="materialCallouts" aria-pressed="false">Выноски материалов</button></span>
+<label class="check" id="materialCalloutsControl">
+  <input type="checkbox" id="materialCallouts" />
+  <span>Выноски материалов</span>
+</label>
 
 <details class="toolMenu" id="materialCalloutsList">
   <summary>В сносках…</summary>
@@ -3985,7 +3817,11 @@ window.OrbitControls = OrbitControls;
 </div>
 </div>
 <div data-feature-markup="hardware_mono">
-<span id="hardwareMonoControl"><button type="button" id="hardwareMono" aria-pressed="false">Однотонная фурнитура</button></span>
+<!-- Галочка «Однотонная фурнитура»: модуль переносит её в строку «Материалы» (layersMount). -->
+<label class="check" id="hardwareMonoControl">
+  <input type="checkbox" id="hardwareMono" />
+  <span>Однотонная фурнитура</span>
+</label>
 </div>
 <div data-feature-markup="navigation">
 <!-- Подсказка по клавишам; модуль переносит её в строку подсказок под моделью -->
@@ -4168,12 +4004,6 @@ window.OrbitControls = OrbitControls;
 <div class="tools viewerUpdateTools" id="viewerUpdateTools">
   <span role="status" class="subtle" id="viewerUpdateStatus"></span>
 </div>
-</div>
-<div data-feature-markup="icon_controls">
-<label class="check" id="iconControlsSetting">
-  <input type="checkbox" id="iconControlsEnabled" data-local-preference="true" />
-  <span>Отображение иконками</span>
-</label>
 </div></div>
 <script id="featureSrc">(function (root) {
   'use strict';
@@ -4185,11 +4015,7 @@ window.OrbitControls = OrbitControls;
     const original = root.BazisI18n ? root.BazisI18n.untranslated(snapshot) : snapshot();
     const inputs = doc.querySelectorAll
       ? Array.from(doc.querySelectorAll('input[id]'))
-          .filter(
-            e =>
-              (e.type === 'checkbox' || e.type === 'range') &&
-              e.getAttribute('data-local-preference') !== 'true'
-          )
+          .filter(e => e.type === 'checkbox' || e.type === 'range')
           .map(e => e.id)
       : [];
     // Кнопок у модуля нет (решение владельца 24.09.2026: локальная копия у него есть,
@@ -7820,9 +7646,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
           ',' +
           Math.round(e.y * 2) +
           ':' +
-          (e.box.textContent || '').length +
-          ':' +
-          (e.width || '');
+          (e.box.textContent || '').length;
       const time = now();
       if (key === last && time - stamp < REFRESH_MS) return;
       last = key;
@@ -7831,7 +7655,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         sides = [[], []];
       for (const entry of all) {
         put(entry.box, 'display', 'block');
-        put(entry.box, 'width', (entry.width || width) + 'px');
+        put(entry.box, 'width', width + 'px');
       }
       const heights = new Map(all.map(e => [e, e.box.getBoundingClientRect().height]));
       for (const entry of all) sides[entry.x < w / 2 ? 0 : 1].push(entry);
@@ -7855,14 +7679,13 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
           remaining = total;
         for (const { entry, height } of placed) {
           const { box, line } = entry,
-            entryWidth = entry.width || width,
-            x = side ? w - entryWidth - 8 : 8;
+            x = side ? w - width - 8 : 8;
           const y = Math.min(Math.max(entry.y - height / 2, last + 8, 8), h - 8 - remaining);
           last = y + height;
           remaining -= height + 8;
           put(box, 'left', x + 'px');
           put(box, 'top', y + 'px');
-          const endX = side ? x : x + entryWidth,
+          const endX = side ? x : x + width,
             endY = y + height / 2,
             dx = endX - entry.x,
             dy = endY - entry.y;
@@ -8020,7 +7843,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       elapsed = 1;
       fresh = true;
       job = null;
-      if (button) button.setAttribute('aria-pressed', String(enabled));
+      if (button) button.checked = enabled;
       if (mark) changedAt = new Date().toISOString();
       if (!enabled) {
         for (const item of labels.values()) {
@@ -8055,7 +7878,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       };
       canvas.addEventListener('pointerup', tap);
       button = doc.getElementById('materialCallouts');
-      button.onclick = () => setEnabled(!enabled);
+      button.onchange = () => setEnabled(button.checked);
       const label = doc.getElementById('materialCalloutsControl');
       const mount = context.layersMount || context.toolMount;
       mount.append(label);
@@ -8063,7 +7886,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       if (bundle.enabled) setEnabled(true, false);
     }
     // Выпадающий чек-лист «что показывать в сносках»: все материалы панелей/профилей,
-    // галочка = текущее состояние. Общая кнопка #materialCallouts переключает все выноски.
+    // галочка = текущее состояние. Мастер-чекбокс #materialCallouts оставляем как есть.
     function buildList(mount) {
       const list = bundle.materials || [];
       const menu = doc.getElementById('materialCalloutsList');
@@ -8452,8 +8275,6 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       ray = new T.Raycaster(),
       pointer = new T.Vector2(),
       views = new Map();
-    const mobile = () => win.innerWidth <= 760;
-    let expandedNote = null;
     let notes = [],
       enabled = true,
       adding = false,
@@ -8714,22 +8535,6 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         const box = doc.createElement('div');
         box.className = 'noteCallout';
         box.dataset.note = note.id;
-        const badge = doc.createElement('button');
-        badge.type = 'button';
-        badge.className = 'noteBadge';
-        badge.setAttribute('aria-label', 'Открыть заметку');
-        badge.innerHTML =
-          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 3h14v13l-5 5H5zM14 21v-5h5M8 7h8M8 11h5"/></svg>';
-        const edit = doc.createElement('button');
-        edit.type = 'button';
-        edit.className = 'noteMobileEdit';
-        edit.textContent = 'Изменить заметку';
-        edit.onclick = e => {
-          e.stopPropagation();
-          const note = current();
-          if (note) openEditor(note, false);
-        };
-
         const text = doc.createElement('span');
         text.className = 'noteText';
         const meta = doc.createElement('small');
@@ -8746,7 +8551,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
           const note = current();
           if (note?.images?.length) openImage(note.images[0], note.images);
         };
-        box.append(badge, edit, text, photos, meta);
+        box.append(text, photos, meta);
         const line = doc.createElement('div');
         line.className = 'noteLeader';
         const dot = doc.createElement('div');
@@ -8760,12 +8565,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
             return;
           }
           const note = current();
-          if (note) {
-            if (mobile()) {
-              expandedNote = expandedNote === note.id ? null : note.id;
-              layout();
-            } else openEditor(note, false);
-          }
+          if (note) openEditor(note, false);
         };
         box.oncontextmenu = e => {
           e.preventDefault();
@@ -8788,7 +8588,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         for (const type of ['pointerup', 'pointercancel', 'pointerleave'])
           box.addEventListener(type, () => win.clearTimeout(press));
         overlay.append(line, dot, box);
-        item = { box, badge, text, meta, photos, thumb, line, dot, occluded: false };
+        item = { box, text, meta, photos, thumb, line, dot, occluded: false };
         views.set(note.id, item);
       }
       const photos = note.images?.length || 0;
@@ -8808,9 +8608,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       item.box.title =
         note.text +
         (note.element ? '\n' + note.element : '') +
-        (mobile()
-          ? '\nНажмите, чтобы раскрыть или свернуть'
-          : '\nНажмите, чтобы изменить; правая кнопка — меню');
+        '\nНажмите, чтобы изменить; правая кнопка — меню';
       return item;
     }
     function hide(item) {
@@ -8847,13 +8645,6 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       for (const note of notes) {
         const item = views.get(note.id);
         if (!item) continue;
-        const collapsed = mobile() && expandedNote !== note.id;
-        if (item.collapsed !== collapsed) {
-          item.collapsed = collapsed;
-          item.box.classList.toggle('noteCollapsed', collapsed);
-          item.badge.setAttribute('aria-expanded', String(!collapsed));
-          item.badge.setAttribute('aria-label', collapsed ? 'Открыть заметку' : 'Свернуть заметку');
-        }
         const shown = where(note);
         if (!shown) {
           hide(item);
@@ -8864,14 +8655,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         put(item.dot, 'display', 'block');
         put(item.dot, 'left', x + 'px');
         put(item.dot, 'top', y + 'px');
-        entries.push({
-          key: 'note:' + note.id,
-          x,
-          y,
-          box: item.box,
-          line: item.line,
-          width: collapsed ? 42 : undefined
-        });
+        entries.push({ key: 'note:' + note.id, x, y, box: item.box, line: item.line });
       }
       board.set('notes', entries);
       board.layout(w, h);
@@ -9060,7 +8844,6 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       if (noteMenu && !noteMenu.hidden && !noteMenu.contains(e.target)) closeMenu();
     };
     function focusNote(note) {
-      if (mobile()) expandedNote = note.id;
       if (!enabled) setEnabled(true);
       if (note.hidden) setHidden(note, false);
       if (note.objectId != null) services.selectId?.(note.objectId);
@@ -9307,7 +9090,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
   else (root.BazisViewerFeatures || (root.BazisViewerFeatures = [])).push({ name: 'notes', install });
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 
-(globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"Деталь":{"en":"Part","pl":"Element","uk":"Деталь"},"Закрыть фото":{"en":"Close photo","pl":"Zamknij zdjęcie","uk":"Закрити фото"},"Заметка":{"en":"Note","pl":"Notatka","uk":"Нотатка"},"Заметки":{"en":"Notes","pl":"Notatki","uk":"Нотатки"},"Заметки сохраняются вместе с видом — дискеткой «Сохранить на GitHub».":{"en":"Notes are saved together with the view — with the “Save to GitHub” floppy.","pl":"Notatki zapisują się razem z widokiem — dyskietką „Zapisz na GitHub”.","uk":"Нотатки зберігаються разом із виглядом — дискетою «Зберегти на GitHub»."},"Заметок пока нет":{"en":"No notes yet","pl":"Brak notatek","uk":"Нотаток поки немає"},"Изменить":{"en":"Edit","pl":"Edytuj","uk":"Змінити"},"Изменить заметку":{"en":"Edit note","pl":"Edytuj notatkę","uk":"Змінити нотатку"},"Мимо детали: щёлкните по её поверхности. Esc — отмена.":{"en":"Missed the part: click its surface. Esc — cancel.","pl":"Obok elementu: kliknij jego powierzchnię. Esc — anuluj.","uk":"Повз деталь: клацніть по її поверхні. Esc — скасування."},"Нажмите, чтобы изменить; правая кнопка — меню":{"en":"Click to edit; right button — menu","pl":"Kliknij, aby edytować; prawy przycisk — menu","uk":"Натисніть, щоб змінити; права кнопка — меню"},"Нажмите, чтобы раскрыть или свернуть":{"en":"Tap to expand or collapse","pl":"Dotknij, aby rozwinąć lub zwinąć","uk":"Натисніть, щоб розгорнути або згорнути"},"Не больше":{"en":"No more than","pl":"Nie więcej niż","uk":"Не більше"},"Не удалось добавить фото:":{"en":"Could not add the photo:","pl":"Nie udało się dodać zdjęcia:","uk":"Не вдалося додати фото:"},"Несовместимый модуль заметок":{"en":"Incompatible notes module","pl":"Niezgodny moduł notatek","uk":"Несумісний модуль нотаток"},"Новая заметка":{"en":"New note","pl":"Nowa notatka","uk":"Нова нотатка"},"Открыть заметку":{"en":"Open note","pl":"Otwórz notatkę","uk":"Відкрити нотатку"},"Открыть фото (":{"en":"Open photos (","pl":"Otwórz zdjęcia (","uk":"Відкрити фото ("},"Отмена":{"en":"Cancel","pl":"Anuluj","uk":"Скасувати"},"Показать заметку":{"en":"Show note","pl":"Pokaż notatkę","uk":"Показати нотатку"},"Показывать":{"en":"Show","pl":"Pokazuj","uk":"Показувати"},"Предыдущее фото":{"en":"Previous photo","pl":"Poprzednie zdjęcie","uk":"Попереднє фото"},"Свернуть заметку":{"en":"Collapse note","pl":"Zwiń notatkę","uk":"Згорнути нотатку"},"Скрыть заметку":{"en":"Hide note","pl":"Ukryj notatkę","uk":"Приховати нотатку"},"Следующее фото":{"en":"Next photo","pl":"Następne zdjęcie","uk":"Наступне фото"},"Сохранить":{"en":"Save","pl":"Zapisz","uk":"Зберегти"},"Список (":{"en":"List (","pl":"Lista (","uk":"Список ("},"Список (0)":{"en":"List (0)","pl":"Lista (0)","uk":"Список (0)"},"Текст заметки":{"en":"Note text","pl":"Tekst notatki","uk":"Текст нотатки"},"Точка без привязки к детали":{"en":"Point not attached to a part","pl":"Punkt bez powiązania z elementem","uk":"Точка без прив'язки до деталі"},"Убрать фото из заметки":{"en":"Remove photo from note","pl":"Usuń zdjęcie z notatki","uk":"Прибрати фото з нотатки"},"Удалить":{"en":"Delete","pl":"Usuń","uk":"Видалити"},"Удалить заметку":{"en":"Delete note","pl":"Usuń notatkę","uk":"Видалити нотатку"},"Удалить заметку?":{"en":"Delete the note?","pl":"Usunąć notatkę?","uk":"Видалити нотатку?"},"Фото":{"en":"Photo","pl":"Zdjęcie","uk":"Фото"},"Фото заметки":{"en":"Note photo","pl":"Zdjęcie notatki","uk":"Фото нотатки"},"Фото уменьшаются до 1600 px и сохраняются дискеткой в публичный репозиторий GitHub рядом со страницей.":{"en":"Photos are reduced to 1600 px and saved with the floppy to the public GitHub repository next to the page.","pl":"Zdjęcia są zmniejszane do 1600 px i zapisywane dyskietką w publicznym repozytorium GitHub obok strony.","uk":"Фото зменшуються до 1600 px і зберігаються дискетою в публічний репозиторій GitHub поруч зі сторінкою."},"Фото:":{"en":"Photos:","pl":"Zdjęcia:","uk":"Фото:"},"Щёлкните по детали, куда поставить заметку. Esc — отмена.":{"en":"Click the part where the note goes. Esc — cancel.","pl":"Kliknij element, na którym umieścić notatkę. Esc — anuluj.","uk":"Клацніть по деталі, куди поставити нотатку. Esc — скасування."},"не удалось сжать фото":{"en":"could not compress the photo","pl":"nie udało się skompresować zdjęcia","uk":"не вдалося стиснути фото"},"поз.":{"en":"pos.","pl":"poz.","uk":"поз."},"фото в одной заметке.":{"en":"photos in one note.","pl":"zdjęć w jednej notatce.","uk":"фото в одній нотатці."},"＋ Заметка":{"en":"＋ Note","pl":"＋ Notatka","uk":"＋ Нотатка"},"＋ Фото":{"en":"＋ Photo","pl":"＋ Zdjęcie","uk":"＋ Фото"}});
+(globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"Деталь":{"en":"Part","pl":"Element","uk":"Деталь"},"Закрыть фото":{"en":"Close photo","pl":"Zamknij zdjęcie","uk":"Закрити фото"},"Заметка":{"en":"Note","pl":"Notatka","uk":"Нотатка"},"Заметки":{"en":"Notes","pl":"Notatki","uk":"Нотатки"},"Заметки сохраняются вместе с видом — дискеткой «Сохранить на GitHub».":{"en":"Notes are saved together with the view — with the “Save to GitHub” floppy.","pl":"Notatki zapisują się razem z widokiem — dyskietką „Zapisz na GitHub”.","uk":"Нотатки зберігаються разом із виглядом — дискетою «Зберегти на GitHub»."},"Заметок пока нет":{"en":"No notes yet","pl":"Brak notatek","uk":"Нотаток поки немає"},"Изменить":{"en":"Edit","pl":"Edytuj","uk":"Змінити"},"Изменить заметку":{"en":"Edit note","pl":"Edytuj notatkę","uk":"Змінити нотатку"},"Мимо детали: щёлкните по её поверхности. Esc — отмена.":{"en":"Missed the part: click its surface. Esc — cancel.","pl":"Obok elementu: kliknij jego powierzchnię. Esc — anuluj.","uk":"Повз деталь: клацніть по її поверхні. Esc — скасування."},"Нажмите, чтобы изменить; правая кнопка — меню":{"en":"Click to edit; right button — menu","pl":"Kliknij, aby edytować; prawy przycisk — menu","uk":"Натисніть, щоб змінити; права кнопка — меню"},"Не больше":{"en":"No more than","pl":"Nie więcej niż","uk":"Не більше"},"Не удалось добавить фото:":{"en":"Could not add the photo:","pl":"Nie udało się dodać zdjęcia:","uk":"Не вдалося додати фото:"},"Несовместимый модуль заметок":{"en":"Incompatible notes module","pl":"Niezgodny moduł notatek","uk":"Несумісний модуль нотаток"},"Новая заметка":{"en":"New note","pl":"Nowa notatka","uk":"Нова нотатка"},"Открыть фото (":{"en":"Open photos (","pl":"Otwórz zdjęcia (","uk":"Відкрити фото ("},"Отмена":{"en":"Cancel","pl":"Anuluj","uk":"Скасувати"},"Показать заметку":{"en":"Show note","pl":"Pokaż notatkę","uk":"Показати нотатку"},"Показывать":{"en":"Show","pl":"Pokazuj","uk":"Показувати"},"Предыдущее фото":{"en":"Previous photo","pl":"Poprzednie zdjęcie","uk":"Попереднє фото"},"Скрыть заметку":{"en":"Hide note","pl":"Ukryj notatkę","uk":"Приховати нотатку"},"Следующее фото":{"en":"Next photo","pl":"Następne zdjęcie","uk":"Наступне фото"},"Сохранить":{"en":"Save","pl":"Zapisz","uk":"Зберегти"},"Список (":{"en":"List (","pl":"Lista (","uk":"Список ("},"Список (0)":{"en":"List (0)","pl":"Lista (0)","uk":"Список (0)"},"Текст заметки":{"en":"Note text","pl":"Tekst notatki","uk":"Текст нотатки"},"Точка без привязки к детали":{"en":"Point not attached to a part","pl":"Punkt bez powiązania z elementem","uk":"Точка без прив'язки до деталі"},"Убрать фото из заметки":{"en":"Remove photo from note","pl":"Usuń zdjęcie z notatki","uk":"Прибрати фото з нотатки"},"Удалить":{"en":"Delete","pl":"Usuń","uk":"Видалити"},"Удалить заметку":{"en":"Delete note","pl":"Usuń notatkę","uk":"Видалити нотатку"},"Удалить заметку?":{"en":"Delete the note?","pl":"Usunąć notatkę?","uk":"Видалити нотатку?"},"Фото":{"en":"Photo","pl":"Zdjęcie","uk":"Фото"},"Фото заметки":{"en":"Note photo","pl":"Zdjęcie notatki","uk":"Фото нотатки"},"Фото уменьшаются до 1600 px и сохраняются дискеткой в публичный репозиторий GitHub рядом со страницей.":{"en":"Photos are reduced to 1600 px and saved with the floppy to the public GitHub repository next to the page.","pl":"Zdjęcia są zmniejszane do 1600 px i zapisywane dyskietką w publicznym repozytorium GitHub obok strony.","uk":"Фото зменшуються до 1600 px і зберігаються дискетою в публічний репозиторій GitHub поруч зі сторінкою."},"Фото:":{"en":"Photos:","pl":"Zdjęcia:","uk":"Фото:"},"Щёлкните по детали, куда поставить заметку. Esc — отмена.":{"en":"Click the part where the note goes. Esc — cancel.","pl":"Kliknij element, na którym umieścić notatkę. Esc — anuluj.","uk":"Клацніть по деталі, куди поставити нотатку. Esc — скасування."},"не удалось сжать фото":{"en":"could not compress the photo","pl":"nie udało się skompresować zdjęcia","uk":"не вдалося стиснути фото"},"поз.":{"en":"pos.","pl":"poz.","uk":"поз."},"фото в одной заметке.":{"en":"photos in one note.","pl":"zdjęć w jednej notatce.","uk":"фото в одній нотатці."},"＋ Заметка":{"en":"＋ Note","pl":"＋ Notatka","uk":"＋ Нотатка"},"＋ Фото":{"en":"＋ Photo","pl":"＋ Zdjęcie","uk":"＋ Фото"}});
 (function (root) {
   'use strict';
   // «Однотонная фурнитура». По умолчанию выключена: фурнитура и импортированные тела
@@ -9373,15 +9156,15 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     }
     function setMono(value) {
       on = !!value;
-      if (box) box.setAttribute('aria-pressed', String(on));
+      if (box) box.checked = on;
       if (!disposed) apply();
     }
     function ready() {
       // разметка — markup.html (сборщик кладёт её в #featureMarkup)
       label = doc.getElementById('hardwareMonoControl');
       box = doc.getElementById('hardwareMono');
-      box.setAttribute('aria-pressed', String(on));
-      box.onclick = () => setMono(!on);
+      box.checked = on;
+      box.onchange = () => setMono(box.checked);
       (context.layersMount || context.toolMount).append(label);
       apply();
     }
@@ -13475,178 +13258,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
   else (root.BazisViewerFeatures || (root.BazisViewerFeatures = [])).push({ name: 'viewer_update', install });
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 
-(globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"(у страницы —":{"en":"(page has","pl":"(strona ma","uk":"(у сторінки —"},"). GitHub Pages выложит страницу примерно через минуту — затем перезагрузите её.":{"en":"). GitHub Pages will publish the page in about a minute — then reload it.","pl":"). GitHub Pages opublikuje stronę za około minutę — potem ją odśwież.","uk":"). GitHub Pages опублікує сторінку приблизно за хвилину — потім перезавантажте її."},". Обновление — на опубликованной странице.":{"en":". Updating is available on the published page.","pl":". Aktualizacja — na opublikowanej stronie.","uk":". Оновлення — на опублікованій сторінці."},"; добавлено:":{"en":"; added:","pl":"; dodano:","uk":"; додано:"},"В данных модели нет разделов модулей — обновите страницу локально.":{"en":"The model data has no module sections — update the page locally.","pl":"Dane modelu nie mają sekcji modułów — zaktualizuj stronę lokalnie.","uk":"У даних моделі немає розділів модулів — оновіть сторінку локально."},"В странице нет данных модели.":{"en":"The page has no model data.","pl":"Strona nie zawiera danych modelu.","uk":"На сторінці немає даних моделі."},"Версия просмотрщика":{"en":"Viewer version","pl":"Wersja przeglądarki","uk":"Версія переглядача"},"Данные модели новее набора кода — выпустите новую версию просмотрщика.":{"en":"The model data is newer than the code bundle — release a new viewer version.","pl":"Dane modelu są nowsze niż pakiet kodu — wydaj nową wersję przeglądarki.","uk":"Дані моделі новіші за набір коду — випустіть нову версію переглядача."},"Есть новая версия просмотрщика:":{"en":"A new viewer version is available:","pl":"Dostępna jest nowa wersja przeglądarki:","uk":"Є нова версія переглядача:"},"Записываю на GitHub…":{"en":"Writing to GitHub…","pl":"Zapisuję na GitHub…","uk":"Записую на GitHub…"},"Набор кода другого формата — обновите страницу локально (upgrade_html.py).":{"en":"The code bundle has a different format — update the page locally (upgrade_html.py).","pl":"Pakiet kodu ma inny format — zaktualizuj stronę lokalnie (upgrade_html.py).","uk":"Набір коду іншого формату — оновіть сторінку локально (upgrade_html.py)."},"Не удалось добавить разделы модулей в данные — обновите страницу локально.":{"en":"Could not add module sections to the data — update the page locally.","pl":"Nie udało się dodać sekcji modułów do danych — zaktualizuj stronę lokalnie.","uk":"Не вдалося додати розділи модулів у дані — оновіть сторінку локально."},"Не удалось получить":{"en":"Could not fetch","pl":"Nie udało się pobrać","uk":"Не вдалося отримати"},"Не удалось проверить версию просмотрщика:":{"en":"Could not check the viewer version:","pl":"Nie udało się sprawdzić wersji przeglądarki:","uk":"Не вдалося перевірити версію переглядача:"},"Не удалось прочитать эту страницу (":{"en":"Could not read this page (","pl":"Nie udało się odczytać tej strony (","uk":"Не вдалося прочитати цю сторінку ("},"Несовместимый модуль обновления просмотрщика":{"en":"Incompatible viewer update module","pl":"Niezgodny moduł aktualizacji przeglądarki","uk":"Несумісний модуль оновлення переглядача"},"Нет модуля записи на GitHub — обновите страницу локально.":{"en":"No GitHub write module — update the page locally.","pl":"Brak modułu zapisu na GitHub — zaktualizuj stronę lokalnie.","uk":"Немає модуля запису на GitHub — оновіть сторінку локально."},"Обнови просмотрщик":{"en":"Update viewer","pl":"Zaktualizuj przeglądarkę","uk":"Онови переглядач"},"Обновить":{"en":"Update","pl":"Aktualizuj","uk":"Оновити"},"Обновить просмотрщик":{"en":"Update viewer","pl":"Zaktualizuj przeglądarkę","uk":"Оновити переглядач"},"Обновлено":{"en":"Updated","pl":"Zaktualizowano","uk":"Оновлено"},"Обновляю…":{"en":"Updating…","pl":"Aktualizuję…","uk":"Оновлюю…"},"Отменено.":{"en":"Cancelled.","pl":"Anulowano.","uk":"Скасовано."},"Ошибка":{"en":"Error","pl":"Błąd","uk":"Помилка"},"Просмотрщик актуален (":{"en":"The viewer is up to date (","pl":"Przeglądarka jest aktualna (","uk":"Переглядач актуальний ("},"Просмотрщик обновлён (коммит":{"en":"Viewer updated (commit","pl":"Przeglądarka zaktualizowana (commit","uk":"Переглядач оновлено (коміт"},"Скачиваю новую версию просмотрщика…":{"en":"Downloading the new viewer version…","pl":"Pobieram nową wersję przeglądarki…","uk":"Завантажую нову версію переглядача…"},"Собираю страницу…":{"en":"Building the page…","pl":"Buduję stronę…","uk":"Збираю сторінку…"},"Страница собрана в другом режиме сжатия — обновите её локально (upgrade_html.py).":{"en":"The page was built with a different compression mode — update it locally (upgrade_html.py).","pl":"Strona została zbudowana w innym trybie kompresji — zaktualizuj ją lokalnie (upgrade_html.py).","uk":"Сторінку зібрано в іншому режимі стиснення — оновіть її локально (upgrade_html.py)."},"до":{"en":"to","pl":"do","uk":"до"},"неизвестна":{"en":"unknown","pl":"nieznana","uk":"невідома"},"старая":{"en":"old","pl":"stara","uk":"стара"}});
-(function (root) {
-  'use strict';
-  // Original 24×24 line drawings. Masks inherit active/disabled button colors.
-  const paths = {
-    section: 'M4 7l8-4 8 4v10l-8 4-8-4zM4 7l8 4 8-4M12 11v10M2 13h20',
-    assembly: 'M3 3h12v18H3zM3 9h12M8 9v12M11 13h.01M21 4a4 4 0 0 0-4 5l-3 7 2 1 3-7a4 4 0 0 0 3-5l-2 2-2-1z',
-    materials: 'M4 4h16v16H4z',
-    measure: 'M3 16L16 3l5 5L8 21zM7 12l3 3M11 8l3 3M15 4l3 3',
-    notes: 'M5 3h14v13l-5 5H5zM14 21v-5h5M8 7h8M8 11h5',
-    tree: 'M5 3v14h5M5 7h5M11 4h9v6h-9zM11 14h9v6h-9z',
-    pointer: 'M5 3l14 10-7 1-3 7z',
-    restore: 'M4 9a8 8 0 1 1 1 9M4 3v6h6',
-    hardware: 'M9 3h6v5l-2 2v11h-2V10L9 8zM9 5h6M10 14h4M10 17h4',
-    explode: 'M3 5l9-4 9 4-9 4zM3 12l9-4 9 4-9 4zM3 19l9-4 9 4-9 4zM2 8v8M22 8v8',
-    drawing: 'M3 2h18v20H3zM7 7h7v4h3v6H7zM7 4h10M7 3v2M17 3v2M5 7v10M4 7h2M4 17h2',
-    size: 'M8 8h12v12H8zM8 4h12M8 2v4M20 2v4M4 8v12M2 8h4M2 20h4',
-    settings: 'M4 6h16M4 12h16M4 18h16M8 3v6M16 9v6M10 15v6',
-    texture: 'M3 6c4-5 5 5 9 0s5 5 9 0M3 12c4-5 5 5 9 0s5 5 9 0M3 18c4-5 5 5 9 0s5 5 9 0',
-    edges: 'M4 4h16v16H4zM4 4v16h16M8 8h8v8H8z',
-    mono: 'M12 3l9 5v9l-9 5-9-5V8zM3 8l9 5 9-5M12 13v9',
-    edit: 'M4 20l1-5L16 4l4 4L9 19zM13 7l4 4M4 20l5-1',
-    trash: 'M3 6h18M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7M14 10v7',
-    list: 'M8 5h13M8 12h13M8 19h13M3 5h.01M3 12h.01M3 19h.01',
-    noteAdd: 'M14 3H4v18h16V11M8 9h4M8 14h7M18 2v6M15 5h6',
-    fit: 'M3 9V3h6M15 3h6v6M21 15v6h-6M9 21H3v-6M8 8h8v8H8z',
-    eye: 'M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0',
-    callouts: 'M3 4h12v8H3zM15 8l6 11M18 19h3v-3',
-    refresh: 'M20 10a8 8 0 1 0-2 8M20 3v7h-7'
-  };
-  const colored = {
-    materials:
-      '<path fill="#80ceee" d="M3 5h14v16H3z"/><path fill="#f1bb70" d="M6 3h14v16H6z"/><path fill="#bd9edf" d="M9 1h13v15H9z"/><path d="M11 5h8M11 8h8M11 11h5"/>',
-    texture:
-      '<defs><linearGradient id="c"><stop stop-color="#ef7878"/><stop offset=".25" stop-color="#f5c75d"/><stop offset=".5" stop-color="#6ed48c"/><stop offset=".75" stop-color="#6ac6ef"/><stop offset="1" stop-color="#b793ed"/></linearGradient></defs><rect x="2" y="3" width="20" height="18" rx="2" fill="url(#c)"/><path opacity=".6" d="M4 8c4-4 7 4 11 0s4-1 5 0M4 13c4-4 7 4 11 0s4-1 5 0M4 18c4-4 7 4 11 0s4-1 5 0"/>',
-    edges:
-      '<rect x="3" y="3" width="18" height="18" rx="1" fill="#84cbe0" stroke="#f6b64f" stroke-width="4"/><path stroke="#e2f5ff" stroke-width=".8" d="M7 7h10v10H7z"/>',
-    mono: '<path fill="#f0c464" d="M12 2l10 5-10 5L2 7z"/><path fill="#6fbade" d="M2 7l10 5v10L2 17z"/><path fill="#cd8eb9" d="M12 12l10-5v10l-10 5z"/>',
-    pointer:
-      '<path fill="#61c0f2" d="M3 3h12v10H3z"/><path d="M3 6h12M6 3v10"/><path fill="#f6f8fb" d="M9 8l11 6-5 1 3 5-2 1-3-5-3 4z"/>',
-    selectionGroup:
-      '<path fill="#52738d" d="M2 9h12v8H2z"/><path fill="#81a3bb" d="M4 6h12v8H4z"/><path fill="#8cd4f4" d="M6 3h12v8H6z"/><path fill="#f6f8fb" d="M10 10l11 5-5 1 3 5-2 1-3-5-3 4z"/>'
-  };
-  const targets = {
-    '#sectionOpen': 'section',
-    '#assemblerOpen': 'assembly',
-    '#materialsOpen': 'materials',
-    '#measureOpen': 'measure',
-    '#notesOpen': 'notes',
-    '#mobileStructure': 'tree',
-    '#toggleSide': 'tree',
-    '#visibilityMode': 'pointer',
-    '#visibilityRestore': 'restore',
-    '#panelHardwareToggle': 'hardware',
-    '#assemblerExplode': 'explode',
-    '#assemblerDrawing': 'drawing',
-    '#assemblerPartDimensions': 'size',
-    '#assemblerSettings > summary': 'settings',
-    '#finishModes [data-mode="texture"]': 'texture',
-    '#finishModes [data-mode="edges"]': 'edges',
-    '#finishModes [data-mode="mono"]': 'mono',
-    '#matEditorOpen': 'edit',
-    '#measure': 'measure',
-    '#clearMeasures': 'trash',
-    '#notesAdd': 'noteAdd',
-    '#notesListSummary': 'list',
-    '#fit': 'fit',
-    '#materialCalloutsList > summary': 'callouts',
-    '#viewerUpdate': 'refresh',
-    '#materialCallouts': 'callouts',
-    '#hardwareMono': 'hardware'
-  };
-  const icon = name =>
-    'url("data:image/svg+xml,' +
-    encodeURIComponent(
-      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="' +
-        (colored[name] ? '#253b49' : 'black') +
-        '" stroke-width="' +
-        (colored[name] ? '1.2' : '1.6') +
-        '" stroke-linecap="round" stroke-linejoin="round">' +
-        (colored[name] || '<path d="' + paths[name] + '"/>') +
-        '</svg>'
-    ) +
-    '")';
-  function install(context) {
-    const { document: doc, hooks } = context,
-      win = context.window || root,
-      key = 'bazisIconControls';
-    const setting = doc.getElementById('iconControlsSetting'),
-      input = doc.getElementById('iconControlsEnabled'),
-      controls = new Map();
-    let enabled = false,
-      observer = null;
-    try {
-      enabled = win.localStorage.getItem(key) === 'true';
-    } catch (e) {}
-    function setEnabled(value) {
-      enabled = !!value;
-      input.checked = enabled;
-      doc.documentElement.classList.toggle('iconControls', enabled);
-      try {
-        win.localStorage.setItem(key, String(enabled));
-      } catch (e) {}
-    }
-    function nameOf(el) {
-      return el.textContent.trim().replace(/\s+/g, ' ');
-    }
-    function label(el) {
-      const text = nameOf(el);
-      if (text) {
-        if (el.getAttribute('aria-label') !== text) el.setAttribute('aria-label', text);
-        if (el.title !== text) el.title = text;
-      }
-    }
-    function ready() {
-      doc.querySelector?.('#viewerMenuPopup')?.append(setting);
-      for (const [selector, name] of Object.entries(targets))
-        for (const el of doc.querySelectorAll(selector)) {
-          controls.set(el, { title: el.getAttribute('title'), aria: el.getAttribute('aria-label') });
-          el.classList.add('viewerIconControl');
-          if (colored[name]) el.classList.add('viewerColorIcon');
-          el.style.setProperty('--viewer-control-icon', icon(name));
-          if (el.id === 'visibilityMode')
-            el.style.setProperty('--viewer-assembly-icon', icon('selectionGroup'));
-          label(el);
-        }
-      if (win.MutationObserver) {
-        observer = new win.MutationObserver(records => {
-          const changed = new Set();
-          for (const r of records) {
-            let el = r.target.nodeType === 3 ? r.target.parentElement : r.target;
-            while (el && !controls.has(el)) el = el.parentElement;
-            if (el) changed.add(el);
-          }
-          changed.forEach(label);
-        });
-        for (const el of controls.keys())
-          observer.observe(el, { childList: true, characterData: true, subtree: true });
-      }
-      setEnabled(enabled);
-    }
-    input.onchange = () => setEnabled(input.checked);
-    hooks.ready.push(ready);
-    return {
-      name: 'icon_controls',
-      setEnabled,
-      get enabled() {
-        return enabled;
-      },
-      dispose() {
-        observer?.disconnect();
-        for (const [el, old] of controls) {
-          el.classList.remove('viewerIconControl', 'viewerColorIcon');
-          el.style.removeProperty('--viewer-control-icon');
-          el.style.removeProperty('--viewer-assembly-icon');
-          for (const [attr, value] of [
-            ['title', old.title],
-            ['aria-label', old.aria]
-          ])
-            value == null ? el.removeAttribute(attr) : el.setAttribute(attr, value);
-        }
-        doc.documentElement.classList.remove('iconControls');
-        setting.remove();
-        const i = hooks.ready.indexOf(ready);
-        if (i >= 0) hooks.ready.splice(i, 1);
-      }
-    };
-  }
-  (root.BazisViewerFeatures || (root.BazisViewerFeatures = [])).push({ name: 'icon_controls', install });
-})(typeof globalThis !== 'undefined' ? globalThis : this);
-
-(globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"Отображение иконками":{"en":"Show icons","pl":"Wyświetlaj ikony","uk":"Відображення іконками"}});</script>
+(globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"(у страницы —":{"en":"(page has","pl":"(strona ma","uk":"(у сторінки —"},"). GitHub Pages выложит страницу примерно через минуту — затем перезагрузите её.":{"en":"). GitHub Pages will publish the page in about a minute — then reload it.","pl":"). GitHub Pages opublikuje stronę za około minutę — potem ją odśwież.","uk":"). GitHub Pages опублікує сторінку приблизно за хвилину — потім перезавантажте її."},". Обновление — на опубликованной странице.":{"en":". Updating is available on the published page.","pl":". Aktualizacja — na opublikowanej stronie.","uk":". Оновлення — на опублікованій сторінці."},"; добавлено:":{"en":"; added:","pl":"; dodano:","uk":"; додано:"},"В данных модели нет разделов модулей — обновите страницу локально.":{"en":"The model data has no module sections — update the page locally.","pl":"Dane modelu nie mają sekcji modułów — zaktualizuj stronę lokalnie.","uk":"У даних моделі немає розділів модулів — оновіть сторінку локально."},"В странице нет данных модели.":{"en":"The page has no model data.","pl":"Strona nie zawiera danych modelu.","uk":"На сторінці немає даних моделі."},"Версия просмотрщика":{"en":"Viewer version","pl":"Wersja przeglądarki","uk":"Версія переглядача"},"Данные модели новее набора кода — выпустите новую версию просмотрщика.":{"en":"The model data is newer than the code bundle — release a new viewer version.","pl":"Dane modelu są nowsze niż pakiet kodu — wydaj nową wersję przeglądarki.","uk":"Дані моделі новіші за набір коду — випустіть нову версію переглядача."},"Есть новая версия просмотрщика:":{"en":"A new viewer version is available:","pl":"Dostępna jest nowa wersja przeglądarki:","uk":"Є нова версія переглядача:"},"Записываю на GitHub…":{"en":"Writing to GitHub…","pl":"Zapisuję na GitHub…","uk":"Записую на GitHub…"},"Набор кода другого формата — обновите страницу локально (upgrade_html.py).":{"en":"The code bundle has a different format — update the page locally (upgrade_html.py).","pl":"Pakiet kodu ma inny format — zaktualizuj stronę lokalnie (upgrade_html.py).","uk":"Набір коду іншого формату — оновіть сторінку локально (upgrade_html.py)."},"Не удалось добавить разделы модулей в данные — обновите страницу локально.":{"en":"Could not add module sections to the data — update the page locally.","pl":"Nie udało się dodać sekcji modułów do danych — zaktualizuj stronę lokalnie.","uk":"Не вдалося додати розділи модулів у дані — оновіть сторінку локально."},"Не удалось получить":{"en":"Could not fetch","pl":"Nie udało się pobrać","uk":"Не вдалося отримати"},"Не удалось проверить версию просмотрщика:":{"en":"Could not check the viewer version:","pl":"Nie udało się sprawdzić wersji przeglądarki:","uk":"Не вдалося перевірити версію переглядача:"},"Не удалось прочитать эту страницу (":{"en":"Could not read this page (","pl":"Nie udało się odczytać tej strony (","uk":"Не вдалося прочитати цю сторінку ("},"Несовместимый модуль обновления просмотрщика":{"en":"Incompatible viewer update module","pl":"Niezgodny moduł aktualizacji przeglądarki","uk":"Несумісний модуль оновлення переглядача"},"Нет модуля записи на GitHub — обновите страницу локально.":{"en":"No GitHub write module — update the page locally.","pl":"Brak modułu zapisu na GitHub — zaktualizuj stronę lokalnie.","uk":"Немає модуля запису на GitHub — оновіть сторінку локально."},"Обнови просмотрщик":{"en":"Update viewer","pl":"Zaktualizuj przeglądarkę","uk":"Онови переглядач"},"Обновить":{"en":"Update","pl":"Aktualizuj","uk":"Оновити"},"Обновить просмотрщик":{"en":"Update viewer","pl":"Zaktualizuj przeglądarkę","uk":"Оновити переглядач"},"Обновлено":{"en":"Updated","pl":"Zaktualizowano","uk":"Оновлено"},"Обновляю…":{"en":"Updating…","pl":"Aktualizuję…","uk":"Оновлюю…"},"Отменено.":{"en":"Cancelled.","pl":"Anulowano.","uk":"Скасовано."},"Ошибка":{"en":"Error","pl":"Błąd","uk":"Помилка"},"Просмотрщик актуален (":{"en":"The viewer is up to date (","pl":"Przeglądarka jest aktualna (","uk":"Переглядач актуальний ("},"Просмотрщик обновлён (коммит":{"en":"Viewer updated (commit","pl":"Przeglądarka zaktualizowana (commit","uk":"Переглядач оновлено (коміт"},"Скачиваю новую версию просмотрщика…":{"en":"Downloading the new viewer version…","pl":"Pobieram nową wersję przeglądarki…","uk":"Завантажую нову версію переглядача…"},"Собираю страницу…":{"en":"Building the page…","pl":"Buduję stronę…","uk":"Збираю сторінку…"},"Страница собрана в другом режиме сжатия — обновите её локально (upgrade_html.py).":{"en":"The page was built with a different compression mode — update it locally (upgrade_html.py).","pl":"Strona została zbudowana w innym trybie kompresji — zaktualizuj ją lokalnie (upgrade_html.py).","uk":"Сторінку зібрано в іншому режимі стиснення — оновіть її локально (upgrade_html.py)."},"до":{"en":"to","pl":"do","uk":"до"},"неизвестна":{"en":"unknown","pl":"nieznana","uk":"невідома"},"старая":{"en":"old","pl":"stara","uk":"стара"}});</script>
 <script>
 'use strict';
 let DATA;
