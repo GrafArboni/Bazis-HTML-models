@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="bazis-viewer" content="dc4395df575a">
+<meta name="bazis-viewer" content="72eb93a3ac38">
 <title>068_5_Дит2_ · просмотр модели</title>
 <style>
 :root{color-scheme:dark;--bg:#10171d;--panel:#17232d;--line:#31414b;--text:#e8eef0;--muted:#a6bac4;--accent:#9ee2d0;--popup-border:#526776;--control-border:#46586a;--hover:#304654;--muted-soft:#9fb3bd;--divider:#26343d;--compact-slider:70px}
@@ -336,25 +336,105 @@
 .featureRow[hidden] {
   display: none !important;
 }
+/* Сборочные единицы: «Общий вид» (пока выбран узел) и кнопка текущего узла со
+   списком — одной строкой справа под кубом. Список — в общем слое (portalToolMenu). */
 .assemblyUnits {
   position: absolute;
   right: 8px;
   top: 110px;
   z-index: 4;
   display: flex;
-  flex-direction: column;
+  align-items: flex-start;
   gap: 5px;
-  max-width: 170px;
-  max-height: 60%;
-  overflow: auto;
+  max-width: calc(100% - 16px);
 }
 .assemblyUnits[hidden] {
   display: none;
 }
-.assemblyUnits button {
+.assemblyUnits button,
+.assemblyUnitsList button {
   text-align: left;
   font-size: 12px;
   padding: 6px 9px;
+}
+.assemblyUnits button[hidden] {
+  display: none;
+}
+.assemblyUnitsMenu > summary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 5px 10px;
+  border: 1px solid #415563;
+  border-radius: 7px;
+  background: #21313e;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 600;
+  list-style: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.assemblyUnitsMenu > summary::-webkit-details-marker {
+  display: none;
+}
+.assemblyUnitsMenu > summary::after {
+  content: '▾';
+  opacity: 0.7;
+}
+.assemblyUnitsMenu[open] > summary,
+.assemblyUnitsMenu > summary:hover {
+  background: var(--hover);
+}
+/* список узлов — строками: глаз · узел · вписать · позиции сквозь прозрачность;
+   окну портал сам ставит display:block */
+.assemblyUnitRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0 0 4px;
+}
+.assemblyUnitRow:last-child {
+  margin-bottom: 0;
+}
+.assemblyUnitRow > button[data-unit] {
+  flex: 1;
+  min-width: 0;
+}
+.assemblyUnitRow > button[data-unit]:first-child {
+  margin-left: 32px; /* у «Общего вида» нет глаза — выравниваем по остальным */
+}
+.assemblyUnitTool {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+}
+/* скрытый узел — перечёркнутый глаз */
+.assemblyUnitTool[data-tool='eye'][data-state='off'] {
+  opacity: 0.55;
+  background: linear-gradient(
+    to top right,
+    transparent 46%,
+    currentColor 47%,
+    currentColor 53%,
+    transparent 54%
+  );
+}
+/* «позиции сквозь прозрачность»: как у родителя — приглушено, показывать —
+   акцент, скрывать — перечёркнуто */
+.assemblyUnitTool[data-tool='through'][data-state='inherit'] {
+  opacity: 0.5;
+}
+.assemblyUnitTool[data-tool='through'][data-state='on'] {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.assemblyUnitTool[data-tool='through'][data-state='off'] {
+  background: linear-gradient(to top right, transparent 46%, #ff8a8a 47%, #ff8a8a 53%, transparent 54%);
 }
 @media (max-width: 760px) {
   .top {
@@ -1348,11 +1428,12 @@ dialog.matPicker {
   background: #1c1a12;
 }
 
+/* не нажата — только цветная обводка (фон как у всех кнопок), нажата — заливка:
+   иначе не понять, включены ли заметки */
 #notesOpen,
 #notesOpen.viewerIconControl {
-  background: #2b2616;
   color: #fbf5e3;
-  border-color: #9c8545;
+  border-color: #c9a646;
 }
 #notesOpen[aria-pressed='true'],
 html.iconControls #notesOpen[aria-pressed='true'] {
@@ -1480,7 +1561,7 @@ html.iconControls #notesOpen[aria-pressed='true'] {
     font-size: 12px;
   }
 }
-.assemblyUnits button:not([data-depth='0'])::before {
+.assemblyUnitsList button[data-unit]:not([data-depth='0'])::before {
   content: '↳ ';
   opacity: 0.65;
 }
@@ -1614,10 +1695,37 @@ dialog.assemblerDrawing[open] {
   width: 100%;
   height: 100%;
 }
+/* телефон: номер прямо на детали — компактная пилюля без рамки-выноски */
+#assemblerLabels .assemblerCallout.balloon {
+  padding: 1px 5px;
+  border-radius: 9px;
+  border-color: #ffcc70;
+  background: #17303dd9;
+  text-align: center;
+}
+/* «Не поместилось номеров: N — приблизьте модель» — над подвалом, по центру */
+.assemblerHiddenHint {
+  position: absolute;
+  left: 50%;
+  bottom: 64px;
+  transform: translateX(-50%);
+  padding: 4px 10px;
+  border: 1px solid #7895a0;
+  border-radius: 12px;
+  background: #17303de8;
+  color: var(--text);
+  font: 12px/16px system-ui;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.assemblerHiddenHint[hidden] {
+  display: none;
+}
 
+/* не нажата — только цветная обводка (фон как у всех кнопок), нажата — заливка:
+   иначе не понять, включён ли режим */
 #assemblerOpen,
 #assemblerOpen.viewerIconControl {
-  background: #193c55;
   color: #c5eaff;
   border-color: #6db6df;
 }
@@ -4053,12 +4161,25 @@ window.OrbitControls = OrbitControls;
         <output id="assemblerLabelFontSizeValue"></output>
       </label>
       <p class="subtle">При выборе детали её сноска подсвечивается и показывает название.</p>
+      <label class="check">
+        <input type="checkbox" id="assemblerLabelsThrough" />
+        <span>Позиции с прозрачностью</span>
+      </label>
+      <p class="subtle">Выключено — позиция детали, которую что-то перекрывает, не показывается, даже при прозрачных панелях. У сборочной единицы может быть своя настройка — в списке узлов.</p>
     </div>
   </details>
 </div>
 
 
-<div class="assemblyUnits" id="assemblyUnits" aria-label="Сборочные единицы"></div>
+<!-- Сборочные единицы: одна кнопка «текущий узел ▾» со списком (раньше — столбец
+     кнопок на пол-экрана) и быстрый возврат «Общий вид», пока выбран узел. -->
+<div class="assemblyUnits" id="assemblyUnits" aria-label="Сборочные единицы">
+  <button type="button" class="assemblyUnitsAll" id="assemblyUnitsAll" hidden>Общий вид</button>
+  <details class="toolMenu assemblyUnitsMenu" id="assemblyUnitsMenu">
+    <summary id="assemblyUnitsCurrent" title="Сборочные единицы"></summary>
+    <div class="toolPopup toolPopupRight assemblyUnitsList" id="assemblyUnitsList"></div>
+  </details>
+</div>
 
 <!-- Слой сносок поверх холста: HTML-подписи и SVG с линиями выносок -->
 <div id="assemblerLabels">
@@ -7271,7 +7392,38 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       if (!key || !bank[key]) return null;
       return services && services.texture ? services.texture(key) : buildTex(bank[key]);
     };
+    // Материалы в просмотрщике общие на цвет: «Никель», «# Чорний» и «Оріон сірий»
+    // одного цвета делят один материал. Группа импорта при первой правке получает
+    // свою копию — иначе перекраска задела бы и чужие детали того же цвета.
+    // Копию делаем только при настоящей правке: восстановление настроек вида
+    // применяет и нетронутые материалы, и менять им объект материала незачем —
+    // другие модули (одноцветная фурнитура) держат ссылки на исходные.
+    const edited = g =>
+      g.state.mode !== g.orig.mode ||
+      g.state.color !== g.orig.color ||
+      g.state.texKey !== g.orig.texKey ||
+      !!g.state.texData ||
+      !!g.state.rot;
+    const ownMaterials = g => {
+      if (!g.own || g.cloned || !edited(g)) return;
+      g.cloned = true;
+      const copies = new Map();
+      // копируем исходный материал (запомнен при сборе списка); сейчас на меше
+      // может стоять подменный — «Однотонная фурнитура» вернёт исходный сама
+      for (const [mesh, base] of g.meshes) {
+        let copy = copies.get(base);
+        if (!copy) {
+          copy = base.clone();
+          const textured = services?.texturedMaterials?.find(e => e.mat === base);
+          if (textured) services.texturedMaterials.push({ ...textured, mat: copy });
+          copies.set(base, copy);
+        }
+        if (mesh.material === base) mesh.material = copy;
+      }
+      g.mats = new Set(copies.values());
+    };
     const apply = g => {
+      ownMaterials(g);
       const map = currentMap(g);
       for (const m of g.mats) {
         if (g.state.mode === 'col') {
@@ -7307,7 +7459,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
             g = {
               id,
               type: art ? 'tex' : 'col',
-              name: art ? artName(art) : (rec.material || 'Цвет').split('\r')[0] || 'Цвет',
+              name: art ? artName(art).split('\r')[0] : (rec.material || 'Цвет').split('\r')[0] || 'Цвет',
               names: new Set(),
               mats: new Set(),
               orig: { mode: art ? 'tex' : 'col', texKey: art, color: rec.color || '#cccccc' },
@@ -7323,6 +7475,45 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
           }
           g.names.add(rec.material || '—');
           g.mats.add(o.material);
+        });
+      // Импорт и фурнитура: у каждой пачки TriData свой материал (сталь, пластик,
+      // стекло…), в редакторе — по названию материала. Пачку меша узнаём по порядку:
+      // просмотрщик создаёт по мешу на пачку в том же порядке.
+      const meshGroups = [services?.groups?.imports, services?.groups?.hardware].filter(Boolean);
+      for (const grp of meshGroups)
+        grp.traverse(root => {
+          const rec = root.userData?.record;
+          if (root.isMesh || !rec?.mesh) return;
+          const batches = DATA.mesh_definitions?.[rec.mesh]?.batches;
+          if (!batches) return;
+          root.children
+            .filter(o => o.isMesh && o.material)
+            .forEach((o, k) => {
+              const b = batches[k];
+              if (!b) return;
+              const art = b.tex || null,
+                name = String(b.material || '').trim(),
+                id = art ? 'art:' + art : 'mat:' + (name || '—'),
+                color = b.color || rec.color || '#cccccc';
+              let g = groups.get(id);
+              if (!g) {
+                g = {
+                  id,
+                  type: art ? 'tex' : 'col',
+                  name: art ? artName(art).split('\r')[0] : name.split('\r')[0] || 'Цвет',
+                  names: new Set(),
+                  mats: new Set(),
+                  meshes: new Map(), // меш → исходный материал
+                  own: !art,
+                  orig: { mode: art ? 'tex' : 'col', texKey: art, color },
+                  state: { rot: 0, mode: art ? 'tex' : 'col', texKey: art, texData: null, color }
+                };
+                groups.set(id, g);
+              }
+              g.names.add(name || '—');
+              g.mats.add(o.material);
+              if (g.meshes) g.meshes.set(o, o.material);
+            });
         });
       for (const g of groups.values()) {
         const s = saved[g.id];
@@ -10462,6 +10653,157 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
 
 (function (root) {
   'use strict';
+  // «Карта видимости» позиций сборщика: где какая деталь реально видна на экране.
+  //
+  // Служебный кадр в невидимую текстуру уменьшенного размера: каждая деталь-цель —
+  // своим цветом, остальные закрывающие детали — общим, фон — нулём. Всё рисуется
+  // непрозрачным, поэтому ползунок прозрачности на результат не влияет: перекрытая
+  // деталь остаётся перекрытой, даже если сквозь панель её видно. Сечение режет и
+  // этот кадр (плоскости отсечения у отрисовщика общие).
+  //
+  // Для цели берётся «самая глубокая» видимая точка — пиксель, дальше всех
+  // отстоящий от края её видимого куска (расстояние до ближайшего чужого пикселя,
+  // фаской 3-4). Если и эта точка ближе к краю, чем радиус метки, места под метку
+  // на видимом куске нет (узкая полоска из-за соседней детали) — позиции не будет.
+  // Так номер всегда стоит на видимом куске детали, а не на заслонившей её.
+  const OCCLUDER = 1,
+    MAX_SIDE = 720;
+  let target = null;
+
+  // targets: [{ key, meshes: [Mesh…] }]; hide(object) — не рисовать совсем (фурнитура,
+  // служебное). Вернёт Map key → { x, y } в пикселях области просмотра; нет ключа —
+  // видимого места под метку нет.
+  function spots(context, targets, { width, height, radius, hide }) {
+    const { THREE: T, renderer, scene, camera } = context,
+      result = new Map();
+    if (!targets.length || !(width > 0) || !(height > 0)) return result;
+    const scale = Math.max(1, Math.max(width, height) / MAX_SIDE),
+      w = Math.max(1, Math.round(width / scale)),
+      h = Math.max(1, Math.round(height / scale));
+    if (!target) target = new T.WebGLRenderTarget(w, h, { depthBuffer: true });
+    else if (target.width !== w || target.height !== h) target.setSize(w, h);
+
+    const owner = new Map();
+    targets.forEach((t, i) => t.meshes.forEach(mesh => owner.set(mesh, i + 2)));
+    const materials = new Map();
+    const material = id => {
+      let m = materials.get(id);
+      if (!m) {
+        m = new T.MeshBasicMaterial({ side: T.DoubleSide, toneMapped: false, fog: false });
+        m.color.setRGB(
+          (id & 255) / 255,
+          ((id >> 8) & 255) / 255,
+          ((id >> 16) & 255) / 255,
+          T.LinearSRGBColorSpace
+        );
+        materials.set(id, m);
+      }
+      return m;
+    };
+    const saved = [];
+    scene.traverse(o => {
+      if (o === scene) return;
+      if (o.isMesh && !o.isInstancedMesh) {
+        const id = owner.get(o) ?? (hide(o) || o.userData?.decorative ? 0 : OCCLUDER);
+        saved.push([o, o.visible, o.material]);
+        if (id) o.material = material(id);
+        else o.visible = false;
+      } else if (o.isLine || o.isPoints || o.isSprite || o.isInstancedMesh) {
+        saved.push([o, o.visible, o.material]);
+        o.visible = false;
+      }
+    });
+    const before = {
+      target: renderer.getRenderTarget(),
+      clear: renderer.getClearColor(new T.Color()),
+      alpha: renderer.getClearAlpha(),
+      background: scene.background,
+      override: scene.overrideMaterial
+    };
+    const pixels = new Uint8Array(w * h * 4);
+    try {
+      scene.background = null;
+      scene.overrideMaterial = null;
+      renderer.setRenderTarget(target);
+      renderer.setClearColor(0x000000, 1);
+      renderer.clear(true, true, true);
+      renderer.render(scene, camera);
+      renderer.readRenderTargetPixels(target, 0, 0, w, h, pixels);
+    } finally {
+      renderer.setRenderTarget(before.target);
+      renderer.setClearColor(before.clear, before.alpha);
+      scene.background = before.background;
+      scene.overrideMaterial = before.override;
+      for (const [o, visible, m] of saved) {
+        o.visible = visible;
+        if (o.material !== m) o.material = m;
+      }
+      for (const m of materials.values()) m.dispose();
+    }
+
+    // номер цели в каждом пикселе (строка 0 — низ кадра)
+    const ids = new Uint32Array(w * h);
+    for (let i = 0; i < w * h; i++)
+      ids[i] = pixels[i * 4] | (pixels[i * 4 + 1] << 8) | (pixels[i * 4 + 2] << 16);
+    // расстояние до ближайшего чужого пикселя, в третях пикселя (фаска 3-4)
+    const INF = 1e9,
+      d = new Float32Array(w * h).fill(INF);
+    for (let y = 0; y < h; y++)
+      for (let x = 0; x < w; x++) {
+        const i = y * w + x,
+          id = ids[i];
+        if (
+          x === 0 ||
+          y === 0 ||
+          x === w - 1 ||
+          y === h - 1 ||
+          ids[i - 1] !== id ||
+          ids[i + 1] !== id ||
+          ids[i - w] !== id ||
+          ids[i + w] !== id
+        )
+          d[i] = 3;
+      }
+    for (let y = 1; y < h; y++)
+      for (let x = 1; x < w - 1; x++) {
+        const i = y * w + x;
+        d[i] = Math.min(d[i], d[i - 1] + 3, d[i - w] + 3, d[i - w - 1] + 4, d[i - w + 1] + 4);
+      }
+    for (let y = h - 2; y >= 0; y--)
+      for (let x = w - 2; x > 0; x--) {
+        const i = y * w + x;
+        d[i] = Math.min(d[i], d[i + 1] + 3, d[i + w] + 3, d[i + w + 1] + 4, d[i + w - 1] + 4);
+      }
+    const best = new Map();
+    for (let i = 0; i < w * h; i++) {
+      const id = ids[i];
+      if (id < 2) continue;
+      const b = best.get(id);
+      if (!b || d[i] > b.d) best.set(id, { d: d[i], i });
+    }
+    const need = (radius / scale) * 3;
+    targets.forEach((t, n) => {
+      const b = best.get(n + 2);
+      if (!b || b.d < need) return;
+      const x = b.i % w,
+        y = Math.floor(b.i / w);
+      result.set(t.key, { x: (x + 0.5) * scale, y: (h - y - 0.5) * scale });
+    });
+    return result;
+  }
+
+  function dispose() {
+    target?.dispose();
+    target = null;
+  }
+
+  const api = { spots, dispose };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  root.BazisAssemblerOcclusion = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this);
+
+(function (root) {
+  'use strict';
   function entryDistance(start, direction, depth, panel) {
     const cuts = [0, depth],
       epsilon = 1e-7;
@@ -11467,7 +11809,10 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
   function install(context, bundle) {
     const { THREE: T, data, hooks, services, document: doc, scene, camera, controls, canvas } = context;
     const win = context.window || doc.defaultView;
-    const t = text => (root.BazisI18n ? root.BazisI18n.t(text) : text);
+    const t = (text, ...args) =>
+      root.BazisI18n
+        ? root.BazisI18n.t(text, ...args)
+        : args.reduce((out, value, i) => out.split('{' + i + '}').join(String(value)), text);
     if (bundle?.schema !== 1) throw new Error('Несовместимый режим сборщика');
     hooks.assemblerChanged = hooks.assemblerChanged || [];
     const records = new Map(data.objects.map(r => [r.id, r])),
@@ -11495,7 +11840,18 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       lastVisibility = '',
       labelElapsed = 1,
       labelsDirty = true, // подписи надо пересчитать, даже если вид тот же
-      labelKey = ''; // отпечаток вида прошлого пересчёта подписей
+      labelKey = '', // отпечаток вида прошлого пересчёта подписей
+      // «Позиции с прозрачностью»: true — позиция видна и у перекрытой детали
+      // (сквозь прозрачные панели), false — только на её видимом куске
+      positionsThrough = false,
+      stillFor = 0, // сколько секунд камера стоит (карту видимости — по остановке)
+      occlusionStale = false; // подписи стоят по карте видимости прошлого вида
+    // Своя настройка у сборочной единицы (id → true/false); нет записи — как у
+    // родительской единицы, а у верхней — как общая галочка.
+    const unitThrough = new Map(),
+      hiddenUnits = new Set(), // «глаз» в списке узлов
+      lastCamera = new T.Matrix4();
+    let occlusionCache = null; // id → мировая точка метки или null (перекрыта)
     let disposeSettings = null;
     // Кэши подписей: меши детали (лучи — только по ним, не по линиям рёбер) и её
     // габарит на экране-препятствие. Сбрасываются, когда детали двигаются или
@@ -11570,8 +11926,118 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     const explodeInput = $('assemblerExplode');
     explodeInput.onclick = () => setExploded(!exploded);
     popup.append($('assemblerToolItems'));
-    const unitBar = $('assemblyUnits');
-    const unitButtons = new Map();
+    const unitBar = $('assemblyUnits'),
+      unitMenu = $('assemblyUnitsMenu'),
+      unitList = $('assemblyUnitsList'),
+      unitCurrent = $('assemblyUnitsCurrent'),
+      unitAll = $('assemblyUnitsAll');
+    const unitButtons = new Map(),
+      unitTools = [];
+    let disposeUnitMenu = null;
+    const ICONS = {
+      eye: '<path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+      fit: '<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>',
+      through:
+        '<rect x="3" y="3" width="13" height="13" rx="1.5" fill="currentColor" fill-opacity=".25"/>' +
+        '<rect x="8" y="8" width="13" height="13" rx="1.5"/><circle cx="8" cy="8" r="2.2" fill="currentColor"/>'
+    };
+    function unitTool(kind, id, onclick) {
+      const b = doc.createElement('button');
+      b.type = 'button';
+      b.className = 'assemblyUnitTool';
+      b.dataset.tool = kind;
+      b.dataset.toolUnit = id ?? '';
+      b.innerHTML =
+        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
+        ICONS[kind] +
+        '</svg>';
+      b.onclick = e => {
+        e.stopPropagation();
+        onclick();
+      };
+      unitTools.push(b);
+      return b;
+    }
+    // Подсказки и состояния кнопок строк — по текущим настройкам.
+    function syncUnitTools() {
+      for (const b of unitTools) {
+        const id = b.dataset.toolUnit === '' ? null : Number(b.dataset.toolUnit);
+        if (b.dataset.tool === 'eye') {
+          const hidden = hiddenUnits.has(id);
+          b.dataset.state = hidden ? 'off' : 'on';
+          b.title = hidden ? t('Показать сборочную единицу') : t('Скрыть сборочную единицу');
+        } else if (b.dataset.tool === 'fit')
+          b.title = id == null ? t('Вписать всё изделие') : t('Вписать в экран');
+        else {
+          const own = unitThrough.has(id) ? unitThrough.get(id) : null,
+            now = throughFor('unit' + id);
+          b.dataset.state = own == null ? 'inherit' : own ? 'on' : 'off';
+          b.title =
+            (own == null
+              ? t('Позиции с прозрачностью: как у родителя/в общих настройках')
+              : own
+                ? t('Позиции с прозрачностью: показывать и у перекрытых деталей')
+                : t('Позиции с прозрачностью: только на видимых деталях')) +
+            ' — ' +
+            (now ? t('сейчас показываются') : t('сейчас скрываются'));
+        }
+      }
+    }
+    function toggleUnitHidden(id) {
+      if (hiddenUnits.has(id)) hiddenUnits.delete(id);
+      else hiddenUnits.add(id);
+      refresh();
+    }
+    // как в общих → показывать → скрывать → как в общих
+    function cycleUnitThrough(id) {
+      const own = unitThrough.has(id) ? unitThrough.get(id) : null;
+      if (own == null) unitThrough.set(id, true);
+      else if (own) unitThrough.set(id, false);
+      else unitThrough.delete(id);
+      occlusionCache = null;
+      syncUnitTools();
+      touchLabels();
+      if (ready && active) updateLabels();
+    }
+    // Вписать узел в экран, не меняя направления взгляда: найти его, если он
+    // потерялся за краем или слишком мелкий. Без узла — всё изделие.
+    function fitUnit(id) {
+      const box = new T.Box3();
+      for (const i of items.values())
+        if (i.kind !== 'hardware' && belongs(i.id, id)) for (const r of i.roots) box.expandByObject(r.object);
+      if (box.isEmpty()) return;
+      const sphere = box.getBoundingSphere(new T.Sphere()),
+        v = T.MathUtils.degToRad(camera.fov || 50),
+        h = 2 * Math.atan(Math.tan(v / 2) * (camera.aspect || 1)),
+        distance = sphere.radius / Math.sin(Math.min(v, h) / 2);
+      const dir = camera.position.clone().sub(controls.target);
+      if (dir.lengthSq() < 1e-9) dir.set(1, 1, 1);
+      controls.target.copy(sphere.center);
+      camera.position.copy(sphere.center).add(dir.normalize().multiplyScalar(distance * 1.05));
+      camera.near = Math.max(0.1, Math.min(camera.near, distance / 100));
+      camera.updateProjectionMatrix();
+      controls.update();
+      unitMenu.open = false;
+    }
+    // «Позиции с прозрачностью» для детали или подписи узла ('unit' + id): своя
+    // настройка ближайшей сборочной единицы вверх по дереву, иначе общая галочка.
+    function throughFor(id) {
+      let u = typeof id === 'string' && id.startsWith('unit') ? Number(id.slice(4)) : unitOf(id);
+      const seen = new Set();
+      while (u != null && !seen.has(u)) {
+        seen.add(u);
+        if (unitThrough.has(u)) return unitThrough.get(u);
+        u = unitOf(records.get(u)?.parent_id);
+      }
+      return positionsThrough;
+    }
+    const chooseUnit = id => {
+      unitId = id;
+      active = true;
+      unitMenu.open = false;
+      refresh();
+    };
+    unitAll.onclick = () => chooseUnit(null);
     // Вложенные сборочные единицы — с отступом под своей родительской: список идёт
     // обходом в глубину (родитель, затем его вложенные), отступ — по глубине.
     const parentUnit = u => unitOf(u.parent_id);
@@ -11613,12 +12079,18 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       b.title = u.name || '';
       b.translate = u.id == null; // «Общий вид» переводим, позиции и названия — нет
       b.dataset.unit = u.id ?? '';
-      b.onclick = () => {
-        unitId = u.id;
-        active = true;
-        refresh();
-      };
-      unitBar.append(b);
+      b.onclick = () => chooseUnit(u.id);
+      // Строка узла: глаз (скрыть весь узел) · узел · вписать в экран · позиции
+      // сквозь прозрачность. У «Общего вида» — только «вписать» (всё изделие).
+      const row = doc.createElement('div');
+      row.className = 'assemblyUnitRow';
+      if (u.id != null) row.append(unitTool('eye', u.id, () => toggleUnitHidden(u.id)));
+      row.append(
+        b,
+        unitTool('fit', u.id, () => fitUnit(u.id))
+      );
+      if (u.id != null) row.append(unitTool('through', u.id, () => cycleUnitThrough(u.id)));
+      unitList.append(row);
       unitButtons.set(u.id, b);
     }
     const slider = $('assemblerSeparation'),
@@ -11644,6 +12116,8 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     positionInput.onchange = () => setLabelOptions({ position: positionInput.checked });
     nameInput.onchange = () => setLabelOptions({ name: nameInput.checked });
     fontInput.oninput = () => setLabelOptions({ fontSize: Number(fontInput.value) });
+    const throughInput = $('assemblerLabelsThrough');
+    throughInput.onchange = () => setLabelOptions({ through: throughInput.checked });
     setLabelOptions({}); // галочки и ползунок — по фактическому умолчанию
 
     const area = canvas.parentElement || doc.getElementById('viewport'),
@@ -11657,6 +12131,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     function init() {
       // окно — в общем слое под всей строкой (как «⋯» у сечения)
       disposeSettings = services.portalToolMenu?.(settings, { anchor: popup });
+      disposeUnitMenu = services.portalToolMenu?.(unitMenu) || null;
       ready = true;
       area.append(labelLayer, unitBar);
       scene.add(linkGroup, partDimensionGroup);
@@ -11838,6 +12313,12 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       slider.value = String(separation);
       amount.textContent = separation + ' мм';
       for (const [id, b] of unitButtons) b.setAttribute('aria-pressed', String(id === unitId));
+      // на кнопке — текущий узел; «Общий вид» рядом, только пока выбран узел
+      const current = unitButtons.get(unitId);
+      unitCurrent.textContent = current ? current.textContent : t('Общий вид');
+      unitCurrent.translate = unitId == null;
+      unitAll.hidden = unitId == null;
+      syncUnitTools();
       preview.disabled = !panels.has(selectedId);
       labelLayer.style.display = active ? 'block' : 'none';
       partDimensionGroup.visible = active && partDimensionsEnabled;
@@ -11851,6 +12332,15 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
               for (const child of services.descendants(id)) keep.add(child);
         }
         services.setVisibilityFilter('assembler', keep ? id => keep.has(id) : null);
+        // «Глаз» узла: скрыт весь узел; крепёж — если скрыты все его панели
+        let gone = null;
+        if (active && hiddenUnits.size) {
+          gone = new Set([...records.keys()].filter(id => [...hiddenUnits].some(u => belongs(id, u))));
+          for (const [id, panels] of byHardware)
+            if (panels.length && panels.every(pid => gone.has(pid)))
+              for (const child of services.descendants(id)) gone.add(child);
+        }
+        services.setVisibilityFilter('assemblerHidden', gone ? id => !gone.has(id) : null);
         if (selectedId != null && !services.objectVisible(selectedId)) services.select(null);
       }
       const boxes = new Map();
@@ -11917,6 +12407,17 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     }
     function frame(delta = 0.016) {
       if (!ready || !active) return;
+      camera.updateMatrixWorld();
+      if (!camera.matrixWorld.equals(lastCamera)) {
+        lastCamera.copy(camera.matrixWorld);
+        stillFor = 0;
+      } else stillFor += delta;
+      // во время вращения подписи шли по старой карте видимости — камера
+      // остановилась, строим новую
+      if (occlusionStale && stillFor >= 0.2) {
+        occlusionStale = false;
+        labelsDirty = true;
+      }
       const signature = [...items.values()]
         .map(i => i.roots.map(o => (services.visible(o.object) ? '1' : '0')).join(''))
         .join('');
@@ -11999,6 +12500,12 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       labelName = labelNameOverride ?? defaultLabelName();
       if (Number.isFinite(options.fontSize))
         labelFontSize = Math.max(10, Math.min(28, Math.round(options.fontSize)));
+      if ('through' in options) {
+        positionsThrough = !!options.through;
+        occlusionCache = null;
+      }
+      throughInput.checked = positionsThrough;
+      syncUnitTools();
       positionInput.checked = labelPosition;
       nameInput.checked = labelName;
       fontInput.value = String(labelFontSize);
@@ -12006,6 +12513,11 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       touchLabels();
       if (ready && active) updateLabels();
     }
+    // Ключ одинаковых деталей для склейки подписей; без позиции деталь не склеиваем.
+    const sameAs = rec => {
+      const pos = String(rec.artpos || '').trim();
+      return pos ? pos + '\n' + String(rec.name || '').trim() : null;
+    };
     function calloutText(rec, selected = false) {
       const parts = [];
       if (labelPosition)
@@ -12058,7 +12570,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         const children = childUnits();
         for (const i of items.values())
           if (shown(i) && listable(i) && (i.id === selectedId || !children.some(u => belongs(i.id, u.id))))
-            wanted.push([i.id, anchor(i), calloutText(i.rec, i.id === selectedId)]);
+            wanted.push([i.id, anchor(i), calloutText(i.rec, i.id === selectedId), sameAs(i.rec)]);
         for (const u of children) {
           const parts = [...items.values()].filter(i => shown(i) && listable(i) && belongs(i.id, u.id));
           if (parts.length) {
@@ -12100,10 +12612,12 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         for (const [k, v] of Object.entries({
           cx: ax,
           cy: ay,
-          r: 5,
+          r: 3.5,
           fill: '#ffcc70',
+          'fill-opacity': 0.8,
           stroke: '#17232d',
-          'stroke-width': 2
+          'stroke-width': 1.2,
+          'stroke-opacity': 0.8
         }))
           m.setAttribute(k, v);
         m.setAttribute('data-anchor', String(id));
@@ -12150,25 +12664,68 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         }
         return l;
       };
+      // Одинаковые детали (та же позиция и то же название: полки, стенки ящиков) —
+      // одна подпись «текст ×N» с выносками к каждой, а не N рамок. Склеиваем по
+      // детали, а не по тексту подписи: с выключенной позицией у разных деталей
+      // бывает одно название. Выбранная деталь — всегда отдельно, со своим названием.
+      const spots = occlusionSpots(wanted, width, height);
+      const groups = new Map();
+      for (const [id, point, text, same] of wanted) {
+        if (!text) continue;
+        const selected = id === selectedId || id === 'unit' + selectedId;
+        let x, y;
+        if (spots.has(id)) {
+          const spot = spots.get(id);
+          if (!spot) continue; // перекрыта — позиции нет
+          ({ x, y } = spot);
+        } else {
+          const p = point.clone().project(camera);
+          if (p.z < -1 || p.z > 1 || Math.abs(p.x) > 1 || Math.abs(p.y) > 1) continue;
+          x = ((p.x + 1) * width) / 2;
+          y = ((1 - p.y) * height) / 2;
+        }
+        const key = selected || !same ? 'id:' + id : same + '\n' + text;
+        if (!groups.has(key)) groups.set(key, { id, text, selected, members: [] });
+        groups.get(key).members.push({ id, x, y });
+      }
+      const { obstacles, sizes } = labelObstacles(width, height);
+      if (mobile()) {
+        placeBalloons(
+          groups,
+          obstacles.filter(o => o.ui),
+          sizes,
+          width,
+          height,
+          boxFor
+        );
+        return;
+      }
+      showHiddenHint(0);
       // Размеры подписей меряем пачкой: сначала все записи стилей, потом все
       // чтения — одна перекладка страницы, а не по одной на подпись.
       const points = [];
-      for (const [id, point, text] of wanted) {
-        if (!text) continue;
-        const p = point.project(camera);
-        if (p.z < -1 || p.z > 1 || Math.abs(p.x) > 1 || Math.abs(p.y) > 1) continue;
-        const selected = id === selectedId || id === 'unit' + selectedId,
-          l = boxFor(id);
-        l.textContent = text;
+      for (const g of groups.values()) {
+        const l = boxFor(g.id),
+          n = g.members.length;
+        l.classList.remove('balloon');
+        l.textContent = n > 1 ? g.text + ' ×' + n : g.text;
         // шрифт из настроек — для сносок с наименованием; одна позиция остаётся мелкой
-        l.style.fontSize = (labelName || selected ? labelFontSize : 11) + 'px';
+        l.style.fontSize = (labelName || g.selected ? labelFontSize : 11) + 'px';
         l.style.lineHeight = '1.3';
-        l.setAttribute('aria-pressed', String(selected));
+        l.setAttribute('aria-pressed', String(g.selected));
         l.style.display = 'block';
         l.style.width = 'max-content';
-        l.style.maxWidth = (selected ? Math.min(240, width * 0.65) : labelWidth) + 'px';
+        l.style.maxWidth = (g.selected ? Math.min(240, width * 0.65) : labelWidth) + 'px';
         l.style.maxHeight = 'none';
-        points.push({ id, text, selected, l, x: ((p.x + 1) * width) / 2, y: ((1 - p.y) * height) / 2 });
+        points.push({
+          id: g.id,
+          text: l.textContent,
+          selected: g.selected,
+          members: g.members,
+          l,
+          x: g.members.reduce((sum, m) => sum + m.x, 0) / n,
+          y: g.members.reduce((sum, m) => sum + m.y, 0) / n
+        });
       }
       for (const point of points) {
         const r = point.l.getBoundingClientRect();
@@ -12179,8 +12736,83 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         point.l.style.display = 'none';
         delete point.l;
       }
-
-      const obstacles = [];
+      for (const r of root.BazisAssemblerLabels.layout(points, obstacles, width, height, labelWidth, 36)) {
+        const l = boxFor(r.point.id);
+        l.textContent = r.point.text;
+        l.title = r.point.text;
+        l.style.display = 'block';
+        l.style.width = r.w + 'px';
+        l.style.maxHeight = r.h + 'px';
+        l.style.left = r.x + 'px';
+        l.style.top = r.y + 'px';
+        for (const m of r.point.members) {
+          leader(m.x, m.y, r.target.x, r.target.y);
+          anchorMarker(m.id, m.x, m.y);
+        }
+      }
+    }
+    // Где ставить позиции деталей, у которых «Позиции с прозрачностью» выключены:
+    // Map id → {x, y} на видимом куске детали или null (перекрыта). Выбранная деталь
+    // показывается всегда. Карта видимости — служебный кадр, поэтому строится, когда
+    // камера остановилась; во время вращения подписи едут за мировыми точками
+    // прошлой карты.
+    function occlusionSpots(wanted, width, height) {
+      const out = new Map(),
+        need = wanted.filter(([id]) => id !== selectedId && id !== 'unit' + selectedId && !throughFor(id));
+      if (!need.length) return out;
+      const toScreen = point => {
+        const p = point.clone().project(camera);
+        if (p.z < -1 || p.z > 1 || Math.abs(p.x) > 1 || Math.abs(p.y) > 1) return null;
+        return { x: ((p.x + 1) * width) / 2, y: ((1 - p.y) * height) / 2 };
+      };
+      if (stillFor < 0.2 && occlusionCache && need.every(([id]) => occlusionCache.has(id))) {
+        for (const [id] of need) {
+          const world = occlusionCache.get(id);
+          out.set(id, world ? toScreen(world) : null);
+        }
+        occlusionStale = true;
+        return out;
+      }
+      const meshesFor = id => {
+        if (typeof id === 'string' && id.startsWith('unit')) {
+          const u = Number(id.slice(4)),
+            list = [];
+          for (const i of items.values())
+            if (shown(i) && listable(i) && belongs(i.id, u)) list.push(...meshesOf(i));
+          return list;
+        }
+        return items.has(id) ? meshesOf(items.get(id)) : [];
+      };
+      const targets = need.map(([id]) => ({ key: id, meshes: meshesFor(id) }));
+      const found = root.BazisAssemblerOcclusion.spots(context, targets, {
+        width,
+        height,
+        radius: mobile() ? 9 : 5,
+        hide: o => o.userData?.kind === 'hardware' || Number.isInteger(o.userData?.holeIndex)
+      });
+      occlusionCache = new Map();
+      const ray = new T.Raycaster(),
+        ndc = new T.Vector2();
+      for (const t of targets) {
+        const spot = found.get(t.key) || null;
+        out.set(t.key, spot);
+        let world = null;
+        if (spot) {
+          ndc.set((spot.x / width) * 2 - 1, 1 - (spot.y / height) * 2);
+          ray.setFromCamera(ndc, camera);
+          world = ray.intersectObjects(t.meshes, false)[0]?.point || null;
+        }
+        occlusionCache.set(t.key, world);
+      }
+      occlusionStale = false;
+      return out;
+    }
+    // Препятствия для подписей: габариты видимых деталей на экране и интерфейс
+    // поверх холста (куб, список узлов, каталог фурнитуры, подвал). sizes — площадь
+    // детали на экране: на телефоне номера крупных деталей ставятся первыми.
+    function labelObstacles(width, height) {
+      const obstacles = [],
+        sizes = new Map();
       for (const i of items.values()) {
         if (i.kind === 'hardware' || !i.roots.some(r => services.visible(r.object))) continue;
         let box = boxCache.get(i.id);
@@ -12199,41 +12831,95 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
             }
         if (ps.length) {
           const x = Math.min(...ps.map(p => p.x)),
-            y = Math.min(...ps.map(p => p.y));
-          obstacles.push({
-            x,
-            y,
-            w: Math.max(...ps.map(p => p.x)) - x,
-            h: Math.max(...ps.map(p => p.y)) - y
-          });
+            y = Math.min(...ps.map(p => p.y)),
+            w = Math.max(...ps.map(p => p.x)) - x,
+            h = Math.max(...ps.map(p => p.y)) - y;
+          obstacles.push({ x, y, w, h });
+          sizes.set(i.id, w * h);
         }
       }
       obstacles.push({ x: width - 112, y: 0, w: 112, h: 110, ui: true });
-      if (!unitBar.hidden) {
-        const r = unitBar.getBoundingClientRect(),
-          a = area.getBoundingClientRect();
-        obstacles.push({ x: r.left - a.left, y: r.top - a.top, w: r.width, h: r.height, ui: true });
-      }
-      for (const el of doc.querySelectorAll('#hardwareCatalog,#hardwareCatalogToggle,.footer')) {
+      const a = area.getBoundingClientRect();
+      for (const el of [
+        unitBar,
+        ...doc.querySelectorAll('#hardwareCatalog,#hardwareCatalogToggle,.footer')
+      ]) {
         if (el.hidden) continue;
-        const r = el.getBoundingClientRect(),
-          a = area.getBoundingClientRect();
+        const r = el.getBoundingClientRect();
         if (r.width && r.height)
           obstacles.push({ x: r.left - a.left, y: r.top - a.top, w: r.width, h: r.height, ui: true });
       }
-      for (const r of root.BazisAssemblerLabels.layout(points, obstacles, width, height, labelWidth, 36)) {
-        const l = boxFor(r.point.id);
-        l.textContent = r.point.text;
-        l.title = r.point.text;
-        l.style.display = 'block';
-        l.style.width = r.w + 'px';
-        l.style.maxHeight = r.h + 'px';
-        l.style.left = r.x + 'px';
-        l.style.top = r.y + 'px';
-        leader(r.point.x, r.point.y, r.target.x, r.target.y);
-        anchorMarker(r.point.id, r.point.x, r.point.y);
-      }
+      return { obstacles, sizes };
     }
+    // Телефон: номера прямо на деталях, без рамок и выносок — на узком экране линии
+    // сливаются в кашу. Каждая деталь — свой номер; номер, которому нет места
+    // (наезжает на другой или на интерфейс), прячется, пока модель не приблизят.
+    // Первыми ставятся выбранная деталь и крупные на экране детали. Нажатие на номер
+    // выбирает деталь — её номер раскрывается с названием.
+    function placeBalloons(groups, ui, sizes, width, height, boxFor) {
+      const list = [];
+      for (const g of groups.values())
+        for (const m of g.members) {
+          const l = boxFor(m.id);
+          l.classList.add('balloon');
+          l.textContent = g.text;
+          l.title = g.text;
+          l.style.fontSize = (g.selected ? labelFontSize : 11) + 'px';
+          l.style.lineHeight = '1.3';
+          l.setAttribute('aria-pressed', String(g.selected));
+          l.style.display = 'block';
+          l.style.width = 'max-content';
+          l.style.maxWidth = (g.selected ? width * 0.65 : Math.min(160, width * 0.4)) + 'px';
+          l.style.maxHeight = 'none';
+          list.push({ m, l, size: g.selected ? Infinity : (sizes.get(m.id) ?? 1e9) });
+        }
+      for (const b of list) {
+        const r = b.l.getBoundingClientRect();
+        b.w = Math.ceil(r.width);
+        b.h = Math.ceil(r.height);
+      }
+      list.sort((a, b) => b.size - a.size);
+      const clash = (a, b) =>
+          a.x < b.x + b.w + 2 && a.x + a.w + 2 > b.x && a.y < b.y + b.h + 2 && a.y + a.h + 2 > b.y,
+        placed = [];
+      let hidden = 0;
+      for (const b of list) {
+        const r = { x: Math.round(b.m.x - b.w / 2), y: Math.round(b.m.y - b.h / 2), w: b.w, h: b.h };
+        if (
+          r.x < 2 ||
+          r.y < 2 ||
+          r.x + r.w > width - 2 ||
+          r.y + r.h > height - 2 ||
+          ui.some(o => clash(r, o)) ||
+          placed.some(o => clash(r, o))
+        ) {
+          b.l.style.display = 'none';
+          hidden++;
+          continue;
+        }
+        placed.push(r);
+        b.l.style.left = r.x + 'px';
+        b.l.style.top = r.y + 'px';
+        b.l.style.width = r.w + 'px';
+      }
+      showHiddenHint(hidden);
+    }
+    let hiddenHint = null;
+    function showHiddenHint(count) {
+      if (!count) {
+        if (hiddenHint) hiddenHint.hidden = true;
+        return;
+      }
+      if (!hiddenHint) {
+        hiddenHint = doc.createElement('div');
+        hiddenHint.className = 'assemblerHiddenHint';
+        hiddenHint.translate = false; // текст уже переведён через t()
+        labelLayer.append(hiddenHint);
+      }
+      hiddenHint.hidden = false;
+      hiddenHint.textContent = t('Не поместилось номеров: {0} — приблизьте модель', count);
+    }
+    const mobile = () => !!win?.matchMedia?.('(max-width: 760px)').matches;
 
     hooks.ready.push(init);
     hooks.frame.push(frame);
@@ -12273,14 +12959,25 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         partDimensionsEnabled,
         labelPosition,
         labelName: labelNameOverride,
-        labelFontSize
+        labelFontSize,
+        positionsThrough,
+        unitThrough: Object.fromEntries(unitThrough),
+        hiddenUnits: [...hiddenUnits]
       }),
       restore: s => {
         setLabelOptions({
           position: s.labelPosition !== false,
           name: typeof s.labelName === 'boolean' ? s.labelName : null,
-          fontSize: Number(s.labelFontSize)
+          fontSize: Number(s.labelFontSize),
+          through: !!s.positionsThrough
         });
+        unitThrough.clear();
+        for (const [id, value] of Object.entries(s.unitThrough || {}))
+          if (units.some(u => u.id === Number(id)) && typeof value === 'boolean')
+            unitThrough.set(Number(id), value);
+        hiddenUnits.clear();
+        for (const id of Array.isArray(s.hiddenUnits) ? s.hiddenUnits : [])
+          if (units.some(u => u.id === id)) hiddenUnits.add(id);
         active = !!s.active;
         exploded = !!s.exploded;
         partDimensionsEnabled = !!s.partDimensionsEnabled;
@@ -12304,6 +13001,8 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         }
         scene.remove(linkGroup, partDimensionGroup);
         disposeSettings?.();
+        disposeUnitMenu?.();
+        root.BazisAssemblerOcclusion?.dispose();
         settings.remove();
         labelLayer.remove();
         unitBar.remove();
@@ -12318,7 +13017,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
   else (root.BazisViewerFeatures || (root.BazisViewerFeatures = [])).push({ name: 'assembler', install });
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 
-(globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"(красный пунктир).":{"en":"(red dashed line).","pl":"(czerwona linia przerywana).","uk":"(червоний пунктир)."},", диаметр":{"en":", diameter","pl":", średnica","uk":", діаметр"},"Артикул":{"en":"Article","pl":"Artykuł","uk":"Артикул"},"Без названия":{"en":"Untitled","pl":"Bez nazwy","uk":"Без назви"},"Без позиции":{"en":"No position","pl":"Bez pozycji","uk":"Без позиції"},"В сносках деталей":{"en":"In part labels","pl":"W etykietach elementów","uk":"У виносках деталей"},"Взрыв-схема":{"en":"Exploded view","pl":"Widok rozstrzelony","uk":"Рознесена схема"},"Вписать":{"en":"Fit","pl":"Dopasuj","uk":"Вписати"},"Входящие в эту панель отверстия не найдены.":{"en":"No holes entering this panel were found.","pl":"Nie znaleziono otworów wchodzących w ten panel.","uk":"Отворів, що входять у цю панель, не знайдено."},"Выберите вторую точку":{"en":"Pick the second point","pl":"Wybierz drugi punkt","uk":"Виберіть другу точку"},"Выберите отверстие на чертеже или в таблице.":{"en":"Pick a hole on the drawing or in the table.","pl":"Wybierz otwór na rysunku lub w tabeli.","uk":"Виберіть отвір на кресленні або в таблиці."},"Выберите первую точку":{"en":"Pick the first point","pl":"Wybierz pierwszy punkt","uk":"Виберіть першу точку"},"Выберите первую точку следующего замера":{"en":"Pick the first point of the next measurement","pl":"Wybierz pierwszy punkt następnego pomiaru","uk":"Виберіть першу точку наступного виміру"},"Выбор, скрытие, прозрачность и навигация — общие. Выбранная сборка остаётся в сцене вместе со своим крепежом. «Все сборки» снимает фильтр.":{"en":"Selection, hiding, transparency and navigation are shared. The selected assembly stays in the scene with its fasteners. “All assemblies” clears the filter.","pl":"Wybór, ukrywanie, przezroczystość i nawigacja są wspólne. Wybrany zespół pozostaje w scenie wraz z łącznikami. „Wszystkie zespoły” usuwa filtr.","uk":"Вибір, приховування, прозорість і навігація — спільні. Вибрана збірка залишається в сцені разом зі своїм кріпленням. «Усі збірки» знімає фільтр."},"Габариты выбранной детали":{"en":"Selected part dimensions","pl":"Wymiary wybranego elementu","uk":"Габарити вибраної деталі"},"Габариты:":{"en":"Overall size:","pl":"Wymiary:","uk":"Габарити:"},"Глубина":{"en":"Depth","pl":"Głębokość","uk":"Глибина"},"Закрыть чертёж":{"en":"Close drawing","pl":"Zamknij rysunek","uk":"Закрити креслення"},"Измерить 2 точки":{"en":"Measure 2 points","pl":"Zmierz 2 punkty","uk":"Виміряти 2 точки"},"Кромка":{"en":"Edge band","pl":"Obrzeże","uk":"Кромка"},"Кромки":{"en":"Edge bands","pl":"Obrzeża","uk":"Кромки"},"Материал не указан":{"en":"No material","pl":"Brak materiału","uk":"Матеріал не вказано"},"Миллиметры. База X/Y — минимальные координаты контура, Z — нижняя пласть. Выберите отверстие: появятся размеры до его оси. Глубина — из фурнитуры БАЗИС. Контур соответствует экспортированной геометрии; это обзорный чертёж, не программа сверления.":{"en":"Millimeters. X/Y origin is the minimum contour coordinates, Z is the bottom face. Pick a hole to see dimensions to its axis. Depth comes from BAZIS hardware. The contour matches the exported geometry; this is an overview drawing, not a drilling program.","pl":"Milimetry. Baza X/Y — minimalne współrzędne konturu, Z — dolna płaszczyzna. Wybierz otwór: pojawią się wymiary do jego osi. Głębokość — z okuć BAZIS. Kontur odpowiada wyeksportowanej geometrii; to rysunek poglądowy, nie program wiercenia.","uk":"Міліметри. База X/Y — мінімальні координати контуру, Z — нижня пласть. Виберіть отвір: з'являться розміри до його осі. Глибина — з фурнітури БАЗИС. Контур відповідає експортованій геометрії; це оглядове креслення, не програма свердління."},"Названия кромок появятся после перевыгрузки модели из БАЗИСа.":{"en":"Edge band names will appear after the model is re-exported from BAZIS.","pl":"Nazwy obrzeży pojawią się po ponownym wyeksportowaniu modelu z BAZIS.","uk":"Назви кромок з’являться після повторного вивантаження моделі з БАЗИСу."},"Наименование":{"en":"Name","pl":"Nazwa","uk":"Найменування"},"Настройки":{"en":"Settings","pl":"Ustawienia","uk":"Налаштування"},"Настройки сносок сборщика":{"en":"Assembly label settings","pl":"Ustawienia etykiet montażu","uk":"Налаштування виносок складання"},"Некорректный разнос":{"en":"Invalid spread","pl":"Nieprawidłowe rozsunięcie","uk":"Некоректне рознесення"},"Несовместимый режим сборщика":{"en":"Incompatible assembly mode","pl":"Niezgodny tryb montażu","uk":"Несумісний режим складання"},"Общий вид":{"en":"Overview","pl":"Widok ogólny","uk":"Загальний вид"},"Отверстие":{"en":"Hole","pl":"Otwór","uk":"Отвір"},"Отверстие №":{"en":"Hole #","pl":"Otwór nr","uk":"Отвір №"},"Очистить замеры":{"en":"Clear measurements","pl":"Wyczyść pomiary","uk":"Очистити виміри"},"Пласть XY":{"en":"Face XY","pl":"Płaszczyzna XY","uk":"Пласть XY"},"Позиция":{"en":"Position","pl":"Pozycja","uk":"Позиція"},"При выборе детали её сноска подсвечивается и показывает название.":{"en":"When a part is selected, its label is highlighted and shows the name.","pl":"Po wybraniu elementu jego etykieta jest podświetlona i pokazuje nazwę.","uk":"При виборі деталі її виноска підсвічується і показує назву."},"Проекция чертежа":{"en":"Drawing projection","pl":"Rzut rysunku","uk":"Проєкція креслення"},"Размер детали":{"en":"Part size","pl":"Wymiar elementu","uk":"Розмір деталі"},"Размер шрифта наименований, px":{"en":"Name font size, px","pl":"Rozmiar czcionki nazw, px","uk":"Розмір шрифту найменувань, px"},"Разнос":{"en":"Spread","pl":"Rozsunięcie","uk":"Рознесення"},"Разнос деталей, мм":{"en":"Part spread, mm","pl":"Rozsunięcie elementów, mm","uk":"Рознесення деталей, мм"},"Сборочные единицы":{"en":"Assembly units","pl":"Zespoły montażowe","uk":"Складальні одиниці"},"Сборщик":{"en":"Assembly","pl":"Montaż","uk":"Складання"},"Связи взрыв-схемы":{"en":"Exploded view links","pl":"Powiązania widoku rozstrzelonego","uk":"Зв'язки рознесеної схеми"},"Сторон":{"en":"Sides","pl":"Boków","uk":"Сторін"},"Сторон без кромки:":{"en":"Sides without edge band:","pl":"Boki bez obrzeża:","uk":"Сторін без кромки:"},"Строки со знаком ≈: точка входа не определена, показано начало отверстия из БАЗИС.":{"en":"Rows marked ≈: the entry point is unknown, the hole start from BAZIS is shown.","pl":"Wiersze ze znakiem ≈: punkt wejścia nieokreślony, pokazano początek otworu z BAZIS.","uk":"Рядки зі знаком ≈: точку входу не визначено, показано початок отвору з БАЗИС."},"Толщина":{"en":"Thickness","pl":"Grubość","uk":"Товщина"},"Торец XZ":{"en":"End XZ","pl":"Czoło XZ","uk":"Торець XZ"},"Торец YZ":{"en":"End YZ","pl":"Czoło YZ","uk":"Торець YZ"},"Фаска 45°":{"en":"45° chamfer","pl":"Fazowanie 45°","uk":"Фаска 45°"},"Чертёж":{"en":"Drawing","pl":"Rysunek","uk":"Креслення"},"Чертёж детали":{"en":"Part drawing","pl":"Rysunek elementu","uk":"Креслення деталі"},"Чертёж детали с отверстиями":{"en":"Part drawing with holes","pl":"Rysunek elementu z otworami","uk":"Креслення деталі з отворами"},"Шрифт наименований":{"en":"Name font","pl":"Czcionka nazw","uk":"Шрифт найменувань"},"мм":{"en":"mm","pl":"mm","uk":"мм"},"мм\nНаправление оси:":{"en":"mm\nAxis direction:","pl":"mm\nKierunek osi:","uk":"мм\nНапрямок осі:"},"мм · глубина":{"en":"mm · depth","pl":"mm · głębokość","uk":"мм · глибина"},"≈ Показано начало отверстия, точка входа не определена.":{"en":"≈ The hole start is shown; the entry point is unknown.","pl":"≈ Pokazano początek otworu, punkt wejścia nieokreślony.","uk":"≈ Показано початок отвору, точку входу не визначено."}});
+(globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"(красный пунктир).":{"en":"(red dashed line).","pl":"(czerwona linia przerywana).","uk":"(червоний пунктир)."},", диаметр":{"en":", diameter","pl":", średnica","uk":", діаметр"},"Артикул":{"en":"Article","pl":"Artykuł","uk":"Артикул"},"Без названия":{"en":"Untitled","pl":"Bez nazwy","uk":"Без назви"},"Без позиции":{"en":"No position","pl":"Bez pozycji","uk":"Без позиції"},"В сносках деталей":{"en":"In part labels","pl":"W etykietach elementów","uk":"У виносках деталей"},"Взрыв-схема":{"en":"Exploded view","pl":"Widok rozstrzelony","uk":"Рознесена схема"},"Вписать":{"en":"Fit","pl":"Dopasuj","uk":"Вписати"},"Вписать в экран":{"en":"Fit to screen","pl":"Dopasuj do ekranu","uk":"Вписати в екран"},"Вписать всё изделие":{"en":"Fit the whole product","pl":"Dopasuj cały produkt","uk":"Вписати весь виріб"},"Входящие в эту панель отверстия не найдены.":{"en":"No holes entering this panel were found.","pl":"Nie znaleziono otworów wchodzących w ten panel.","uk":"Отворів, що входять у цю панель, не знайдено."},"Выберите вторую точку":{"en":"Pick the second point","pl":"Wybierz drugi punkt","uk":"Виберіть другу точку"},"Выберите отверстие на чертеже или в таблице.":{"en":"Pick a hole on the drawing or in the table.","pl":"Wybierz otwór na rysunku lub w tabeli.","uk":"Виберіть отвір на кресленні або в таблиці."},"Выберите первую точку":{"en":"Pick the first point","pl":"Wybierz pierwszy punkt","uk":"Виберіть першу точку"},"Выберите первую точку следующего замера":{"en":"Pick the first point of the next measurement","pl":"Wybierz pierwszy punkt następnego pomiaru","uk":"Виберіть першу точку наступного виміру"},"Выбор, скрытие, прозрачность и навигация — общие. Выбранная сборка остаётся в сцене вместе со своим крепежом. «Все сборки» снимает фильтр.":{"en":"Selection, hiding, transparency and navigation are shared. The selected assembly stays in the scene with its fasteners. “All assemblies” clears the filter.","pl":"Wybór, ukrywanie, przezroczystość i nawigacja są wspólne. Wybrany zespół pozostaje w scenie wraz z łącznikami. „Wszystkie zespoły” usuwa filtr.","uk":"Вибір, приховування, прозорість і навігація — спільні. Вибрана збірка залишається в сцені разом зі своїм кріпленням. «Усі збірки» знімає фільтр."},"Выключено — позиция детали, которую что-то перекрывает, не показывается, даже при прозрачных панелях. У сборочной единицы может быть своя настройка — в списке узлов.":{"en":"Off — the position of a part covered by something is not shown, even with transparent panels. An assembly unit can have its own setting — in the unit list.","pl":"Wyłączone — pozycja części zasłoniętej przez coś nie jest pokazywana, nawet przy przezroczystych panelach. Zespół może mieć własne ustawienie — na liście zespołów.","uk":"Вимкнено — позиція деталі, яку щось перекриває, не показується, навіть за прозорих панелей. Складальна одиниця може мати власне налаштування — у списку вузлів."},"Габариты выбранной детали":{"en":"Selected part dimensions","pl":"Wymiary wybranego elementu","uk":"Габарити вибраної деталі"},"Габариты:":{"en":"Overall size:","pl":"Wymiary:","uk":"Габарити:"},"Глубина":{"en":"Depth","pl":"Głębokość","uk":"Глибина"},"Закрыть чертёж":{"en":"Close drawing","pl":"Zamknij rysunek","uk":"Закрити креслення"},"Измерить 2 точки":{"en":"Measure 2 points","pl":"Zmierz 2 punkty","uk":"Виміряти 2 точки"},"Кромка":{"en":"Edge band","pl":"Obrzeże","uk":"Кромка"},"Кромки":{"en":"Edge bands","pl":"Obrzeża","uk":"Кромки"},"Материал не указан":{"en":"No material","pl":"Brak materiału","uk":"Матеріал не вказано"},"Миллиметры. База X/Y — минимальные координаты контура, Z — нижняя пласть. Выберите отверстие: появятся размеры до его оси. Глубина — из фурнитуры БАЗИС. Контур соответствует экспортированной геометрии; это обзорный чертёж, не программа сверления.":{"en":"Millimeters. X/Y origin is the minimum contour coordinates, Z is the bottom face. Pick a hole to see dimensions to its axis. Depth comes from BAZIS hardware. The contour matches the exported geometry; this is an overview drawing, not a drilling program.","pl":"Milimetry. Baza X/Y — minimalne współrzędne konturu, Z — dolna płaszczyzna. Wybierz otwór: pojawią się wymiary do jego osi. Głębokość — z okuć BAZIS. Kontur odpowiada wyeksportowanej geometrii; to rysunek poglądowy, nie program wiercenia.","uk":"Міліметри. База X/Y — мінімальні координати контуру, Z — нижня пласть. Виберіть отвір: з'являться розміри до його осі. Глибина — з фурнітури БАЗИС. Контур відповідає експортованій геометрії; це оглядове креслення, не програма свердління."},"Названия кромок появятся после перевыгрузки модели из БАЗИСа.":{"en":"Edge band names will appear after the model is re-exported from BAZIS.","pl":"Nazwy obrzeży pojawią się po ponownym wyeksportowaniu modelu z BAZIS.","uk":"Назви кромок з’являться після повторного вивантаження моделі з БАЗИСу."},"Наименование":{"en":"Name","pl":"Nazwa","uk":"Найменування"},"Настройки":{"en":"Settings","pl":"Ustawienia","uk":"Налаштування"},"Настройки сносок сборщика":{"en":"Assembly label settings","pl":"Ustawienia etykiet montażu","uk":"Налаштування виносок складання"},"Не поместилось номеров: {0} — приблизьте модель":{"en":"Numbers that did not fit: {0} — zoom in","pl":"Nie zmieściło się numerów: {0} — przybliż model","uk":"Не вмістилося номерів: {0} — наблизьте модель"},"Некорректный разнос":{"en":"Invalid spread","pl":"Nieprawidłowe rozsunięcie","uk":"Некоректне рознесення"},"Несовместимый режим сборщика":{"en":"Incompatible assembly mode","pl":"Niezgodny tryb montażu","uk":"Несумісний режим складання"},"Общий вид":{"en":"Overview","pl":"Widok ogólny","uk":"Загальний вид"},"Отверстие":{"en":"Hole","pl":"Otwór","uk":"Отвір"},"Отверстие №":{"en":"Hole #","pl":"Otwór nr","uk":"Отвір №"},"Очистить замеры":{"en":"Clear measurements","pl":"Wyczyść pomiary","uk":"Очистити виміри"},"Пласть XY":{"en":"Face XY","pl":"Płaszczyzna XY","uk":"Пласть XY"},"Позиции с прозрачностью":{"en":"Positions through transparency","pl":"Pozycje przez przezroczystość","uk":"Позиції з прозорістю"},"Позиции с прозрачностью: как у родителя/в общих настройках":{"en":"Positions through transparency: as parent / general settings","pl":"Pozycje przez przezroczystość: jak u nadrzędnego / w ustawieniach ogólnych","uk":"Позиції з прозорістю: як у батьківського/у загальних налаштуваннях"},"Позиции с прозрачностью: показывать и у перекрытых деталей":{"en":"Positions through transparency: show for covered parts too","pl":"Pozycje przez przezroczystość: pokazuj także dla zasłoniętych części","uk":"Позиції з прозорістю: показувати й у перекритих деталей"},"Позиции с прозрачностью: только на видимых деталях":{"en":"Positions through transparency: only on visible parts","pl":"Pozycje przez przezroczystość: tylko na widocznych częściach","uk":"Позиції з прозорістю: лише на видимих деталях"},"Позиция":{"en":"Position","pl":"Pozycja","uk":"Позиція"},"Показать сборочную единицу":{"en":"Show assembly unit","pl":"Pokaż zespół","uk":"Показати складальну одиницю"},"При выборе детали её сноска подсвечивается и показывает название.":{"en":"When a part is selected, its label is highlighted and shows the name.","pl":"Po wybraniu elementu jego etykieta jest podświetlona i pokazuje nazwę.","uk":"При виборі деталі її виноска підсвічується і показує назву."},"Проекция чертежа":{"en":"Drawing projection","pl":"Rzut rysunku","uk":"Проєкція креслення"},"Размер детали":{"en":"Part size","pl":"Wymiar elementu","uk":"Розмір деталі"},"Размер шрифта наименований, px":{"en":"Name font size, px","pl":"Rozmiar czcionki nazw, px","uk":"Розмір шрифту найменувань, px"},"Разнос":{"en":"Spread","pl":"Rozsunięcie","uk":"Рознесення"},"Разнос деталей, мм":{"en":"Part spread, mm","pl":"Rozsunięcie elementów, mm","uk":"Рознесення деталей, мм"},"Сборочные единицы":{"en":"Assembly units","pl":"Zespoły montażowe","uk":"Складальні одиниці"},"Сборщик":{"en":"Assembly","pl":"Montaż","uk":"Складання"},"Связи взрыв-схемы":{"en":"Exploded view links","pl":"Powiązania widoku rozstrzelonego","uk":"Зв'язки рознесеної схеми"},"Скрыть сборочную единицу":{"en":"Hide assembly unit","pl":"Ukryj zespół","uk":"Приховати складальну одиницю"},"Сторон":{"en":"Sides","pl":"Boków","uk":"Сторін"},"Сторон без кромки:":{"en":"Sides without edge band:","pl":"Boki bez obrzeża:","uk":"Сторін без кромки:"},"Строки со знаком ≈: точка входа не определена, показано начало отверстия из БАЗИС.":{"en":"Rows marked ≈: the entry point is unknown, the hole start from BAZIS is shown.","pl":"Wiersze ze znakiem ≈: punkt wejścia nieokreślony, pokazano początek otworu z BAZIS.","uk":"Рядки зі знаком ≈: точку входу не визначено, показано початок отвору з БАЗИС."},"Толщина":{"en":"Thickness","pl":"Grubość","uk":"Товщина"},"Торец XZ":{"en":"End XZ","pl":"Czoło XZ","uk":"Торець XZ"},"Торец YZ":{"en":"End YZ","pl":"Czoło YZ","uk":"Торець YZ"},"Фаска 45°":{"en":"45° chamfer","pl":"Fazowanie 45°","uk":"Фаска 45°"},"Чертёж":{"en":"Drawing","pl":"Rysunek","uk":"Креслення"},"Чертёж детали":{"en":"Part drawing","pl":"Rysunek elementu","uk":"Креслення деталі"},"Чертёж детали с отверстиями":{"en":"Part drawing with holes","pl":"Rysunek elementu z otworami","uk":"Креслення деталі з отворами"},"Шрифт наименований":{"en":"Name font","pl":"Czcionka nazw","uk":"Шрифт найменувань"},"мм":{"en":"mm","pl":"mm","uk":"мм"},"мм\nНаправление оси:":{"en":"mm\nAxis direction:","pl":"mm\nKierunek osi:","uk":"мм\nНапрямок осі:"},"мм · глубина":{"en":"mm · depth","pl":"mm · głębokość","uk":"мм · глибина"},"сейчас показываются":{"en":"currently shown","pl":"teraz pokazywane","uk":"зараз показуються"},"сейчас скрываются":{"en":"currently hidden","pl":"teraz ukrywane","uk":"зараз приховуються"},"≈ Показано начало отверстия, точка входа не определена.":{"en":"≈ The hole start is shown; the entry point is unknown.","pl":"≈ Pokazano początek otworu, punkt wejścia nieokreślony.","uk":"≈ Показано початок отвору, точку входу не визначено."}});
 (function (root) {
   'use strict';
   function install(context, bundle) {
@@ -13481,7 +14180,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
   // Original 24×24 line drawings. Masks inherit active/disabled button colors.
   const paths = {
     section: 'M4 7l8-4 8 4v10l-8 4-8-4zM4 7l8 4 8-4M12 11v10M2 13h20',
-    assembly: 'M3 3h12v18H3zM3 9h12M8 9v12M11 13h.01M21 4a4 4 0 0 0-4 5l-3 7 2 1 3-7a4 4 0 0 0 3-5l-2 2-2-1z',
+    assembly: 'M21 3l-4 4-3-3 4-3a6 6 0 0 0-7 8L3 17a2.8 2.8 0 0 0 4 4l8-8a6 6 0 0 0 6-10zM5 19h.01',
     materials: 'M4 4h16v16H4z',
     measure: 'M3 16L16 3l5 5L8 21zM7 12l3 3M11 8l3 3M15 4l3 3',
     notes: 'M5 3h14v13l-5 5H5zM14 21v-5h5M8 7h8M8 11h5',
@@ -13489,7 +14188,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     pointer: 'M5 3l14 10-7 1-3 7z',
     restore: 'M4 9a8 8 0 1 1 1 9M4 3v6h6',
     hardware: 'M9 3h6v5l-2 2v11h-2V10L9 8zM9 5h6M10 14h4M10 17h4',
-    explode: 'M3 5l9-4 9 4-9 4zM3 12l9-4 9 4-9 4zM3 19l9-4 9 4-9 4zM2 8v8M22 8v8',
+
     drawing: 'M3 2h18v20H3zM7 7h7v4h3v6H7zM7 4h10M7 3v2M17 3v2M5 7v10M4 7h2M4 17h2',
     size: 'M8 8h12v12H8zM8 4h12M8 2v4M20 2v4M4 8v12M2 8h4M2 20h4',
     settings: 'M4 6h16M4 12h16M4 18h16M8 3v6M16 9v6M10 15v6',
@@ -13506,6 +14205,8 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     refresh: 'M20 10a8 8 0 1 0-2 8M20 3v7h-7'
   };
   const colored = {
+    explode:
+      '<path fill="#f0c464" d="M12 1l8 4-8 4-8-4z"/><path fill="#6fbade" d="M1 10l8 4v9l-8-4z"/><path fill="#cd8eb9" d="M15 14l8-4v9l-8 4z"/>',
     materials:
       '<path fill="#80ceee" d="M3 5h14v16H3z"/><path fill="#f1bb70" d="M6 3h14v16H6z"/><path fill="#bd9edf" d="M9 1h13v15H9z"/><path d="M11 5h8M11 8h8M11 11h5"/>',
     texture:
@@ -13542,7 +14243,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     '#notesAdd': 'noteAdd',
     '#notesListSummary': 'list',
     '#fit': 'fit',
-    '#materialCalloutsList > summary': 'callouts',
+    '#materialCalloutsList > summary': 'list',
     '#viewerUpdate': 'refresh',
     '#materialCallouts': 'callouts',
     '#hardwareMono': 'hardware'
