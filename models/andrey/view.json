@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "source": "34127680a977c37b1dcbf001f000d52dcffa4e595c26b63c19fad79697ce68a9",
- "savedAt": "2026-09-28T20:29:42.194Z",
+ "savedAt": "2026-09-28T20:30:05.765Z",
  "features": {
   "outline": false,
   "section": {
@@ -922,7 +922,7 @@
   "holes": true,
   "lines": true,
   "overlay": false,
-  "opacity": "86",
+  "opacity": "100",
   "guides": false,
   "holeOverlay": false,
   "nativeDimensions": true,
@@ -950,9 +950,9 @@
  },
  "camera": {
   "position": [
-   -3417.565893788258,
-   4124.925007721958,
-   3560.323023633967
+   -3417.565244560048,
+   4124.924992697024,
+   3560.3257753188564
   ],
   "target": [
    1675.8681236902937,
