@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "source": "144cc131104e5921fc1d4460299830c5eac42aa344ea7b1d66589f77f0445886",
- "savedAt": "2026-09-25T18:47:16.916Z",
+ "source": "8a05079eaf848456274ab04bfa5f6351b5cdb9644753d06bc0328d2f3b2efb44",
+ "savedAt": "2026-09-28T11:23:37.927Z",
  "features": {
   "outline": false,
   "section": {
@@ -21,19 +21,13 @@
   "dimension_actions": {
    "colors": []
   },
+  "dimensions": {
+   "size": 16,
+   "color": "#e60000",
+   "unit": false,
+   "box": false
+  },
   "materials": [
-   {
-    "id": "art:Пол\r-10",
-    "type": "tex",
-    "name": "Пол",
-    "state": {
-     "rot": 0,
-     "mode": "tex",
-     "texKey": "Пол\r-10",
-     "texData": null,
-     "color": "#4f5053"
-    }
-   },
    {
     "id": "col:#ffffe6",
     "type": "col",
@@ -44,6 +38,18 @@
      "texKey": null,
      "texData": null,
      "color": "#ffffe6"
+    }
+   },
+   {
+    "id": "art:Пол\r-10",
+    "type": "tex",
+    "name": "Пол",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "Пол\r-10",
+     "texData": null,
+     "color": "#4f5053"
     }
    },
    {
@@ -257,12 +263,15 @@
   "guides": false,
   "holeOverlay": false,
   "nativeDimensions": true,
-  "manualDimensions": true,
+  "manualDimensions": false,
   "githubTokenRemember": true,
   "sectionEnabled": false,
   "sectionShowPlane": true,
   "sectionPosition": "1282.7218154435",
   "sectionReverse": false,
+  "dimensionFontSize": "16",
+  "dimensionUnit": false,
+  "dimensionBox": false,
   "notesShow": true,
   "assemblerSeparation": "250",
   "assemblerLabelPosition": true,
@@ -278,14 +287,14 @@
  },
  "camera": {
   "position": [
-   3006.381569061892,
-   2136.883393561628,
-   4468.26880734028
+   2366.135577636142,
+   2687.0540035133868,
+   4339.154939368747
   ],
   "target": [
-   1583.0525270439582,
-   1101.907917158186,
-   431.87274409206856
+   1052.9085615436818,
+   1844.417651550427,
+   221.5182676152489
   ],
   "up": [
    0,
