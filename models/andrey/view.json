@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "source": "34127680a977c37b1dcbf001f000d52dcffa4e595c26b63c19fad79697ce68a9",
- "savedAt": "2026-09-28T20:30:05.765Z",
+ "savedAt": "2026-09-28T20:32:13.180Z",
  "features": {
   "outline": false,
   "section": {
@@ -787,7 +787,8 @@
       18
      ],
      "element": "Front panel left",
-     "updated": "2026-09-28T20:24:11.112Z"
+     "updated": "2026-09-28T20:24:11.112Z",
+     "hidden": false
     },
     {
      "id": "nmulp4xciams0",
@@ -804,10 +805,11 @@
       -184.601
      ],
      "element": "Кухонная мойка Franke KUBUS 2 KNG 110-62 (125.0631.519)\r124496",
+     "updated": "2026-09-28T20:25:19.383Z",
+     "hidden": false,
      "images": [
       "ed95645d53c7e9cb.jpg"
-     ],
-     "updated": "2026-09-28T20:25:19.383Z"
+     ]
     },
     {
      "id": "nmulp8bsg5jws",
@@ -824,7 +826,8 @@
       11.964
      ],
      "element": "Плитка",
-     "updated": "2026-09-28T20:28:00.246Z"
+     "updated": "2026-09-28T20:28:00.246Z",
+     "hidden": false
     },
     {
      "id": "nmulp9nqsmtjt",
@@ -841,10 +844,11 @@
       18.024
      ],
      "element": "Front panel right",
+     "updated": "2026-09-28T20:28:45.454Z",
+     "hidden": false,
      "images": [
       "3cbdef5ec135bd3d.jpg"
-     ],
-     "updated": "2026-09-28T20:28:45.454Z"
+     ]
     },
     {
      "id": "nmulpaj9wdbvt",
@@ -861,34 +865,17 @@
       0.436
      ],
      "element": "горизонтальная",
+     "updated": "2026-09-28T20:29:34.178Z",
+     "hidden": false,
      "images": [
       "9e14e5450ce5e341.jpg"
-     ],
-     "updated": "2026-09-28T20:29:34.178Z"
+     ]
     }
    ]
   },
   "hardware_mono": false,
   "visibility": {
-   "hidden": [
-    13137,
-    13139,
-    13182,
-    13141,
-    13184,
-    13143,
-    13147,
-    13149,
-    13186,
-    13190,
-    13192,
-    13145,
-    13146,
-    13151,
-    13188,
-    13189,
-    13194
-   ],
+   "hidden": [],
    "objectMode": true
   },
   "panel_hardware": {
@@ -950,9 +937,9 @@
  },
  "camera": {
   "position": [
-   -3417.565244560048,
-   4124.924992697024,
-   3560.3257753188564
+   -3123.72216337552,
+   3322.554456666341,
+   -483.20960996142276
   ],
   "target": [
    1675.8681236902937,
