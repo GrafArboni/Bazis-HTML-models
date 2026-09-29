@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="bazis-viewer" content="773c3d5d49a8">
+<meta name="bazis-viewer" content="ade8371f573b">
 <title>068_5_Дит2_ · просмотр модели</title>
 <style>
 :root{color-scheme:dark;--bg:#10171d;--panel:#17232d;--line:#31414b;--text:#e8eef0;--muted:#a6bac4;--accent:#9ee2d0;--popup-border:#526776;--control-border:#46586a;--hover:#304654;--muted-soft:#9fb3bd;--divider:#26343d;--compact-slider:70px}
@@ -166,6 +166,14 @@
   align-items: center;
   margin: 10px 0;
   font-size: 12px;
+}
+/* «логин» для менеджера паролей браузера — на экране не виден */
+.githubTokenUser {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
 }
 .githubTokenButtons {
   display: flex;
@@ -3914,15 +3922,21 @@ window.OrbitControls = OrbitControls;
     and write. Он хранится только в этом браузере, в опубликованный файл не попадает и посетителям не виден.
   </p>
   <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Создать токен на GitHub</a>
-  <input type="password" id="githubTokenInput" autocomplete="off" placeholder="github_pat_…" />
-  <label class="check">
-    <input type="checkbox" id="githubTokenRemember" checked />
-    <span>Запомнить в этом браузере</span>
-  </label>
-  <div class="githubTokenButtons">
-    <button type="button" id="githubTokenCancel">Отмена</button>
-    <button type="button" id="githubTokenOk">Сохранить</button>
-  </div>
+  <!-- Своя форма со своим «логином»: без неё браузер, запомнив токен как пароль,
+       считал логином ближайшее поле страницы — поиск по структуре — и вписывал
+       туда запомненное при каждой загрузке. -->
+  <form id="githubTokenForm" class="githubTokenForm" autocomplete="off">
+    <input type="text" id="githubTokenUser" class="githubTokenUser" autocomplete="username" value="github-token" readonly tabindex="-1" aria-hidden="true" data-i18n-skip />
+    <input type="password" id="githubTokenInput" autocomplete="off" placeholder="github_pat_…" />
+    <label class="check">
+      <input type="checkbox" id="githubTokenRemember" checked />
+      <span>Запомнить в этом браузере</span>
+    </label>
+    <div class="githubTokenButtons">
+      <button type="button" id="githubTokenCancel">Отмена</button>
+      <button type="button" id="githubTokenOk">Сохранить</button>
+    </div>
+  </form>
 </dialog>
 </div>
 <div data-feature-markup="toolbar">
@@ -4152,6 +4166,7 @@ window.OrbitControls = OrbitControls;
 <div class="visibilityMenu hidden" id="visibilityMenu" role="menu">
   <button type="button" role="menuitem" id="visibilityHideSelected">Скрыть выбранное</button>
   <button type="button" role="menuitem" id="visibilityHideSameParts">Скрыть все такие детали</button>
+  <button type="button" role="menuitem" id="visibilityHideMaterial">Скрыть материал</button>
   <button type="button" role="menuitem" id="visibilityHideBlock">Скрыть блок</button>
   <button type="button" role="menuitem" id="visibilityHideSameBlocks">Скрыть все такие блоки</button>
   <button type="button" role="menuitem" id="visibilityHideUnit">Скрыть сборочную единицу</button>
@@ -4986,6 +5001,7 @@ window.OrbitControls = OrbitControls;
           input.value = '';
           doc.getElementById('githubTokenOk').onclick = null;
           doc.getElementById('githubTokenCancel').onclick = null;
+          doc.getElementById('githubTokenForm').onsubmit = null;
           dialog.oncancel = null;
           resolve(value);
         };
@@ -4995,6 +5011,11 @@ window.OrbitControls = OrbitControls;
           finish(value);
         };
         doc.getElementById('githubTokenCancel').onclick = () => finish('');
+        // Enter в поле токена — как «Сохранить»; страница не перезагружается
+        doc.getElementById('githubTokenForm').onsubmit = event => {
+          event.preventDefault();
+          doc.getElementById('githubTokenOk').onclick();
+        };
         dialog.oncancel = event => {
           event.preventDefault();
           finish('');
@@ -5553,6 +5574,28 @@ window.OrbitControls = OrbitControls;
     group.visible = false;
     scene.add(group);
     const entries = [];
+    // Крышка разреза — красная, чтобы срез читался сразу (как в БАЗИС), а не
+    // сливался с пластью. Прозрачность — как у детали: материал на каждую
+    // непрозрачность, общий для всех крышек.
+    const CAP_COLOR = 0xe53935,
+      capMaterials = new Map();
+    function capMaterial(source) {
+      const opacity = Math.round((source?.opacity ?? 1) * 100) / 100;
+      let m = capMaterials.get(opacity);
+      if (!m) {
+        // без освещения: срез одного ровного цвета с любой стороны
+        m = new T.MeshBasicMaterial({
+          color: CAP_COLOR,
+          side: T.DoubleSide,
+          transparent: opacity < 1,
+          opacity,
+          depthWrite: opacity >= 1
+        });
+        m.userData.sectionCap = true;
+        capMaterials.set(opacity, m);
+      }
+      return m;
+    }
     function clear() {
       while (group.children.length) {
         const mesh = group.children.pop();
@@ -5560,7 +5603,11 @@ window.OrbitControls = OrbitControls;
       }
       entries.length = 0;
     }
-    const key = (p, t) => Math.round(p.x / t) + ',' + Math.round(p.y / t);
+    // Концы отрезков среза сводятся в узлы с допуском JOIN: грани детали чуть
+    // раздуты наружу (inflate/tieBreak до 0,036 мм, у каждой грани — по своей
+    // нормали), и на рёбрах они расходятся на сотые миллиметра. С допуском в
+    // 1e-4 мм контур не замыкался — у двух деталей из трёх крышки не было.
+    const JOIN = 0.2;
     function crossSection(mesh, plane, u, v, tolerance) {
       const position = mesh.geometry?.attributes?.position;
       if (!position) return [];
@@ -5613,18 +5660,37 @@ window.OrbitControls = OrbitControls;
       return segments;
     }
     function loopsFrom(segments, tolerance) {
-      const nodes = new Map(),
+      const join = Math.max(tolerance, JOIN),
+        cells = new Map(),
         edges = new Map();
+      let count = 0;
+      // ближайший узел в пределах join (соседние ячейки сетки), иначе новый
       const node = p => {
-        const k = key(p, tolerance);
-        if (!nodes.has(k)) nodes.set(k, { key: k, p: p.clone(), edges: [] });
-        return nodes.get(k);
+        const cx = Math.floor(p.x / join),
+          cy = Math.floor(p.y / join);
+        let best = null,
+          bestDistance = join * join;
+        for (let x = cx - 1; x <= cx + 1; x++)
+          for (let y = cy - 1; y <= cy + 1; y++)
+            for (const n of cells.get(x + ',' + y) || []) {
+              const d = n.p.distanceToSquared(p);
+              if (d <= bestDistance) {
+                bestDistance = d;
+                best = n;
+              }
+            }
+        if (best) return best;
+        const created = { key: String(count++), p: p.clone(), edges: [] },
+          k = cx + ',' + cy;
+        if (!cells.has(k)) cells.set(k, []);
+        cells.get(k).push(created);
+        return created;
       };
       for (const segment of segments) {
         const a = node(segment[0]),
           b = node(segment[1]);
         if (a === b) continue;
-        const ek = a.key < b.key ? a.key + '|' + b.key : b.key + '|' + a.key;
+        const ek = Number(a.key) < Number(b.key) ? a.key + '|' + b.key : b.key + '|' + a.key;
         if (edges.has(ek)) continue;
         const edge = { key: ek, a, b, used: false };
         edges.set(ek, edge);
@@ -5652,7 +5718,7 @@ window.OrbitControls = OrbitControls;
           previous = current;
           current = following;
         }
-        if (loop.length >= 4 && loop[0].distanceToSquared(loop.at(-1)) <= tolerance * tolerance) {
+        if (loop.length >= 4 && loop[0].distanceToSquared(loop.at(-1)) <= join * join) {
           loop.pop();
           const clean = loop.filter((p, i) => {
             const before = loop[(i + loop.length - 1) % loop.length],
@@ -5744,7 +5810,7 @@ window.OrbitControls = OrbitControls;
       for (const source of sources()) {
         const geometry = capGeometry(source, plane, normal);
         if (!geometry) continue;
-        const cap = new T.Mesh(geometry, source.material);
+        const cap = new T.Mesh(geometry, capMaterial(source.material));
         cap.userData = { decorative: true, sectionCap: true };
         cap.renderOrder = source.renderOrder + 0.1;
         cap.frustumCulled = false;
@@ -5755,12 +5821,14 @@ window.OrbitControls = OrbitControls;
     }
     function sync() {
       for (const entry of entries) {
-        entry.cap.material = entry.source.material;
+        entry.cap.material = capMaterial(entry.source.material);
         entry.cap.visible = services.visible?.(entry.source) !== false;
       }
     }
     function dispose() {
       clear();
+      for (const m of capMaterials.values()) m.dispose();
+      capMaterials.clear();
       group.removeFromParent();
     }
     return {
@@ -9965,6 +10033,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     };
     const hideButton = action('visibilityHideSelected', () => hideSelected());
     const hideSamePartsButton = action('visibilityHideSameParts', () => hideSameParts());
+    const hideMaterialButton = action('visibilityHideMaterial', () => hideSameMaterial());
     const hideBlockButton = action('visibilityHideBlock', () => hideBlock());
     const hideSameBlocksButton = action('visibilityHideSameBlocks', () => hideSameBlocks());
     const hideUnitButton = action('visibilityHideUnit', () => hideUnit());
@@ -10016,6 +10085,22 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       return [...services.sourceById.values()].filter(
         r => r.type === 1005 && !assemblies.has(r.id) && baseName(r) === name
       );
+    }
+    // «Скрыть материал»: все детали из того же материала, что выбранная (название
+    // с артикулом — как в редакторе материалов). Материал берём у отрисованной
+    // детали: у панели это видимая облицовка, у импорта — его материал.
+    const materialOf = rec => (typeof rec?.material === 'string' && rec.material.trim()) || null;
+    function sameMaterial(rec) {
+      const material = materialOf(rec);
+      if (!material) return [];
+      const out = [];
+      for (const [id, objects] of services.renderedById || [])
+        if (objects.some(o => materialOf(o.userData?.record) === material))
+          out.push(services.sourceById?.get(id) || { id });
+      return out;
+    }
+    function hideSameMaterial() {
+      hideAll(selected ? sameMaterial(selected.userData.record) : []);
     }
     function hideAll(list) {
       if (!list.length) return;
@@ -10148,6 +10233,15 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       const parts = sameParts(selected.userData.record),
         blocks = sameBlocks(block);
       hideSamePartsButton.disabled = parts.length < 2;
+      const material = materialOf(selected.userData.record),
+        byMaterial = sameMaterial(selected.userData.record);
+      hideMaterialButton.disabled = !byMaterial.length;
+      hideMaterialButton.textContent = byMaterial.length
+        ? 'Скрыть материал «' + short(material.split('\r')[0].trim()) + '» (' + byMaterial.length + ')'
+        : 'Скрыть материал';
+      hideMaterialButton.title = material
+        ? 'Скрыть все детали из материала ' + material.split('\r').join(' · ')
+        : 'У выбранного нет материала';
       hideSameBlocksButton.disabled = blocks.length < 2;
       hideSamePartsButton.textContent = parts.length
         ? 'Скрыть все такие детали «' + short(baseName(parts[0])) + '» (' + parts.length + ')'
@@ -10329,10 +10423,15 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       hideSelected,
       hideBlock,
       hideSameParts,
+      hideSameMaterial,
       hideSameBlocks,
       hideUnit,
       unitFor: id => unitFor(services.sourceById.get(id))?.id ?? null,
       sameParts: id => sameParts(services.sourceById.get(id)).map(r => r.id),
+      sameMaterial: id => {
+        const objects = services.renderedById?.get(id) || [];
+        return sameMaterial(objects[0]?.userData?.record).map(r => r.id);
+      },
       sameBlocks: id => sameBlocks(blockFor(services.sourceById.get(id))).map(r => r.id),
       blockFor: id => blockFor(services.sourceById.get(id))?.id ?? null,
       isolateSelected,
@@ -10351,7 +10450,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
   else (root.BazisViewerFeatures || (root.BazisViewerFeatures = [])).push({ name: 'visibility', install });
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 
-(globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"Вернуть скрытые":{"en":"Show hidden","pl":"Przywróć ukryte","uk":"Повернути приховані"},"Восстановить видимость":{"en":"Restore visibility","pl":"Przywróć widoczność","uk":"Відновити видимість"},"Восстановить видимость всех объектов":{"en":"Restore visibility of all objects","pl":"Przywróć widoczność wszystkich obiektów","uk":"Відновити видимість усіх об'єктів"},"Выбор: объект":{"en":"Select: object","pl":"Wybór: obiekt","uk":"Вибір: об'єкт"},"Выбор: сборка":{"en":"Select: assembly","pl":"Wybór: zespół","uk":"Вибір: збірка"},"Выбранное не входит в блок внутри сборочной единицы":{"en":"The selection is not in a block inside an assembly unit","pl":"Zaznaczenie nie należy do bloku wewnątrz zespołu montażowego","uk":"Вибране не входить у блок усередині складальної одиниці"},"Выбранное не входит в сборочную единицу":{"en":"The selection is not in an assembly unit","pl":"Zaznaczenie nie należy do zespołu montażowego","uk":"Вибране не входить у складальну одиницю"},"Некорректный фильтр видимости":{"en":"Invalid visibility filter","pl":"Nieprawidłowy filtr widoczności","uk":"Некоректний фільтр видимості"},"Объект":{"en":"Object","pl":"Obiekt","uk":"Об'єкт"},"Оставить только выбранное":{"en":"Isolate selection","pl":"Pozostaw tylko zaznaczone","uk":"Залишити тільки вибране"},"Переключить выбор отдельного объекта и сборочной единицы":{"en":"Switch between selecting a single object and an assembly unit","pl":"Przełącz wybór pojedynczego obiektu i zespołu montażowego","uk":"Перемкнути вибір окремого об'єкта і складальної одиниці"},"Просмотрщик не поддерживает модуль видимости":{"en":"The viewer does not support the visibility module","pl":"Przeglądarka nie obsługuje modułu widoczności","uk":"Переглядач не підтримує модуль видимості"},"Сборка":{"en":"Assembly","pl":"Zespół","uk":"Збірка"},"Сборочная единица":{"en":"Assembly unit","pl":"Zespół montażowy","uk":"Складальна одиниця"},"Скрыть блок":{"en":"Hide block","pl":"Ukryj blok","uk":"Приховати блок"},"Скрыть блок «":{"en":"Hide block “","pl":"Ukryj blok „","uk":"Приховати блок «"},"Скрыть блок со всем содержимым; другие блоки сборочной единицы останутся":{"en":"Hide the block with everything in it; other blocks of the assembly unit stay","pl":"Ukryj blok z całą zawartością; pozostałe bloki zespołu montażowego zostaną","uk":"Приховати блок з усім вмістом; інші блоки складальної одиниці залишаться"},"Скрыть все такие блоки":{"en":"Hide all such blocks","pl":"Ukryj wszystkie takie bloki","uk":"Приховати всі такі блоки"},"Скрыть все такие блоки «":{"en":"Hide all such blocks “","pl":"Ukryj wszystkie takie bloki „","uk":"Приховати всі такі блоки «"},"Скрыть все такие детали":{"en":"Hide all such parts","pl":"Ukryj wszystkie takie elementy","uk":"Приховати всі такі деталі"},"Скрыть все такие детали «":{"en":"Hide all such parts “","pl":"Ukryj wszystkie takie elementy „","uk":"Приховати всі такі деталі «"},"Скрыть выбранное":{"en":"Hide selection","pl":"Ukryj zaznaczone","uk":"Приховати вибране"},"Скрыть сборочную единицу":{"en":"Hide assembly unit","pl":"Ukryj zespół montażowy","uk":"Приховати складальну одиницю"},"Скрыть сборочную единицу «":{"en":"Hide assembly unit “","pl":"Ukryj zespół montażowy „","uk":"Приховати складальну одиницю «"},"Скрыть сборочную единицу со всем содержимым":{"en":"Hide the assembly unit with everything in it","pl":"Ukryj zespół montażowy z całą zawartością","uk":"Приховати складальну одиницю з усім вмістом"},"Статус":{"en":"Status","pl":"Status","uk":"Статус"},"без имени":{"en":"unnamed","pl":"bez nazwy","uk":"без імені"}});
+(globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"Вернуть скрытые":{"en":"Show hidden","pl":"Przywróć ukryte","uk":"Повернути приховані"},"Восстановить видимость":{"en":"Restore visibility","pl":"Przywróć widoczność","uk":"Відновити видимість"},"Восстановить видимость всех объектов":{"en":"Restore visibility of all objects","pl":"Przywróć widoczność wszystkich obiektów","uk":"Відновити видимість усіх об'єктів"},"Выбор: объект":{"en":"Select: object","pl":"Wybór: obiekt","uk":"Вибір: об'єкт"},"Выбор: сборка":{"en":"Select: assembly","pl":"Wybór: zespół","uk":"Вибір: збірка"},"Выбранное не входит в блок внутри сборочной единицы":{"en":"The selection is not in a block inside an assembly unit","pl":"Zaznaczenie nie należy do bloku wewnątrz zespołu montażowego","uk":"Вибране не входить у блок усередині складальної одиниці"},"Выбранное не входит в сборочную единицу":{"en":"The selection is not in an assembly unit","pl":"Zaznaczenie nie należy do zespołu montażowego","uk":"Вибране не входить у складальну одиницю"},"Некорректный фильтр видимости":{"en":"Invalid visibility filter","pl":"Nieprawidłowy filtr widoczności","uk":"Некоректний фільтр видимості"},"Объект":{"en":"Object","pl":"Obiekt","uk":"Об'єкт"},"Оставить только выбранное":{"en":"Isolate selection","pl":"Pozostaw tylko zaznaczone","uk":"Залишити тільки вибране"},"Переключить выбор отдельного объекта и сборочной единицы":{"en":"Switch between selecting a single object and an assembly unit","pl":"Przełącz wybór pojedynczego obiektu i zespołu montażowego","uk":"Перемкнути вибір окремого об'єкта і складальної одиниці"},"Просмотрщик не поддерживает модуль видимости":{"en":"The viewer does not support the visibility module","pl":"Przeglądarka nie obsługuje modułu widoczności","uk":"Переглядач не підтримує модуль видимості"},"Сборка":{"en":"Assembly","pl":"Zespół","uk":"Збірка"},"Сборочная единица":{"en":"Assembly unit","pl":"Zespół montażowy","uk":"Складальна одиниця"},"Скрыть блок":{"en":"Hide block","pl":"Ukryj blok","uk":"Приховати блок"},"Скрыть блок «":{"en":"Hide block “","pl":"Ukryj blok „","uk":"Приховати блок «"},"Скрыть блок со всем содержимым; другие блоки сборочной единицы останутся":{"en":"Hide the block with everything in it; other blocks of the assembly unit stay","pl":"Ukryj blok z całą zawartością; pozostałe bloki zespołu montażowego zostaną","uk":"Приховати блок з усім вмістом; інші блоки складальної одиниці залишаться"},"Скрыть все детали из материала":{"en":"Hide all parts made of","pl":"Ukryj wszystkie części z materiału","uk":"Приховати всі деталі з матеріалу"},"Скрыть все такие блоки":{"en":"Hide all such blocks","pl":"Ukryj wszystkie takie bloki","uk":"Приховати всі такі блоки"},"Скрыть все такие блоки «":{"en":"Hide all such blocks “","pl":"Ukryj wszystkie takie bloki „","uk":"Приховати всі такі блоки «"},"Скрыть все такие детали":{"en":"Hide all such parts","pl":"Ukryj wszystkie takie elementy","uk":"Приховати всі такі деталі"},"Скрыть все такие детали «":{"en":"Hide all such parts “","pl":"Ukryj wszystkie takie elementy „","uk":"Приховати всі такі деталі «"},"Скрыть выбранное":{"en":"Hide selection","pl":"Ukryj zaznaczone","uk":"Приховати вибране"},"Скрыть материал":{"en":"Hide material","pl":"Ukryj materiał","uk":"Приховати матеріал"},"Скрыть материал «":{"en":"Hide material «","pl":"Ukryj materiał «","uk":"Приховати матеріал «"},"Скрыть сборочную единицу":{"en":"Hide assembly unit","pl":"Ukryj zespół montażowy","uk":"Приховати складальну одиницю"},"Скрыть сборочную единицу «":{"en":"Hide assembly unit “","pl":"Ukryj zespół montażowy „","uk":"Приховати складальну одиницю «"},"Скрыть сборочную единицу со всем содержимым":{"en":"Hide the assembly unit with everything in it","pl":"Ukryj zespół montażowy z całą zawartością","uk":"Приховати складальну одиницю з усім вмістом"},"Статус":{"en":"Status","pl":"Status","uk":"Статус"},"У выбранного нет материала":{"en":"The selection has no material","pl":"Zaznaczenie nie ma materiału","uk":"У вибраного немає матеріалу"},"без имени":{"en":"unnamed","pl":"bez nazwy","uk":"без імені"}});
 (function (root) {
   'use strict';
   function install(context, bundle) {
@@ -14857,11 +14956,26 @@ function screen(v){const p=v.clone().project(camera);return {x:(p.x+1)*viewport.
 // дают модули через hooks.snapCandidates. Кандидат в пределах своего допуска (px):
 // выигрывает меньший rank (вершина важнее середины, та — перпендикуляра, тот —
 // точки на ребре), при равном rank — ближний к курсору.
+// Вершины сгруппированы по объекту с описанной сферой: на кухне их 500 тыс., и
+// перебор всех на каждое движение мыши стоил ~430 мс. Перебираем только объекты,
+// чья сфера на экране рядом с курсором. Взрыв-схема двигает точки — индекс
+// пересобирается по geometryChanged.
+let snapIndex=null;const snapView=new THREE.Vector3();
+function snapGroups(){if(snapIndex)return snapIndex;const by=new Map();
+ for(const s of snaps){let g=by.get(s.object);if(!g){g={object:s.object,list:[],center:new THREE.Vector3(),radius:0};by.set(s.object,g)}g.list.push(s)}
+ const box=new THREE.Box3(),size=new THREE.Vector3();
+ for(const g of by.values()){box.makeEmpty();for(const s of g.list)box.expandByPoint(s.v);box.getCenter(g.center);g.radius=box.getSize(size).length()/2}
+ return snapIndex=[...by.values()]}
+featureHooks.geometryChanged.push(()=>{snapIndex=null});
 function closestSnap(e){
  const r=canvas.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top;let best=null;
  const offer=(c,tol)=>{if(!c||(c.object&&!visible(c.object))||!pointVisible(c.v))return;const p=screen(c.v);if(p.z<-1||p.z>1)return;
   const d=Math.hypot(p.x-mx,p.y-my),rank=c.rank||0;if(d>tol)return;if(!best||rank<best.rank||(rank===best.rank&&d<best.d))best=Object.assign({},c,{rank,d})};
- for(const snap of snaps)offer(snap,16);
+ const focal=viewport.clientHeight/(2*Math.tan(camera.fov*Math.PI/360));
+ for(const g of snapGroups()){if(g.object&&!visible(g.object))continue;const d=camera.position.distanceTo(g.center);
+  const vz=snapView.copy(g.center).applyMatrix4(camera.matrixWorldInverse).z;if(vz>g.radius)continue;
+  if(vz<-g.radius&&d>g.radius){const p=screen(g.center);const reach=g.radius*focal/Math.sqrt(d*d-g.radius*g.radius)+16;if(Math.hypot(p.x-mx,p.y-my)>reach)continue}
+  for(const snap of g.list)offer(snap,16)}
  for(const hook of featureHooks.snapCandidates)for(const c of hook({event:e,mx,my,rect:r,firstPoint})||[])offer(c,c.tol||12);
  return best;
 }
@@ -14945,13 +15059,18 @@ const STICKY_ROW=28;
 for(const rec of childrenById.get(null)||[])buildTree(rec,$('modelTree'),0);
 let dimensionSurfaceOpacity=1;
 const dimensionRay=new THREE.Raycaster(),dimensionDirection=new THREE.Vector3();
+// Заслоны подписей размеров — видимые меши деталей одним списком (раньше луч шёл
+// рекурсивно по всем группам вместе с линиями рёбер). Список собирается заново при
+// каждой проверке подписей (см. draw), не на каждый луч.
+let dimensionOccluders=null;const dimensionBlockedMemo=new WeakMap(),dimensionCamera=new THREE.Matrix4();let dimensionCheckedAt=-1e9,dimensionMoved=true;
+function dimensionOccluderList(){if(!dimensionOccluders){dimensionOccluders=[];for(const g of [groups.panels,groups.profiles,groups.imports])g.traverse(o=>{if(o.isMesh&&!o.userData?.decorative&&visible(o))dimensionOccluders.push(o)})}return dimensionOccluders}
 function dimensionBlocked(point){
  if(dimensionSurfaceOpacity<.999)return false;
  const distance=camera.position.distanceTo(point);dimensionDirection.copy(point).sub(camera.position).normalize();dimensionRay.set(camera.position,dimensionDirection);
- const hit=dimensionRay.intersectObjects([groups.panels,groups.profiles,groups.imports],true).find(h=>h.object.isMesh&&visible(h.object)&&featureHooks.pointVisible.every(hook=>hook(h.point)!==false));
+ const hit=dimensionRay.intersectObjects(dimensionOccluderList(),false).find(h=>featureHooks.pointVisible.every(hook=>hook(h.point)!==false));
  return !!hit&&hit.distance<distance-Math.max(.5,distance*.0002);
 }
-function setDimensionSurfaceOpacity(value){dimensionSurfaceOpacity=value;const depthTest=value>=.999;
+function setDimensionSurfaceOpacity(value){dimensionSurfaceOpacity=value;dimensionCheckedAt=-1e9;const depthTest=value>=.999;
  for(const rec of dimensionVisuals)for(const material of rec.materials||[]){material.depthTest=depthTest;material.needsUpdate=true;}}
 featureHooks.opacity.push(setDimensionSurfaceOpacity);
 function pointVisible(point){return featureHooks.pointVisible.every(hook=>hook(point)!==false)}
@@ -15129,10 +15248,20 @@ $('nativeDimensions').disabled=!DATA.native_dimensions.length;
 $('nativeNote').textContent=DATA.native_dimensions.length?'Размеры из файла и созданные здесь управляются отдельно.':'В этом файле сохранённых размерных объектов нет. Ниже можно создать замеры по геометрии.';
 updateStatus();
 function renderFrame(){if(!featureHooks.render.some(hook=>hook()===true))renderer.render(scene,camera)}
-let previousFrame=null;function draw(now=0){requestAnimationFrame(draw);const delta=previousFrame==null?0:Math.min(Math.max((now-previousFrame)/1000,0),.05);previousFrame=now;for(const hook of featureHooks.frame)hook(delta);controls.update();if(hoverSnap&&measureMode)showSnap(hoverSnap);updateMeasurePreview();for(const r of dimensionVisuals){const mid=r.a.clone().add(r.b).multiplyScalar(.5),p=screen(mid);
+// Заслонение подписей размеров — луч на подпись; каждый кадр это стоило половину
+// кадра на тяжёлой модели (70 размеров × 10 тыс. мешей, режим замера — 83 → 172 мс).
+// Пересчёт — не чаще раза в 200 мс, пока камера движется, ещё раз после остановки
+// и раз в секунду на случай скрытия деталей; между ними — прошлый ответ.
+
+function dimensionRecheck(now){const e=camera.matrixWorld.elements,o=dimensionCamera.elements,far=Math.max(1,camera.position.distanceTo(controls.target));let changed=false;
+ for(let i=0;i<16&&!changed;i++)changed=Math.abs(e[i]-o[i])>(i>=12?far*1e-4:1e-4);
+ if(changed){dimensionCamera.copy(camera.matrixWorld);dimensionMoved=true}
+ if((dimensionMoved&&now-dimensionCheckedAt>200)||now-dimensionCheckedAt>1000){dimensionCheckedAt=now;dimensionMoved=changed;dimensionOccluders=null;return true}return false}
+let previousFrame=null;function draw(now=0){requestAnimationFrame(draw);const delta=previousFrame==null?0:Math.min(Math.max((now-previousFrame)/1000,0),.05);previousFrame=now;for(const hook of featureHooks.frame)hook(delta);controls.update();if(hoverSnap&&measureMode)showSnap(hoverSnap);updateMeasurePreview();camera.updateMatrixWorld();const dimensionFresh=dimensionRecheck(now);for(const r of dimensionVisuals){const mid=r.a.clone().add(r.b).multiplyScalar(.5),p=screen(mid);
+ let hidden=dimensionBlockedMemo.get(r);if(dimensionFresh||hidden===undefined){hidden=dimensionBlocked(mid);dimensionBlockedMemo.set(r,hidden)}
  // Один цикл на ручные замеры и на размеры из БАЗИСа: видимость слоя берём обходом
  // предков, поэтому каждый источник по-прежнему выключается своей галочкой.
- const shown=visible(r.group)&&pointVisible(mid)&&!dimensionBlocked(mid)&&p.z>=-1&&p.z<=1;
+ const shown=visible(r.group)&&pointVisible(mid)&&!hidden&&p.z>=-1&&p.z<=1;
  r.label.style.display=shown?'block':'none';if(shown){r.label.style.left=p.x+'px';r.label.style.top=p.y+'px'}}sizeMeasureDots();renderFrame();drawLoupe()}draw();
 window.__viewer={render:renderFrame,addTreeAction,renderer,scene,camera,controls,groups,stats:meshStats,data:DATA,features:featureInstances,featureHooks,dimensions:dimRecords,addDimension,select,selectId,setView,snaps,screen,treeEntries,highlight,selectedLine,holeMeshes};diag('Сцена','OK',meshStats.panels+' панелей');window.BazisDiagnostics?.complete(window.__viewer);
 }
