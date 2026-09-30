@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="bazis-viewer" content="f750c11b8a8d">
+<meta name="bazis-viewer" content="ade8371f573b">
 <title>Ber_TV_ · просмотр модели</title>
 <style>
 :root{color-scheme:dark;--bg:#10171d;--panel:#17232d;--line:#31414b;--text:#e8eef0;--muted:#a6bac4;--accent:#9ee2d0;--popup-border:#526776;--control-border:#46586a;--hover:#304654;--muted-soft:#9fb3bd;--divider:#26343d;--compact-slider:70px}
@@ -15288,15 +15288,13 @@ function boxUV(geo){
   const [u,v]=ax>=ay&&ax>=az?[p.getY(i),p.getZ(i)]:ay>=az?[p.getX(i),p.getZ(i)]:[p.getX(i),p.getY(i)];uv[i*2]=u;uv[i*2+1]=v}
  geo.setAttribute('uv',new THREE.BufferAttribute(uv,2));
 }
-// Импорт и фурнитура обводятся по острым рёбрам цветом контура объекта из БАЗИС
-// (поле Color; у фурнитуры без него — тёмный), как в самом БАЗИС.
 function addMesh(rec,kind,parent){
  const root=new THREE.Group();attach(root,rec,kind,parent);pickables.pop();
  for(const batch of DATA.mesh_definitions[rec.mesh].batches){
   const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.Float32BufferAttribute(batch.vertices,3));geo.setAttribute('normal',new THREE.Float32BufferAttribute(batch.normals,3));if(batch.index)geo.setIndex(undelta(batch));
   inflate(geo,(kind==='hardware'?BIAS.hardware:BIAS.panel)+tieBreak(rec.id));
   if(batch.tex&&texture(batch.tex))boxUV(geo);
-  const mesh=new THREE.Mesh(geo,material(batch.color||rec.color,batch.tex&&texture(batch.tex)?batch.tex:null));mesh.userData=root.userData;root.add(mesh);if(kind==='import'||kind==='hardware')edgeLines(mesh,rec.outline_color||'#161616');pickables.push(mesh);meshStats.triangles+=batch.triangles;
+  const mesh=new THREE.Mesh(geo,material(batch.color||rec.color,batch.tex&&texture(batch.tex)?batch.tex:null));mesh.userData=root.userData;root.add(mesh);if(kind==='import')edgeLines(mesh,rec.outline_color);pickables.push(mesh);meshStats.triangles+=batch.triangles;
   for(let i=0;i<batch.vertices.length;i+=3)addSnap(world(rec,batch.vertices.slice(i,i+3)),root,rec.name);
  }
  return root;
