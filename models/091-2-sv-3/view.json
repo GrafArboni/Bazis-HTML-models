@@ -1,0 +1,273 @@
+{
+ "schema": 1,
+ "source": "0efb8957c9f0790fe77b51d1d4ba6cddb862f3134e08a15644edd59d99bce77e",
+ "savedAt": "2026-10-01T08:31:01.067Z",
+ "features": {
+  "outline": false,
+  "section": {
+   "active": false,
+   "axis": "y",
+   "position": 1279.5234375,
+   "reversed": false,
+   "showPlane": true,
+   "chosen": false,
+   "normal": [
+    0,
+    1,
+    0
+   ]
+  },
+  "finish": "texture",
+  "dimension_actions": {
+   "colors": []
+  },
+  "dimensions": {
+   "size": 16,
+   "color": "#e60000",
+   "unit": false,
+   "box": false
+  },
+  "materials": [
+   {
+    "id": "art:ДСП SAVIOLA Valiant/Valiant DG2 Орех Термо 2800х2120х18 мм\r45788",
+    "type": "tex",
+    "name": "ДСП SAVIOLA Valiant/Valiant DG2 Орех Термо 2800х2120х18 мм",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "ДСП SAVIOLA Valiant/Valiant DG2 Орех Термо 2800х2120х18 мм\r45788",
+     "texData": null,
+     "color": "#403b3a",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "col:#d6d6d6",
+    "type": "col",
+    "name": "Хромк",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#888888",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:ДСП бук",
+    "type": "col",
+    "name": "ДСП бук",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#c0c0c0",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "art:Пластік чорний",
+    "type": "tex",
+    "name": "Пластік чорний",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "Пластік чорний",
+     "texData": null,
+     "color": "#291516",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:Хромк\r-5",
+    "type": "col",
+    "name": "Хромк",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#d6d6d6",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "art:Сталь сіра",
+    "type": "tex",
+    "name": "Сталь сіра",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "Сталь сіра",
+     "texData": null,
+     "color": "#909090",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "art:Алюминий\r-2",
+    "type": "tex",
+    "name": "Алюминий",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": "Алюминий\r-2",
+     "texData": null,
+     "color": "#cccccc",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:# Білий",
+    "type": "col",
+    "name": "# Білий",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#ffffff",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:# Антрацит",
+    "type": "col",
+    "name": "# Антрацит",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#444444",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:# Сірий",
+    "type": "col",
+    "name": "# Сірий",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#c0c0c0",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:# Чорний",
+    "type": "col",
+    "name": "# Чорний",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#444444",
+     "transparency": 0
+    }
+   }
+  ],
+  "texture_fit": {
+   "schema": 2,
+   "modes": {}
+  },
+  "material_labels": {
+   "enabled": true,
+   "changedAt": null
+  },
+  "notes": {
+   "enabled": true,
+   "notes": []
+  },
+  "hardware_mono": false,
+  "visibility": {
+   "hidden": [],
+   "objectMode": true
+  },
+  "panel_hardware": {
+   "active": false,
+   "selectedPanelId": null
+  },
+  "assembler": {
+   "active": false,
+   "exploded": false,
+   "separation": 250,
+   "unitId": null,
+   "partDimensionsEnabled": false,
+   "labelPosition": true,
+   "labelName": null,
+   "labelFontSize": 11,
+   "positionsThrough": false,
+   "unitThrough": {},
+   "hiddenUnits": []
+  },
+  "hardware_catalog": {
+   "expanded": false
+  }
+ },
+ "controls": {
+  "panels": true,
+  "profiles": true,
+  "edges": true,
+  "textures": true,
+  "imports": true,
+  "hardware": true,
+  "holes": true,
+  "lines": true,
+  "overlay": false,
+  "opacity": "77",
+  "guides": false,
+  "holeOverlay": false,
+  "nativeDimensions": true,
+  "manualDimensions": true,
+  "githubTokenRemember": true,
+  "sectionEnabled": false,
+  "sectionShowPlane": true,
+  "sectionPosition": "1279.5",
+  "sectionReverse": false,
+  "dimensionFontSize": "16",
+  "dimensionUnit": false,
+  "dimensionBox": false,
+  "notesShow": true,
+  "assemblerSeparation": "250",
+  "assemblerLabelPosition": true,
+  "assemblerLabelName": true,
+  "assemblerLabelFontSize": "11",
+  "assemblerLabelsThrough": false
+ },
+ "layers": [
+  true,
+  true,
+  true,
+  true
+ ],
+ "layersByName": {
+  "Слой 0": true,
+  "Слой LEICA_3DDISTO_SURFACESCAN": true,
+  "Слой LAYER_2": true,
+  "Линии": true
+ },
+ "camera": {
+  "position": [
+   2617.641055441148,
+   2873.6251384611605,
+   4607.61584856994
+  ],
+  "target": [
+   462.62205505371094,
+   1279.5234375,
+   358.3674113178255
+  ],
+  "up": [
+   0,
+   1,
+   0
+  ]
+ },
+ "dimensions": []
+}
