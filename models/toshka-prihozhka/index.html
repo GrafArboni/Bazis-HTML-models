@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="bazis-viewer" content="0f83870d26a3">
+<meta name="bazis-viewer" content="632cce0bad41">
 <title>Передпокій · просмотр модели</title>
 <style>
 :root{color-scheme:dark;--bg:#10171d;--panel:#17232d;--line:#31414b;--text:#e8eef0;--muted:#a6bac4;--accent:#9ee2d0;--popup-border:#526776;--control-border:#46586a;--hover:#304654;--muted-soft:#9fb3bd;--divider:#26343d;--compact-slider:70px}
@@ -1358,6 +1358,14 @@ dialog.matPicker {
   padding: 4px;
 }
 .noteEditor {
+  /* плавающее окно: место задаёт модуль (left/top), тащится за заголовок */
+  position: fixed;
+  inset: auto;
+  margin: 0;
+  z-index: 40;
+  max-height: calc(100vh - 16px);
+  overflow: auto;
+  box-shadow: 0 12px 35px #0008;
   width: 440px;
   max-width: calc(100vw - 24px);
   background: var(--panel);
@@ -1365,6 +1373,24 @@ dialog.matPicker {
   border: 1px solid var(--popup-border);
   border-radius: 10px;
   padding: 14px;
+}
+.noteEditorHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: -14px -14px 6px;
+  padding: 10px 14px 6px;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+.noteEditorHead:active {
+  cursor: grabbing;
+}
+.noteEditorGrip {
+  color: var(--muted-soft);
+  font-size: 14px;
+  line-height: 1;
 }
 .noteEditor::backdrop {
   background: #0006;
@@ -1498,13 +1524,52 @@ dialog.matPicker {
   padding: 4px 10px;
   font-size: 12px;
 }
+/* Значок «нажми» у заметок, по которым нажимают (ракурс, узел): палец с
+   волнами. Маска — цвет берётся из background-color, как у значков кнопок. */
 .noteCallout.noteHasView .noteText::before {
-  content: '◉ ';
-  color: #e2b93b;
+  content: '';
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  vertical-align: -3px;
+  background-color: #e2b93b;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4.5%209.5a7.5%207.5%200%200%201%2015%200%22/%3E%3Cpath%20d%3D%22M7.8%209.5a4.2%204.2%200%200%201%208.4%200%22/%3E%3Cpath%20d%3D%22M10.6%2021.5v-3.2L8%2015.4a1.4%201.4%200%200%201%202.1-1.9l.9.9V9.6a1.4%201.4%200%200%201%202.8%200v4.2a1.4%201.4%200%200%201%202.7.5%201.4%201.4%200%200%201%202.6.8V18a3.5%203.5%200%200%201-3.5%203.5z%22/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4.5%209.5a7.5%207.5%200%200%201%2015%200%22/%3E%3Cpath%20d%3D%22M7.8%209.5a4.2%204.2%200%200%201%208.4%200%22/%3E%3Cpath%20d%3D%22M10.6%2021.5v-3.2L8%2015.4a1.4%201.4%200%200%201%202.1-1.9l.9.9V9.6a1.4%201.4%200%200%201%202.8%200v4.2a1.4%201.4%200%200%201%202.7.5%201.4%201.4%200%200%201%202.6.8V18a3.5%203.5%200%200%201-3.5%203.5z%22/%3E%3C/svg%3E") center / contain no-repeat;
 }
 .noteCallout.noteActive {
   outline: 2px solid #e2b93b;
   outline-offset: 1px;
+}
+/* Узел (местный разрез сферой) — бирюзовый, а не жёлтый, как обычные заметки:
+   сразу видно, что по нему нажимают, чтобы посмотреть узел крупным планом. */
+.noteCallout.noteSphere {
+  background: #13283aee;
+  border-color: #3f8fb0;
+  border-left-color: #4fc3f7;
+  color: #e6f6fd;
+}
+.noteCallout.noteSphere small {
+  color: #a9d4e6;
+}
+.noteCallout.noteSphere:hover,
+.noteCallout.noteSphere.focus {
+  border-color: #8fdcff;
+  background: #1a3850f4;
+  box-shadow: 0 0 0 2px #4fc3f744;
+}
+.noteCallout.noteSphere .noteText::before {
+  background-color: #4fc3f7;
+}
+.noteCallout.noteSphere.noteActive {
+  outline-color: #4fc3f7;
+}
+.noteLeader.noteSphere {
+  border-top-color: #4fc3f7;
+}
+.noteDot.noteSphere {
+  background: #4fc3f7;
+  box-shadow: 0 0 0 2px #13283a;
 }
 
 /* фото заметки: миниатюры в редакторе и просмотр в полный размер */
@@ -1666,6 +1731,9 @@ html.iconControls #notesOpen[aria-pressed='true'] {
   display: none;
 }
 @media (max-width: 760px) {
+  .noteCallout.noteSphere .noteBadge {
+    color: #8fdcff;
+  }
   .noteCallout .noteBadge {
     display: inline-grid;
     place-items: center;
@@ -4327,9 +4395,13 @@ window.OrbitControls = OrbitControls;
   <span class="noteStatus" id="notesStatus"></span>
 </div>
 
-<!-- Редактор заметки: новая / правка -->
+<!-- Редактор заметки: новая / правка. Плавающее окно (не модальное): модель за
+     ним можно крутить — видно, какой ракурс запоминаешь; тащится за заголовок. -->
 <dialog class="noteEditor" id="noteEditor" aria-label="Заметка">
-  <strong id="noteEditorTitle"></strong>
+  <div class="noteEditorHead" id="noteEditorHead" title="Перетащите, чтобы сдвинуть окно">
+    <span class="noteEditorGrip" aria-hidden="true">⠿</span>
+    <strong id="noteEditorTitle"></strong>
+  </div>
   <small id="noteEditorMeta"></small>
   <textarea id="noteEditorText" placeholder="Текст заметки" aria-label="Текст заметки"></textarea>
   <!-- Фото заметки: миниатюры строятся по данным. Файлы лежат рядом со страницей
@@ -9568,9 +9640,8 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
           else o.layers.disable(CAP_LAYER);
         });
     }
-    // Кадр с крышкой: метки трафарета → очистка глубины → сцена → красная
-    // полусфера по трафарету.
-    function renderWithCaps(render, scene, camera) {
+    // Метки трафарета: задние грани → 1, передние → 0 (ближайшая побеждает).
+    function drawMarks(render, scene, camera) {
       const mask = camera.layers.mask,
         override = scene.overrideMaterial;
       if (view.orthographic()) {
@@ -9580,32 +9651,75 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         ray[2] = direction.z;
       } else ray[0] = ray[1] = ray[2] = 0;
       markSolids();
-      renderer.autoClear = false;
       try {
-        renderer.clear(true, true, true);
         camera.layers.set(CAP_LAYER);
+        value[3] = shared.radius;
         ray[3] = 1;
         scene.overrideMaterial = backMark;
         render.call(renderer, scene, camera);
         ray[3] = 2;
         scene.overrideMaterial = frontMark;
         render.call(renderer, scene, camera);
+      } finally {
         ray[3] = 0;
         scene.overrideMaterial = override;
         camera.layers.mask = mask;
+      }
+    }
+    // Красная полусфера по трафарету; при прозрачных деталях — с их прозрачностью.
+    function drawCap(render, camera, opacity = 1) {
+      const m = capMesh.material,
+        see = opacity < 0.999;
+      if (m.transparent !== see) {
+        m.transparent = see;
+        m.needsUpdate = true;
+      }
+      m.opacity = opacity;
+      m.depthWrite = !see;
+      value[3] = 0; // сама крышка не обрезается
+      capMesh.position.copy(center);
+      capMesh.scale.setScalar(shared.radius * CHORD);
+      render.call(renderer, capScene, camera);
+      capsDrawn++;
+      framed = true;
+    }
+    // Кадр с крышкой: метки трафарета → очистка глубины → сцена → крышка.
+    function renderWithCaps(render, scene, camera) {
+      renderer.autoClear = false;
+      try {
+        renderer.clear(true, true, true);
+        drawMarks(render, scene, camera);
         renderer.clear(false, true, false);
+        value[3] = shared.radius;
         const result = render.call(renderer, scene, camera);
-        value[3] = 0; // сама крышка не обрезается
-        capMesh.position.copy(center);
-        capMesh.scale.setScalar(shared.radius * CHORD);
-        render.call(renderer, capScene, camera);
-        capsDrawn++;
+        drawCap(render, camera);
         return result;
       } finally {
-        scene.overrideMaterial = override;
-        camera.layers.mask = mask;
         renderer.autoClear = true;
-        ray[3] = 0;
+      }
+    }
+    // Кадр, нарисованный не обычным render (проход прозрачности деталей, OIT: свои
+    // цели и смешивание на экране), крышку не получил. Дорисовываем её поверх
+    // готового кадра (hooks.afterRender): очищаем глубину и трафарет, метки, крышка
+    // с прозрачностью деталей.
+    let framed = false;
+    function afterFrame(opacity) {
+      const drawn = framed;
+      framed = false;
+      if (drawn || !(shared.radius > 0) || !stencilOk || !shared.render) return;
+      const autoClear = renderer.autoClear,
+        target = renderer.getRenderTarget();
+      renderer.autoClear = false;
+      try {
+        renderer.setRenderTarget(null);
+        renderer.clear(false, true, true);
+        drawMarks(shared.render, view.scene, view.camera);
+        drawCap(shared.render, view.camera, opacity);
+      } finally {
+        framed = false;
+        value[3] = 0;
+        renderer.setRenderTarget(target);
+        renderer.autoClear = autoClear;
       }
     }
 
@@ -9613,6 +9727,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     if (!shared.renderers.has(renderer)) {
       shared.renderers.add(renderer);
       const render = renderer.render;
+      shared.render = render;
       renderer.render = function (scene, camera) {
         value[3] = shared.radius || 0;
         try {
@@ -9650,6 +9765,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       get capsDrawn() {
         return capsDrawn;
       },
+      afterFrame,
       contains(point) {
         return (
           !(shared.radius > 0) ||
@@ -10021,6 +10137,15 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     // привязки и выбор деталей проверяют hooks.pointVisible.
     const insideSphere = point => (clip?.active ? clip.contains(point) : true);
     hooks.pointVisible?.push(insideSphere);
+    // Прозрачность деталей (OIT) рисует кадр своими проходами — крышку узла тогда
+    // дорисовываем поверх готового кадра, с той же прозрачностью, что у деталей.
+    let panelOpacity = 1;
+    const trackOpacity = v => {
+      panelOpacity = Number(v) || 1;
+    };
+    const capsAfterRender = () => clip?.afterFrame(panelOpacity);
+    hooks.opacity?.push(trackOpacity);
+    hooks.afterRender?.push(capsAfterRender);
     function updateSphere() {
       const note = activeSphereNote();
       if (!clip) return;
@@ -10118,6 +10243,31 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     function markActive() {
       for (const [id, item] of views) item.box.classList.toggle('noteActive', id === activeNote);
     }
+    // Место окна редактора: по умолчанию на ПК — справа сверху области просмотра
+    // (модель остаётся видна), на телефоне — снизу; дальше — куда перетащили.
+    let editorPlace = null;
+    function placeEditor(x, y) {
+      const r = dialog.getBoundingClientRect(),
+        vw = win.innerWidth,
+        vh = win.innerHeight;
+      if (x === undefined) {
+        if (editorPlace) ({ x, y } = editorPlace);
+        else if (mobile()) {
+          x = (vw - r.width) / 2;
+          y = vh - r.height - 8;
+        } else {
+          const view = doc.getElementById('viewport')?.getBoundingClientRect();
+          x = vw - r.width - 16;
+          y = (view?.top || 80) + 8;
+        }
+      }
+      // заголовок всегда остаётся на экране — за него окно и тащат
+      x = Math.max(4, Math.min(vw - r.width - 4, x));
+      y = Math.max(4, Math.min(vh - 40, y));
+      dialog.style.left = x + 'px';
+      dialog.style.top = y + 'px';
+      if (arguments.length) editorPlace = { x, y };
+    }
     function renderPlacesRow() {
       if (!editing || !manyInput) return;
       manyInput.checked = editing.many;
@@ -10147,7 +10297,8 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       canvas.style.cursor = '';
       if (pickBar) pickBar.hidden = true;
       if (editing) {
-        dialog.showModal();
+        dialog.show();
+        placeEditor();
         renderPlacesRow();
         showSpherePreview();
       }
@@ -10293,6 +10444,9 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       item.text.translate = !note.text; // текст заметки не переводим, заглушку «Фото» — да
       item.text.hidden = !note.text && photos > 0;
       item.box.classList.toggle('noteHasView', enterable(note));
+      // узел (местный разрез) — свой цвет: видно, что по нему можно нажать и войти
+      const sphere = validSphere(note.sphere);
+      for (const el of [item.box, item.line, item.dot]) el.classList.toggle('noteSphere', sphere);
       // стрелки к доп. местам: по элементу линии и точки на место
       const places = note.extra || [];
       while (item.extra.length > places.length) {
@@ -10310,6 +10464,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         overlay.insertBefore(line, dot);
         item.extra.push({ line, dot, occluded: false });
       }
+      for (const e of item.extra) for (const el of [e.line, e.dot]) el.classList.toggle('noteSphere', sphere);
       item.box.classList.toggle('noteActive', note.id === activeNote);
       item.meta.textContent = note.element || '';
       item.meta.hidden = !note.element;
@@ -10584,9 +10739,13 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       photoHint.textContent = photoHint.dataset.text;
       renderDraft();
       renderViewRow();
-      if (dialog.open) dialog.close();
-      dialog.showModal();
-      renderSphereRow(); // после showModal: превью сферы показывается при открытом редакторе
+      // Окно не модальное: модель за ним крутится — видно, какой ракурс запоминаешь.
+      // Уже открыто (правка другой заметки) — только меняем содержимое.
+      if (!dialog.open) {
+        dialog.show();
+        placeEditor();
+      }
+      renderSphereRow(); // после show: превью сферы показывается при открытом редакторе
       renderPlacesRow();
       area.focus();
     }
@@ -10707,6 +10866,35 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         renderSphereRow();
       };
       $('noteEditorCancel').onclick = () => dialog.close();
+      // Перетаскивание за заголовок; место держится до перезагрузки страницы.
+      const head = $('noteEditorHead');
+      head.addEventListener('pointerdown', e => {
+        if (e.button !== 0) return;
+        const r = dialog.getBoundingClientRect(),
+          dx = e.clientX - r.left,
+          dy = e.clientY - r.top;
+        head.setPointerCapture?.(e.pointerId);
+        const move = ev => placeEditor(ev.clientX - dx, ev.clientY - dy);
+        const up = () => {
+          head.removeEventListener('pointermove', move);
+          head.removeEventListener('pointerup', up);
+          head.removeEventListener('pointercancel', up);
+        };
+        head.addEventListener('pointermove', move);
+        head.addEventListener('pointerup', up);
+        head.addEventListener('pointercancel', up);
+        e.preventDefault();
+      });
+      // Esc в плавающем окне закрывает его (у не модального окна сам не закрывает)
+      dialog.addEventListener('keydown', e => {
+        // закрытое окно (фокус остался внутри) — Esc идёт дальше, к выходу из ракурса
+        if (e.key !== 'Escape' || !dialog.open) return;
+        e.preventDefault();
+        // окно закрыто здесь же — до документа событие не пускаем, иначе он решил
+        // бы, что Esc нажат вне окна, и вывел бы из ракурса заметки
+        e.stopPropagation();
+        dialog.close();
+      });
       dialog.addEventListener('close', () => {
         // редактор спрятан на время выбора мест — черновик не теряем
         if (picking) return;
@@ -10866,8 +11054,10 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         return;
       }
       if (event.key !== 'Escape') return;
-      // Esc в редакторе/просмотре фото закрывает их, а не выводит из заметки
-      if (!event.target?.closest?.('dialog') && !adding) exitNote();
+      // Esc в редакторе/просмотре фото закрывает их, а не выводит из заметки.
+      // Только ОТКРЫТОЕ окно: после закрытия фокус иногда остаётся на элементе
+      // внутри него, и второй Esc тогда не выводил из ракурса.
+      if (!event.target?.closest?.('dialog[open]') && !adding) exitNote();
       closeMenu();
       if (adding) setAdding(false);
     }
@@ -10971,8 +11161,14 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       flight = null;
       clip?.dispose();
       restoreMinDistance();
-      const at = hooks.pointVisible?.indexOf(insideSphere) ?? -1;
-      if (at >= 0) hooks.pointVisible.splice(at, 1);
+      for (const [list, fn] of [
+        [hooks.pointVisible, insideSphere],
+        [hooks.opacity, trackOpacity],
+        [hooks.afterRender, capsAfterRender]
+      ]) {
+        const at = list?.indexOf(fn) ?? -1;
+        if (at >= 0) list.splice(at, 1);
+      }
       if (sphereMesh) {
         sphereMesh.removeFromParent();
         sphereMesh.geometry.dispose();
@@ -11078,7 +11274,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
   else (root.BazisViewerFeatures || (root.BazisViewerFeatures = [])).push({ name: 'notes', install });
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 
-(globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"Вернуть камеру как было (Esc)":{"en":"Return the camera to where it was (Esc)","pl":"Przywróć kamerę jak było (Esc)","uk":"Повернути камеру як було (Esc)"},"Вернуться в редактор (Enter, Esc)":{"en":"Back to the editor (Enter, Esc)","pl":"Wróć do edytora (Enter, Esc)","uk":"Повернутися в редактор (Enter, Esc)"},"Готово":{"en":"Done","pl":"Gotowe","uk":"Готово"},"Деталь":{"en":"Part","pl":"Element","uk":"Деталь"},"Диаметр":{"en":"Diameter","pl":"Średnica","uk":"Діаметр"},"Диаметр сферы, мм":{"en":"Sphere diameter, mm","pl":"Średnica sfery, mm","uk":"Діаметр сфери, мм"},"Забыть ракурс":{"en":"Forget view","pl":"Zapomnij widok","uk":"Забути ракурс"},"Закрыть фото":{"en":"Close photo","pl":"Zamknij zdjęcie","uk":"Закрити фото"},"Заметка":{"en":"Note","pl":"Notatka","uk":"Нотатка"},"Заметки":{"en":"Notes","pl":"Notatki","uk":"Нотатки"},"Заметки сохраняются вместе с видом — дискеткой «Сохранить на GitHub».":{"en":"Notes are saved together with the view — with the “Save to GitHub” floppy.","pl":"Notatki zapisują się razem z widokiem — dyskietką „Zapisz na GitHub”.","uk":"Нотатки зберігаються разом із виглядом — дискетою «Зберегти на GitHub»."},"Заметок пока нет":{"en":"No notes yet","pl":"Brak notatek","uk":"Нотаток поки немає"},"Запомнить ракурс":{"en":"Remember view","pl":"Zapamiętaj widok","uk":"Запам'ятати ракурс"},"Изменить":{"en":"Edit","pl":"Edytuj","uk":"Змінити"},"Изменить заметку":{"en":"Edit note","pl":"Edytuj notatkę","uk":"Змінити нотатку"},"Камера встанет в запомненный ракурс при нажатии на заметку.":{"en":"The camera moves to the saved view when the note is clicked.","pl":"Po kliknięciu notatki kamera ustawi się w zapamiętanym widoku.","uk":"Камера стане в запам'ятований ракурс при натисканні на нотатку."},"Мест:":{"en":"Places:","pl":"Miejsc:","uk":"Місць:"},"Мимо детали: щёлкните по её поверхности. Esc — отмена.":{"en":"Missed the part: click its surface. Esc — cancel.","pl":"Obok elementu: kliknij jego powierzchnię. Esc — anuluj.","uk":"Повз деталь: клацніть по її поверхні. Esc — скасування."},"Нажмите, чтобы изменить; правая кнопка — меню":{"en":"Click to edit; right button — menu","pl":"Kliknij, aby edytować; prawy przycisk — menu","uk":"Натисніть, щоб змінити; права кнопка — меню"},"Нажмите, чтобы посмотреть в ракурсе заметки; правая кнопка — меню":{"en":"Click to look from the note's view; right click — menu","pl":"Kliknij, aby zobaczyć w widoku notatki; prawy przycisk — menu","uk":"Натисніть, щоб подивитися в ракурсі нотатки; права кнопка — меню"},"Нажмите, чтобы посмотреть узел крупным планом; правая кнопка — меню":{"en":"Click to see the joint close up; right click — menu","pl":"Kliknij, aby zobaczyć węzeł w zbliżeniu; prawy przycisk — menu","uk":"Натисніть, щоб подивитися вузол великим планом; права кнопка — меню"},"Нажмите, чтобы раскрыть или свернуть":{"en":"Tap to expand or collapse","pl":"Dotknij, aby rozwinąć lub zwinąć","uk":"Натисніть, щоб розгорнути або згорнути"},"Не больше":{"en":"No more than","pl":"Nie więcej niż","uk":"Не більше"},"Не удалось добавить фото:":{"en":"Could not add the photo:","pl":"Nie udało się dodać zdjęcia:","uk":"Не вдалося додати фото:"},"Несколько мест":{"en":"Several places","pl":"Kilka miejsc","uk":"Кілька місць"},"Несовместимый модуль заметок":{"en":"Incompatible notes module","pl":"Niezgodny moduł notatek","uk":"Несумісний модуль нотаток"},"Новая заметка":{"en":"New note","pl":"Nowa notatka","uk":"Нова нотатка"},"Обновить ракурс":{"en":"Update view","pl":"Zaktualizuj widok","uk":"Оновити ракурс"},"Открыть заметку":{"en":"Open note","pl":"Otwórz notatkę","uk":"Відкрити нотатку"},"Открыть фото (":{"en":"Open photos (","pl":"Otwórz zdjęcia (","uk":"Відкрити фото ("},"Отмена":{"en":"Cancel","pl":"Anuluj","uk":"Скасувати"},"Показать заметку":{"en":"Show note","pl":"Pokaż notatkę","uk":"Показати нотатку"},"Показывать":{"en":"Show","pl":"Pokazuj","uk":"Показувати"},"Поставьте камеру как нужно и нажмите «Запомнить ракурс».":{"en":"Set the camera as needed and click “Remember view”.","pl":"Ustaw kamerę jak trzeba i kliknij „Zapamiętaj widok”.","uk":"Поставте камеру як потрібно і натисніть «Запам'ятати ракурс»."},"Предыдущее фото":{"en":"Previous photo","pl":"Poprzednie zdjęcie","uk":"Попереднє фото"},"Ракурс заметки":{"en":"Note view","pl":"Widok notatki","uk":"Ракурс нотатки"},"Ракурс запомнен: камера встанет так при нажатии на заметку.":{"en":"View saved: the camera moves here when the note is clicked.","pl":"Widok zapamiętany: kamera ustawi się tak po kliknięciu notatki.","uk":"Ракурс запам'ятовано: камера стане так при натисканні на нотатку."},"Свернуть заметку":{"en":"Collapse note","pl":"Zwiń notatkę","uk":"Згорнути нотатку"},"Скрыть заметку":{"en":"Hide note","pl":"Ukryj notatkę","uk":"Приховати нотатку"},"Следующее фото":{"en":"Next photo","pl":"Następne zdjęcie","uk":"Наступне фото"},"Сохранить":{"en":"Save","pl":"Zapisz","uk":"Зберегти"},"Список (":{"en":"List (","pl":"Lista (","uk":"Список ("},"Список (0)":{"en":"List (0)","pl":"Lista (0)","uk":"Список (0)"},"Текст заметки":{"en":"Note text","pl":"Tekst notatki","uk":"Текст нотатки"},"Точка без привязки к детали":{"en":"Point not attached to a part","pl":"Punkt bez powiązania z elementem","uk":"Точка без прив'язки до деталі"},"Убрать последнее":{"en":"Remove last","pl":"Usuń ostatnie","uk":"Прибрати останнє"},"Убрать фото из заметки":{"en":"Remove photo from note","pl":"Usuń zdjęcie z notatki","uk":"Прибрати фото з нотатки"},"Удалить":{"en":"Delete","pl":"Usuń","uk":"Видалити"},"Удалить заметку":{"en":"Delete note","pl":"Usuń notatkę","uk":"Видалити нотатку"},"Удалить заметку?":{"en":"Delete the note?","pl":"Usunąć notatkę?","uk":"Видалити нотатку?"},"Узел крупным планом (сфера)":{"en":"Joint close-up (sphere)","pl":"Węzeł w zbliżeniu (sfera)","uk":"Вузол великим планом (сфера)"},"Фото":{"en":"Photo","pl":"Zdjęcie","uk":"Фото"},"Фото заметки":{"en":"Note photo","pl":"Zdjęcie notatki","uk":"Фото нотатки"},"Фото уменьшаются до 1600 px и сохраняются дискеткой в публичный репозиторий GitHub рядом со страницей.":{"en":"Photos are reduced to 1600 px and saved with the floppy to the public GitHub repository next to the page.","pl":"Zdjęcia są zmniejszane do 1600 px i zapisywane dyskietką w publicznym repozytorium GitHub obok strony.","uk":"Фото зменшуються до 1600 px і зберігаються дискетою в публічний репозиторій GitHub поруч зі сторінкою."},"Фото:":{"en":"Photos:","pl":"Zdjęcia:","uk":"Фото:"},"Щёлкните по детали, куда поставить заметку. Esc — отмена.":{"en":"Click the part where the note goes. Esc — cancel.","pl":"Kliknij element, na którym umieścić notatkę. Esc — anuluj.","uk":"Клацніть по деталі, куди поставити нотатку. Esc — скасування."},"Щёлкните по деталям, на которые указывает заметка":{"en":"Click the parts the note points to","pl":"Kliknij części, na które wskazuje notatka","uk":"Клацніть по деталях, на які вказує нотатка"},"Щёлкните по деталям, на которые указывает заметка. Мест:":{"en":"Click the parts the note points to. Places:","pl":"Kliknij części, na które wskazuje notatka. Miejsc:","uk":"Клацніть по деталях, на які вказує нотатка. Місць:"},"мм":{"en":"mm","pl":"mm","uk":"мм"},"не удалось сжать фото":{"en":"could not compress the photo","pl":"nie udało się skompresować zdjęcia","uk":"не вдалося стиснути фото"},"поз.":{"en":"pos.","pl":"poz.","uk":"поз."},"фото в одной заметке.":{"en":"photos in one note.","pl":"zdjęć w jednej notatce.","uk":"фото в одній нотатці."},"✕ Выйти":{"en":"✕ Exit","pl":"✕ Wyjdź","uk":"✕ Вийти"},"＋ Заметка":{"en":"＋ Note","pl":"＋ Notatka","uk":"＋ Нотатка"},"＋ Место":{"en":"＋ Place","pl":"＋ Miejsce","uk":"＋ Місце"},"＋ Фото":{"en":"＋ Photo","pl":"＋ Zdjęcie","uk":"＋ Фото"}});
+(globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"Вернуть камеру как было (Esc)":{"en":"Return the camera to where it was (Esc)","pl":"Przywróć kamerę jak było (Esc)","uk":"Повернути камеру як було (Esc)"},"Вернуться в редактор (Enter, Esc)":{"en":"Back to the editor (Enter, Esc)","pl":"Wróć do edytora (Enter, Esc)","uk":"Повернутися в редактор (Enter, Esc)"},"Готово":{"en":"Done","pl":"Gotowe","uk":"Готово"},"Деталь":{"en":"Part","pl":"Element","uk":"Деталь"},"Диаметр":{"en":"Diameter","pl":"Średnica","uk":"Діаметр"},"Диаметр сферы, мм":{"en":"Sphere diameter, mm","pl":"Średnica sfery, mm","uk":"Діаметр сфери, мм"},"Забыть ракурс":{"en":"Forget view","pl":"Zapomnij widok","uk":"Забути ракурс"},"Закрыть фото":{"en":"Close photo","pl":"Zamknij zdjęcie","uk":"Закрити фото"},"Заметка":{"en":"Note","pl":"Notatka","uk":"Нотатка"},"Заметки":{"en":"Notes","pl":"Notatki","uk":"Нотатки"},"Заметки сохраняются вместе с видом — дискеткой «Сохранить на GitHub».":{"en":"Notes are saved together with the view — with the “Save to GitHub” floppy.","pl":"Notatki zapisują się razem z widokiem — dyskietką „Zapisz na GitHub”.","uk":"Нотатки зберігаються разом із виглядом — дискетою «Зберегти на GitHub»."},"Заметок пока нет":{"en":"No notes yet","pl":"Brak notatek","uk":"Нотаток поки немає"},"Запомнить ракурс":{"en":"Remember view","pl":"Zapamiętaj widok","uk":"Запам'ятати ракурс"},"Изменить":{"en":"Edit","pl":"Edytuj","uk":"Змінити"},"Изменить заметку":{"en":"Edit note","pl":"Edytuj notatkę","uk":"Змінити нотатку"},"Камера встанет в запомненный ракурс при нажатии на заметку.":{"en":"The camera moves to the saved view when the note is clicked.","pl":"Po kliknięciu notatki kamera ustawi się w zapamiętanym widoku.","uk":"Камера стане в запам'ятований ракурс при натисканні на нотатку."},"Мест:":{"en":"Places:","pl":"Miejsc:","uk":"Місць:"},"Мимо детали: щёлкните по её поверхности. Esc — отмена.":{"en":"Missed the part: click its surface. Esc — cancel.","pl":"Obok elementu: kliknij jego powierzchnię. Esc — anuluj.","uk":"Повз деталь: клацніть по її поверхні. Esc — скасування."},"Нажмите, чтобы изменить; правая кнопка — меню":{"en":"Click to edit; right button — menu","pl":"Kliknij, aby edytować; prawy przycisk — menu","uk":"Натисніть, щоб змінити; права кнопка — меню"},"Нажмите, чтобы посмотреть в ракурсе заметки; правая кнопка — меню":{"en":"Click to look from the note's view; right click — menu","pl":"Kliknij, aby zobaczyć w widoku notatki; prawy przycisk — menu","uk":"Натисніть, щоб подивитися в ракурсі нотатки; права кнопка — меню"},"Нажмите, чтобы посмотреть узел крупным планом; правая кнопка — меню":{"en":"Click to see the joint close up; right click — menu","pl":"Kliknij, aby zobaczyć węzeł w zbliżeniu; prawy przycisk — menu","uk":"Натисніть, щоб подивитися вузол великим планом; права кнопка — меню"},"Нажмите, чтобы раскрыть или свернуть":{"en":"Tap to expand or collapse","pl":"Dotknij, aby rozwinąć lub zwinąć","uk":"Натисніть, щоб розгорнути або згорнути"},"Не больше":{"en":"No more than","pl":"Nie więcej niż","uk":"Не більше"},"Не удалось добавить фото:":{"en":"Could not add the photo:","pl":"Nie udało się dodać zdjęcia:","uk":"Не вдалося додати фото:"},"Несколько мест":{"en":"Several places","pl":"Kilka miejsc","uk":"Кілька місць"},"Несовместимый модуль заметок":{"en":"Incompatible notes module","pl":"Niezgodny moduł notatek","uk":"Несумісний модуль нотаток"},"Новая заметка":{"en":"New note","pl":"Nowa notatka","uk":"Нова нотатка"},"Обновить ракурс":{"en":"Update view","pl":"Zaktualizuj widok","uk":"Оновити ракурс"},"Открыть заметку":{"en":"Open note","pl":"Otwórz notatkę","uk":"Відкрити нотатку"},"Открыть фото (":{"en":"Open photos (","pl":"Otwórz zdjęcia (","uk":"Відкрити фото ("},"Отмена":{"en":"Cancel","pl":"Anuluj","uk":"Скасувати"},"Перетащите, чтобы сдвинуть окно":{"en":"Drag to move the window","pl":"Przeciągnij, aby przesunąć okno","uk":"Перетягніть, щоб зсунути вікно"},"Показать заметку":{"en":"Show note","pl":"Pokaż notatkę","uk":"Показати нотатку"},"Показывать":{"en":"Show","pl":"Pokazuj","uk":"Показувати"},"Поставьте камеру как нужно и нажмите «Запомнить ракурс».":{"en":"Set the camera as needed and click “Remember view”.","pl":"Ustaw kamerę jak trzeba i kliknij „Zapamiętaj widok”.","uk":"Поставте камеру як потрібно і натисніть «Запам'ятати ракурс»."},"Предыдущее фото":{"en":"Previous photo","pl":"Poprzednie zdjęcie","uk":"Попереднє фото"},"Ракурс заметки":{"en":"Note view","pl":"Widok notatki","uk":"Ракурс нотатки"},"Ракурс запомнен: камера встанет так при нажатии на заметку.":{"en":"View saved: the camera moves here when the note is clicked.","pl":"Widok zapamiętany: kamera ustawi się tak po kliknięciu notatki.","uk":"Ракурс запам'ятовано: камера стане так при натисканні на нотатку."},"Свернуть заметку":{"en":"Collapse note","pl":"Zwiń notatkę","uk":"Згорнути нотатку"},"Скрыть заметку":{"en":"Hide note","pl":"Ukryj notatkę","uk":"Приховати нотатку"},"Следующее фото":{"en":"Next photo","pl":"Następne zdjęcie","uk":"Наступне фото"},"Сохранить":{"en":"Save","pl":"Zapisz","uk":"Зберегти"},"Список (":{"en":"List (","pl":"Lista (","uk":"Список ("},"Список (0)":{"en":"List (0)","pl":"Lista (0)","uk":"Список (0)"},"Текст заметки":{"en":"Note text","pl":"Tekst notatki","uk":"Текст нотатки"},"Точка без привязки к детали":{"en":"Point not attached to a part","pl":"Punkt bez powiązania z elementem","uk":"Точка без прив'язки до деталі"},"Убрать последнее":{"en":"Remove last","pl":"Usuń ostatnie","uk":"Прибрати останнє"},"Убрать фото из заметки":{"en":"Remove photo from note","pl":"Usuń zdjęcie z notatki","uk":"Прибрати фото з нотатки"},"Удалить":{"en":"Delete","pl":"Usuń","uk":"Видалити"},"Удалить заметку":{"en":"Delete note","pl":"Usuń notatkę","uk":"Видалити нотатку"},"Удалить заметку?":{"en":"Delete the note?","pl":"Usunąć notatkę?","uk":"Видалити нотатку?"},"Узел крупным планом (сфера)":{"en":"Joint close-up (sphere)","pl":"Węzeł w zbliżeniu (sfera)","uk":"Вузол великим планом (сфера)"},"Фото":{"en":"Photo","pl":"Zdjęcie","uk":"Фото"},"Фото заметки":{"en":"Note photo","pl":"Zdjęcie notatki","uk":"Фото нотатки"},"Фото уменьшаются до 1600 px и сохраняются дискеткой в публичный репозиторий GitHub рядом со страницей.":{"en":"Photos are reduced to 1600 px and saved with the floppy to the public GitHub repository next to the page.","pl":"Zdjęcia są zmniejszane do 1600 px i zapisywane dyskietką w publicznym repozytorium GitHub obok strony.","uk":"Фото зменшуються до 1600 px і зберігаються дискетою в публічний репозиторій GitHub поруч зі сторінкою."},"Фото:":{"en":"Photos:","pl":"Zdjęcia:","uk":"Фото:"},"Щёлкните по детали, куда поставить заметку. Esc — отмена.":{"en":"Click the part where the note goes. Esc — cancel.","pl":"Kliknij element, na którym umieścić notatkę. Esc — anuluj.","uk":"Клацніть по деталі, куди поставити нотатку. Esc — скасування."},"Щёлкните по деталям, на которые указывает заметка":{"en":"Click the parts the note points to","pl":"Kliknij części, na które wskazuje notatka","uk":"Клацніть по деталях, на які вказує нотатка"},"Щёлкните по деталям, на которые указывает заметка. Мест:":{"en":"Click the parts the note points to. Places:","pl":"Kliknij części, na które wskazuje notatka. Miejsc:","uk":"Клацніть по деталях, на які вказує нотатка. Місць:"},"мм":{"en":"mm","pl":"mm","uk":"мм"},"не удалось сжать фото":{"en":"could not compress the photo","pl":"nie udało się skompresować zdjęcia","uk":"не вдалося стиснути фото"},"поз.":{"en":"pos.","pl":"poz.","uk":"поз."},"фото в одной заметке.":{"en":"photos in one note.","pl":"zdjęć w jednej notatce.","uk":"фото в одній нотатці."},"✕ Выйти":{"en":"✕ Exit","pl":"✕ Wyjdź","uk":"✕ Вийти"},"＋ Заметка":{"en":"＋ Note","pl":"＋ Notatka","uk":"＋ Нотатка"},"＋ Место":{"en":"＋ Place","pl":"＋ Miejsce","uk":"＋ Місце"},"＋ Фото":{"en":"＋ Photo","pl":"＋ Zdjęcie","uk":"＋ Фото"}});
 (function (root) {
   'use strict';
   // «Однотонная фурнитура». По умолчанию выключена: фурнитура и импортированные тела
@@ -16027,7 +16223,7 @@ const meshStats={panels:0,profiles:0,lines:0,imports:0,hardware:0,guides:0,trian
 const holeMeshes=[],holeMaterials=new Set();
 // Универсальный контракт модулей. Предметная логика остаётся в adapter.js
 // функции; шаблон только предоставляет точки расширения.
-const featureHooks={canvasClick:[],snapCandidates:[],pointVisible:[],panelGeometry:[],selectionTarget:[],selectionChanged:[],geometryChanged:[],selectionFields:[],selectionAccuracy:[],frame:[],ready:[],projection:[],surfaceMaterial:[],opacity:[],render:[]},featureInstances=[],featureServices={};
+const featureHooks={canvasClick:[],snapCandidates:[],pointVisible:[],panelGeometry:[],selectionTarget:[],selectionChanged:[],geometryChanged:[],selectionFields:[],selectionAccuracy:[],frame:[],ready:[],projection:[],afterRender:[],surfaceMaterial:[],opacity:[],render:[]},featureInstances=[],featureServices={};
 // Точки монтирования по блокам меню: selectionMount — «Выбор и видимость»,
 // layersMount — «Слои». toolMount остаётся запасным (скрытый span) для модулей,
 // не выбравших блок. Так модуль сам решает, в какой блок класть свой инструмент.
@@ -16734,7 +16930,7 @@ $('nativeMeasureCount').textContent=DATA.native_dimensions.length;
 $('nativeDimensions').disabled=!DATA.native_dimensions.length;
 $('nativeNote').textContent=DATA.native_dimensions.length?'Размеры из файла и созданные здесь управляются отдельно.':'В этом файле сохранённых размерных объектов нет. Ниже можно создать замеры по геометрии.';
 updateStatus();
-function renderFrame(){if(!featureHooks.render.some(hook=>hook()===true))renderer.render(scene,camera)}
+function renderFrame(){if(!featureHooks.render.some(hook=>hook()===true))renderer.render(scene,camera);for(const hook of featureHooks.afterRender)hook()}
 // Заслонение подписей размеров — луч на подпись; каждый кадр это стоило половину
 // кадра на тяжёлой модели (70 размеров × 10 тыс. мешей, режим замера — 83 → 172 мс).
 // Пересчёт — не чаще раза в 200 мс, пока камера движется, ещё раз после остановки
