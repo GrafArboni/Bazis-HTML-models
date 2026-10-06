@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "source": "796a94f97be96d829b0d14c394c8e468c1eed99a264343181b3a94df2d178505",
- "savedAt": "2026-10-06T13:58:25.720Z",
+ "savedAt": "2026-10-06T14:01:04.905Z",
  "features": {
   "outline": false,
   "section": {
@@ -428,14 +428,86 @@
       "diameter": 440
      },
      "updated": "2026-10-06T13:58:15.106Z"
+    },
+    {
+     "id": "nmuwqv84fx30e",
+     "text": "Тыкнул сюдой кабель-каналы",
+     "point": [
+      -1122.172,
+      601.208,
+      -18.968
+     ],
+     "objectId": 8660,
+     "local": [
+      -1122.172,
+      601.208,
+      0
+     ],
+     "element": "Задняя стенка",
+     "sphere": {
+      "diameter": 530
+     },
+     "updated": "2026-10-06T13:59:19.206Z"
+    },
+    {
+     "id": "nmuwqwu8c80at",
+     "text": "Капец кривой угол",
+     "point": [
+      -21.777,
+      2512.618,
+      -15.9
+     ],
+     "objectId": 3535,
+     "local": [
+      1179.148,
+      269.931,
+      18
+     ],
+     "element": "Крышка",
+     "updated": "2026-10-06T14:00:05.842Z"
+    },
+    {
+     "id": "nmuwqx4v8zx6g",
+     "text": "Общая накладка на боковину шкафа и дверной проем",
+     "point": [
+      -1806.72,
+      1250.204,
+      173.566
+     ],
+     "objectId": 541,
+     "local": [
+      569.873,
+      1246.918,
+      18
+     ],
+     "element": "Стойка правая внутренняя",
+     "updated": "2026-10-06T14:00:27.937Z"
+    },
+    {
+     "id": "nmuwqxnse4cp9",
+     "text": "Стык фасада и стоек",
+     "point": [
+      -1797.494,
+      2518.775,
+      654.555
+     ],
+     "objectId": 6597,
+     "local": [
+      -8.774,
+      4.657,
+      18.024
+     ],
+     "element": "Карниз",
+     "sphere": {
+      "diameter": 360
+     },
+     "updated": "2026-10-06T14:00:48.025Z"
     }
    ]
   },
   "hardware_mono": false,
   "visibility": {
-   "hidden": [
-    8850
-   ],
+   "hidden": [],
    "objectMode": true
   },
   "panel_hardware": {
@@ -469,7 +541,7 @@
   "holes": true,
   "lines": true,
   "overlay": false,
-  "opacity": "82",
+  "opacity": "100",
   "guides": false,
   "holeOverlay": false,
   "nativeDimensions": true,
@@ -485,7 +557,7 @@
   "notesShow": true,
   "noteEditorMany": false,
   "noteEditorSphere": true,
-  "noteEditorDiameter": "440",
+  "noteEditorDiameter": "360",
   "assemblerSeparation": "250",
   "assemblerLabelPosition": true,
   "assemblerLabelName": true,
@@ -506,21 +578,21 @@
  },
  "camera": {
   "position": [
-   -2785.461000000001,
-   1608.5710000000001,
-   2296.6619999999994
+   -1684.2040000000006,
+   2657.5499999999993,
+   4453.0239999999985
   ],
   "target": [
-   -1236.68,
-   655.912,
-   484.529
+   -979.522,
+   644.7150000000001,
+   -70.24000000000001
   ],
   "up": [
    0,
    1,
    0
   ],
-  "orthographic": false
+  "orthographic": true
  },
  "dimensions": []
 }
