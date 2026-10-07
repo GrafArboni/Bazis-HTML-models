@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "source": "b029d8bd79dd9100bbf32d3dfd4c6eda75c23be4ad9d4d1c1e6db5823b66678e",
- "savedAt": "2026-10-07T08:38:21.824Z",
+ "savedAt": "2026-10-07T08:38:48.219Z",
  "features": {
   "outline": false,
   "section": {
@@ -502,7 +502,7 @@
   },
   "panel_hardware": {
    "active": false,
-   "selectedPanelId": 2091
+   "selectedPanelId": null
   },
   "assembler": {
    "active": false,
@@ -568,14 +568,14 @@
  },
  "camera": {
   "position": [
-   -2483.864031536481,
-   2869.9587396058587,
-   2677.4933046419374
+   950.6751619195265,
+   2562.9767946677175,
+   4391.118828618598
   ],
   "target": [
-   -1180.866,
-   1332.135,
-   -625.612
+   -1653.5268127262907,
+   1108.7578259955337,
+   -278.63883080429065
   ],
   "up": [
    0,
