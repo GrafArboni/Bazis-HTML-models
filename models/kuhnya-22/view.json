@@ -1,0 +1,102 @@
+{
+ "schema": 1,
+ "source": "efd63453aa78c093f9c04e30e70dca1bef08cace27cc8a349698a3e7efe21aa1",
+ "savedAt": "2026-10-07T16:02:54.311Z",
+ "features": {
+  "outline": false,
+  "section": {
+   "active": false,
+   "axis": "y",
+   "position": 1367.044312953949,
+   "reversed": false,
+   "showPlane": true,
+   "chosen": false,
+   "normal": [
+    0,
+    1,
+    0
+   ]
+  },
+  "display_modes": null,
+  "dimension_actions": {
+   "colors": []
+  },
+  "notes": {
+   "enabled": true,
+   "notes": []
+  },
+  "hardware_mono": false,
+  "visibility": {
+   "hidden": [],
+   "objectMode": true
+  }
+ },
+ "controls": {
+  "panels": true,
+  "profiles": true,
+  "edges": true,
+  "textures": true,
+  "imports": true,
+  "hardware": true,
+  "holes": true,
+  "lines": true,
+  "overlay": false,
+  "opacity": "100",
+  "guides": false,
+  "holeOverlay": false,
+  "nativeDimensions": true,
+  "manualDimensions": true,
+  "githubTokenRemember": true,
+  "sectionEnabled": false,
+  "sectionShowPlane": true,
+  "sectionPosition": "1366.99570598602",
+  "sectionReverse": false,
+  "displayModesEnabled": false,
+  "notesShow": true,
+  "noteEditorMany": false,
+  "noteEditorSphere": false,
+  "noteEditorDiameter": "60"
+ },
+ "layers": [
+  true,
+  true,
+  true
+ ],
+ "layersByName": {
+  "Слой 0": true,
+  "Слой LAYER_1": true,
+  "Слой LEICA_3DDISTO_SURFACESCAN": true
+ },
+ "camera": {
+  "position": [
+   -2650.580190074132,
+   1639.5905420596441,
+   1863.203492158724
+  ],
+  "target": [
+   -1869.4013671875,
+   1366.044312953949,
+   1886.172180175781
+  ],
+  "up": [
+   0,
+   1,
+   0
+  ],
+  "orthographic": false
+ },
+ "dimensions": [
+  {
+   "a": [
+    -70.312,
+    617.939,
+    1262.369
+   ],
+   "b": [
+    -14.079626410651558,
+    589.7395038266673,
+    2071.756700831489
+   ]
+  }
+ ]
+}
