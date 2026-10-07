@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "source": "c54736d04f4f3dc06c513ad9fc1c89be5d9e587ced6697ebb4457e99a2126a13",
- "savedAt": "2026-10-07T18:03:52.896Z",
+ "savedAt": "2026-10-07T18:05:22.491Z",
  "features": {
   "outline": false,
   "section": {
@@ -567,6 +567,26 @@
       "diameter": 430
      },
      "updated": "2026-10-07T18:03:35.562Z"
+    },
+    {
+     "id": "nmuyf3kigv0lb",
+     "text": "Мусорное ведро Blanco",
+     "point": [
+      1198.384,
+      401.857,
+      577.716
+     ],
+     "objectId": 20616,
+     "local": [
+      236.384,
+      283.857,
+      0.216
+     ],
+     "element": "Система сортування відходів SELECT II 60/2 BLANCO (526203)\r162874",
+     "images": [
+      "6a7c5a3ba4662799.jpg"
+     ],
+     "updated": "2026-10-07T18:05:15.911Z"
     }
    ]
   },
@@ -577,7 +597,7 @@
   },
   "panel_hardware": {
    "active": false,
-   "selectedPanelId": null
+   "selectedPanelId": 20652
   },
   "assembler": {
    "active": false,
@@ -622,7 +642,7 @@
   "dimensionBox": false,
   "notesShow": true,
   "noteEditorMany": false,
-  "noteEditorSphere": true,
+  "noteEditorSphere": false,
   "noteEditorDiameter": "430",
   "assemblerSeparation": "250",
   "assemblerLabelPosition": true,
@@ -638,14 +658,14 @@
  },
  "camera": {
   "position": [
-   5272.574541643897,
-   2104.7067414194235,
-   5786.184985762675
+   5048.449131679883,
+   1744.4331267422162,
+   3572.799244273835
   ],
   "target": [
-   1467.0109542258065,
-   1107.9806992377082,
-   1773.3144290485295
+   1801.0008948288714,
+   580.6757319077132,
+   1300.4151002897431
   ],
   "up": [
    0,
