@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="bazis-viewer" content="012ec8d73289">
+<meta name="bazis-viewer" content="79cdac07efe5">
 <title>Зона ТВ · просмотр модели</title>
 <style>
 :root{color-scheme:dark;--bg:#10171d;--panel:#17232d;--line:#31414b;--text:#e8eef0;--muted:#a6bac4;--accent:#9ee2d0;--popup-border:#526776;--control-border:#46586a;--hover:#304654;--muted-soft:#9fb3bd;--divider:#26343d;--compact-slider:70px}
@@ -14112,9 +14112,13 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       return list;
     }
     function anchor(i) {
+      // Луч — без ссылки на камеру: Raycaster хранит переданную точку по ссылке, и
+      // viewRay (в параллельной проекции — начало луча за подписью) переставлял бы
+      // саму камеру — она металась между подписями при выборе узла.
       const center = i.center.clone().add(i.offset),
-        ray = new T.Raycaster(camera.position, center.clone().sub(camera.position).normalize());
-      services.viewRay?.(center, ray); // в параллельной проекции — вдоль взгляда
+        ray = new T.Raycaster();
+      if (services.viewRay) services.viewRay(center, ray);
+      else ray.set(camera.position, center.clone().sub(camera.position).normalize());
       const hit = ray.intersectObjects(meshesOf(i), false).find(h => services.pointVisible(h.point));
       return hit?.point || center;
     }
@@ -16476,7 +16480,8 @@ let cameraFitted=false;
 // остались того же порядка, что в перспективе.
 const viewDirection=new THREE.Vector3();
 function viewDepth(point){return orthographic?camera.position.distanceTo(controls.target):camera.position.distanceTo(point)}
-function viewRay(point,ray){if(!orthographic){const d=camera.position.distanceTo(point);ray.set(camera.position,viewDirection.copy(point).sub(camera.position).normalize());return d}
+function viewRay(point,ray){const own=ray.ray||ray;if(own.origin===camera.position)own.origin=new THREE.Vector3();// луч с камерой по ссылке (new Raycaster(camera.position)) двигал бы камеру
+ if(!orthographic){const d=camera.position.distanceTo(point);ray.set(camera.position,viewDirection.copy(point).sub(camera.position).normalize());return d}
  camera.getWorldDirection(viewDirection);const d=Math.max(1,viewDirection.dot(point.clone().sub(center))+span*1.5);
  ray.set(point.clone().addScaledVector(viewDirection,-d),viewDirection);return d}
 function setProjection(value){orthographic=!!value;camera.updateProjectionMatrix();dimensionMoved=true;
