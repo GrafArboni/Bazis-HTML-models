@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="bazis-viewer" content="012ec8d73289">
+<meta name="bazis-viewer" content="632cce0bad41">
 <title>ЖК Варшавский Кухня · просмотр модели</title>
 <style>
 :root{color-scheme:dark;--bg:#10171d;--panel:#17232d;--line:#31414b;--text:#e8eef0;--muted:#a6bac4;--accent:#9ee2d0;--popup-border:#526776;--control-border:#46586a;--hover:#304654;--muted-soft:#9fb3bd;--divider:#26343d;--compact-slider:70px}
@@ -179,14 +179,6 @@
   display: flex;
   gap: 8px;
   justify-content: flex-end;
-}
-
-/* «Настройки вида применены…» — для сведения; на телефоне строка статуса ложится
-   поверх модели, там её не показываем (ход сохранения и ошибки — показываем) */
-@media (max-width: 760px) {
-  #githubSaveStatus.githubSaveInfo {
-    display: none;
-  }
 }
 </style>
 <style data-feature="toolbar">
@@ -2209,33 +2201,6 @@ html.iconControls #assemblerOpen[aria-pressed='true'] {
   #viewerUpdateLabel {
     display: none;
   }
-}
-</style>
-<style data-feature="range_entry">
-/* Значение справа от ползунка — его можно нажать и ввести число вручную */
-input[type='range'] + output,
-input[type='range'] + span {
-  cursor: text;
-  border-bottom: 1px dotted transparent;
-}
-input[type='range'] + output:hover,
-input[type='range'] + span:hover,
-input[type='range'] + output:focus-visible,
-input[type='range'] + span:focus-visible {
-  border-bottom-color: var(--muted-soft);
-}
-.rangeEntry {
-  box-sizing: border-box;
-  height: 24px;
-  padding: 1px 5px;
-  border: 1px solid var(--accent);
-  border-radius: 5px;
-  background: #0f1a21;
-  color: var(--text);
-  font: inherit;
-  font-size: 12px;
-  text-align: right;
-  flex: none;
 }
 </style>
 <style data-feature="icon_controls">
@@ -5244,13 +5209,6 @@ window.OrbitControls = OrbitControls;
     const button = doc.getElementById('saveGithub');
     button.title = 'Сохранить настройки вида в опубликованную страницу (' + settingsPath + ')';
     const status = doc.getElementById('githubSaveStatus');
-    // Статус кнопки. info — сообщение «для сведения» (применён сохранённый вид): на
-    // телефоне его не показываем — строка статуса ложится поверх модели. Ход
-    // сохранения и ошибки видны везде.
-    const say = (text, info = false) => {
-      status.textContent = text;
-      status.classList.toggle('githubSaveInfo', info);
-    };
     const wrap = doc.getElementById('githubSaveTools');
     (context.toolbarMount || context.toolMount).append(wrap);
     dialog = doc.getElementById('githubTokenDialog');
@@ -5364,7 +5322,7 @@ window.OrbitControls = OrbitControls;
           return made.sha;
         } catch (error) {
           if (error.status !== 422 || attempt >= ATTEMPTS) throw error;
-          say('Ветка изменилась, пересобираю коммит… (' + attempt + ')');
+          status.textContent = 'Ветка изменилась, пересобираю коммит… (' + attempt + ')';
         }
       }
     }
@@ -5409,7 +5367,7 @@ window.OrbitControls = OrbitControls;
 
     async function tokenOrAsk() {
       const token = readToken() || (await askToken());
-      if (!token) say('Отменено.');
+      if (!token) status.textContent = 'Отменено.';
       return token;
     }
 
@@ -5479,11 +5437,11 @@ window.OrbitControls = OrbitControls;
       if (!token) return null;
       const saver = ((win.__viewer && win.__viewer.features) || []).find(f => f.name === 'html_save');
       if (!saver || !saver.capture) {
-        say('Модуль сохранения HTML недоступен.');
+        status.textContent = 'Модуль сохранения HTML недоступен.';
         return null;
       }
       button.disabled = true;
-      say('Сохраняю на GitHub…');
+      status.textContent = 'Сохраняю на GitHub…';
       try {
         const state = saver.capture();
         const { entries, uploaded } = await attachmentEntries(token);
@@ -5498,10 +5456,11 @@ window.OrbitControls = OrbitControls;
         try {
           win.localStorage.setItem(CACHE, JSON.stringify(state));
         } catch (e) {}
-        say('Настройки вида сохранены (коммит ' + sha.slice(0, 7) + '). Перезаливка модели их не сотрёт.');
+        status.textContent =
+          'Настройки вида сохранены (коммит ' + sha.slice(0, 7) + '). Перезаливка модели их не сотрёт.';
         return sha;
       } catch (error) {
-        say(error.message);
+        status.textContent = error.message;
         if (/\b401\b|\b403\b/.test(error.message)) writeToken(''); // негодный токен не держим
         return null;
       } finally {
@@ -5539,10 +5498,10 @@ window.OrbitControls = OrbitControls;
       if (!best || (embedded && stamp(embedded) >= stamp(best))) return null;
       try {
         const result = saver.applyState(best);
-        say(saver.describe(result) + (best === remote ? ' (из сохранённых на GitHub)' : ''), true);
+        status.textContent = saver.describe(result) + (best === remote ? ' (из сохранённых на GitHub)' : '');
         return result;
       } catch (error) {
-        say('Не удалось применить сохранённые настройки: ' + error.message);
+        status.textContent = 'Не удалось применить сохранённые настройки: ' + error.message;
         return null;
       }
     }
@@ -5572,7 +5531,7 @@ window.OrbitControls = OrbitControls;
       hasToken: () => !!readToken(),
       forgetToken: () => {
         writeToken('');
-        say('Токен удалён из браузера.');
+        status.textContent = 'Токен удалён из браузера.';
       },
       dispose() {
         disposed = true;
@@ -16209,134 +16168,6 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 
 (globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"(у страницы —":{"en":"(page has","pl":"(strona ma","uk":"(у сторінки —"},"). GitHub Pages выложит страницу примерно через минуту — затем перезагрузите её.":{"en":"). GitHub Pages will publish the page in about a minute — then reload it.","pl":"). GitHub Pages opublikuje stronę za około minutę — potem ją odśwież.","uk":"). GitHub Pages опублікує сторінку приблизно за хвилину — потім перезавантажте її."},". Обновление — на опубликованной странице.":{"en":". Updating is available on the published page.","pl":". Aktualizacja — na opublikowanej stronie.","uk":". Оновлення — на опублікованій сторінці."},"; добавлено:":{"en":"; added:","pl":"; dodano:","uk":"; додано:"},"В данных модели нет разделов модулей — обновите страницу локально.":{"en":"The model data has no module sections — update the page locally.","pl":"Dane modelu nie mają sekcji modułów — zaktualizuj stronę lokalnie.","uk":"У даних моделі немає розділів модулів — оновіть сторінку локально."},"В странице нет данных модели.":{"en":"The page has no model data.","pl":"Strona nie zawiera danych modelu.","uk":"На сторінці немає даних моделі."},"Версия просмотрщика":{"en":"Viewer version","pl":"Wersja przeglądarki","uk":"Версія переглядача"},"Данные модели новее набора кода — выпустите новую версию просмотрщика.":{"en":"The model data is newer than the code bundle — release a new viewer version.","pl":"Dane modelu są nowsze niż pakiet kodu — wydaj nową wersję przeglądarki.","uk":"Дані моделі новіші за набір коду — випустіть нову версію переглядача."},"Есть новая версия просмотрщика:":{"en":"A new viewer version is available:","pl":"Dostępna jest nowa wersja przeglądarki:","uk":"Є нова версія переглядача:"},"Записываю на GitHub…":{"en":"Writing to GitHub…","pl":"Zapisuję na GitHub…","uk":"Записую на GitHub…"},"Набор кода другого формата — обновите страницу локально (upgrade_html.py).":{"en":"The code bundle has a different format — update the page locally (upgrade_html.py).","pl":"Pakiet kodu ma inny format — zaktualizuj stronę lokalnie (upgrade_html.py).","uk":"Набір коду іншого формату — оновіть сторінку локально (upgrade_html.py)."},"Не удалось добавить разделы модулей в данные — обновите страницу локально.":{"en":"Could not add module sections to the data — update the page locally.","pl":"Nie udało się dodać sekcji modułów do danych — zaktualizuj stronę lokalnie.","uk":"Не вдалося додати розділи модулів у дані — оновіть сторінку локально."},"Не удалось получить":{"en":"Could not fetch","pl":"Nie udało się pobrać","uk":"Не вдалося отримати"},"Не удалось проверить версию просмотрщика:":{"en":"Could not check the viewer version:","pl":"Nie udało się sprawdzić wersji przeglądarki:","uk":"Не вдалося перевірити версію переглядача:"},"Не удалось прочитать эту страницу (":{"en":"Could not read this page (","pl":"Nie udało się odczytać tej strony (","uk":"Не вдалося прочитати цю сторінку ("},"Несовместимый модуль обновления просмотрщика":{"en":"Incompatible viewer update module","pl":"Niezgodny moduł aktualizacji przeglądarki","uk":"Несумісний модуль оновлення переглядача"},"Нет модуля записи на GitHub — обновите страницу локально.":{"en":"No GitHub write module — update the page locally.","pl":"Brak modułu zapisu na GitHub — zaktualizuj stronę lokalnie.","uk":"Немає модуля запису на GitHub — оновіть сторінку локально."},"Обнови просмотрщик":{"en":"Update viewer","pl":"Zaktualizuj przeglądarkę","uk":"Онови переглядач"},"Обновить":{"en":"Update","pl":"Aktualizuj","uk":"Оновити"},"Обновить просмотрщик":{"en":"Update viewer","pl":"Zaktualizuj przeglądarkę","uk":"Оновити переглядач"},"Обновлено":{"en":"Updated","pl":"Zaktualizowano","uk":"Оновлено"},"Обновляю…":{"en":"Updating…","pl":"Aktualizuję…","uk":"Оновлюю…"},"Отменено.":{"en":"Cancelled.","pl":"Anulowano.","uk":"Скасовано."},"Ошибка":{"en":"Error","pl":"Błąd","uk":"Помилка"},"Просмотрщик актуален (":{"en":"The viewer is up to date (","pl":"Przeglądarka jest aktualna (","uk":"Переглядач актуальний ("},"Просмотрщик обновлён (коммит":{"en":"Viewer updated (commit","pl":"Przeglądarka zaktualizowana (commit","uk":"Переглядач оновлено (коміт"},"Скачиваю новую версию просмотрщика…":{"en":"Downloading the new viewer version…","pl":"Pobieram nową wersję przeglądarki…","uk":"Завантажую нову версію переглядача…"},"Собираю страницу…":{"en":"Building the page…","pl":"Buduję stronę…","uk":"Збираю сторінку…"},"Страница собрана в другом режиме сжатия — обновите её локально (upgrade_html.py).":{"en":"The page was built with a different compression mode — update it locally (upgrade_html.py).","pl":"Strona została zbudowana w innym trybie kompresji — zaktualizuj ją lokalnie (upgrade_html.py).","uk":"Сторінку зібрано в іншому режимі стиснення — оновіть її локально (upgrade_html.py)."},"до":{"en":"to","pl":"do","uk":"до"},"неизвестна":{"en":"unknown","pl":"nieznana","uk":"невідома"},"старая":{"en":"old","pl":"stara","uk":"стара"}});
-(function (root) {
-  'use strict';
-  // Ручной ввод у ползунков: значение справа от ползунка (output или span сразу
-  // после input[type=range]) нажимается — на его месте поле ввода. Enter или уход
-  // с поля применяют, Esc отменяет. Число зажимается в границы ползунка и
-  // округляется до его шага; ползунку выставляется значение и посылаются те же
-  // события input/change, что при перетаскивании, — модулю-владельцу ползунка
-  // ничего знать не нужно. Ползунки, появившиеся позже (строки редактора
-  // материалов), подхватываются сами: обработчик — один на документ.
-  const HINT = 'Нажмите, чтобы ввести значение';
-  // значение справа от ползунка (сосед сразу после него)
-  const sliderOf = el =>
-    el && /^(OUTPUT|SPAN)$/.test(el.tagName) && el.previousElementSibling?.matches?.('input[type="range"]')
-      ? el.previousElementSibling
-      : null;
-  // Число по правилам ползунка: в границах min..max и кратное шагу от min.
-  function clampToSlider(slider, raw) {
-    // единицы и пробелы («40 %», «Ø 300 мм») отбрасываем; без цифр — не число
-    const cleaned = String(raw).replace(',', '.').replace(/[^\d.+-]/g, ''),
-      value = Number(cleaned);
-    if (!/\d/.test(cleaned) || !Number.isFinite(value)) return null;
-    const min = slider.min === '' ? 0 : Number(slider.min),
-      max = slider.max === '' ? 100 : Number(slider.max),
-      step = slider.step === 'any' || !Number(slider.step) ? 0 : Number(slider.step);
-    let v = Math.min(max, Math.max(min, value));
-    if (step) {
-      v = min + Math.round((v - min) / step) * step;
-      const decimals = (String(step).split('.')[1] || '').length;
-      v = Number(v.toFixed(decimals));
-      if (v > max) v -= step;
-    }
-    return v;
-  }
-  function install(context) {
-    // подписи — по-русски: модуль перевода сам переводит title/aria-label и
-    // следит за новыми элементами
-    const doc = context.document;
-    if (!doc?.addEventListener) throw new Error('Просмотрщик не поддерживает ручной ввод у ползунков');
-    let editing = null;
-    function open(display) {
-      const slider = sliderOf(display);
-      if (!slider || slider.disabled || editing) return;
-      const input = doc.createElement('input');
-      input.type = 'text';
-      input.inputMode = 'decimal';
-      input.className = 'rangeEntry';
-      input.value = slider.value;
-      input.setAttribute('aria-label', slider.getAttribute('aria-label') || 'Значение');
-      input.style.width = Math.min(64, Math.max(44, display.getBoundingClientRect().width + 8)) + 'px';
-      display.after(input);
-      display.hidden = true;
-      editing = { display, slider, input };
-      input.focus();
-      input.select();
-      input.addEventListener('keydown', e => {
-        // Esc и Enter — только этому полю: Esc у документа выводит из ракурса заметки
-        if (e.key === 'Enter') close(true);
-        else if (e.key === 'Escape') close(false);
-        else return;
-        e.preventDefault();
-        e.stopPropagation();
-      });
-      input.addEventListener('blur', () => close(true));
-      // щелчок по полю не должен открывать/закрывать меню, в котором стоит ползунок
-      input.addEventListener('click', e => e.stopPropagation());
-    }
-    function close(apply) {
-      if (!editing) return;
-      const { display, slider, input } = editing;
-      editing = null;
-      const v = apply ? clampToSlider(slider, input.value) : null;
-      input.remove();
-      display.hidden = false;
-      if (v === null || String(v) === slider.value) return;
-      slider.value = String(v);
-      slider.dispatchEvent(new Event('input', { bubbles: true }));
-      slider.dispatchEvent(new Event('change', { bubbles: true }));
-    }
-    // значение-кнопка: подсказка и доступ с клавиатуры (Enter / пробел)
-    function mark(display) {
-      if (display.dataset.rangeEntry) return;
-      display.dataset.rangeEntry = '1';
-      display.tabIndex = 0;
-      display.title = HINT;
-      display.setAttribute('role', 'button');
-    }
-    const onClick = e => {
-      const display = e.target?.closest?.('output, span');
-      if (!sliderOf(display)) return;
-      e.preventDefault();
-      e.stopPropagation();
-      open(display);
-    };
-    const onKey = e => {
-      if ((e.key === 'Enter' || e.key === ' ') && sliderOf(e.target)) {
-        e.preventDefault();
-        open(e.target);
-      }
-    };
-    const onOver = e => {
-      const display = e.target?.closest?.('output, span');
-      if (sliderOf(display)) mark(display);
-    };
-    doc.addEventListener('click', onClick, true);
-    doc.addEventListener('keydown', onKey);
-    doc.addEventListener('pointerover', onOver);
-    const ready = () => doc.querySelectorAll('input[type="range"] + output, input[type="range"] + span').forEach(mark);
-    context.hooks?.ready?.push(ready);
-    return {
-      name: 'range_entry',
-      clampToSlider,
-      open,
-      dispose() {
-        close(false);
-        doc.removeEventListener('click', onClick, true);
-        doc.removeEventListener('keydown', onKey);
-        doc.removeEventListener('pointerover', onOver);
-        const at = context.hooks?.ready?.indexOf(ready) ?? -1;
-        if (at >= 0) context.hooks.ready.splice(at, 1);
-      }
-    };
-  }
-  const api = { install, clampToSlider };
-  if (typeof module !== 'undefined' && module.exports) module.exports = api;
-  else (root.BazisViewerFeatures || (root.BazisViewerFeatures = [])).push({ name: 'range_entry', install });
-})(typeof globalThis !== 'undefined' ? globalThis : this);
-
-(globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"Значение":{"en":"Value","pl":"Wartość","uk":"Значення"},"Нажмите, чтобы ввести значение":{"en":"Click to type a value","pl":"Kliknij, aby wpisać wartość","uk":"Натисніть, щоб ввести значення"},"Просмотрщик не поддерживает ручной ввод у ползунков":{"en":"The viewer does not support typing slider values","pl":"Przeglądarka nie obsługuje wpisywania wartości suwaków","uk":"Переглядач не підтримує ручне введення в повзунках"}});
 (function (root) {
   'use strict';
   // Original 24×24 line drawings. Masks inherit active/disabled button colors.
