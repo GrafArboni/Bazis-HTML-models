@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "source": "796a94f97be96d829b0d14c394c8e468c1eed99a264343181b3a94df2d178505",
- "savedAt": "2026-10-06T14:01:04.905Z",
+ "source": "b029d8bd79dd9100bbf32d3dfd4c6eda75c23be4ad9d4d1c1e6db5823b66678e",
+ "savedAt": "2026-10-07T08:38:21.824Z",
  "features": {
   "outline": false,
   "section": {
@@ -250,19 +250,6 @@
     }
    },
    {
-    "id": "mat:Порошковая краска черная\r-5413543",
-    "type": "col",
-    "name": "Порошковая краска черная",
-    "state": {
-     "rot": 0,
-     "mode": "col",
-     "texKey": null,
-     "texData": null,
-     "color": "#2d2d2d",
-     "transparency": 0
-    }
-   },
-   {
     "id": "mat:Пластик прозрачный\r-456345",
     "type": "col",
     "name": "Пластик прозрачный",
@@ -302,15 +289,15 @@
     }
    },
    {
-    "id": "art:Структурный графит",
-    "type": "tex",
-    "name": "Структурный графит",
+    "id": "mat:Порошковая краска черная\r-5413543",
+    "type": "col",
+    "name": "Порошковая краска черная",
     "state": {
      "rot": 0,
      "mode": "col",
-     "texKey": "Структурный графит",
+     "texKey": null,
      "texData": null,
-     "color": "#232323",
+     "color": "#2d2d2d",
      "transparency": 0
     }
    },
@@ -367,7 +354,8 @@
       0.036
      ],
      "element": "Доска",
-     "updated": "2026-10-06T13:51:58.493Z"
+     "updated": "2026-10-06T13:51:58.493Z",
+     "hidden": true
     },
     {
      "id": "nmuwqmlyhz3jb",
@@ -384,10 +372,11 @@
       53.647
      ],
      "element": "Профиль4",
+     "updated": "2026-10-06T13:54:49.797Z",
+     "hidden": true,
      "images": [
       "5d0b3528913ff1dd.jpg"
-     ],
-     "updated": "2026-10-06T13:54:49.797Z"
+     ]
     },
     {
      "id": "nmuwqqfo2e3s0",
@@ -404,50 +393,11 @@
       18
      ],
      "element": "Царга · поз. 3.10",
+     "updated": "2026-10-06T13:55:16.575Z",
+     "hidden": true,
      "sphere": {
       "diameter": 400
-     },
-     "updated": "2026-10-06T13:55:16.575Z"
-    },
-    {
-     "id": "nmuwqtxu0j0dk",
-     "text": "По переду полка для фиксации стойки на рафиксах.\nПо заду сьемная полка с ручкой",
-     "point": [
-      -1217.864,
-      641.606,
-      477.64
-     ],
-     "objectId": 6970,
-     "local": [
-      552.061,
-      -371.608,
-      17.988
-     ],
-     "element": "Removable shelf",
-     "sphere": {
-      "diameter": 440
-     },
-     "updated": "2026-10-06T13:58:15.106Z"
-    },
-    {
-     "id": "nmuwqv84fx30e",
-     "text": "Тыкнул сюдой кабель-каналы",
-     "point": [
-      -1122.172,
-      601.208,
-      -18.968
-     ],
-     "objectId": 8660,
-     "local": [
-      -1122.172,
-      601.208,
-      0
-     ],
-     "element": "Задняя стенка",
-     "sphere": {
-      "diameter": 530
-     },
-     "updated": "2026-10-06T13:59:19.206Z"
+     }
     },
     {
      "id": "nmuwqwu8c80at",
@@ -464,24 +414,8 @@
       18
      ],
      "element": "Крышка",
-     "updated": "2026-10-06T14:00:05.842Z"
-    },
-    {
-     "id": "nmuwqx4v8zx6g",
-     "text": "Общая накладка на боковину шкафа и дверной проем",
-     "point": [
-      -1806.72,
-      1250.204,
-      173.566
-     ],
-     "objectId": 541,
-     "local": [
-      569.873,
-      1246.918,
-      18
-     ],
-     "element": "Стойка правая внутренняя",
-     "updated": "2026-10-06T14:00:27.937Z"
+     "updated": "2026-10-06T14:00:05.842Z",
+     "hidden": true
     },
     {
      "id": "nmuwqxnse4cp9",
@@ -498,10 +432,66 @@
       18.024
      ],
      "element": "Карниз",
+     "updated": "2026-10-06T14:00:48.025Z",
+     "hidden": false,
      "sphere": {
       "diameter": 360
+     }
+    },
+    {
+     "id": "nmuxuqf6zgs40",
+     "text": "Вырез под провода",
+     "point": [
+      -1189.166,
+      464.733,
+      -15.992
+     ],
+     "objectId": 3536,
+     "local": [
+      29.976,
+      412.115,
+      6.241
+     ],
+     "element": "Левая стойка",
+     "sphere": {
+      "diameter": 830
      },
-     "updated": "2026-10-06T14:00:48.025Z"
+     "updated": "2026-10-07T08:35:45.588Z",
+     "view": {
+      "position": [
+       -318.778,
+       818.043,
+       -1159.532
+      ],
+      "target": [
+       -1127.467,
+       482.789,
+       -264.585
+      ],
+      "up": [
+       0,
+       1,
+       0
+      ],
+      "orthographic": true
+     }
+    },
+    {
+     "id": "nmuxuu1mjlizw",
+     "text": "Тут теперь стык",
+     "point": [
+      -1806.72,
+      1859.394,
+      -118.15
+     ],
+     "objectId": 10354,
+     "local": [
+      278.158,
+      1856.108,
+      18
+     ],
+     "element": "Стойка правая внутренняя",
+     "updated": "2026-10-07T08:37:39.365Z"
     }
    ]
   },
@@ -512,7 +502,7 @@
   },
   "panel_hardware": {
    "active": false,
-   "selectedPanelId": null
+   "selectedPanelId": 2091
   },
   "assembler": {
    "active": false,
@@ -556,8 +546,8 @@
   "dimensionBox": false,
   "notesShow": true,
   "noteEditorMany": false,
-  "noteEditorSphere": true,
-  "noteEditorDiameter": "360",
+  "noteEditorSphere": false,
+  "noteEditorDiameter": "830",
   "assemblerSeparation": "250",
   "assemblerLabelPosition": true,
   "assemblerLabelName": true,
@@ -578,14 +568,14 @@
  },
  "camera": {
   "position": [
-   -1684.2040000000006,
-   2657.5499999999993,
-   4453.0239999999985
+   -2483.864031536481,
+   2869.9587396058587,
+   2677.4933046419374
   ],
   "target": [
-   -979.522,
-   644.7150000000001,
-   -70.24000000000001
+   -1180.866,
+   1332.135,
+   -625.612
   ],
   "up": [
    0,
