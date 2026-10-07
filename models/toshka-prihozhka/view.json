@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "source": "b029d8bd79dd9100bbf32d3dfd4c6eda75c23be4ad9d4d1c1e6db5823b66678e",
- "savedAt": "2026-10-07T08:38:48.219Z",
+ "savedAt": "2026-10-07T08:41:19.542Z",
  "features": {
   "outline": false,
   "section": {
@@ -373,7 +373,7 @@
      ],
      "element": "Профиль4",
      "updated": "2026-10-06T13:54:49.797Z",
-     "hidden": true,
+     "hidden": false,
      "images": [
       "5d0b3528913ff1dd.jpg"
      ]
