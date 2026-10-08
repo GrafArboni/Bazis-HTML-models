@@ -1,0 +1,422 @@
+{
+ "schema": 1,
+ "source": "17ef8ab0ec2d998b974e66a2e71b8e08cbe4fe437f67238088e4cda5387012c9",
+ "savedAt": "2026-10-08T14:00:43.382Z",
+ "features": {
+  "outline": false,
+  "section": {
+   "active": false,
+   "axis": "y",
+   "position": 1292.3901050001382,
+   "reversed": false,
+   "showPlane": true,
+   "chosen": false,
+   "normal": [
+    0,
+    1,
+    0
+   ]
+  },
+  "display_modes": null,
+  "finish": "texture",
+  "dimension_actions": {
+   "colors": []
+  },
+  "dimensions": {
+   "size": 16,
+   "color": "#e60000",
+   "unit": false,
+   "box": false
+  },
+  "materials": [
+   {
+    "id": "art:ДСП лам. Swiss Krono U3053 BS Капучино 2800х2070х18 мм\r18084",
+    "type": "tex",
+    "name": "ДСП лам. Swiss Krono U3053 BS Капучино 2800х2070х18 мм",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "ДСП лам. Swiss Krono U3053 BS Капучино 2800х2070х18 мм\r18084",
+     "texData": null,
+     "color": "#d5bbae",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "art:ДСП лам. Kronospan 5981 PD Кашемир NEW 2800х2070х18мм\r201238",
+    "type": "tex",
+    "name": "ДСП лам. Kronospan 5981 PD Кашемир NEW 2800х2070х18мм",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "ДСП лам. Kronospan 5981 PD Кашемир NEW 2800х2070х18мм\r201238",
+     "texData": null,
+     "color": "#ccc5bd",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "art:88482",
+    "type": "tex",
+    "name": "ХДФ Сіре світле 2101(U12122) WOODECO 2850х2070х3mm",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "88482",
+     "texData": null,
+     "color": "#c0c0c0",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "col:#00ff00",
+    "type": "col",
+    "name": "МДФ крашенный 19мм",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": null,
+     "texData": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAEbARsDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAT/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwC5AIlQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//2Q==",
+     "color": "#444444",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "art:Камень 20мм",
+    "type": "tex",
+    "name": "Камень 20мм",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "Камень 20мм",
+     "texData": null,
+     "color": "#f7f6f2",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "art:Пластік чорний",
+    "type": "tex",
+    "name": "Пластік чорний",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "Пластік чорний",
+     "texData": null,
+     "color": "#000000",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "art:Пластмасса белая",
+    "type": "tex",
+    "name": "Пластмасса белая",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "Пластмасса белая",
+     "texData": null,
+     "color": "#000000",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "col:#f6b67f",
+    "type": "col",
+    "name": "Профиль для LED-ленты, ВРЕЗНОЙ, L = 3м, алюминий, анодир. черный",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#ffffff",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:ДСП бук",
+    "type": "col",
+    "name": "ДСП бук",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#c0c0c0",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "art:Сталь сіра",
+    "type": "tex",
+    "name": "Сталь сіра",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "Сталь сіра",
+     "texData": null,
+     "color": "#909090",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:Noname",
+    "type": "col",
+    "name": "Noname",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#3b3b3b",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:[#] Техн. мат., цинк білий []",
+    "type": "col",
+    "name": "[#] Техн. мат., цинк білий []",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:[#] Техн. мат., темно сірий []",
+    "type": "col",
+    "name": "[#] Техн. мат., темно сірий []",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#808080",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "art:Хром",
+    "type": "tex",
+    "name": "Хром",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "Хром",
+     "texData": null,
+     "color": "#d7c18b",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "art:Пластік білий",
+    "type": "tex",
+    "name": "Пластік білий",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "Пластік білий",
+     "texData": null,
+     "color": "#f7f6f2",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:Белый\r-101",
+    "type": "col",
+    "name": "Белый",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#c0c0c0",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:Пластик серый\rPlastik_seriy",
+    "type": "col",
+    "name": "Пластик серый",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#8c8c8c",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "art:Структурный графит",
+    "type": "tex",
+    "name": "Структурный графит",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": "Структурный графит",
+     "texData": null,
+     "color": "#232323",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:матовый хром\rмат хром",
+    "type": "col",
+    "name": "матовый хром",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#c0c0c0",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:[#] Техн. мат., прозорий []",
+    "type": "col",
+    "name": "[#] Техн. мат., прозорий []",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:[#] Техн. мат., чорний []",
+    "type": "col",
+    "name": "[#] Техн. мат., чорний []",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#b7c4d2",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:Прозорість",
+    "type": "col",
+    "name": "Прозорість",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   }
+  ],
+  "texture_fit": {
+   "schema": 2,
+   "modes": {}
+  },
+  "material_labels": {
+   "enabled": false,
+   "changedAt": null
+  },
+  "notes": {
+   "enabled": true,
+   "notes": []
+  },
+  "hardware_mono": false,
+  "visibility": {
+   "hidden": [],
+   "objectMode": true
+  },
+  "panel_hardware": {
+   "active": false,
+   "selectedPanelId": null
+  },
+  "assembler": {
+   "active": true,
+   "exploded": false,
+   "separation": 250,
+   "unitId": null,
+   "partDimensionsEnabled": false,
+   "labelPosition": true,
+   "labelName": null,
+   "labelFontSize": 11,
+   "positionsThrough": false,
+   "unitThrough": {},
+   "hiddenUnits": []
+  },
+  "hardware_catalog": {
+   "expanded": false
+  }
+ },
+ "controls": {
+  "panels": true,
+  "profiles": true,
+  "edges": true,
+  "textures": true,
+  "imports": true,
+  "hardware": true,
+  "holes": true,
+  "lines": true,
+  "overlay": false,
+  "opacity": "77",
+  "guides": false,
+  "holeOverlay": false,
+  "nativeDimensions": true,
+  "manualDimensions": true,
+  "githubTokenRemember": true,
+  "sectionEnabled": false,
+  "sectionShowPlane": true,
+  "sectionPosition": "1292.37122562528",
+  "sectionReverse": false,
+  "displayModesEnabled": false,
+  "dimensionFontSize": "16",
+  "dimensionUnit": false,
+  "dimensionBox": false,
+  "notesShow": true,
+  "noteEditorMany": false,
+  "noteEditorSphere": false,
+  "noteEditorDiameter": "60",
+  "assemblerSeparation": "250",
+  "assemblerLabelPosition": true,
+  "assemblerLabelName": true,
+  "assemblerLabelFontSize": "11",
+  "assemblerLabelsThrough": false
+ },
+ "layers": [
+  true,
+  true,
+  true,
+  true
+ ],
+ "layersByName": {
+  "Слой 0": true,
+  "Слой LEICA_3DDISTO_SURFACESCAN": true,
+  "Слой LAYER_2": true,
+  "Линии": true
+ },
+ "camera": {
+  "position": [
+   4490.627236999965,
+   2280.7016648695144,
+   4469.1485509555105
+  ],
+  "target": [
+   1137.1238287080555,
+   1269.2703899206908,
+   762.4762739974667
+  ],
+  "up": [
+   0,
+   1,
+   0
+  ],
+  "orthographic": true
+ },
+ "dimensions": []
+}
