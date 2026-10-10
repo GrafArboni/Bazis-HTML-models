@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "source": "8421f1cb8f27a503db791680b28cfd5b78ace324f4d93baadb28d25d90f63254",
- "savedAt": "2026-10-10T18:42:16.168Z",
+ "savedAt": "2026-10-10T18:42:21.634Z",
  "features": {
   "outline": false,
   "section": {
@@ -981,7 +981,7 @@
   "holes": true,
   "lines": true,
   "overlay": false,
-  "opacity": "100",
+  "opacity": "89",
   "guides": false,
   "holeOverlay": false,
   "nativeDimensions": true,
