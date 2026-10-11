@@ -1,0 +1,223 @@
+{
+ "schema": 1,
+ "source": "61ff9662454763e4666a2d421026eaad5a4202e8a8021b6fbdc39b20c0b9daf7",
+ "features": {
+  "outline": false,
+  "section": {
+   "active": false,
+   "axis": "y",
+   "position": 1258.2326599327232,
+   "reversed": false,
+   "showPlane": true,
+   "chosen": false,
+   "normal": [
+    0,
+    1,
+    0
+   ]
+  },
+  "finish": "texture",
+  "dimensions": {
+   "size": 10,
+   "color": "#102820",
+   "unit": false,
+   "box": true
+  },
+  "materials": [
+   {
+    "id": "art:67481",
+    "type": "tex",
+    "name": "ДСП лам. Swiss Krono U164 PE Антрацитный 2800х2070х18мм",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "67481",
+     "texData": null,
+     "color": "#800000"
+    }
+   },
+   {
+    "id": "art:Фасады низ 19мм",
+    "type": "tex",
+    "name": "Краска 19мм  NCS S 7500-N Глубокий Мат двустор.",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "Фасады низ 19мм",
+     "texData": null,
+     "color": "#800000"
+    }
+   },
+   {
+    "id": "art:173522",
+    "type": "tex",
+    "name": "ДСП лам. Egger U961 ST7 Чорный графит 2800х2070х18 мм",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "173522",
+     "texData": null,
+     "color": "#373131"
+    }
+   },
+   {
+    "id": "art:86901",
+    "type": "tex",
+    "name": "Керамогранит NEOLITH Fusion Beton silk 12 мм 3200Х1600",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "86901",
+     "texData": null,
+     "color": "#9d9587"
+    }
+   },
+   {
+    "id": "col:#f1f1ef",
+    "type": "col",
+    "name": "Белый",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#f1f1ef"
+    }
+   },
+   {
+    "id": "art:-2",
+    "type": "tex",
+    "name": "Алюминий",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": "-2",
+     "texData": null,
+     "color": "#cccccc"
+    }
+   },
+   {
+    "id": "col:#2e3236",
+    "type": "col",
+    "name": "Врезной проф.- ручка Ferro Fiori M 8030 черный анодир., 18мм",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#2e3236"
+    }
+   },
+   {
+    "id": "art:110021",
+    "type": "tex",
+    "name": "Профиль для LED-ленты, ВРЕЗНОЙ, L = 3м, алюминий, черный мат",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "110021",
+     "texData": null,
+     "color": "#2b2a28"
+    }
+   },
+   {
+    "id": "col:#eaf0ee",
+    "type": "col",
+    "name": "Линза светорассеивающая для профиля L= 3м, поликарбонат, молочная",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#eaf0ee"
+    }
+   },
+   {
+    "id": "col:#ffe4a8",
+    "type": "col",
+    "name": "LED-стрічка 2835 SMD, 120 LEDs/m, 9.6W, 24V, IP20, тепле світло, 3000К NEW",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#ffe4a8"
+    }
+   },
+   {
+    "id": "col:#c8b79b",
+    "type": "col",
+    "name": "Уголок 50х50х2",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#2e2e2d"
+    }
+   }
+  ],
+  "texture_fit": {
+   "schema": 2,
+   "modes": {}
+  },
+  "material_labels": true,
+  "visibility": {
+   "hidden": [],
+   "objectMode": true
+  },
+  "panel_hardware": {
+   "active": false,
+   "selectedPanelId": null
+  },
+  "assembler": {
+   "active": true,
+   "exploded": false,
+   "separation": 250,
+   "unitId": null,
+   "partDimensionsEnabled": false
+  },
+  "hardware_catalog": {
+   "expanded": false
+  }
+ },
+ "controls": {
+  "panels": true,
+  "profiles": true,
+  "edges": true,
+  "textures": true,
+  "imports": true,
+  "hardware": true,
+  "holes": true,
+  "lines": true,
+  "overlay": false,
+  "opacity": "100",
+  "guides": false,
+  "holeOverlay": false,
+  "nativeDimensions": true,
+  "manualDimensions": true
+ },
+ "layers": [
+  true,
+  true,
+  true
+ ],
+ "camera": {
+  "position": [
+   3320.119048986372,
+   1989.5610982860817,
+   2949.0232808781266
+  ],
+  "target": [
+   1046.5830438036403,
+   1201.9623958638238,
+   768.1504437147985
+  ],
+  "up": [
+   0,
+   1,
+   0
+  ]
+ },
+ "dimensions": []
+}
