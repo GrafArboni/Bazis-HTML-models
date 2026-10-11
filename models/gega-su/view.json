@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "source": "4389342130e064c80fa62c9bfcafd1d98abb9bf43dd13331ce419d7f824267b4",
- "savedAt": "2026-10-11T10:42:12.490Z",
+ "savedAt": "2026-10-11T10:43:40.230Z",
  "features": {
   "outline": false,
   "section": {
@@ -372,7 +372,7 @@
    "labelPosition": true,
    "labelName": null,
    "labelFontSize": 11,
-   "positionsThrough": false,
+   "positionsThrough": true,
    "unitThrough": {},
    "hiddenUnits": []
   },
@@ -412,7 +412,7 @@
   "assemblerLabelPosition": true,
   "assemblerLabelName": true,
   "assemblerLabelFontSize": "11",
-  "assemblerLabelsThrough": false
+  "assemblerLabelsThrough": true
  },
  "layers": [
   true,
@@ -426,9 +426,9 @@
  },
  "camera": {
   "position": [
-   3062.8842973703963,
-   2631.5720476112065,
-   3622.929059248641
+   3308.8030687890036,
+   2769.6373463876603,
+   3361.912423560895
   ],
   "target": [
    989.7556916456875,
