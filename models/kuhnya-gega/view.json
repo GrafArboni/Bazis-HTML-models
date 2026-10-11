@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "source": "5c1da4ca6967b6e70dde7a2a5ac74e62018d6b113bdc9d8d0a4c3a2c6e4c9eb4",
- "savedAt": "2026-10-11T10:42:33.576Z",
+ "savedAt": "2026-10-11T10:43:30.653Z",
  "features": {
   "outline": false,
   "section": {
@@ -762,7 +762,7 @@
   "hardware_mono": false,
   "visibility": {
    "hidden": [],
-   "objectMode": false
+   "objectMode": true
   },
   "panel_hardware": {
    "active": false,
@@ -777,7 +777,7 @@
    "labelPosition": true,
    "labelName": null,
    "labelFontSize": 11,
-   "positionsThrough": false,
+   "positionsThrough": true,
    "unitThrough": {},
    "hiddenUnits": []
   },
@@ -795,7 +795,7 @@
   "holes": true,
   "lines": true,
   "overlay": false,
-  "opacity": "100",
+  "opacity": "84",
   "guides": false,
   "holeOverlay": false,
   "nativeDimensions": true,
@@ -817,7 +817,7 @@
   "assemblerLabelPosition": true,
   "assemblerLabelName": true,
   "assemblerLabelFontSize": "11",
-  "assemblerLabelsThrough": false
+  "assemblerLabelsThrough": true
  },
  "layers": [
   true,
@@ -831,14 +831,14 @@
  },
  "camera": {
   "position": [
-   -978.6761617067859,
-   3250.0549211481857,
-   6438.5766777746685
+   828.5445451311552,
+   3267.7609721145077,
+   5044.806315288184
   ],
   "target": [
-   1453.1540792502938,
-   1594.8630296733343,
-   2782.851892993368
+   2241.970724937223,
+   2312.9917158855537,
+   2991.9709015599337
   ],
   "up": [
    0,
