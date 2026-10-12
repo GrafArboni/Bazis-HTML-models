@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "source": "5c1da4ca6967b6e70dde7a2a5ac74e62018d6b113bdc9d8d0a4c3a2c6e4c9eb4",
- "savedAt": "2026-10-11T10:43:30.653Z",
+ "savedAt": "2026-10-12T09:09:04.338Z",
  "features": {
   "outline": false,
   "section": {
@@ -798,7 +798,7 @@
   "opacity": "84",
   "guides": false,
   "holeOverlay": false,
-  "nativeDimensions": true,
+  "nativeDimensions": false,
   "manualDimensions": true,
   "githubTokenRemember": true,
   "sectionEnabled": false,
@@ -815,7 +815,7 @@
   "noteEditorDiameter": "60",
   "assemblerSeparation": "250",
   "assemblerLabelPosition": true,
-  "assemblerLabelName": true,
+  "assemblerLabelName": false,
   "assemblerLabelFontSize": "11",
   "assemblerLabelsThrough": true
  },
@@ -831,14 +831,14 @@
  },
  "camera": {
   "position": [
-   828.5445451311552,
-   3267.7609721145077,
-   5044.806315288184
+   3295.840472885241,
+   5020.961044235586,
+   10756.436708562525
   ],
   "target": [
-   2241.970724937223,
-   2312.9917158855537,
-   2991.9709015599337
+   2582.136374311326,
+   1882.9992085246636,
+   3008.8931843519276
   ],
   "up": [
    0,
