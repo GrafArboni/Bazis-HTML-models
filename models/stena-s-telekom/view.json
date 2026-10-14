@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "source": "c59c27937fd835172914f4adc036cfdba49a0ef61ea84cb516c9d46eac6d673a",
- "savedAt": "2026-10-14T09:14:04.081Z",
+ "savedAt": "2026-10-14T09:14:25.842Z",
  "features": {
   "outline": false,
   "section": {
@@ -636,6 +636,11 @@
       15.494
      ],
      "element": "Правая стойка · поз. 5.4",
+     "updated": "2026-10-14T09:13:59.493Z",
+     "hidden": false,
+     "sphere": {
+      "diameter": 600
+     },
      "view": {
       "position": [
        53.395,
@@ -653,11 +658,7 @@
        0
       ],
       "orthographic": false
-     },
-     "sphere": {
-      "diameter": 600
-     },
-     "updated": "2026-10-14T09:13:59.493Z"
+     }
     }
    ]
   },
@@ -714,7 +715,7 @@
   "notesShow": true,
   "noteEditorMany": false,
   "noteEditorSphere": true,
-  "noteEditorDiameter": "600",
+  "noteEditorDiameter": "100",
   "noteEditorWindow": false,
   "noteEditorWindowReverse": false,
   "noteEditorWindowDepth": "100",
@@ -736,14 +737,14 @@
  },
  "camera": {
   "position": [
-   53.39500268831921,
-   2865.2669999800746,
-   1532.0140021883344
+   -268.854403854921,
+   3392.0616652686667,
+   4270.776348140545
   ],
   "target": [
-   1454.802,
-   2015.7290000000003,
-   -197.312
+   1837.627349229376,
+   1077.540563123784,
+   190.1875246713977
   ],
   "up": [
    0,
