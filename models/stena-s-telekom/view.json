@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "source": "c59c27937fd835172914f4adc036cfdba49a0ef61ea84cb516c9d46eac6d673a",
- "savedAt": "2026-10-14T08:56:06.309Z",
+ "savedAt": "2026-10-14T09:14:04.081Z",
  "features": {
   "outline": false,
   "section": {
@@ -498,45 +498,8 @@
       17.964
      ],
      "element": "Задняя стенка · поз. 2.1",
-     "updated": "2026-10-14T08:50:43.804Z"
-    },
-    {
-     "id": "nmv7ve2fbv8h0",
-     "text": "Разбил на 2 отдельных модуля, чтобы не создавать слабое место на стыке фасада",
-     "point": [
-      655.511,
-      2476.251,
-      770.036
-     ],
-     "objectId": 7293,
-     "local": [
-      9.819,
-      2466.251,
-      18.036
-     ],
-     "element": "Фасад основа · поз. 4.1",
-     "view": {
-      "position": [
-       21.701,
-       3014.031,
-       1328.334
-      ],
-      "target": [
-       1275.192,
-       1779.118,
-       242.3
-      ],
-      "up": [
-       0,
-       1,
-       0
-      ],
-      "orthographic": false
-     },
-     "sphere": {
-      "diameter": 600
-     },
-     "updated": "2026-10-14T08:51:18.141Z"
+     "updated": "2026-10-14T08:50:43.804Z",
+     "hidden": false
     },
     {
      "id": "nmv7vg5h2mnoc",
@@ -553,6 +516,9 @@
       0.012
      ],
      "element": "Дно · поз. 6.2",
+     "updated": "2026-10-14T08:53:01.202Z",
+     "hidden": false,
+     "isolate": true,
      "view": {
       "position": [
        -9.014,
@@ -570,9 +536,7 @@
        0
       ],
       "orthographic": false
-     },
-     "isolate": true,
-     "updated": "2026-10-14T08:53:01.202Z"
+     }
     },
     {
      "id": "nmv7via2k4nx1",
@@ -589,6 +553,21 @@
       10.752
      ],
      "element": "Несъемная полка · поз. 3.6",
+     "updated": "2026-10-14T08:54:47.278Z",
+     "hidden": false,
+     "window": {
+      "mode": "zone",
+      "normal": [
+       0,
+       0,
+       -1
+      ],
+      "depth": 369,
+      "width": 1715,
+      "height": 1155,
+      "du": -132.5,
+      "dv": -272.5
+     },
      "view": {
       "position": [
        1152.873,
@@ -606,21 +585,7 @@
        0
       ],
       "orthographic": false
-     },
-     "window": {
-      "mode": "zone",
-      "normal": [
-       0,
-       0,
-       -1
-      ],
-      "depth": 369,
-      "width": 1715,
-      "height": 1155,
-      "du": -132.5,
-      "dv": -272.5
-     },
-     "updated": "2026-10-14T08:54:47.278Z"
+     }
     },
     {
      "id": "nmv7vk28zfobk",
@@ -637,6 +602,8 @@
       15.4
      ],
      "element": "Правая стойка · поз. 4.2",
+     "updated": "2026-10-14T08:55:50.869Z",
+     "hidden": false,
      "extra": [
       {
        "point": [
@@ -652,8 +619,45 @@
        ],
        "element": "Top panel · поз. 1.7"
       }
+     ]
+    },
+    {
+     "id": "nmv7w77g2dlgd",
+     "text": "Разбил на 2 отдельных модуля, чтобы не было слабого места на стыке фасадов",
+     "point": [
+      643.186,
+      2500,
+      690.932
      ],
-     "updated": "2026-10-14T08:55:50.869Z"
+     "objectId": 7464,
+     "local": [
+      2500,
+      690.932,
+      15.494
+     ],
+     "element": "Правая стойка · поз. 5.4",
+     "view": {
+      "position": [
+       53.395,
+       2865.267,
+       1532.014
+      ],
+      "target": [
+       1454.802,
+       2015.729,
+       -197.312
+      ],
+      "up": [
+       0,
+       1,
+       0
+      ],
+      "orthographic": false
+     },
+     "sphere": {
+      "diameter": 600
+     },
+     "updated": "2026-10-14T09:13:59.493Z"
     }
    ]
   },
@@ -708,12 +712,12 @@
   "dimensionUnit": false,
   "dimensionBox": false,
   "notesShow": true,
-  "noteEditorMany": true,
-  "noteEditorSphere": false,
+  "noteEditorMany": false,
+  "noteEditorSphere": true,
   "noteEditorDiameter": "600",
   "noteEditorWindow": false,
   "noteEditorWindowReverse": false,
-  "noteEditorWindowDepth": "369",
+  "noteEditorWindowDepth": "100",
   "noteEditorIsolate": false,
   "assemblerSeparation": "250",
   "assemblerLabelPosition": true,
@@ -732,14 +736,14 @@
  },
  "camera": {
   "position": [
-   132.09050864182814,
-   2709.5659002209154,
-   4511.88576870916
+   53.39500268831921,
+   2865.2669999800746,
+   1532.0140021883344
   ],
   "target": [
-   1628.0369183041828,
-   943.248696125398,
-   209.63868705744267
+   1454.802,
+   2015.7290000000003,
+   -197.312
   ],
   "up": [
    0,
