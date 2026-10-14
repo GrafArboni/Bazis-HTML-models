@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "source": "6f6bbd4e74f854749861ff19a9b6063c3311fc9cb6865a5886af3ce00d7e5068",
- "savedAt": "2026-10-13T16:18:53.875Z",
+ "source": "c59c27937fd835172914f4adc036cfdba49a0ef61ea84cb516c9d46eac6d673a",
+ "savedAt": "2026-10-14T08:56:06.309Z",
  "features": {
   "outline": false,
   "section": {
@@ -86,7 +86,7 @@
     "type": "tex",
     "name": "Шпон односторонний 19мм",
     "state": {
-     "rot": 0,
+     "rot": 1,
      "mode": "tex",
      "texKey": "Шпон односторонний 19мм\rШпон односторонний 19мм",
      "texData": null,
@@ -112,7 +112,7 @@
     "type": "tex",
     "name": "Шпон двусторонний 19мм",
     "state": {
-     "rot": 0,
+     "rot": 1,
      "mode": "tex",
      "texKey": "Шпон двусторонний 19мм\rШпон двусторонний 19мм",
      "texData": null,
@@ -125,7 +125,7 @@
     "type": "tex",
     "name": "Шпон ламельный 5мм",
     "state": {
-     "rot": 0,
+     "rot": 1,
      "mode": "tex",
      "texKey": "Шпон ламельный 5мм\rШпон ламельный 5мм",
      "texData": null,
@@ -182,6 +182,19 @@
      "texKey": "Алюминий\r-2",
      "texData": null,
      "color": "#cccccc",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "col:#00ff00",
+    "type": "col",
+    "name": "LED-лента COB, 320 LEDs/M, 12W, 24V, IP20, теплый свет",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": null,
+     "texData": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAEbARsDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAT/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwC5AIlQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//2Q==",
+     "color": "#444444",
      "transparency": 0
     }
    },
@@ -469,7 +482,180 @@
   },
   "notes": {
    "enabled": true,
-   "notes": []
+   "notes": [
+    {
+     "id": "nmv7vdpv76dg6",
+     "text": "Баг отображения, сзади обоев не будет",
+     "point": [
+      1679.748,
+      2235.34,
+      150.536
+     ],
+     "objectId": 749,
+     "local": [
+      1679.748,
+      284.66,
+      17.964
+     ],
+     "element": "Задняя стенка · поз. 2.1",
+     "updated": "2026-10-14T08:50:43.804Z"
+    },
+    {
+     "id": "nmv7ve2fbv8h0",
+     "text": "Разбил на 2 отдельных модуля, чтобы не создавать слабое место на стыке фасада",
+     "point": [
+      655.511,
+      2476.251,
+      770.036
+     ],
+     "objectId": 7293,
+     "local": [
+      9.819,
+      2466.251,
+      18.036
+     ],
+     "element": "Фасад основа · поз. 4.1",
+     "view": {
+      "position": [
+       21.701,
+       3014.031,
+       1328.334
+      ],
+      "target": [
+       1275.192,
+       1779.118,
+       242.3
+      ],
+      "up": [
+       0,
+       1,
+       0
+      ],
+      "orthographic": false
+     },
+     "sphere": {
+      "diameter": 600
+     },
+     "updated": "2026-10-14T08:51:18.141Z"
+    },
+    {
+     "id": "nmv7vg5h2mnoc",
+     "text": "Заложил металлокаркас под верхний стол.\nПереднюю угловую деталь нужно будет фрезеровать на ЧПУ",
+     "point": [
+      1654.024,
+      759.606,
+      546.724
+     ],
+     "objectId": 9242,
+     "local": [
+      182.088,
+      569.332,
+      0.012
+     ],
+     "element": "Дно · поз. 6.2",
+     "view": {
+      "position": [
+       -9.014,
+       1990.424,
+       2429.465
+      ],
+      "target": [
+       1693.279,
+       819.641,
+       734.561
+      ],
+      "up": [
+       0,
+       1,
+       0
+      ],
+      "orthographic": false
+     },
+     "isolate": true,
+     "updated": "2026-10-14T08:53:01.202Z"
+    },
+    {
+     "id": "nmv7via2k4nx1",
+     "text": "Вид на фасады сзади",
+     "point": [
+      1758.713,
+      1652.752,
+      188.012
+     ],
+     "objectId": 6396,
+     "local": [
+      655.021,
+      537.988,
+      10.752
+     ],
+     "element": "Несъемная полка · поз. 3.6",
+     "view": {
+      "position": [
+       1152.873,
+       2028.579,
+       -1706.939
+      ],
+      "target": [
+       1902.924,
+       1257.593,
+       892.238
+      ],
+      "up": [
+       0,
+       1,
+       0
+      ],
+      "orthographic": false
+     },
+     "window": {
+      "mode": "zone",
+      "normal": [
+       0,
+       0,
+       -1
+      ],
+      "depth": 369,
+      "width": 1715,
+      "height": 1155,
+      "du": -132.5,
+      "dv": -272.5
+     },
+     "updated": "2026-10-14T08:54:47.278Z"
+    },
+    {
+     "id": "nmv7vk28zfobk",
+     "text": "Сейчас, если я правильно понял ТЗ, тут два разных материала.\nТак и должно быть?",
+     "point": [
+      920.68,
+      2500.013,
+      585.4
+     ],
+     "objectId": 8532,
+     "local": [
+      2500.012,
+      734.01,
+      15.4
+     ],
+     "element": "Правая стойка · поз. 4.2",
+     "extra": [
+      {
+       "point": [
+        3307.419,
+        2499.524,
+        257.353
+       ],
+       "objectId": 426,
+       "local": [
+        511.647,
+        -405.727,
+        18.024
+       ],
+       "element": "Top panel · поз. 1.7"
+      }
+     ],
+     "updated": "2026-10-14T08:55:50.869Z"
+    }
+   ]
   },
   "hardware_mono": false,
   "visibility": {
@@ -507,7 +693,7 @@
   "holes": true,
   "lines": true,
   "overlay": false,
-  "opacity": "80",
+  "opacity": "84",
   "guides": false,
   "holeOverlay": false,
   "nativeDimensions": true,
@@ -522,9 +708,13 @@
   "dimensionUnit": false,
   "dimensionBox": false,
   "notesShow": true,
-  "noteEditorMany": false,
+  "noteEditorMany": true,
   "noteEditorSphere": false,
-  "noteEditorDiameter": "60",
+  "noteEditorDiameter": "600",
+  "noteEditorWindow": false,
+  "noteEditorWindowReverse": false,
+  "noteEditorWindowDepth": "369",
+  "noteEditorIsolate": false,
   "assemblerSeparation": "250",
   "assemblerLabelPosition": true,
   "assemblerLabelName": true,
@@ -542,14 +732,14 @@
  },
  "camera": {
   "position": [
-   424.9966306930396,
-   2322.5465980484023,
-   3728.2335910839893
+   132.09050864182814,
+   2709.5659002209154,
+   4511.88576870916
   ],
   "target": [
-   2161.3999588914476,
-   1404.5698560623819,
-   1308.1171164381783
+   1628.0369183041828,
+   943.248696125398,
+   209.63868705744267
   ],
   "up": [
    0,
