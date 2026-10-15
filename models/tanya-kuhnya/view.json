@@ -1,13 +1,13 @@
 {
  "schema": 1,
- "source": "49b5d4e6652ff1eb712043d007e051f627655ddf5e78dba6d7c04fc1c2701c5b",
- "savedAt": "2026-10-08T13:51:26.561Z",
+ "source": "96c55fab0076af7dc5ce71cd6c7a0fd5a3bd66602d5011351bb666a6a354de95",
+ "savedAt": "2026-10-15T13:06:42.226Z",
  "features": {
   "outline": false,
   "section": {
    "active": false,
    "axis": "y",
-   "position": 1585.982773600995,
+   "position": 1587.482773600995,
    "reversed": false,
    "showPlane": true,
    "chosen": false,
@@ -21,12 +21,6 @@
   "finish": "texture",
   "dimension_actions": {
    "colors": []
-  },
-  "dimensions": {
-   "size": 16,
-   "color": "#e60000",
-   "unit": false,
-   "box": false
   },
   "materials": [
    {
@@ -56,15 +50,15 @@
     }
    },
    {
-    "id": "art:43081",
+    "id": "art:ДСП лам. Kronospan 5981 PD Кашемир NEW 2800х2070х18мм\r201238",
     "type": "tex",
-    "name": "ДСП Kronospan 5981 BS Кашемир 2800x2070x18 мм",
+    "name": "ДСП лам. Kronospan 5981 PD Кашемир NEW 2800х2070х18мм",
     "state": {
      "rot": 0,
      "mode": "tex",
-     "texKey": "43081",
+     "texKey": "ДСП лам. Kronospan 5981 PD Кашемир NEW 2800х2070х18мм\r201238",
      "texData": null,
-     "color": "#00ff00",
+     "color": "#ccc5bd",
      "transparency": 0
     }
    },
@@ -173,6 +167,19 @@
     }
    },
    {
+    "id": "mat:Noname",
+    "type": "col",
+    "name": "Noname",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#3b3b3b",
+     "transparency": 0
+    }
+   },
+   {
     "id": "mat:Оріон сірий",
     "type": "col",
     "name": "Оріон сірий",
@@ -199,15 +206,28 @@
     }
    },
    {
-    "id": "mat:# Сірий",
+    "id": "mat:# Білий",
     "type": "col",
-    "name": "# Сірий",
+    "name": "# Білий",
     "state": {
      "rot": 0,
      "mode": "col",
      "texKey": null,
      "texData": null,
-     "color": "#c0c0c0",
+     "color": "#ffffff",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "art:151913",
+    "type": "tex",
+    "name": "ДСП лам. Kronospan 0166 BS Базальт 2800х2070х18мм",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "151913",
+     "texData": null,
+     "color": "#494949",
      "transparency": 0
     }
    },
@@ -221,6 +241,19 @@
      "texKey": null,
      "texData": null,
      "color": "#616161",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "art:Сталь сіра",
+    "type": "tex",
+    "name": "Сталь сіра",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "Сталь сіра",
+     "texData": null,
+     "color": "#909090",
      "transparency": 0
     }
    },
@@ -251,19 +284,6 @@
     }
    },
    {
-    "id": "art:Сталь сіра",
-    "type": "tex",
-    "name": "Сталь сіра",
-    "state": {
-     "rot": 0,
-     "mode": "tex",
-     "texKey": "Сталь сіра",
-     "texData": null,
-     "color": "#909090",
-     "transparency": 0
-    }
-   },
-   {
     "id": "mat:# Антрацит",
     "type": "col",
     "name": "# Антрацит",
@@ -277,6 +297,19 @@
     }
    },
    {
+    "id": "mat:# Сірий",
+    "type": "col",
+    "name": "# Сірий",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#c0c0c0",
+     "transparency": 0
+    }
+   },
+   {
     "id": "mat:# Чорний",
     "type": "col",
     "name": "# Чорний",
@@ -286,19 +319,6 @@
      "texKey": null,
      "texData": null,
      "color": "#444444",
-     "transparency": 0
-    }
-   },
-   {
-    "id": "mat:Noname",
-    "type": "col",
-    "name": "Noname",
-    "state": {
-     "rot": 0,
-     "mode": "col",
-     "texKey": null,
-     "texData": null,
-     "color": "#3b3b3b",
      "transparency": 0
     }
    },
@@ -351,6 +371,71 @@
      "texKey": null,
      "texData": null,
      "color": "#444444",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:Пруток 2,7 мм",
+    "type": "col",
+    "name": "Пруток 2,7 мм",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:Пруток 3,7 мм",
+    "type": "col",
+    "name": "Пруток 3,7 мм",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:Сталь лист",
+    "type": "col",
+    "name": "Сталь лист",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:Антрацит матовый (Кессебемер)",
+    "type": "col",
+    "name": "Антрацит матовый (Кессебемер)",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "art:Алюминий\r-2",
+    "type": "tex",
+    "name": "Алюминий",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": "Алюминий\r-2",
+     "texData": null,
+     "color": "#cccccc",
      "transparency": 0
     }
    },
@@ -432,44 +517,8 @@
    "enabled": true,
    "notes": [
     {
-     "id": "nmuyeyzgeyjld",
-     "text": "Узел требует доработки в плане установки петель, полок и тип-онов",
-     "point": [
-      2543.153,
-      734.688,
-      2040.445
-     ],
-     "objectId": 3626,
-     "local": [
-      -372.153,
-      -707.688,
-      -253.555
-     ],
-     "element": "Радіусні фальшки",
-     "updated": "2026-10-07T18:01:31.459Z",
-     "hidden": false
-    },
-    {
-     "id": "nmuyezfrmunpx",
-     "text": "Не окончательный вариант кухни.\nОна может потребовать доработки:\n- голы\n- подсветки\n- типонов\n- стыков\nНо основная часть соответствует тому что планировалось",
-     "point": [
-      3293.976,
-      2716.989,
-      74.901
-     ],
-     "objectId": 108,
-     "local": [
-      174.901,
-      2716.989,
-      0.024
-     ],
-     "element": "Стіна",
-     "updated": "2026-10-07T18:02:42.893Z",
-     "hidden": false
-    },
-    {
      "id": "nmuyf121a0022",
-     "text": "Куда должна попасть розетка?\nВ верха или в антресоли?\nМеняем высоту всех модулей или делаем переноску?",
+     "text": "Розетку согласовали что перенесут",
      "point": [
       2792.252,
       2481.02,
@@ -482,7 +531,7 @@
       95.753
      ],
      "element": "Стіна",
-     "updated": "2026-10-07T18:03:35.562Z",
+     "updated": "2026-10-15T13:04:53.076Z",
      "hidden": false,
      "sphere": {
       "diameter": 430
@@ -526,6 +575,91 @@
      "images": [
       "6a7c5a3ba4662799.jpg"
      ]
+    },
+    {
+     "id": "nmv9jujxzxr6s",
+     "text": "Уменьшили модуль чтобы было место под вентканал согласно инструкции",
+     "point": [
+      3297.976,
+      302.988,
+      61.969
+     ],
+     "objectId": 108,
+     "local": [
+      161.969,
+      302.988,
+      0.024
+     ],
+     "element": "Стіна",
+     "window": {
+      "mode": "cut",
+      "normal": [
+       1,
+       0,
+       0
+      ],
+      "depth": 121,
+      "width": 300,
+      "height": 753,
+      "du": 0,
+      "dv": 226.5
+     },
+     "updated": "2026-10-15T13:04:16.590Z",
+     "view": {
+      "position": [
+       4748.273,
+       685.645,
+       13.403
+      ],
+      "target": [
+       3272.976,
+       529.488,
+       61.969
+      ],
+      "up": [
+       0,
+       1,
+       0
+      ],
+      "orthographic": false
+     }
+    },
+    {
+     "id": "nmv9jwwh4oxak",
+     "text": "Согласно фото тут должна быть еще одна розетка, но ее нет на замерах",
+     "point": [
+      710.074,
+      2532.301,
+      -99.964
+     ],
+     "objectId": 111,
+     "local": [
+      710.074,
+      2532.301,
+      0.036
+     ],
+     "element": "Стіна",
+     "updated": "2026-10-15T13:05:23.694Z"
+    },
+    {
+     "id": "nmv9jyfonb74n",
+     "text": "https://www.stolarkauskwarka.pl/product-pol-4482-Wysuwany-kosz-cargo-z-polkami-i-akcesoriami-Harmony-z-cichym-domykaniem-Pelne-dno-polki-Modul-300mm-Stal-i-plyta-meblowa-Szary-antracytowy.html?curr=PLN&country=1143020003&utm_source=iai_ads&utm_medium=google_shopping",
+     "point": [
+      656.976,
+      483.036,
+      473.559
+     ],
+     "objectId": 5708,
+     "local": [
+      444.059,
+      483.036,
+      0.024
+     ],
+     "element": "Стійка ліва · поз. 4.2",
+     "images": [
+      "0690b59d7c434eea.jpg"
+     ],
+     "updated": "2026-10-15T13:06:27.727Z"
     }
    ]
   },
@@ -536,7 +670,7 @@
   },
   "panel_hardware": {
    "active": false,
-   "selectedPanelId": 20827
+   "selectedPanelId": null
   },
   "assembler": {
    "active": false,
@@ -565,7 +699,7 @@
   "holes": true,
   "lines": true,
   "overlay": false,
-  "opacity": "97",
+  "opacity": "100",
   "guides": false,
   "holeOverlay": false,
   "nativeDimensions": true,
@@ -573,21 +707,23 @@
   "githubTokenRemember": true,
   "sectionEnabled": false,
   "sectionShowPlane": true,
-  "sectionPosition": "1585.9639974814",
+  "sectionPosition": "1587.4639974814",
   "sectionReverse": false,
   "displayModesEnabled": false,
-  "dimensionFontSize": "16",
-  "dimensionUnit": false,
-  "dimensionBox": false,
   "notesShow": true,
   "noteEditorMany": false,
   "noteEditorSphere": false,
-  "noteEditorDiameter": "100",
+  "noteEditorDiameter": "430",
+  "noteEditorWindow": false,
+  "noteEditorWindowReverse": false,
+  "noteEditorWindowDepth": "121",
+  "noteEditorIsolate": false,
   "assemblerSeparation": "250",
   "assemblerLabelPosition": true,
   "assemblerLabelName": true,
   "assemblerLabelFontSize": "11",
-  "assemblerLabelsThrough": false
+  "assemblerLabelsThrough": false,
+  "guideIntroOnly": false
  },
  "layers": [
   true
@@ -597,14 +733,14 @@
  },
  "camera": {
   "position": [
-   6720.883892702479,
-   3223.3740238405367,
-   5685.5042216332
+   5198.778026911344,
+   3292.318779164071,
+   5918.903291173639
   ],
   "target": [
-   1241.4590437272532,
-   882.7185594213197,
-   1533.4233473689205
+   1485.3240156751701,
+   1019.7919440503596,
+   566.7041876469419
   ],
   "up": [
    0,
