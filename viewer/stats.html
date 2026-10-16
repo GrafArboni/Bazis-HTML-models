@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>Статистика просмотрщика</title>
+<!-- Страница владельца: что нажимают на опубликованных моделях и предложения по
+     улучшению. Данные — у Worker приёмника (GET /stats, ключ администратора — секрет
+     ADMIN_KEY в Cloudflare); адрес Worker — из inbox.json рядом. Без ключа пусто.
+     Источник — visualizer/features/usage/stats.html, на сайт кладёт выпуск просмотрщика. -->
+<style>
+  :root {
+    --bg: #0d151b;
+    --panel: #15212a;
+    --line: #2a3a46;
+    --text: #e6eef2;
+    --muted: #8fa2ad;
+    --accent: #6fe3d3;
+    --warm: #ffd970;
+    --client: #b388ff;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.45 system-ui, -apple-system, 'Segoe UI', sans-serif; }
+  header { padding: 18px 20px 10px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--bg); z-index: 2; }
+  h1 { margin: 0 0 10px; font-size: 20px; font-weight: 620; }
+  h2 { margin: 26px 0 10px; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+  main { padding: 0 20px 40px; max-width: 1200px; }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  input, select, button { font: inherit; color: var(--text); background: #1d2c37; border: 1px solid #415563; border-radius: 6px; padding: 6px 10px; }
+  button { cursor: pointer; }
+  button.primary { background: #315e5d; border-color: var(--accent); }
+  #status { color: var(--muted); font-size: 13px; margin-left: 6px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-top: 16px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+  .card b { display: block; font-size: 24px; font-weight: 600; }
+  .card span { color: var(--muted); font-size: 12px; }
+  table { width: 100%; border-collapse: collapse; background: var(--panel); border-radius: 8px; overflow: hidden; }
+  th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 500; font-size: 12px; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td small { display: block; color: var(--muted); font-size: 11px; overflow-wrap: anywhere; }
+  .bar { height: 6px; border-radius: 3px; background: var(--accent); min-width: 2px; }
+  .wrap { overflow-x: auto; }
+  .visit { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; margin-bottom: 8px; }
+  .visit > summary { list-style: none; cursor: pointer; padding: 8px 12px; display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; }
+  .visit > summary::-webkit-details-marker { display: none; }
+  .tag { font-size: 11px; padding: 1px 7px; border-radius: 9px; background: #23343f; color: var(--muted); }
+  .tag.client { background: #2a2140; color: #d9c8ff; }
+  .tag.owner { background: #1f3340; color: var(--accent); }
+  .steps { display: flex; flex-wrap: wrap; gap: 5px; padding: 4px 12px 12px; }
+  .step { font-size: 12px; padding: 2px 8px; border-radius: 10px; background: #1d2c37; border: 1px solid #33485a; }
+  .step i { font-style: normal; color: var(--muted); margin-right: 4px; }
+  .step.sys { border-style: dashed; color: var(--muted); }
+  .fb { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--warm); border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; }
+  .fb .meta { color: var(--muted); font-size: 12px; margin-bottom: 4px; }
+  .fb .text { white-space: pre-wrap; overflow-wrap: anywhere; }
+  .empty { color: var(--muted); padding: 10px 0; }
+  @media (max-width: 640px) { header, main { padding-left: 12px; padding-right: 12px; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Статистика просмотрщика</h1>
+  <div class="filters">
+    <input type="password" id="key" placeholder="Ключ администратора" autocomplete="current-password" size="22" />
+    <select id="days">
+      <option value="7">7 дней</option>
+      <option value="30" selected>30 дней</option>
+      <option value="90">90 дней</option>
+      <option value="365">год</option>
+    </select>
+    <select id="role">
+      <option value="">все</option>
+      <option value="client" selected>клиенты</option>
+      <option value="owner">владелец</option>
+    </select>
+    <select id="page"><option value="">все модели</option></select>
+    <button type="button" class="primary" id="load">Показать</button>
+    <span id="status"></span>
+  </div>
+</header>
+<main>
+  <div class="cards" id="cards"></div>
+  <h2>Кнопки и действия</h2>
+  <div class="wrap"><table id="buttons"></table></div>
+  <h2>Модели</h2>
+  <div class="wrap"><table id="pages"></table></div>
+  <h2>Последние визиты</h2>
+  <div id="visits"></div>
+  <h2>Предложения по улучшению</h2>
+  <div id="feedback"></div>
+</main>
+<script>
+  'use strict';
+  // системные действия модуля usage — по-человечески
+  const SYSTEM = {
+    'visit:open': 'открыл страницу',
+    'visit:hide': 'свернул / переключился',
+    'visit:close': 'закрыл',
+    'camera:move': 'крутил / двигал камеру',
+    'camera:zoom': 'приближал колесом',
+    'model:click': 'щелчок по модели',
+    'feedback:open': 'открыл «Предложить улучшение»',
+    'feedback:sent': 'отправил предложение'
+  };
+  const $ = id => document.getElementById(id);
+  const store = {
+    get: k => { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} }
+  };
+  const el = (tag, props = {}, ...kids) => {
+    const node = Object.assign(document.createElement(tag), props);
+    for (const kid of kids) if (kid != null) node.append(kid);
+    return node;
+  };
+  const slug = page => String(page || '').replace(/^models\//, '').replace(/\/index\.html$/, '');
+  const when = iso => {
+    const d = new Date(iso);
+    return isNaN(d) ? '' : d.toLocaleString('ru-RU', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+  };
+  const titleOf = row => SYSTEM[row.name] || row.label || row.name;
+  const roleTag = role => el('span', { className: 'tag ' + role, textContent: role === 'owner' ? 'владелец' : 'клиент' });
+  let endpoint = null;
+
+  async function readEndpoint() {
+    const response = await fetch('inbox.json?t=' + Date.now(), { cache: 'no-store' });
+    const config = response.ok ? await response.json() : null;
+    if (!config?.endpoint) throw new Error('нет inbox.json с адресом приёмника');
+    endpoint = config.endpoint.replace(/\/+$/, '');
+  }
+  async function load() {
+    const key = $('key').value.trim();
+    if (!key) return ($('status').textContent = 'Введите ключ администратора.');
+    store.set('bazisStatsKey', key);
+    $('status').textContent = 'Загружаю…';
+    try {
+      if (!endpoint) await readEndpoint();
+      const query = new URLSearchParams({ days: $('days').value, role: $('role').value, page: $('page').value });
+      const response = await fetch(endpoint + '/stats?' + query, { headers: { Authorization: 'Bearer ' + key }, cache: 'no-store' });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.ok) throw new Error(data.error || 'ошибка ' + response.status);
+      render(data);
+      $('status').textContent = 'Обновлено ' + new Date().toLocaleTimeString('ru-RU');
+    } catch (error) {
+      $('status').textContent = 'Не удалось: ' + error.message;
+    }
+  }
+
+  function render(data) {
+    const t = data.totals || {};
+    $('cards').replaceChildren(
+      ...[
+        [t.visits || 0, 'визитов'],
+        [t.clientVisits || 0, 'из них клиентов'],
+        [t.pages || 0, 'моделей'],
+        [t.events || 0, 'действий'],
+        [data.feedback.length, 'предложений']
+      ].map(([n, label]) => el('div', { className: 'card' }, el('b', { textContent: n }), el('span', { textContent: label })))
+    );
+    // кнопки
+    const max = Math.max(1, ...data.buttons.map(b => b.clicks));
+    const buttons = $('buttons');
+    buttons.replaceChildren(el('tr', {}, ...['#', 'Кнопка / действие', 'Нажатий', 'В визитах', ''].map(h => el('th', { textContent: h }))));
+    data.buttons.forEach((b, i) =>
+      buttons.append(
+        el('tr', {},
+          el('td', { className: 'num', textContent: i + 1 }),
+          el('td', {}, titleOf(b), el('small', { textContent: b.name })),
+          el('td', { className: 'num', textContent: b.clicks }),
+          el('td', { className: 'num', textContent: b.visits }),
+          el('td', { style: 'width:30%' }, el('div', { className: 'bar', style: 'width:' + (100 * b.clicks) / max + '%' }))
+        )
+      )
+    );
+    if (!data.buttons.length) buttons.append(el('tr', {}, el('td', { colSpan: 5, className: 'empty', textContent: 'Пока нет данных.' })));
+    // модели + фильтр
+    const pages = $('pages'),
+      select = $('page'),
+      chosen = select.value;
+    pages.replaceChildren(el('tr', {}, ...['Модель', 'Визитов', 'Действий', 'Последний'].map(h => el('th', { textContent: h }))));
+    for (const p of data.pages)
+      pages.append(
+        el('tr', {},
+          el('td', {}, el('a', { href: '../' + p.page, textContent: slug(p.page), target: '_blank', style: 'color:var(--accent)' })),
+          el('td', { className: 'num', textContent: p.visits }),
+          el('td', { className: 'num', textContent: p.events || 0 }),
+          el('td', { className: 'num', textContent: when(p.last) })
+        )
+      );
+    if (!chosen) {
+      select.replaceChildren(el('option', { value: '', textContent: 'все модели' }));
+      for (const p of data.pages) select.append(el('option', { value: p.page, textContent: slug(p.page) }));
+    }
+    // визиты с последовательностью действий
+    $('visits').replaceChildren(
+      ...data.visits.map(v => {
+        const last = v.steps.length ? v.steps[v.steps.length - 1].t : 0;
+        return el('details', { className: 'visit' },
+          el('summary', {},
+            el('b', { textContent: slug(v.page) }),
+            el('span', { textContent: when(v.started) }),
+            roleTag(v.role),
+            el('span', { className: 'tag', textContent: v.device === 'phone' ? 'телефон' : 'ПК' }),
+            v.lang ? el('span', { className: 'tag', textContent: v.lang }) : null,
+            el('span', { className: 'tag', textContent: Math.round(last / 1000) + ' с · ' + v.steps.length + ' шагов' })
+          ),
+          el('div', { className: 'steps' },
+            ...v.steps.map(s =>
+              el('span', { className: 'step' + (SYSTEM[s.name] ? ' sys' : ''), title: s.name + ' · ' + Math.round(s.t / 1000) + ' с' },
+                el('i', { textContent: Math.round(s.t / 1000) + 'с' }),
+                titleOf(s) + (s.n > 1 ? ' ×' + s.n : '')
+              )
+            )
+          )
+        );
+      })
+    );
+    if (!data.visits.length) $('visits').append(el('div', { className: 'empty', textContent: 'Визитов нет.' }));
+    // предложения
+    $('feedback').replaceChildren(
+      ...data.feedback.map(f =>
+        el('div', { className: 'fb' },
+          el('div', { className: 'meta' }, when(f.at) + ' · ' + slug(f.page) + ' · ' + (f.name || 'без имени') + ' ', roleTag(f.role)),
+          el('div', { className: 'text', textContent: f.text })
+        )
+      )
+    );
+    if (!data.feedback.length) $('feedback').append(el('div', { className: 'empty', textContent: 'Предложений пока нет.' }));
+  }
+
+  $('key').value = store.get('bazisStatsKey') || '';
+  $('load').onclick = load;
+  for (const id of ['days', 'role', 'page']) $(id).onchange = () => $('key').value && load();
+  $('key').onkeydown = e => e.key === 'Enter' && load();
+  if ($('key').value) load();
+</script>
+</body>
+</html>
