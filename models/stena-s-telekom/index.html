@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="bazis-viewer" content="935a534669f8">
+<meta name="bazis-viewer" content="b1bdadeaa639">
 <title>Стена с телеком · просмотр модели</title>
 <style>
 :root{color-scheme:dark;--bg:#10171d;--panel:#17232d;--line:#31414b;--text:#e8eef0;--muted:#a6bac4;--accent:#9ee2d0;--popup-border:#526776;--control-border:#46586a;--hover:#304654;--muted-soft:#9fb3bd;--divider:#26343d;--compact-slider:70px}
@@ -2606,6 +2606,69 @@ html.iconControls #assemblerOpen[aria-pressed='true'] {
 .inboxPrimary {
   background: #315e5d;
   border-color: var(--accent, #6fe3d3);
+}
+/* окно просмотра пришедших правок */
+.inboxReview {
+  max-width: 520px;
+}
+.inboxReviewList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: min(60vh, 520px);
+  overflow: auto;
+  margin-bottom: 8px;
+}
+.inboxEdit {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px 8px;
+  padding: 7px 9px;
+  border: 1px solid #4a3a72;
+  border-radius: 6px;
+  background: #1a1430;
+}
+.inboxEdit > input {
+  grid-row: span 3;
+  margin-top: 3px;
+}
+.inboxEditHead {
+  font-size: 13px;
+}
+.inboxEditHead span {
+  color: #a9b6bd;
+  font-size: 12px;
+}
+.inboxEditComment {
+  font-size: 12px;
+  color: #eadfff;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.inboxEditItems {
+  margin: 2px 0 0;
+  padding-left: 16px;
+  font-size: 12px;
+}
+.inboxEditItems li {
+  margin: 1px 0;
+  overflow-wrap: anywhere;
+}
+.inboxEditItems b {
+  font-weight: 600;
+  color: #ffb37a;
+}
+.inboxEditItems q {
+  color: #fff;
+}
+.inboxEditItems small {
+  display: block;
+  color: #8fa2ad;
+}
+.inboxReject {
+  margin-right: auto;
+  border-color: #b06a5e;
+  color: #ffc4ba;
 }
 </style>
 <style data-feature="range_entry">
@@ -5418,6 +5481,19 @@ window.OrbitControls = OrbitControls;
       <button type="submit" id="inboxSubmit" class="inboxPrimary">Отправить</button>
     </div>
   </form>
+</dialog>
+<!-- Просмотр пришедших правок перед загрузкой: по отправке — кто, когда, комментарий,
+     что внутри; галочками выбрать, что загрузить, а что отклонить (удалить из ящика). -->
+<dialog id="inboxReview" class="inboxDialog inboxReview">
+  <h3>Пришедшие правки</h3>
+  <p class="inboxHint">Отметьте, что загрузить. Отклонённое удалится из ящика и на модель не попадёт.</p>
+  <div class="inboxReviewList" id="inboxReviewList"></div>
+  <p class="inboxStatus" id="inboxReviewStatus" aria-live="polite"></p>
+  <div class="inboxButtons">
+    <button type="button" id="inboxReviewReject" class="inboxReject">Отклонить выбранные</button>
+    <button type="button" id="inboxReviewCancel">Отмена</button>
+    <button type="button" id="inboxReviewLoad" class="inboxPrimary">Загрузить выбранные</button>
+  </div>
 </dialog>
 </div>
 <div data-feature-markup="icon_controls">
@@ -14133,6 +14209,44 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       // importNotes(list, images, {from, comment, removed}) — у владельца: новые
       // заметки добавляются, правки и удаления существующих — предложением на карточке.
       resolveProposal,
+      // describeImport(list, options) — что сделает importNotes, ничего не меняя:
+      // [{kind: 'new'|'edit'|'delete'|'reply'|'propose'|'agree', about, text}] —
+      // для окна просмотра правок перед загрузкой (client_inbox).
+      describeImport(list, options = {}) {
+        const out = [];
+        for (const raw of Array.isArray(list) ? list : []) {
+          if (!raw || typeof raw !== 'object') continue;
+          const [note] = normalize([{ ...raw, proposal: null }]);
+          if (!note) continue;
+          const existing = notes.find(n => n.id === note.id);
+          if (!existing) {
+            out.push({ kind: 'new', about: '', text: note.text });
+            continue;
+          }
+          const known = new Set((existing.thread || []).map(m => m.id)),
+            all = [...(existing.thread || []), ...(note.thread || [])];
+          for (const m of note.thread || [])
+            if (!known.has(m.id))
+              out.push({
+                kind: m.kind === 'text' ? 'reply' : m.kind,
+                about: existing.text,
+                text:
+                  m.kind === 'text'
+                    ? m.text
+                    : m.ref === 'q'
+                      ? existing.text
+                      : all.find(x => x.id === m.ref)?.text || ''
+              });
+          const base = raw.base && typeof raw.base === 'object' ? raw.base : null;
+          if (Thread.sig(note) !== (typeof base?.sig === 'string' ? base.sig : Thread.sig(existing)))
+            out.push({ kind: 'edit', about: existing.text, text: note.text });
+        }
+        for (const r of Array.isArray(options.removed) ? options.removed : []) {
+          const existing = notes.find(n => n.id === String(r?.id));
+          if (existing) out.push({ kind: 'delete', about: existing.text, text: '' });
+        }
+        return out;
+      },
       importNotes(list, images = {}, options = {}) {
         for (const [name, base64] of Object.entries(images || {})) {
           if (!imageName.test(name) || typeof base64 !== 'string' || pending.has(name)) continue;
@@ -19098,12 +19212,16 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       loadButton = $('inboxLoad'),
       loadLabel = $('inboxLoadLabel'),
       dialog = $('inboxDialog'),
+      review = $('inboxReview'),
+      reviewList = $('inboxReviewList'),
+      reviewStatus = $('inboxReviewStatus'),
       countText = $('inboxDialogCount'),
       nameInput = $('inboxName'),
       commentInput = $('inboxComment'),
       status = $('inboxStatus'),
       submit = $('inboxSubmit');
     doc.body?.append?.(dialog);
+    doc.body?.append?.(review);
     const online = /^https?:$/.test(win.location?.protocol || '');
     const storage = {
       get(key) {
@@ -19294,22 +19412,36 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       loadButton.hidden = !inbox.length || !isOwner();
       loadLabel.textContent = 'Загрузить правки (' + inbox.length + ')';
     }
-    async function load() {
+    // файлы ящика читаются один раз: имя → правка (или null — битый файл)
+    const fetched = new Map();
+    async function fetchEdits(names) {
+      for (const name of names) {
+        if (fetched.has(name)) continue;
+        let edit = null;
+        try {
+          const response = await api(dir + '/' + name, true);
+          if (response.ok) edit = await response.json();
+        } catch (e) {}
+        fetched.set(name, edit?.schema === 1 && Array.isArray(edit.notes) ? edit : null);
+      }
+    }
+    const fromOf = edit => String(edit.from || '').trim() || 'клиент';
+    // load(names) — загрузить эти отправки (по умолчанию все) без окна просмотра
+    async function load(names = [...inbox]) {
       const notes = notesApi();
-      if (!notes?.importNotes || !inbox.length) return;
+      if (!notes?.importNotes) return;
       loadButton.disabled = true;
       let accepted = 0,
         count = 0;
       try {
-        for (const name of [...inbox]) {
-          const response = await api(dir + '/' + name, true);
-          if (!response.ok) continue;
-          const edit = await response.json();
-          if (edit?.schema !== 1 || !Array.isArray(edit.notes)) continue;
+        await fetchEdits(names);
+        for (const name of names) {
+          const edit = fetched.get(name);
+          if (!edit) continue;
           // новые заметки ложатся как есть, правки и удаления существующих —
-          // предложением на карточке («Принять / Отклонить»)
+          // предложением на карточке («Принять / Отклонить»), ответы — в обсуждение
           count += notes.importNotes(edit.notes, edit.images || {}, {
-            from: String(edit.from || '').trim() || 'клиент',
+            from: fromOf(edit),
             comment: edit.comment,
             removed: edit.removed
           });
@@ -19323,6 +19455,118 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       showLoad();
       return { accepted, notes: count };
     }
+    // reject(names) — отклонить: из ящика удаляются при сохранении, на модель не идут
+    function reject(names) {
+      for (const name of names) if (inbox.includes(name) && !consumed.includes(name)) consumed.push(name);
+      inbox = inbox.filter(name => !consumed.includes(name));
+      showLoad();
+      scheduleSave();
+      return names.length;
+    }
+
+    // ---- окно просмотра: что пришло, галочками — что загрузить
+    const KIND = {
+      new: 'Новая заметка',
+      edit: 'Правка заметки',
+      delete: 'Предлагает удалить заметку',
+      reply: 'Ответ',
+      propose: 'Предлагает решение',
+      agree: 'Согласен с решением'
+    };
+    function when(iso) {
+      const d = new Date(iso);
+      if (isNaN(d)) return '';
+      const pad = n => String(n).padStart(2, '0');
+      return pad(d.getDate()) + '.' + pad(d.getMonth() + 1) + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+    }
+    const short = (text, max = 160) => (text.length > max ? text.slice(0, max - 1) + '…' : text);
+    function dataEl(tag, text) {
+      const el = doc.createElement(tag);
+      el.textContent = text;
+      el.translate = false;
+      return el;
+    }
+    async function openReview() {
+      const notes = notesApi();
+      if (!notes || !inbox.length) return;
+      loadButton.disabled = true;
+      try {
+        await fetchEdits(inbox);
+      } finally {
+        loadButton.disabled = false;
+      }
+      reviewList.replaceChildren();
+      reviewStatus.textContent = '';
+      for (const name of inbox) {
+        const edit = fetched.get(name),
+          row = doc.createElement('label');
+        row.className = 'inboxEdit';
+        const box = doc.createElement('input');
+        box.type = 'checkbox';
+        box.checked = true;
+        box.value = name;
+        const head = doc.createElement('div');
+        head.className = 'inboxEditHead';
+        if (!edit) {
+          head.append('Файл не читается — его можно только отклонить');
+          row.append(box, head);
+          reviewList.append(row);
+          continue;
+        }
+        head.append(dataEl('b', fromOf(edit)), ' ', dataEl('span', when(edit.sentAt || edit.receivedAt)));
+        row.append(box, head);
+        if (edit.comment) {
+          const comment = dataEl('div', edit.comment);
+          comment.className = 'inboxEditComment';
+          row.append(doc.createElement('span'), comment);
+        }
+        const items = doc.createElement('ul');
+        items.className = 'inboxEditItems';
+        const photos = Object.keys(edit.images || {}).length;
+        for (const item of notes.describeImport?.(edit.notes, { removed: edit.removed }) || []) {
+          const li = doc.createElement('li'),
+            kind = doc.createElement('b');
+          kind.textContent = KIND[item.kind] || item.kind;
+          li.append(kind);
+          if (item.text) li.append(' ', dataEl('q', short(item.text)));
+          if (item.about && item.kind !== 'edit' && item.text !== item.about) {
+            const about = doc.createElement('small');
+            about.append('к заметке ', dataEl('q', short(item.about, 80)));
+            li.append(about);
+          } else if (item.kind === 'edit' || item.kind === 'delete') {
+            const about = doc.createElement('small');
+            about.append('было ', dataEl('q', short(item.about, 120)));
+            li.append(about);
+          }
+          items.append(li);
+        }
+        if (photos) {
+          const li = doc.createElement('li');
+          li.append('Фото: ', dataEl('span', String(photos)));
+          items.append(li);
+        }
+        if (!items.children.length) items.append(Object.assign(doc.createElement('li'), { textContent: 'Без изменений' }));
+        row.append(doc.createElement('span'), items);
+        reviewList.append(row);
+      }
+      if (review.showModal) review.showModal();
+      else review.setAttribute('open', '');
+    }
+    const chosen = () => [...reviewList.querySelectorAll('input:checked')].map(b => b.value);
+    $('inboxReviewCancel').onclick = () => review.close?.();
+    $('inboxReviewLoad').onclick = async () => {
+      const names = chosen().filter(name => fetched.get(name));
+      if (!names.length) return;
+      await load(names);
+      review.close?.();
+    };
+    $('inboxReviewReject').onclick = () => {
+      const names = chosen();
+      if (!names.length) return;
+      if (win.confirm && !win.confirm('Отклонить выбранные правки? Они удалятся из ящика.')) return;
+      reject(names);
+      review.close?.();
+    };
 
     // ---- дискета: принятые файлы удаляются тем же коммитом, что и вид
     function attachments() {
@@ -19333,7 +19577,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     }
 
     sendButton.onclick = openDialog;
-    loadButton.onclick = load;
+    loadButton.onclick = openReview;
     $('inboxCancel').onclick = () => dialog.close?.();
     submit.onclick = event => {
       event.preventDefault();
@@ -19373,6 +19617,8 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       attachments,
       attachmentsSaved,
       load,
+      reject,
+      openReview,
       checkInbox,
       send,
       autoSave,
@@ -19400,7 +19646,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         doc.documentElement?.classList?.remove('bazisClient');
         win.clearTimeout(saveTimer);
         for (const key of ['viewerRole', 'viewerName', 'notesChanged']) delete services[key];
-        for (const el of [sendButton, loadButton, dialog]) el.remove();
+        for (const el of [sendButton, loadButton, dialog, review]) el.remove();
       }
     };
   }
@@ -19409,7 +19655,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
   else (root.BazisViewerFeatures || (root.BazisViewerFeatures = [])).push({ name: 'client_inbox', install });
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 
-(globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"Ваше имя":{"en":"Your name","pl":"Twoje imię","uk":"Ваше ім'я"},"Владелец модели увидит их на этой странице.":{"en":"The model owner will see them on this page.","pl":"Właściciel modelu zobaczy je na tej stronie.","uk":"Власник моделі побачить їх на цій сторінці."},"Загрузить правки":{"en":"Load edits","pl":"Wczytaj poprawki","uk":"Завантажити правки"},"Загрузить правки (":{"en":"Load edits (","pl":"Wczytaj poprawki (","uk":"Завантажити правки ("},"Заметок к отправке:":{"en":"Notes to send:","pl":"Notatek do wysłania:","uk":"Нотаток до надсилання:"},"Комментарий":{"en":"Comment","pl":"Komentarz","uk":"Коментар"},"Не удалось отправить:":{"en":"Could not send:","pl":"Nie udało się wysłać:","uk":"Не вдалося надіслати:"},"Необязательно":{"en":"Optional","pl":"Opcjonalnie","uk":"Необов'язково"},"Несовместимый модуль правок клиента":{"en":"Incompatible client edits module","pl":"Niezgodny moduł poprawek klienta","uk":"Несумісний модуль правок клієнта"},"Отмена":{"en":"Cancel","pl":"Anuluj","uk":"Скасувати"},"Отправить":{"en":"Send","pl":"Wyślij","uk":"Надіслати"},"Отправить ваши заметки владельцу модели":{"en":"Send your notes to the model owner","pl":"Wyślij swoje notatki właścicielowi modelu","uk":"Надіслати ваші нотатки власнику моделі"},"Отправить правки":{"en":"Send edits","pl":"Wyślij poprawki","uk":"Надіслати правки"},"Отправить правки (":{"en":"Send edits (","pl":"Wyślij poprawki (","uk":"Надіслати правки ("},"Отправляю…":{"en":"Sending…","pl":"Wysyłam…","uk":"Надсилаю…"},"Правки отправлены. Спасибо!":{"en":"Edits sent. Thank you!","pl":"Poprawki wysłane. Dziękujemy!","uk":"Правки надіслано. Дякуємо!"},"Принять правки клиента: они лягут заметками, проверьте и сохраните дискетой":{"en":"Accept client edits: they become notes — review them and save with the disk button","pl":"Przyjmij poprawki klienta: staną się notatkami — sprawdź i zapisz dyskietką","uk":"Прийняти правки клієнта: вони стануть нотатками, перевірте й збережіть дискетою"},"клиент":{"en":"client","pl":"klient","uk":"клієнт"},"ошибка":{"en":"error","pl":"błąd","uk":"помилка"}});
+(globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"Без изменений":{"en":"No changes","pl":"Bez zmian","uk":"Без змін"},"Ваше имя":{"en":"Your name","pl":"Twoje imię","uk":"Ваше ім'я"},"Владелец модели увидит их на этой странице.":{"en":"The model owner will see them on this page.","pl":"Właściciel modelu zobaczy je na tej stronie.","uk":"Власник моделі побачить їх на цій сторінці."},"Загрузить выбранные":{"en":"Load selected","pl":"Wczytaj wybrane","uk":"Завантажити вибрані"},"Загрузить правки":{"en":"Load edits","pl":"Wczytaj poprawki","uk":"Завантажити правки"},"Загрузить правки (":{"en":"Load edits (","pl":"Wczytaj poprawki (","uk":"Завантажити правки ("},"Заметок к отправке:":{"en":"Notes to send:","pl":"Notatek do wysłania:","uk":"Нотаток до надсилання:"},"Комментарий":{"en":"Comment","pl":"Komentarz","uk":"Коментар"},"Не удалось отправить:":{"en":"Could not send:","pl":"Nie udało się wysłać:","uk":"Не вдалося надіслати:"},"Необязательно":{"en":"Optional","pl":"Opcjonalnie","uk":"Необов'язково"},"Несовместимый модуль правок клиента":{"en":"Incompatible client edits module","pl":"Niezgodny moduł poprawek klienta","uk":"Несумісний модуль правок клієнта"},"Новая заметка":{"en":"New note","pl":"Nowa notatka","uk":"Нова нотатка"},"Ответ":{"en":"Reply","pl":"Odpowiedź","uk":"Відповідь"},"Отклонить выбранные":{"en":"Reject selected","pl":"Odrzuć wybrane","uk":"Відхилити вибрані"},"Отклонить выбранные правки? Они удалятся из ящика.":{"en":"Reject the selected edits? They will be removed from the inbox.","pl":"Odrzucić wybrane poprawki? Zostaną usunięte ze skrzynki.","uk":"Відхилити вибрані правки? Їх буде видалено зі скриньки."},"Отмена":{"en":"Cancel","pl":"Anuluj","uk":"Скасувати"},"Отметьте, что загрузить. Отклонённое удалится из ящика и на модель не попадёт.":{"en":"Tick what to load. Rejected edits are removed from the inbox and never reach the model.","pl":"Zaznacz, co wczytać. Odrzucone zostaną usunięte ze skrzynki i nie trafią do modelu.","uk":"Позначте, що завантажити. Відхилене видалиться зі скриньки й не потрапить на модель."},"Отправить":{"en":"Send","pl":"Wyślij","uk":"Надіслати"},"Отправить ваши заметки владельцу модели":{"en":"Send your notes to the model owner","pl":"Wyślij swoje notatki właścicielowi modelu","uk":"Надіслати ваші нотатки власнику моделі"},"Отправить правки":{"en":"Send edits","pl":"Wyślij poprawki","uk":"Надіслати правки"},"Отправить правки (":{"en":"Send edits (","pl":"Wyślij poprawki (","uk":"Надіслати правки ("},"Отправляю…":{"en":"Sending…","pl":"Wysyłam…","uk":"Надсилаю…"},"Правка заметки":{"en":"Note edit","pl":"Poprawka notatki","uk":"Правка нотатки"},"Правки отправлены. Спасибо!":{"en":"Edits sent. Thank you!","pl":"Poprawki wysłane. Dziękujemy!","uk":"Правки надіслано. Дякуємо!"},"Предлагает решение":{"en":"Proposes a solution","pl":"Proponuje rozwiązanie","uk":"Пропонує рішення"},"Предлагает удалить заметку":{"en":"Suggests deleting the note","pl":"Proponuje usunąć notatkę","uk":"Пропонує видалити нотатку"},"Принять правки клиента: они лягут заметками, проверьте и сохраните дискетой":{"en":"Accept client edits: they become notes — review them and save with the disk button","pl":"Przyjmij poprawki klienta: staną się notatkami — sprawdź i zapisz dyskietką","uk":"Прийняти правки клієнта: вони стануть нотатками, перевірте й збережіть дискетою"},"Пришедшие правки":{"en":"Incoming edits","pl":"Otrzymane poprawki","uk":"Отримані правки"},"Согласен с решением":{"en":"Agrees with the solution","pl":"Zgadza się z rozwiązaniem","uk":"Згоден з рішенням"},"Файл не читается — его можно только отклонить":{"en":"The file cannot be read — it can only be rejected","pl":"Pliku nie da się odczytać — można go tylko odrzucić","uk":"Файл не читається — його можна лише відхилити"},"Фото:":{"en":"Photos:","pl":"Zdjęcia:","uk":"Фото:"},"было":{"en":"was","pl":"było","uk":"було"},"к заметке":{"en":"on note","pl":"do notatki","uk":"до нотатки"},"клиент":{"en":"client","pl":"klient","uk":"клієнт"},"ошибка":{"en":"error","pl":"błąd","uk":"помилка"}});
 (function (root) {
   'use strict';
   // Ручной ввод у ползунков: значение справа от ползунка (output или span сразу
