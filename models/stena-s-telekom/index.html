@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="bazis-viewer" content="b1bdadeaa639">
+<meta name="bazis-viewer" content="a52109088889">
 <title>Стена с телеком · просмотр модели</title>
 <style>
 :root{color-scheme:dark;--bg:#10171d;--panel:#17232d;--line:#31414b;--text:#e8eef0;--muted:#a6bac4;--accent:#9ee2d0;--popup-border:#526776;--control-border:#46586a;--hover:#304654;--muted-soft:#9fb3bd;--divider:#26343d;--compact-slider:70px}
@@ -1264,6 +1264,16 @@ dialog.matPicker {
 .materialChip.materialPicked {
   border-color: #27e6df;
   box-shadow: 0 0 0 1px #27e6df;
+}
+/* облицованная деталь: слои от лица к тылу; следующие — с «+ » и помельче */
+.materialCallout .materialLayer {
+  margin-top: 3px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.materialCallout .materialPlus {
+  color: #8fa2ad;
+  font-weight: 700;
 }
 </style>
 <style data-feature="notes">
@@ -6973,25 +6983,29 @@ window.OrbitControls = OrbitControls;
     group.visible = false;
     scene.add(group);
     const entries = [];
-    // Крышка разреза — красная, чтобы срез читался сразу (как в БАЗИС), а не
-    // сливался с пластью. Прозрачность — как у детали: материал на каждую
-    // непрозрачность, общий для всех крышек.
+    // Крышка разреза — монотонным цветом материала детали (services.monoColor,
+    // модуль finish): срез читается сразу и соседние детали не сливаются, как было
+    // с одним красным на всё. Цвета нет (импорт без записи, нет модуля) — красная.
+    // Прозрачность — как у детали: материал на пару «цвет, непрозрачность».
     const CAP_COLOR = 0xe53935,
       capMaterials = new Map();
-    function capMaterial(source) {
-      const opacity = Math.round((source?.opacity ?? 1) * 100) / 100;
-      let m = capMaterials.get(opacity);
+    const colorOf = mesh => services.monoColor?.(mesh?.userData?.record?.material) || CAP_COLOR;
+    function capMaterial(source, mesh) {
+      const opacity = Math.round((source?.opacity ?? 1) * 100) / 100,
+        color = colorOf(mesh),
+        key = color + '|' + opacity;
+      let m = capMaterials.get(key);
       if (!m) {
         // без освещения: срез одного ровного цвета с любой стороны
         m = new T.MeshBasicMaterial({
-          color: CAP_COLOR,
+          color,
           side: T.DoubleSide,
           transparent: opacity < 1,
           opacity,
           depthWrite: opacity >= 1
         });
         m.userData.sectionCap = true;
-        capMaterials.set(opacity, m);
+        capMaterials.set(key, m);
       }
       return m;
     }
@@ -7209,7 +7223,7 @@ window.OrbitControls = OrbitControls;
       for (const source of sources()) {
         const geometry = capGeometry(source, plane, normal);
         if (!geometry) continue;
-        const cap = new T.Mesh(geometry, capMaterial(source.material));
+        const cap = new T.Mesh(geometry, capMaterial(source.material, source));
         cap.userData = { decorative: true, sectionCap: true };
         cap.renderOrder = source.renderOrder + 0.1;
         cap.frustumCulled = false;
@@ -7220,7 +7234,7 @@ window.OrbitControls = OrbitControls;
     }
     function sync() {
       for (const entry of entries) {
-        entry.cap.material = capMaterial(entry.source.material);
+        entry.cap.material = capMaterial(entry.source.material, entry.source);
         entry.cap.visible = services.visible?.(entry.source) !== false;
       }
     }
@@ -10538,6 +10552,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       } catch (e) {}
     };
     const keyOf = name => {
+      if ((name || '').includes('\n')) return name.split('\n').map(keyOf).join(' + ');
       const p = (name || '').split('\r'),
         art = (p[1] || '').trim();
       return art || (name || '').trim();
@@ -10655,17 +10670,39 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
           update();
         };
         const sp = doc.createElement('span');
-        sp.textContent = (m.name.split('\r')[0] || m.name).trim();
+        sp.textContent = layersOf(m.name)
+          .map(l => (l.split('\r')[0] || l).trim())
+          .join(' + ');
         sp.translate = false; // название материала — данные
-        sp.title = m.name.split('\r').join(' · ');
+        sp.title = plainTitle(m.name);
         lab.append(cb, sp);
         box.append(lab);
       }
       mount.append(menu);
       disposeMenu = services.portalToolMenu?.(menu) || null;
     }
+    // Деталь с облицовкой пласти — составной материал: все слои от лица к тылу
+    // через \n («Обои\nДСП…»), а не только верхний. Правило — material_stack в
+    // integration.py: облицовка без Side — на пласти z = толщина, Side 1 — на z = 0;
+    // лицо по FrontFace, не назначено — облицованная сторона.
+    function stackOf(record) {
+      const plastics = (record?.plastics || []).filter(p => p.material),
+        base = record?.base_material;
+      if (!plastics.length || !base) return null;
+      const top = plastics.filter(p => p.side !== 1).map(p => p.material),
+        bottom = plastics.filter(p => p.side === 1).map(p => p.material),
+        face = record.front_face,
+        topFirst = face === 0 || face === 1 ? face === 0 : !!(top.length || !bottom.length);
+      return (topFirst ? [...top, base, ...bottom] : [...bottom, base, ...top]).join('\n');
+    }
     const nameOf = o =>
-      ['panel', 'profile'].includes(o.userData?.kind) ? o.userData.record?.material || '—' : null;
+      ['panel', 'profile'].includes(o.userData?.kind)
+        ? stackOf(o.userData.record) || o.userData.record?.material || '—'
+        : null;
+    const layersOf = name => (name || '').split('\n');
+    // цвет выноски — по лицевому слою
+    const colorOf = name => services.monoColor?.(layersOf(name)[0]);
+    const plainTitle = name => layersOf(name).map(l => l.split('\r').join(' · ')).join('\n+ ');
     function projected(point) {
       return point.clone().project(camera);
     }
@@ -10757,17 +10794,32 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       if (labels.has(name)) return labels.get(name);
       const box = doc.createElement('div');
       box.className = 'materialCallout';
-      box.title = name.split('\r').join(' · ');
+      box.title = plainTitle(name);
       box.setAttribute('data-i18n-skip', ''); // в title — название материала
-      const title = doc.createElement('strong'),
-        article = doc.createElement('small'),
-        parts = name.split('\r');
-      title.textContent = parts[0] || 'Материал без названия';
-      article.textContent = parts[1]?.trim() || 'Артикул не указан';
-      title.translate = !parts[0]; // название и артикул — данные, заглушки — переводим
-      article.translate = !parts[1]?.trim();
-      box.append(title, article);
-      const color = services.monoColor?.(name);
+      // облицованная деталь — слои от лица к тылу; следующие — с «+ » и помельче
+      const stack = name.includes('\n');
+      layersOf(name).forEach((layer, i) => {
+        const title = doc.createElement('strong'),
+          article = doc.createElement('small'),
+          parts = layer.split('\r');
+        title.textContent = parts[0] || 'Материал без названия';
+        article.textContent = parts[1]?.trim() || 'Артикул не указан';
+        title.translate = !parts[0]; // название и артикул — данные, заглушки — переводим
+        article.translate = !parts[1]?.trim();
+        if (i) {
+          const plus = doc.createElement('span');
+          plus.className = 'materialPlus';
+          plus.textContent = '+ ';
+          plus.translate = false;
+          title.prepend(plus);
+          title.classList.add('materialLayer');
+        }
+        box.append(title);
+        // в составной выноске артикул, равный названию («Обои / Обои»), — лишняя строка
+        if (!(stack && parts[1]?.trim() === parts[0]?.trim())) box.append(article);
+      });
+      box.classList.toggle('materialStack', stack);
+      const color = colorOf(name);
       if (color) box.style.borderLeft = '4px solid ' + color;
       box.addEventListener('click', event => {
         event.stopPropagation();
@@ -10798,9 +10850,10 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         chipKey = key;
         chips.textContent = '';
         for (const name of names) {
-          const parts = name.split('\r'),
-            article = (parts[1] || '').trim(),
-            title = (parts[0] || '').trim();
+          const layers = layersOf(name).map(l => l.split('\r')),
+            article = layers.map(p => (p[1] || '').trim() || (p[0] || '').trim()).join(' + '),
+            title = layers.map(p => (p[0] || '').trim()).join(' + '),
+            parts = [article, title];
           const chip = doc.createElement('button');
           chip.type = 'button';
           chip.className = 'materialChip';
@@ -10808,7 +10861,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
           chip.dataset.material = name;
           const swatch = doc.createElement('span');
           swatch.className = 'sw';
-          const color = services.monoColor?.(name);
+          const color = colorOf(name);
           if (color) swatch.style.background = color;
           // Свёрнуто — только артикул; раскрыто — «артикул · название» одной строкой
           // с горизонтальной прокруткой (на телефоне переносить некуда).
@@ -10817,8 +10870,10 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
           short.textContent = article || title;
           const full = doc.createElement('span');
           full.className = 'full';
-          full.textContent = article ? article + ' · ' + title : title;
-          chip.title = parts.join(' · ');
+          full.textContent = layers
+            .map(p => ((p[1] || '').trim() ? p[1].trim() + ' · ' : '') + (p[0] || '').trim())
+            .join(' + ');
+          chip.title = plainTitle(name);
           chip.append(swatch, short, full);
           chip.onclick = () => {
             if (openName === name) {
@@ -11038,6 +11093,78 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
 (globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"Артикул не указан":{"en":"No article number","pl":"Brak numeru katalogowego","uk":"Артикул не вказано"},"В сносках…":{"en":"In callouts…","pl":"W odnośnikach…","uk":"У виносках…"},"Все":{"en":"All","pl":"Wszystkie","uk":"Усі"},"Выноски материалов":{"en":"Material callouts","pl":"Odnośniki materiałów","uk":"Виноски матеріалів"},"Материал без названия":{"en":"Unnamed material","pl":"Materiał bez nazwy","uk":"Матеріал без назви"},"Несовместимый модуль выносок материалов":{"en":"Incompatible material callouts module","pl":"Niezgodny moduł odnośników materiałów","uk":"Несумісний модуль виносок матеріалів"},"Никого":{"en":"None","pl":"Żaden","uk":"Жодного"},"Подсветка материала":{"en":"Material highlight","pl":"Podświetlenie materiału","uk":"Підсвічування матеріалу"}});
 (function (root) {
   'use strict';
+  // Цвет крышки среза — по детали: монотонный цвет её материала (services.monoColor),
+  // а не один красный на всё — соседние срезанные детали не сливаются.
+  //
+  // Крышки узла-сферы и заметки-сечения рисуются трафаретом (sphere_clip.js,
+  // window_clip.js): задние грани деталей пишут в трафарет метку, поверх рисуется
+  // крышка там, где метка стоит. Раньше метка была одна (1) — и крышка одного цвета.
+  // Теперь метка — НОМЕР ЦВЕТА детали (1…254, 255 — «цвет не найден»): общий
+  // материал метки (overrideMaterial) получает номер перед каждой деталью через её
+  // onBeforeRender — three.js применяет трафарет материала уже после этого вызова.
+  // Крышка рисуется по разу на каждый встретившийся цвет (EqualStencilFunc с его
+  // номером): цветов в узле — единицы, проходов столько же.
+  const FALLBACK = 255;
+  function create(T, fallbackHex, colorOf) {
+    const refs = new Map(), // css-цвет → номер
+      palette = new Map([[FALLBACK, new T.Color(fallbackHex)]]),
+      wrapped = [];
+    let used = new Set();
+    function refOf(mesh) {
+      const css = colorOf?.(mesh);
+      if (!css) return FALLBACK;
+      let ref = refs.get(css);
+      if (!ref) {
+        if (refs.size >= FALLBACK - 1) return FALLBACK;
+        ref = refs.size + 1;
+        refs.set(css, ref);
+        palette.set(ref, new T.Color(css));
+      }
+      return ref;
+    }
+    return {
+      // перед проходом задних граней: каждой детали — свой номер в метке
+      begin(meshes, mark) {
+        used = new Set();
+        for (const mesh of meshes) {
+          const ref = refOf(mesh),
+            own = Object.prototype.hasOwnProperty.call(mesh, 'onBeforeRender'),
+            before = mesh.onBeforeRender;
+          used.add(ref);
+          mesh.onBeforeRender = function () {
+            mark.stencilRef = ref;
+            return before.apply(this, arguments);
+          };
+          wrapped.push([mesh, own, before]);
+        }
+      },
+      end(mark) {
+        for (const [mesh, own, before] of wrapped.splice(0)) {
+          if (own) mesh.onBeforeRender = before;
+          else delete mesh.onBeforeRender;
+        }
+        mark.stencilRef = 1;
+      },
+      // крышка: по проходу на каждый встретившийся цвет
+      each(material, draw) {
+        for (const ref of used) {
+          material.stencilRef = ref;
+          material.color.copy(palette.get(ref) || palette.get(FALLBACK));
+          draw();
+        }
+      },
+      get colors() {
+        return used.size;
+      }
+    };
+  }
+  const api = { create, FALLBACK };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  root.BazisCapColors = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this);
+
+(function (root) {
+  'use strict';
   // Обрезка сферой для заметки-«узла»: всё, что дальше радиуса от центра, не
   // рисуется, а срез деталей закрыт красной крышкой ПО ПОВЕРХНОСТИ СФЕРЫ (как
   // срезы сечения).
@@ -11136,6 +11263,9 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       });
     const backMark = marker(T.BackSide),
       frontMark = marker(T.FrontSide);
+    // цвет крышки — по детали (cap_colors.js); нет помощника — один цвет capHex
+    const colors = root.BazisCapColors?.create(T, capHex, view.capColor) || null;
+    let marked = [];
     // сфера чуть больше радиуса: хорды сетки должны лежать СНАРУЖИ сферы среза,
     // иначе грань детали у края оказалась бы ближе крышки
     const SEGMENTS = 64,
@@ -11163,6 +11293,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     // в проход крышки — только детали, чья описанная сфера задевает сферу среза
     function markSolids() {
       center.set(value[0], value[1], value[2]);
+      marked = [];
       for (const group of view.solids())
         group?.traverse(o => {
           if (!o.isMesh) return;
@@ -11171,8 +11302,10 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
           const g = o.geometry;
           if (!g.boundingSphere) g.computeBoundingSphere();
           bounds.copy(g.boundingSphere).applyMatrix4(o.matrixWorld);
-          if (bounds.center.distanceTo(center) <= bounds.radius + shared.radius) o.layers.enable(CAP_LAYER);
-          else o.layers.disable(CAP_LAYER);
+          if (bounds.center.distanceTo(center) <= bounds.radius + shared.radius) {
+            o.layers.enable(CAP_LAYER);
+            marked.push(o);
+          } else o.layers.disable(CAP_LAYER);
         });
     }
     // Метки трафарета: задние грани → 1, передние → 0 (ближайшая побеждает).
@@ -11191,7 +11324,9 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         value[3] = shared.radius;
         ray[3] = 1;
         scene.overrideMaterial = backMark;
+        colors?.begin(marked, backMark);
         render.call(renderer, scene, camera);
+        colors?.end(backMark);
         ray[3] = 2;
         scene.overrideMaterial = frontMark;
         render.call(renderer, scene, camera);
@@ -11214,7 +11349,8 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       value[3] = 0; // сама крышка не обрезается
       capMesh.position.copy(center);
       capMesh.scale.setScalar(shared.radius * CHORD);
-      render.call(renderer, capScene, camera);
+      if (colors) colors.each(m, () => render.call(renderer, capScene, camera));
+      else render.call(renderer, capScene, camera);
       capsDrawn++;
       framed = true;
     }
@@ -11424,6 +11560,9 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       });
     const backMark = marker(T.BackSide),
       frontMark = marker(T.FrontSide);
+    // цвет крышки — по детали (cap_colors.js); нет помощника — один цвет capHex
+    const colors = root.BazisCapColors?.create(T, capHex, view.capColor) || null;
+    let marked = [];
     // крышка — изнанка призмы: дно на плоскости и стенки до DEPTH вдоль нормали
     // призма вдоль нормали: у выреза — перед плоскостью (изнанка), у зоны — за ней
     const capScene = new T.Scene(),
@@ -11456,6 +11595,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     function markSolids() {
       center.set(clip[0], clip[1], clip[2]);
       const r = Math.hypot(u[3], v[3]) + reach;
+      marked = [];
       for (const group of view.solids())
         group?.traverse(o => {
           if (!o.isMesh) return;
@@ -11463,8 +11603,10 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
           const g = o.geometry;
           if (!g.boundingSphere) g.computeBoundingSphere();
           bounds.copy(g.boundingSphere).applyMatrix4(o.matrixWorld);
-          if (bounds.center.distanceTo(center) <= bounds.radius + r) o.layers.enable(CAP_LAYER);
-          else o.layers.disable(CAP_LAYER);
+          if (bounds.center.distanceTo(center) <= bounds.radius + r) {
+            o.layers.enable(CAP_LAYER);
+            marked.push(o);
+          } else o.layers.disable(CAP_LAYER);
         });
     }
     function drawMarks(render, scene, camera) {
@@ -11482,7 +11624,9 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         clip[3] = shared.mode;
         n[3] = 1;
         scene.overrideMaterial = backMark;
+        colors?.begin(marked, backMark);
         render.call(renderer, scene, camera);
+        colors?.end(backMark);
         n[3] = 2;
         scene.overrideMaterial = frontMark;
         render.call(renderer, scene, camera);
@@ -11516,7 +11660,8 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       basis.setPosition(clip[0], clip[1], clip[2]);
       capMesh.matrix.copy(basis);
       capMesh.matrixWorld.copy(basis);
-      render.call(renderer, capScene, camera);
+      if (colors) colors.each(m, () => render.call(renderer, capScene, camera));
+      else render.call(renderer, capScene, camera);
       capsDrawn++;
       framed = true;
     }
@@ -11958,6 +12103,9 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       forgetButton = null,
       viewHint = null;
     // Узел крупным планом (note.sphere = {diameter}): обрезка сферой — sphere_clip.js.
+    // Срез детали — её монотонным цветом (services.monoColor, модуль finish); нет его —
+    // красным, как раньше.
+    const capColor = mesh => services.monoColor?.(mesh.userData?.record?.material) || null;
     const CAP_COLOR = 0xe53935, // как срезы сечения
       clip =
         root.BazisSphereClip?.install(T, context.renderer, CAP_COLOR, {
@@ -11965,7 +12113,8 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
           camera,
           // замкнутые детали — для подсчёта крышки (импорт и фурнитура бывают незамкнуты)
           solids: () => [services.groups?.panels, services.groups?.profiles],
-          orthographic: () => !!services.isOrthographic?.()
+          orthographic: () => !!services.isOrthographic?.(),
+          capColor
         }) || null;
     // Сечение «окном» (note.window = {normal, depth, width, height, du, dv}): плоскость
     // на depth мм за точкой заметки по нормали, прямоугольник width×height со
@@ -11975,7 +12124,8 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         scene: context.scene,
         camera,
         solids: () => [services.groups?.panels, services.groups?.profiles],
-        orthographic: () => !!services.isOrthographic?.()
+        orthographic: () => !!services.isOrthographic?.(),
+        capColor
       }) || null;
     let windowInput = null,
       windowBox = null,
@@ -19018,6 +19168,8 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     return { text, added };
   }
 
+  const LIVE_POLL_MS = 5000,
+    LIVE_TIMEOUT_MS = 10 * 60 * 1000;
   function install(context, data) {
     const { document: doc, window: win } = context;
     if (data?.schema !== 1) throw new Error('Несовместимый модуль обновления просмотрщика');
@@ -19132,14 +19284,14 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
           say('Отменено.', 'Обновить');
           return null;
         }
-        say(
-          'Просмотрщик обновлён (коммит ' +
-            sha.slice(0, 7) +
-            (result.added.length ? '; добавлено: ' + result.added.join(', ') : '') +
-            '). GitHub Pages выложит страницу примерно через минуту — затем перезагрузите её.',
-          'Обновлено'
-        );
+        committed =
+          'Записано на GitHub (коммит ' +
+          sha.slice(0, 7) +
+          (result.added.length ? '; добавлено: ' + result.added.join(', ') : '') +
+          ').';
+        say(committed + ' Жду, пока GitHub Pages выложит страницу…', 'Публикуется…');
         updated = true; // второй раз коммитить то же незачем — до перезагрузки кнопка неактивна
+        waitLive(manifest.version); // «Обновлено» — только когда сайт отдаёт новую версию
         return result;
       } catch (error) {
         say(error.message, 'Ошибка');
@@ -19149,7 +19301,55 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       }
     }
 
-    button.onclick = update;
+    // После коммита GitHub Pages выкладывает страницу не сразу (обычно ~минуту).
+    // Опрашиваем саму страницу на сайте (в обход кэша) и ищем в её заголовке метку
+    // версии просмотрщика: совпала с новой — страница реально обновлена, кнопка
+    // становится «Перезагрузить».
+    let committed = '',
+      liveTimer = null,
+      live = false;
+    const META = /<meta\s+name="bazis-viewer"\s+content="([^"]*)"/;
+    async function liveVersion() {
+      const url = win.location.href.replace(/[?#].*$/, '');
+      const response = await win.fetch(url + '?live=' + Date.now(), {
+        cache: 'no-store',
+        headers: { Range: 'bytes=0-8191' } // метка — в начале страницы; не качать всю
+      });
+      if (!response.ok) return '';
+      return (await response.text()).match(META)?.[1] || '';
+    }
+    function waitLive(version) {
+      const started = Date.now();
+      const tick = async () => {
+        liveTimer = null;
+        if (disposed) return;
+        let seen = '';
+        try {
+          seen = await liveVersion();
+        } catch (e) {}
+        const waited = Math.round((Date.now() - started) / 1000);
+        if (seen === version) {
+          live = true;
+          button.disabled = false;
+          say(committed + ' Страница на сайте обновлена — перезагрузите её.', 'Перезагрузить');
+          return;
+        }
+        if (Date.now() - started > LIVE_TIMEOUT_MS) {
+          button.disabled = false;
+          say(
+            committed + ' GitHub Pages ещё не выложил страницу (' + waited + ' с) — перезагрузите её позже.',
+            'Перезагрузить'
+          );
+          live = true;
+          return;
+        }
+        say(committed + ' Жду GitHub Pages… ' + waited + ' с', 'Публикуется…');
+        liveTimer = win.setTimeout(tick, LIVE_POLL_MS);
+      };
+      liveTimer = win.setTimeout(tick, LIVE_POLL_MS);
+    }
+
+    button.onclick = () => (live ? win.location.reload() : update());
     button.hidden = true;
     check();
     return {
@@ -19157,8 +19357,12 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       version: own,
       check,
       update,
+      get live() {
+        return live;
+      },
       dispose() {
         disposed = true;
+        win.clearTimeout(liveTimer);
         const i = readyHooks ? readyHooks.indexOf(place) : -1;
         if (i >= 0) readyHooks.splice(i, 1);
         button.remove();
@@ -19173,7 +19377,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
   else (root.BazisViewerFeatures || (root.BazisViewerFeatures = [])).push({ name: 'viewer_update', install });
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 
-(globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"(у страницы —":{"en":"(page has","pl":"(strona ma","uk":"(у сторінки —"},"). GitHub Pages выложит страницу примерно через минуту — затем перезагрузите её.":{"en":"). GitHub Pages will publish the page in about a minute — then reload it.","pl":"). GitHub Pages opublikuje stronę za około minutę — potem ją odśwież.","uk":"). GitHub Pages опублікує сторінку приблизно за хвилину — потім перезавантажте її."},". Обновление — на опубликованной странице.":{"en":". Updating is available on the published page.","pl":". Aktualizacja — na opublikowanej stronie.","uk":". Оновлення — на опублікованій сторінці."},"; добавлено:":{"en":"; added:","pl":"; dodano:","uk":"; додано:"},"В данных модели нет разделов модулей — обновите страницу локально.":{"en":"The model data has no module sections — update the page locally.","pl":"Dane modelu nie mają sekcji modułów — zaktualizuj stronę lokalnie.","uk":"У даних моделі немає розділів модулів — оновіть сторінку локально."},"В странице нет данных модели.":{"en":"The page has no model data.","pl":"Strona nie zawiera danych modelu.","uk":"На сторінці немає даних моделі."},"Версия просмотрщика":{"en":"Viewer version","pl":"Wersja przeglądarki","uk":"Версія переглядача"},"Данные модели новее набора кода — выпустите новую версию просмотрщика.":{"en":"The model data is newer than the code bundle — release a new viewer version.","pl":"Dane modelu są nowsze niż pakiet kodu — wydaj nową wersję przeglądarki.","uk":"Дані моделі новіші за набір коду — випустіть нову версію переглядача."},"Есть новая версия просмотрщика:":{"en":"A new viewer version is available:","pl":"Dostępna jest nowa wersja przeglądarki:","uk":"Є нова версія переглядача:"},"Записываю на GitHub…":{"en":"Writing to GitHub…","pl":"Zapisuję na GitHub…","uk":"Записую на GitHub…"},"Набор кода другого формата — обновите страницу локально (upgrade_html.py).":{"en":"The code bundle has a different format — update the page locally (upgrade_html.py).","pl":"Pakiet kodu ma inny format — zaktualizuj stronę lokalnie (upgrade_html.py).","uk":"Набір коду іншого формату — оновіть сторінку локально (upgrade_html.py)."},"Не удалось добавить разделы модулей в данные — обновите страницу локально.":{"en":"Could not add module sections to the data — update the page locally.","pl":"Nie udało się dodać sekcji modułów do danych — zaktualizuj stronę lokalnie.","uk":"Не вдалося додати розділи модулів у дані — оновіть сторінку локально."},"Не удалось получить":{"en":"Could not fetch","pl":"Nie udało się pobrać","uk":"Не вдалося отримати"},"Не удалось проверить версию просмотрщика:":{"en":"Could not check the viewer version:","pl":"Nie udało się sprawdzić wersji przeglądarki:","uk":"Не вдалося перевірити версію переглядача:"},"Не удалось прочитать эту страницу (":{"en":"Could not read this page (","pl":"Nie udało się odczytać tej strony (","uk":"Не вдалося прочитати цю сторінку ("},"Несовместимый модуль обновления просмотрщика":{"en":"Incompatible viewer update module","pl":"Niezgodny moduł aktualizacji przeglądarki","uk":"Несумісний модуль оновлення переглядача"},"Нет модуля записи на GitHub — обновите страницу локально.":{"en":"No GitHub write module — update the page locally.","pl":"Brak modułu zapisu na GitHub — zaktualizuj stronę lokalnie.","uk":"Немає модуля запису на GitHub — оновіть сторінку локально."},"Обнови просмотрщик":{"en":"Update viewer","pl":"Zaktualizuj przeglądarkę","uk":"Онови переглядач"},"Обновить":{"en":"Update","pl":"Aktualizuj","uk":"Оновити"},"Обновить просмотрщик":{"en":"Update viewer","pl":"Zaktualizuj przeglądarkę","uk":"Оновити переглядач"},"Обновлено":{"en":"Updated","pl":"Zaktualizowano","uk":"Оновлено"},"Обновляю…":{"en":"Updating…","pl":"Aktualizuję…","uk":"Оновлюю…"},"Отменено.":{"en":"Cancelled.","pl":"Anulowano.","uk":"Скасовано."},"Ошибка":{"en":"Error","pl":"Błąd","uk":"Помилка"},"Просмотрщик актуален (":{"en":"The viewer is up to date (","pl":"Przeglądarka jest aktualna (","uk":"Переглядач актуальний ("},"Просмотрщик обновлён (коммит":{"en":"Viewer updated (commit","pl":"Przeglądarka zaktualizowana (commit","uk":"Переглядач оновлено (коміт"},"Скачиваю новую версию просмотрщика…":{"en":"Downloading the new viewer version…","pl":"Pobieram nową wersję przeglądarki…","uk":"Завантажую нову версію переглядача…"},"Собираю страницу…":{"en":"Building the page…","pl":"Buduję stronę…","uk":"Збираю сторінку…"},"Страница собрана в другом режиме сжатия — обновите её локально (upgrade_html.py).":{"en":"The page was built with a different compression mode — update it locally (upgrade_html.py).","pl":"Strona została zbudowana w innym trybie kompresji — zaktualizuj ją lokalnie (upgrade_html.py).","uk":"Сторінку зібрано в іншому режимі стиснення — оновіть її локально (upgrade_html.py)."},"до":{"en":"to","pl":"do","uk":"до"},"неизвестна":{"en":"unknown","pl":"nieznana","uk":"невідома"},"старая":{"en":"old","pl":"stara","uk":"стара"}});
+(globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"(у страницы —":{"en":"(page has","pl":"(strona ma","uk":"(у сторінки —"},". Обновление — на опубликованной странице.":{"en":". Updating is available on the published page.","pl":". Aktualizacja — na opublikowanej stronie.","uk":". Оновлення — на опублікованій сторінці."},"; добавлено:":{"en":"; added:","pl":"; dodano:","uk":"; додано:"},"GitHub Pages ещё не выложил страницу (":{"en":"GitHub Pages has not published the page yet (","pl":"GitHub Pages jeszcze nie opublikował strony (","uk":"GitHub Pages ще не виклав сторінку ("},"В данных модели нет разделов модулей — обновите страницу локально.":{"en":"The model data has no module sections — update the page locally.","pl":"Dane modelu nie mają sekcji modułów — zaktualizuj stronę lokalnie.","uk":"У даних моделі немає розділів модулів — оновіть сторінку локально."},"В странице нет данных модели.":{"en":"The page has no model data.","pl":"Strona nie zawiera danych modelu.","uk":"На сторінці немає даних моделі."},"Версия просмотрщика":{"en":"Viewer version","pl":"Wersja przeglądarki","uk":"Версія переглядача"},"Данные модели новее набора кода — выпустите новую версию просмотрщика.":{"en":"The model data is newer than the code bundle — release a new viewer version.","pl":"Dane modelu są nowsze niż pakiet kodu — wydaj nową wersję przeglądarki.","uk":"Дані моделі новіші за набір коду — випустіть нову версію переглядача."},"Есть новая версия просмотрщика:":{"en":"A new viewer version is available:","pl":"Dostępna jest nowa wersja przeglądarki:","uk":"Є нова версія переглядача:"},"Жду GitHub Pages…":{"en":"Waiting for GitHub Pages…","pl":"Czekam na GitHub Pages…","uk":"Чекаю GitHub Pages…"},"Жду, пока GitHub Pages выложит страницу…":{"en":"Waiting for GitHub Pages to publish the page…","pl":"Czekam, aż GitHub Pages opublikuje stronę…","uk":"Чекаю, поки GitHub Pages викладе сторінку…"},"Записано на GitHub (коммит":{"en":"Saved to GitHub (commit","pl":"Zapisano na GitHub (commit","uk":"Записано на GitHub (коміт"},"Записываю на GitHub…":{"en":"Writing to GitHub…","pl":"Zapisuję na GitHub…","uk":"Записую на GitHub…"},"Набор кода другого формата — обновите страницу локально (upgrade_html.py).":{"en":"The code bundle has a different format — update the page locally (upgrade_html.py).","pl":"Pakiet kodu ma inny format — zaktualizuj stronę lokalnie (upgrade_html.py).","uk":"Набір коду іншого формату — оновіть сторінку локально (upgrade_html.py)."},"Не удалось добавить разделы модулей в данные — обновите страницу локально.":{"en":"Could not add module sections to the data — update the page locally.","pl":"Nie udało się dodać sekcji modułów do danych — zaktualizuj stronę lokalnie.","uk":"Не вдалося додати розділи модулів у дані — оновіть сторінку локально."},"Не удалось получить":{"en":"Could not fetch","pl":"Nie udało się pobrać","uk":"Не вдалося отримати"},"Не удалось проверить версию просмотрщика:":{"en":"Could not check the viewer version:","pl":"Nie udało się sprawdzić wersji przeglądarki:","uk":"Не вдалося перевірити версію переглядача:"},"Не удалось прочитать эту страницу (":{"en":"Could not read this page (","pl":"Nie udało się odczytać tej strony (","uk":"Не вдалося прочитати цю сторінку ("},"Несовместимый модуль обновления просмотрщика":{"en":"Incompatible viewer update module","pl":"Niezgodny moduł aktualizacji przeglądarki","uk":"Несумісний модуль оновлення переглядача"},"Нет модуля записи на GitHub — обновите страницу локально.":{"en":"No GitHub write module — update the page locally.","pl":"Brak modułu zapisu na GitHub — zaktualizuj stronę lokalnie.","uk":"Немає модуля запису на GitHub — оновіть сторінку локально."},"Обнови просмотрщик":{"en":"Update viewer","pl":"Zaktualizuj przeglądarkę","uk":"Онови переглядач"},"Обновить":{"en":"Update","pl":"Aktualizuj","uk":"Оновити"},"Обновить просмотрщик":{"en":"Update viewer","pl":"Zaktualizuj przeglądarkę","uk":"Оновити переглядач"},"Обновляю…":{"en":"Updating…","pl":"Aktualizuję…","uk":"Оновлюю…"},"Отменено.":{"en":"Cancelled.","pl":"Anulowano.","uk":"Скасовано."},"Ошибка":{"en":"Error","pl":"Błąd","uk":"Помилка"},"Перезагрузить":{"en":"Reload","pl":"Przeładuj","uk":"Перезавантажити"},"Просмотрщик актуален (":{"en":"The viewer is up to date (","pl":"Przeglądarka jest aktualna (","uk":"Переглядач актуальний ("},"Публикуется…":{"en":"Publishing…","pl":"Publikowanie…","uk":"Публікується…"},"Скачиваю новую версию просмотрщика…":{"en":"Downloading the new viewer version…","pl":"Pobieram nową wersję przeglądarki…","uk":"Завантажую нову версію переглядача…"},"Собираю страницу…":{"en":"Building the page…","pl":"Buduję stronę…","uk":"Збираю сторінку…"},"Страница на сайте обновлена — перезагрузите её.":{"en":"The page on the site is updated — reload it.","pl":"Strona w serwisie jest zaktualizowana — przeładuj ją.","uk":"Сторінку на сайті оновлено — перезавантажте її."},"Страница собрана в другом режиме сжатия — обновите её локально (upgrade_html.py).":{"en":"The page was built with a different compression mode — update it locally (upgrade_html.py).","pl":"Strona została zbudowana w innym trybie kompresji — zaktualizuj ją lokalnie (upgrade_html.py).","uk":"Сторінку зібрано в іншому режимі стиснення — оновіть її локально (upgrade_html.py)."},"до":{"en":"to","pl":"do","uk":"до"},"неизвестна":{"en":"unknown","pl":"nieznana","uk":"невідома"},"с":{"en":"s","pl":"s","uk":"с"},"с) — перезагрузите её позже.":{"en":"s) — reload it later.","pl":"s) — przeładuj ją później.","uk":"с) — перезавантажте її пізніше."},"старая":{"en":"old","pl":"stara","uk":"стара"}});
 (function (root) {
   'use strict';
   // Правки клиента на опубликованной странице.
