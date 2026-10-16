@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="bazis-viewer" content="6c243b9188d9">
+<meta name="bazis-viewer" content="935a534669f8">
 <title>Стена с телеком · просмотр модели</title>
 <style>
 :root{color-scheme:dark;--bg:#10171d;--panel:#17232d;--line:#31414b;--text:#e8eef0;--muted:#a6bac4;--accent:#9ee2d0;--popup-border:#526776;--control-border:#46586a;--hover:#304654;--muted-soft:#9fb3bd;--divider:#26343d;--compact-slider:70px}
@@ -1426,7 +1426,8 @@ dialog.matPicker {
   color: var(--muted-soft);
   padding: 4px;
 }
-.noteEditor {
+.noteEditor,
+.noteChat {
   /* плавающее окно: место задаёт модуль (left/top), тащится за заголовок */
   position: fixed;
   inset: auto;
@@ -1470,7 +1471,8 @@ dialog.matPicker {
   margin: 2px 0 8px;
   overflow-wrap: anywhere;
 }
-.noteEditor textarea {
+.noteEditor textarea,
+.noteChat textarea {
   display: block;
   width: 100%;
   min-height: 110px;
@@ -1483,13 +1485,15 @@ dialog.matPicker {
   padding: 8px;
   font: 13px/1.4 system-ui;
 }
-.noteEditor .noteButtons {
+.noteEditor .noteButtons,
+.noteChat .noteButtons {
   display: flex;
   gap: 8px;
   justify-content: flex-end;
   margin-top: 10px;
 }
-.noteEditor .noteButtons .noteDelete {
+.noteEditor .noteButtons .noteDelete,
+.noteChat .noteChatEditButton {
   margin-right: auto;
 }
 
@@ -1953,6 +1957,141 @@ html.iconControls #notesOpen[aria-pressed='true'] {
     max-height: 45vh;
     overflow: auto;
   }
+}
+/* обсуждение: открытый вопрос — оранжевый, согласованное решение — зелёное */
+.noteCallout.noteThread {
+  border-color: #c9773a;
+  border-left-color: #ff8a3d;
+  background: #36220fee;
+}
+.noteCallout.noteAgreed {
+  border-color: #3c9a5a;
+  border-left-color: #3fcf6e;
+  background: #12301cee;
+}
+.noteCallout .noteQuestion {
+  margin-bottom: 3px;
+  color: #ffb37a;
+  font-size: 11px;
+  line-height: 14px;
+  max-height: 28px;
+  overflow: hidden;
+}
+.noteCallout .noteQuestion[hidden],
+.noteCallout .noteTalk[hidden] {
+  display: none;
+}
+.noteCallout .noteTalk {
+  margin-top: 3px;
+  font-size: 11px;
+  line-height: 14px;
+  color: #ffd2ad;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.noteCallout.noteAgreed .noteTalk {
+  color: #9ff0b8;
+}
+.noteCallout .noteTalk em {
+  color: #ffcf6e;
+  font-style: normal;
+  font-weight: 600;
+}
+/* окно обсуждения */
+.noteChat {
+  width: 400px;
+}
+.noteChatStatus {
+  margin-left: auto;
+  padding: 1px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  background: #ff8a3d33;
+  color: #ffb37a;
+}
+.noteChatStatus[data-status='proposed'] {
+  background: #3fcf6e22;
+  color: #9ff0b8;
+}
+.noteChatStatus[data-status='agreed'] {
+  background: #3fcf6e44;
+  color: #c8ffd8;
+}
+.noteChatList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: min(52vh, 460px);
+  overflow: auto;
+  margin-bottom: 8px;
+}
+.noteMsg {
+  max-width: 88%;
+  padding: 5px 8px;
+  border-radius: 8px;
+  background: #1b2a33;
+  border: 1px solid #2c3f4a;
+  font-size: 13px;
+}
+.noteMsgMine {
+  align-self: flex-end;
+  background: #1f3340;
+}
+.noteMsgTheirs {
+  align-self: flex-start;
+  background: #2a2140;
+  border-color: #4a3a72;
+}
+.noteMsgQuestion {
+  border-color: #ff8a3d;
+  background: #36220f;
+}
+.noteMsgProposed {
+  border: 1px dashed #3fcf6e;
+}
+.noteMsgDecision {
+  border: 1px solid #3fcf6e;
+  background: #12301c;
+}
+.noteMsgHead {
+  font-size: 11px;
+  color: var(--muted-soft);
+  margin-bottom: 2px;
+}
+.noteMsgHead b {
+  color: var(--text);
+}
+.noteMsgTag {
+  color: #ffb37a;
+}
+.noteMsgText {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.noteMsgActions {
+  margin-top: 4px;
+  font-size: 11px;
+  color: #9ff0b8;
+}
+.noteMsgActions button {
+  padding: 2px 6px;
+  font-size: 11px;
+  border-radius: 4px;
+}
+.noteMsgActions .noteMsgAgree {
+  border-color: #3fcf6e;
+  background: #1d4a2c;
+  color: #fff;
+}
+.noteMsgEvent {
+  align-self: center;
+  font-size: 11px;
+  color: #9ff0b8;
+}
+.noteChat textarea {
+  min-height: 60px;
 }
 </style>
 <style data-feature="visibility">
@@ -5006,8 +5145,25 @@ window.OrbitControls = OrbitControls;
   </div>
   <div class="noteButtons">
     <button type="button" class="noteDelete" id="noteEditorDelete">Удалить</button>
+    <button type="button" id="noteEditorChat" hidden>Обсуждение</button>
     <button type="button" id="noteEditorCancel">Отмена</button>
     <button type="button" class="active" id="noteEditorSave">Сохранить</button>
+  </div>
+</dialog>
+
+<!-- Обсуждение заметки (thread.js): вопрос — текст заметки, ниже переписка
+     владельца и клиента; решение одна сторона предлагает, другая подтверждает. -->
+<dialog class="noteChat" id="noteChat" aria-label="Обсуждение заметки">
+  <div class="noteEditorHead">
+    <strong>Обсуждение</strong>
+    <span class="noteChatStatus" id="noteChatStatus"></span>
+  </div>
+  <div class="noteChatList" id="noteChatList"></div>
+  <textarea id="noteChatText" rows="3" placeholder="Ваш ответ (Ctrl+Enter — отправить)" aria-label="Ваш ответ"></textarea>
+  <div class="noteButtons">
+    <button type="button" class="noteChatEditButton" id="noteChatEdit">Изменить заметку</button>
+    <button type="button" id="noteChatClose">Закрыть</button>
+    <button type="button" class="active" id="noteChatSend">Ответить</button>
   </div>
 </dialog>
 
@@ -11408,6 +11564,264 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
 
 (function (root) {
   'use strict';
+  // Обсуждение заметки (переписка владельца и клиента) — note.thread.
+  //
+  // Текст заметки — исходный ВОПРОС, thread — лента сообщений только на добавление:
+  //   {id, role: 'owner'|'client', from, at, kind: 'text', text}
+  //   {id, role, from, at, kind: 'propose', ref}  — «предлагаю как решение» сообщение ref
+  //   {id, role, from, at, kind: 'agree', ref}    — «согласен» с предложением ref
+  // ref — id сообщения или 'q' (сам вопрос). Решение согласовано, когда предложение
+  // одной стороны подтвердила другая. Раз лента только растёт, её части от разных
+  // людей сливаются по id без конфликтов: клиент шлёт лишь новые сообщения.
+  //
+  // Здесь — данные (normalize/state/merge/fresh/sig) и окно обсуждения (mountChat);
+  // карточки и обмен через ящик — в adapter.js и client_inbox.
+  const MAX_MESSAGES = 300,
+    MAX_TEXT = 4000,
+    KINDS = ['text', 'propose', 'agree'];
+
+  function normalize(list) {
+    if (!Array.isArray(list)) return null;
+    const seen = new Set(),
+      out = [];
+    for (const m of list) {
+      if (!m || typeof m !== 'object' || !KINDS.includes(m.kind)) continue;
+      const id = typeof m.id === 'string' ? m.id.slice(0, 64) : '';
+      if (!id || seen.has(id)) continue;
+      const text = typeof m.text === 'string' ? m.text.trim().slice(0, MAX_TEXT) : '',
+        ref = typeof m.ref === 'string' ? m.ref.slice(0, 64) : '';
+      if (m.kind === 'text' ? !text : !ref) continue;
+      seen.add(id);
+      out.push({
+        id,
+        role: m.role === 'client' ? 'client' : 'owner',
+        from: typeof m.from === 'string' ? m.from.trim().slice(0, 80) : '',
+        at: typeof m.at === 'string' ? m.at.slice(0, 40) : '',
+        kind: m.kind,
+        ...(m.kind === 'text' ? { text } : { ref })
+      });
+    }
+    out.sort((a, b) => (a.at < b.at ? -1 : a.at > b.at ? 1 : 0));
+    return out.length ? out.slice(-MAX_MESSAGES) : null;
+  }
+
+  // Состояние обсуждения: open — идёт разговор, proposed — решение предложено и
+  // ждёт согласия другой стороны, agreed — согласовано (decision — его ref).
+  function state(thread) {
+    const list = thread || [],
+      texts = list.filter(m => m.kind === 'text');
+    if (!list.length) return { status: 'none', count: 0, last: null, decision: null, pending: null };
+    let decision = null,
+      pending = null; // {ref, role}
+    for (const m of list) {
+      if (m.kind === 'propose') pending = { ref: m.ref, role: m.role, by: m };
+      else if (m.kind === 'agree' && pending && pending.ref === m.ref && pending.role !== m.role) {
+        decision = { ref: m.ref, proposedBy: pending.by, agreedBy: m };
+        pending = null;
+      }
+    }
+    return {
+      status: pending ? 'proposed' : decision ? 'agreed' : 'open',
+      count: texts.length,
+      last: texts.at(-1) || null,
+      decision,
+      pending
+    };
+  }
+
+  // добавить в into сообщения incoming, которых там нет (по id); вернуть число новых
+  function merge(note, incoming) {
+    const add = normalize(incoming) || [],
+      have = new Set((note.thread || []).map(m => m.id)),
+      fresh = add.filter(m => !have.has(m.id));
+    if (fresh.length) note.thread = normalize([...(note.thread || []), ...fresh]);
+    return fresh.length;
+  }
+
+  // сообщения, которых не было при открытии страницы (known — Set id)
+  const fresh = (thread, known) => (thread || []).filter(m => !known.has(m.id));
+
+  // Отпечаток СОДЕРЖАНИЯ заметки — без обсуждения, отметок времени и видимости:
+  // по нему понятно, правил ли клиент саму заметку или только отвечал.
+  const CONTENT = ['text', 'point', 'objectId', 'local', 'images', 'extra', 'sphere', 'isolate', 'window', 'view'];
+  function sig(note) {
+    return JSON.stringify(CONTENT.map(k => note?.[k] ?? null));
+  }
+
+  function textOf(note, ref) {
+    if (ref === 'q') return note.text;
+    return (note.thread || []).find(m => m.id === ref)?.text || '';
+  }
+
+  // ---- окно обсуждения ----
+  // ctx: {doc, win, dialog, role(): 'owner'|'client', myName(): string, newId(),
+  //       onChange(note), onEdit(note), place(dialog)}
+  function mountChat(ctx) {
+    const { doc, win, dialog } = ctx,
+      $ = id => doc.getElementById(id),
+      list = $('noteChatList'),
+      input = $('noteChatText'),
+      status = $('noteChatStatus'),
+      send = $('noteChatSend');
+    let note = null;
+
+    const time = iso => {
+      const d = new Date(iso);
+      if (isNaN(d)) return '';
+      const pad = n => String(n).padStart(2, '0');
+      return pad(d.getDate()) + '.' + pad(d.getMonth() + 1) + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+    };
+    // имя стороны: «Вы» — своя (переводится), иначе имя (данные) или «Клиент/Владелец»
+    function who(role, from) {
+      const el = doc.createElement('b');
+      if (role === ctx.role()) el.textContent = 'Вы';
+      else if (from) {
+        el.textContent = from;
+        el.translate = false;
+      } else el.textContent = role === 'client' ? 'Клиент' : 'Владелец';
+      return el;
+    }
+    function post(kind, extra) {
+      if (!note) return;
+      const message = {
+        id: ctx.newId(),
+        role: ctx.role(),
+        from: ctx.myName() || '',
+        at: new Date().toISOString(),
+        kind,
+        ...extra
+      };
+      note.thread = normalize([...(note.thread || []), message]);
+      ctx.onChange(note);
+      draw();
+    }
+    function bubble(id, role, from, at, text, st, question) {
+      const box = doc.createElement('div'),
+        mine = role === ctx.role();
+      box.className = 'noteMsg ' + (mine ? 'noteMsgMine' : 'noteMsgTheirs');
+      if (question) box.classList.add('noteMsgQuestion');
+      if (st.decision?.ref === id && st.status === 'agreed') box.classList.add('noteMsgDecision');
+      if (st.pending?.ref === id) box.classList.add('noteMsgProposed');
+      const head = doc.createElement('div');
+      head.className = 'noteMsgHead';
+      head.append(who(role, from));
+      const when = doc.createElement('span');
+      when.textContent = time(at);
+      when.translate = false;
+      head.append(' ', when);
+      if (question) {
+        const tag = doc.createElement('span');
+        tag.className = 'noteMsgTag';
+        tag.textContent = 'вопрос';
+        head.append(' ', tag);
+      }
+      const body = doc.createElement('div');
+      body.className = 'noteMsgText';
+      body.textContent = text;
+      body.translate = false;
+      box.append(head, body);
+      // действия: предложить как решение / согласиться
+      const act = doc.createElement('div');
+      act.className = 'noteMsgActions';
+      if (st.pending?.ref === id) {
+        if (st.pending.role === ctx.role()) {
+          const wait = doc.createElement('span');
+          wait.textContent = 'Предложено как решение — ждёт согласия';
+          act.append(wait);
+        } else {
+          const ok = doc.createElement('button');
+          ok.type = 'button';
+          ok.className = 'noteMsgAgree';
+          ok.textContent = 'Согласен ✓';
+          ok.onclick = () => post('agree', { ref: id });
+          act.append(ok);
+        }
+      } else if (!(st.status === 'agreed' && st.decision?.ref === id)) {
+        const offer = doc.createElement('button');
+        offer.type = 'button';
+        offer.className = 'noteMsgPropose';
+        offer.textContent = 'Предложить как решение';
+        offer.onclick = () => post('propose', { ref: id });
+        act.append(offer);
+      } else {
+        const done = doc.createElement('span');
+        done.textContent = 'Согласованное решение';
+        act.append(done);
+      }
+      box.append(act);
+      return box;
+    }
+    function event(m) {
+      const row = doc.createElement('div');
+      row.className = 'noteMsgEvent';
+      const what = doc.createElement('span');
+      what.textContent = m.kind === 'propose' ? 'предлагает решение' : 'согласен — решение принято';
+      row.append(who(m.role, m.from), ' ', what);
+      const when = doc.createElement('span');
+      when.textContent = ' · ' + time(m.at);
+      when.translate = false;
+      row.append(when);
+      return row;
+    }
+    function draw() {
+      if (!note) return;
+      const st = state(note.thread);
+      list.replaceChildren();
+      list.append(bubble('q', note.from ? 'client' : 'owner', note.from || '', note.updated || '', note.text, st, true));
+      for (const m of note.thread || [])
+        list.append(m.kind === 'text' ? bubble(m.id, m.role, m.from, m.at, m.text, st, false) : event(m));
+      status.textContent =
+        st.status === 'agreed' ? 'Согласовано' : st.status === 'proposed' ? 'Решение предложено' : 'Открыт';
+      status.dataset.status = st.status;
+      list.scrollTop = list.scrollHeight;
+    }
+    send.onclick = () => {
+      const text = input.value.trim();
+      if (!text) return;
+      input.value = '';
+      post('text', { text });
+    };
+    input.onkeydown = e => {
+      if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) send.onclick();
+    };
+    $('noteChatClose').onclick = () => dialog.close();
+    $('noteChatEdit').onclick = () => {
+      const target = note;
+      dialog.close();
+      if (target) ctx.onEdit(target);
+    };
+    dialog.addEventListener('close', () => {
+      note = null;
+    });
+    return {
+      open(target) {
+        note = target;
+        draw();
+        if (!dialog.open) {
+          dialog.show();
+          ctx.place?.(dialog);
+        }
+        input.focus();
+      },
+      refresh(target) {
+        if (note && (!target || target.id === note.id)) draw();
+      },
+      close() {
+        if (dialog.open) dialog.close();
+      },
+      get note() {
+        return note;
+      }
+    };
+  }
+
+  const api = { normalize, state, merge, fresh, sig, textOf, mountChat };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  root.BazisNoteThread = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this);
+
+(function (root) {
+  'use strict';
   // Заметки: точка на детали + текст (и фото), выноской сбоку, как у материалов.
   // Ставятся, правятся и удаляются прямо на странице; хранятся в сохраняемых
   // настройках вида (serialize/restore). Фото — файлы notes/<хэш>.jpg рядом со
@@ -11417,6 +11831,14 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     const { THREE: T, hooks, services, camera, canvas, document: doc } = context,
       win = context.window || root;
     if (bundle?.schema !== 1) throw new Error('Несовместимый модуль заметок');
+    // обсуждение заметки — thread.js; роль и имя смотрящего даёт client_inbox
+    // (services.viewerRole/viewerName), без него — владелец
+    const Thread = root.BazisNoteThread,
+      role = () => services.viewerRole?.() || 'owner',
+      myName = () => services.viewerName?.() || '',
+      // изменения владельца — сигнал автосохранению (client_inbox)
+      notify = () => services.notesChanged?.();
+    let chat = null;
     const board = root.BazisCallouts.board(services),
       ray = new T.Raycaster(),
       pointer = new T.Vector2(),
@@ -12334,7 +12756,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         edit.onclick = e => {
           e.stopPropagation();
           const note = current();
-          if (note) openEditor(note, false);
+          if (note) openNote(note);
         };
 
         const text = doc.createElement('span');
@@ -12368,7 +12790,16 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         const offer = doc.createElement('div');
         offer.className = 'noteOffer';
         offer.hidden = true;
-        box.append(badge, edit, text, more, offer, photos, meta);
+        // обсуждение: над текстом — исходный вопрос (когда решение согласовано),
+        // под ним — «💬 N · последняя реплика», «ждёт ответа»
+        const question = doc.createElement('div');
+        question.className = 'noteQuestion';
+        question.hidden = true;
+        question.translate = false;
+        const talk = doc.createElement('div');
+        talk.className = 'noteTalk';
+        talk.hidden = true;
+        box.append(badge, edit, question, text, more, talk, offer, photos, meta);
         const line = doc.createElement('div');
         line.className = 'noteLeader';
         const dot = doc.createElement('div');
@@ -12391,7 +12822,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
               layout();
             } else if (activeNote !== note.id && enterNote(note)) {
               // камера ушла в ракурс заметки; повторное нажатие — редактор
-            } else openEditor(note, false);
+            } else openNote(note);
           }
         };
         box.oncontextmenu = e => {
@@ -12415,7 +12846,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         for (const type of ['pointerup', 'pointercancel', 'pointerleave'])
           box.addEventListener(type, () => win.clearTimeout(press));
         overlay.append(line, dot, box);
-        item = { box, badge, text, more, offer, meta, photos, thumb, line, dot, occluded: false, extra: [] };
+        item = { box, badge, text, more, offer, question, talk, meta, photos, thumb, line, dot, occluded: false, extra: [] };
         views.set(note.id, item);
       }
       const photos = note.images?.length || 0;
@@ -12453,6 +12884,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       item.meta.textContent = [note.element, from].filter(Boolean).join(' · ');
       item.meta.hidden = !item.meta.textContent;
       showOffer(item, note);
+      showTalk(item, note);
       // обрезан ли текст — видно только после раскладки
       win.requestAnimationFrame?.(() => {
         const clipped = !item.text.hidden && item.text.scrollHeight > item.text.clientHeight + 1;
@@ -12483,6 +12915,66 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
             : '\nНажмите, чтобы изменить; правая кнопка — меню');
       return item;
     }
+    // ---- обсуждение на карточке: открытый вопрос — оранжевый, согласовано — зелёный
+    function showTalk(item, note) {
+      const st = Thread.state(note.thread),
+        talking = st.status !== 'none';
+      item.box.classList.toggle('noteThread', talking && st.status !== 'agreed');
+      item.box.classList.toggle('noteAgreed', st.status === 'agreed');
+      item.question.hidden = st.status !== 'agreed';
+      item.talk.hidden = !talking;
+      item.talk.replaceChildren();
+      if (!talking) return;
+      if (st.status === 'agreed') {
+        // крупно — решение, мелко над ним — исходный вопрос
+        item.question.textContent = note.text;
+        item.text.textContent = Thread.textOf(note, st.decision.ref);
+        item.text.translate = false;
+        item.text.hidden = false;
+      }
+      const count = doc.createElement('span');
+      count.className = 'noteTalkCount';
+      count.textContent = '💬 ' + st.count;
+      count.translate = false;
+      item.talk.append(count);
+      if (st.status === 'agreed') {
+        const done = doc.createElement('span');
+        done.textContent = 'Согласовано';
+        item.talk.append(' ', done);
+      } else if (st.status === 'proposed') {
+        const wait = doc.createElement('span');
+        wait.textContent = st.pending.role === role() ? 'Решение предложено' : 'Предложено решение — подтвердите';
+        item.talk.append(' ', wait);
+      } else if (st.last) {
+        const line = doc.createElement('span');
+        line.className = 'noteTalkLast';
+        line.textContent = (st.last.from || '') + (st.last.from ? ': ' : '') + st.last.text;
+        line.translate = false;
+        item.talk.append(' ', line);
+        if (st.last.role !== role()) {
+          const ask = doc.createElement('em');
+          ask.textContent = 'ждёт ответа';
+          item.talk.append(' ', ask);
+        }
+      }
+    }
+    // Щелчок по заметке (после входа в её ракурс): обсуждение, если оно уже идёт
+    // или смотрит клиент (он не правит, а отвечает), иначе — редактор.
+    function openNote(note) {
+      if (chat && (note.thread?.length || role() === 'client')) chat.open(note);
+      else openEditor(note, false);
+    }
+    function placeChat(box) {
+      const r = box.getBoundingClientRect(),
+        vw = win.innerWidth,
+        vh = win.innerHeight,
+        view = doc.getElementById('viewport')?.getBoundingClientRect();
+      const x = mobile() ? (vw - r.width) / 2 : vw - r.width - 16,
+        y = mobile() ? vh - r.height - 8 : (view?.top || 80) + 8;
+      box.style.left = Math.max(4, x) + 'px';
+      box.style.top = Math.max(4, y) + 'px';
+    }
+
     // ---- предложения клиента на карточке ----
     function changedParts(was, now) {
       const same = key => JSON.stringify(was[key] ?? null) === JSON.stringify(now[key] ?? null),
@@ -12566,15 +13058,18 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       delete note.proposal;
       if (accept && p.kind === 'delete') {
         remove(note);
+        notify();
         return true;
       }
       if (accept) {
         const next = { ...p.note, id: note.id, updated: new Date().toISOString() };
+        if (note.thread) next.thread = note.thread;
         if (p.from) next.from = p.from;
         else delete next.from;
         notes[notes.indexOf(note)] = next;
       }
       render();
+      notify();
       return true;
     }
     function hide(item) {
@@ -12876,6 +13371,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       dialogMeta.translate = !note.element;
       area.value = note.text || '';
       deleteButton.hidden = isNew;
+      $('noteEditorChat').hidden = isNew;
       draftImages = [...(note.images || [])];
       photoHint.textContent = photoHint.dataset.text;
       renderDraft();
@@ -13130,6 +13626,29 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         updateSphere();
       });
       doc.body.append(dialog);
+      const chatDialog = $('noteChat');
+      doc.body.append(chatDialog);
+      chat = Thread.mountChat({
+        doc,
+        win,
+        dialog: chatDialog,
+        role,
+        myName,
+        newId,
+        place: placeChat,
+        onChange() {
+          if (!enabled) setEnabled(true);
+          render();
+          notify();
+        },
+        onEdit: note => openEditor(note, false)
+      });
+      const toChat = $('noteEditorChat');
+      toChat.onclick = () => {
+        const note = editing?.note;
+        dialog.close();
+        if (note) chat.open(note);
+      };
     }
 
     // ---- панель «Заметки» ----
@@ -13323,7 +13842,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     // conflict — владелец менял заметку после того, как клиент её открыл.
     function withProposal(p) {
       if (!p || typeof p !== 'object' || (p.kind !== 'edit' && p.kind !== 'delete')) return {};
-      const note = p.kind === 'edit' ? normalize([{ ...p.note, proposal: null }])[0] : null;
+      const note = p.kind === 'edit' ? normalize([{ ...p.note, proposal: null, thread: null }])[0] : null;
       if (p.kind === 'edit' && !note) return {};
       const text = (v, max) => (typeof v === 'string' ? v.trim().slice(0, max) : '');
       return {
@@ -13359,6 +13878,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
           hidden: n.hidden === true,
           ...(typeof n.from === 'string' && n.from.trim() ? { from: n.from.trim().slice(0, 80) } : {}),
           ...withProposal(n.proposal),
+          ...(Thread.normalize(n.thread) ? { thread: Thread.normalize(n.thread) } : {}),
           ...(images.length ? { images } : {}),
           ...(Array.isArray(n.extra) && n.extra.some(validPlace)
             ? {
@@ -13401,7 +13921,12 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       if (!value || typeof value !== 'object') return;
       const list = Array.isArray(value) ? value : value.notes;
       notes = normalize(list);
-      baseline = new Map(notes.map(n => [n.id, { text: n.text, updated: n.updated }]));
+      baseline = new Map(
+        notes.map(n => [
+          n.id,
+          { text: n.text, updated: n.updated, sig: Thread.sig(n), ids: new Set((n.thread || []).map(m => m.id)) }
+        ])
+      );
       removedLog = [];
       if (typeof value.enabled === 'boolean') enabled = value.enabled;
       if (showBox) showBox.checked = enabled;
@@ -13427,6 +13952,8 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       doc.removeEventListener('keydown', keydown);
       doc.removeEventListener('pointerdown', outsideMenu, true);
       noteMenu?.remove();
+      chat?.close();
+      doc.getElementById('noteChat')?.remove();
       viewBar?.remove();
       pickBar?.remove();
       flight = null;
@@ -13564,7 +14091,10 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       // ещё не отправленными фото (base64); importNotes(list, images) — принять чужие
       // заметки: та же id заменяется, новые добавляются, фото — в память до дискеты.
       changedSince(iso) {
-        return notes.filter(n => n.updated && String(n.updated) >= String(iso)).map(n => n.id);
+        const since = String(iso);
+        return notes
+          .filter(n => (n.updated && String(n.updated) >= since) || (n.thread || []).some(m => m.at >= since))
+          .map(n => n.id);
       },
       // removedSince(iso) — заметки, бывшие при открытии и удалённые после iso.
       removedSince(iso) {
@@ -13580,7 +14110,14 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
             .map(n => {
               const copy = JSON.parse(JSON.stringify(n));
               delete copy.proposal;
-              if (baseline.has(n.id)) copy.base = { ...baseline.get(n.id) };
+              const base = baseline.get(n.id);
+              if (base) {
+                copy.base = { text: base.text, updated: base.updated, sig: base.sig };
+                // из обсуждения — только новое: старое у владельца уже есть
+                const fresh = Thread.fresh(n.thread, base.ids);
+                if (fresh.length) copy.thread = fresh;
+                else delete copy.thread;
+              }
               return copy;
             });
         for (const n of list)
@@ -13590,7 +14127,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
           }
         const removed = [...new Set(removedIds)]
           .filter(id => baseline.has(id) && !notes.some(n => n.id === id))
-          .map(id => ({ id, base: { ...baseline.get(id) } }));
+          .map(id => ({ id, base: { text: baseline.get(id).text, updated: baseline.get(id).updated } }));
         return { notes: list, images, removed };
       },
       // importNotes(list, images, {from, comment, removed}) — у владельца: новые
@@ -13611,16 +14148,25 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
           commentTo = null;
         for (const raw of Array.isArray(list) ? list : []) {
           if (!raw || typeof raw !== 'object') continue;
-          const [note] = normalize([{ ...raw, proposal: null, ...(from ? { from } : {}) }]);
+          // реплики клиента без имени подписываем именем из отправки
+          const thread = Array.isArray(raw.thread)
+            ? raw.thread.map(m => (m && m.role === 'client' && !m.from && from ? { ...m, from } : m))
+            : raw.thread;
+          const [note] = normalize([{ ...raw, thread, proposal: null, ...(from ? { from } : {}) }]);
           if (!note) continue;
-          count++;
           const existing = notes.find(n => n.id === note.id);
           if (!existing) {
+            count++;
             notes.push(note);
             commentTo = commentTo || note;
             continue;
           }
           const base = raw.base && typeof raw.base === 'object' ? raw.base : null;
+          const replies = Thread.merge(existing, note.thread);
+          count += replies;
+          // саму заметку клиент не правил (только отвечал) — предложения нет
+          if (Thread.sig(note) === (typeof base?.sig === 'string' ? base.sig : Thread.sig(existing))) continue;
+          count++;
           existing.proposal = {
             kind: 'edit',
             from,
@@ -13650,10 +14196,17 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         }
         if (count && !enabled) setEnabled(true);
         render();
+        chat?.refresh();
+        if (count) notify();
         return count;
       },
       get notes() {
         return notes.map(n => ({ ...n }));
+      },
+      // открыть обсуждение заметки
+      discuss(id) {
+        const note = notes.find(n => n.id === id);
+        if (note && chat) chat.open(note);
       },
       // открыть редактор самой заметки (openEditor с копией из .notes правил бы копию)
       edit(id) {
@@ -13681,7 +14234,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
   else (root.BazisViewerFeatures || (root.BazisViewerFeatures = [])).push({ name: 'notes', install });
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 
-(globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"Вернуть камеру как было (Esc)":{"en":"Return the camera to where it was (Esc)","pl":"Przywróć kamerę jak było (Esc)","uk":"Повернути камеру як було (Esc)"},"Вернуться в редактор (Enter, Esc)":{"en":"Back to the editor (Enter, Esc)","pl":"Wróć do edytora (Enter, Esc)","uk":"Повернутися в редактор (Enter, Esc)"},"Видно только то, что за плоскостью внутри рамки; всё остальное обрезано":{"en":"Only what lies behind the plane inside the frame is shown; everything else is clipped","pl":"Widać tylko to, co za płaszczyzną wewnątrz ramki; reszta jest obcięta","uk":"Видно лише те, що за площиною всередині рамки; усе інше обрізано"},"Вы меняли заметку после него — сверьте":{"en":"You changed this note after them — compare","pl":"Zmieniłeś notatkę po nim — porównaj","uk":"Ви змінювали нотатку після нього — звірте"},"Вырез":{"en":"Cutout","pl":"Wycięcie","uk":"Виріз"},"Высота окна, мм":{"en":"Window height, mm","pl":"Wysokość okna, mm","uk":"Висота вікна, мм"},"Готово":{"en":"Done","pl":"Gotowe","uk":"Готово"},"Деталь":{"en":"Part","pl":"Element","uk":"Деталь"},"Деталь не входит в сборочную единицу.":{"en":"The part is not in an assembly unit.","pl":"Element nie należy do zespołu.","uk":"Деталь не входить до складальної одиниці."},"Диаметр":{"en":"Diameter","pl":"Średnica","uk":"Діаметр"},"Диаметр сферы, мм":{"en":"Sphere diameter, mm","pl":"Średnica sfery, mm","uk":"Діаметр сфери, мм"},"Забыть ракурс":{"en":"Forget view","pl":"Zapomnij widok","uk":"Забути ракурс"},"Закрыть фото":{"en":"Close photo","pl":"Zamknij zdjęcie","uk":"Закрити фото"},"Заметка":{"en":"Note","pl":"Notatka","uk":"Нотатка"},"Заметки":{"en":"Notes","pl":"Notatki","uk":"Нотатки"},"Заметки сохраняются вместе с видом — дискеткой «Сохранить на GitHub».":{"en":"Notes are saved together with the view — with the “Save to GitHub” floppy.","pl":"Notatki zapisują się razem z widokiem — dyskietką „Zapisz na GitHub”.","uk":"Нотатки зберігаються разом із виглядом — дискетою «Зберегти на GitHub»."},"Заметок пока нет":{"en":"No notes yet","pl":"Brak notatek","uk":"Нотаток поки немає"},"Запомнить ракурс":{"en":"Remember view","pl":"Zapamiętaj widok","uk":"Запам'ятати ракурс"},"Изменить":{"en":"Edit","pl":"Edytuj","uk":"Змінити"},"Изменить заметку":{"en":"Edit note","pl":"Edytuj notatkę","uk":"Змінити нотатку"},"Камера встанет в запомненный ракурс при нажатии на заметку.":{"en":"The camera moves to the saved view when the note is clicked.","pl":"Po kliknięciu notatki kamera ustawi się w zapamiętanym widoku.","uk":"Камера стане в запам'ятований ракурс при натисканні на нотатку."},"Клиент":{"en":"Client","pl":"Klient","uk":"Клієнт"},"Края рамки можно тянуть мышью прямо на модели.":{"en":"Drag the frame edges with the mouse right on the model.","pl":"Krawędzie ramki można przeciągać myszą bezpośrednio na modelu.","uk":"Краї рамки можна тягнути мишею прямо на моделі."},"Мест:":{"en":"Places:","pl":"Miejsc:","uk":"Місць:"},"Мимо детали: щёлкните по её поверхности. Esc — отмена.":{"en":"Missed the part: click its surface. Esc — cancel.","pl":"Obok elementu: kliknij jego powierzchnię. Esc — anuluj.","uk":"Повз деталь: клацніть по її поверхні. Esc — скасування."},"Модель целая, а внутри рамки срезано всё перед плоскостью":{"en":"The model stays whole; inside the frame everything in front of the plane is cut away","pl":"Model jest cały, a wewnątrz ramki wycięto wszystko przed płaszczyzną","uk":"Модель ціла, а всередині рамки зрізано все перед площиною"},"Нажмите, чтобы заглянуть в сечение; правая кнопка — меню":{"en":"Click to look into the section; right-click for the menu","pl":"Kliknij, aby zajrzeć w przekrój; prawy przycisk — menu","uk":"Натисніть, щоб зазирнути в переріз; права кнопка — меню"},"Нажмите, чтобы изменить; правая кнопка — меню":{"en":"Click to edit; right button — menu","pl":"Kliknij, aby edytować; prawy przycisk — menu","uk":"Натисніть, щоб змінити; права кнопка — меню"},"Нажмите, чтобы оставить на экране только её сборочную единицу; правая кнопка — меню":{"en":"Click to keep only its assembly unit on screen; right-click for the menu","pl":"Kliknij, aby zostawić na ekranie tylko jej zespół; prawy przycisk — menu","uk":"Натисніть, щоб залишити на екрані лише її складальну одиницю; права кнопка — меню"},"Нажмите, чтобы посмотреть в ракурсе заметки; правая кнопка — меню":{"en":"Click to look from the note's view; right click — menu","pl":"Kliknij, aby zobaczyć w widoku notatki; prawy przycisk — menu","uk":"Натисніть, щоб подивитися в ракурсі нотатки; права кнопка — меню"},"Нажмите, чтобы посмотреть узел крупным планом; правая кнопка — меню":{"en":"Click to see the joint close up; right click — menu","pl":"Kliknij, aby zobaczyć węzeł w zbliżeniu; prawy przycisk — menu","uk":"Натисніть, щоб подивитися вузол великим планом; права кнопка — меню"},"Нажмите, чтобы раскрыть или свернуть":{"en":"Tap to expand or collapse","pl":"Dotknij, aby rozwinąć lub zwinąć","uk":"Натисніть, щоб розгорнути або згорнути"},"Не больше":{"en":"No more than","pl":"Nie więcej niż","uk":"Не більше"},"Не удалось добавить фото:":{"en":"Could not add the photo:","pl":"Nie udało się dodać zdjęcia:","uk":"Не вдалося додати фото:"},"Несколько мест":{"en":"Several places","pl":"Kilka miejsc","uk":"Кілька місць"},"Несовместимый модуль заметок":{"en":"Incompatible notes module","pl":"Niezgodny moduł notatek","uk":"Несумісний модуль нотаток"},"Новая заметка":{"en":"New note","pl":"Nowa notatka","uk":"Нова нотатка"},"Обновить ракурс":{"en":"Update view","pl":"Zaktualizuj widok","uk":"Оновити ракурс"},"Обратная сторона":{"en":"Reverse side","pl":"Druga strona","uk":"Зворотний бік"},"Отклонить":{"en":"Reject","pl":"Odrzuć","uk":"Відхилити"},"Открыть заметку":{"en":"Open note","pl":"Otwórz notatkę","uk":"Відкрити нотатку"},"Открыть фото (":{"en":"Open photos (","pl":"Otwórz zdjęcia (","uk":"Відкрити фото ("},"Отмена":{"en":"Cancel","pl":"Anuluj","uk":"Скасувати"},"Перетащите, чтобы сдвинуть окно":{"en":"Drag to move the window","pl":"Przeciągnij, aby przesunąć okno","uk":"Перетягніть, щоб зсунути вікно"},"Плоскость":{"en":"Plane","pl":"Płaszczyzna","uk":"Площина"},"По грани":{"en":"By face","pl":"Wg ściany","uk":"По грані"},"По центру точки":{"en":"Center on point","pl":"Na środku punktu","uk":"По центру точки"},"Показать заметку":{"en":"Show note","pl":"Pokaż notatkę","uk":"Показати нотатку"},"Показывать":{"en":"Show","pl":"Pokazuj","uk":"Показувати"},"Положение":{"en":"Position","pl":"Położenie","uk":"Положення"},"Положение плоскости за точкой, мм":{"en":"Plane position behind the point, mm","pl":"Położenie płaszczyzny za punktem, mm","uk":"Положення площини за точкою, мм"},"Поставьте камеру как нужно и нажмите «Запомнить ракурс».":{"en":"Set the camera as needed and click “Remember view”.","pl":"Ustaw kamerę jak trzeba i kliknij „Zapamiętaj widok”.","uk":"Поставте камеру як потрібно і натисніть «Запам'ятати ракурс»."},"Предыдущее фото":{"en":"Previous photo","pl":"Poprzednie zdjęcie","uk":"Попереднє фото"},"При нажатии на заметку останется только её сборочная единица.":{"en":"Clicking the note leaves only its assembly unit visible.","pl":"Po kliknięciu notatki zostanie tylko jej zespół.","uk":"При натисканні на нотатку залишиться лише її складальна одиниця."},"Принять":{"en":"Accept","pl":"Przyjmij","uk":"Прийняти"},"Размер":{"en":"Size","pl":"Rozmiar","uk":"Розмір"},"Ракурс заметки":{"en":"Note view","pl":"Widok notatki","uk":"Ракурс нотатки"},"Ракурс запомнен: камера встанет так при нажатии на заметку.":{"en":"View saved: the camera moves here when the note is clicked.","pl":"Widok zapamiętany: kamera ustawi się tak po kliknięciu notatki.","uk":"Ракурс запам'ятовано: камера стане так при натисканні на нотатку."},"Режим":{"en":"Mode","pl":"Tryb","uk":"Режим"},"Свернуть заметку":{"en":"Collapse note","pl":"Zwiń notatkę","uk":"Згорнути нотатку"},"Сечение":{"en":"Section","pl":"Przekrój","uk":"Переріз"},"Скрыть заметку":{"en":"Hide note","pl":"Ukryj notatkę","uk":"Приховати нотатку"},"Скрыть остальные":{"en":"Hide the rest","pl":"Ukryj pozostałe","uk":"Сховати інші"},"Следующее фото":{"en":"Next photo","pl":"Następne zdjęcie","uk":"Наступне фото"},"Сохранить":{"en":"Save","pl":"Zapisz","uk":"Зберегти"},"Список (":{"en":"List (","pl":"Lista (","uk":"Список ("},"Список (0)":{"en":"List (0)","pl":"Lista (0)","uk":"Список (0)"},"Текст заметки":{"en":"Note text","pl":"Tekst notatki","uk":"Текст нотатки"},"Только зона":{"en":"Zone only","pl":"Tylko strefa","uk":"Лише зона"},"Точка без привязки к детали":{"en":"Point not attached to a part","pl":"Punkt bez powiązania z elementem","uk":"Точка без прив'язки до деталі"},"Убрать последнее":{"en":"Remove last","pl":"Usuń ostatnie","uk":"Прибрати останнє"},"Убрать фото из заметки":{"en":"Remove photo from note","pl":"Usuń zdjęcie z notatki","uk":"Прибрати фото з нотатки"},"Удалить":{"en":"Delete","pl":"Usuń","uk":"Видалити"},"Удалить заметку":{"en":"Delete note","pl":"Usuń notatkę","uk":"Видалити нотатку"},"Удалить заметку?":{"en":"Delete the note?","pl":"Usunąć notatkę?","uk":"Видалити нотатку?"},"Узел крупным планом (сфера)":{"en":"Joint close-up (sphere)","pl":"Węzeł w zbliżeniu (sfera)","uk":"Вузол великим планом (сфера)"},"Фото":{"en":"Photo","pl":"Zdjęcie","uk":"Фото"},"Фото заметки":{"en":"Note photo","pl":"Zdjęcie notatki","uk":"Фото нотатки"},"Фото уменьшаются до 1600 px и сохраняются дискеткой в публичный репозиторий GitHub рядом со страницей.":{"en":"Photos are reduced to 1600 px and saved with the floppy to the public GitHub repository next to the page.","pl":"Zdjęcia są zmniejszane do 1600 px i zapisywane dyskietką w publicznym repozytorium GitHub obok strony.","uk":"Фото зменшуються до 1600 px і зберігаються дискетою в публічний репозиторій GitHub поруч зі сторінкою."},"Фото:":{"en":"Photos:","pl":"Zdjęcia:","uk":"Фото:"},"Ширина окна, мм":{"en":"Window width, mm","pl":"Szerokość okna, mm","uk":"Ширина вікна, мм"},"Щёлкните по грани модели: плоскость станет параллельной ей.":{"en":"Click a model face: the plane becomes parallel to it.","pl":"Kliknij ścianę modelu: płaszczyzna stanie się do niej równoległa.","uk":"Клацніть по грані моделі: площина стане паралельною їй."},"Щёлкните по детали, куда поставить заметку. Esc — отмена.":{"en":"Click the part where the note goes. Esc — cancel.","pl":"Kliknij element, na którym umieścić notatkę. Esc — anuluj.","uk":"Клацніть по деталі, куди поставити нотатку. Esc — скасування."},"Щёлкните по деталям, на которые указывает заметка":{"en":"Click the parts the note points to","pl":"Kliknij części, na które wskazuje notatka","uk":"Клацніть по деталях, на які вказує нотатка"},"Щёлкните по деталям, на которые указывает заметка. Мест:":{"en":"Click the parts the note points to. Places:","pl":"Kliknij części, na które wskazuje notatka. Miejsc:","uk":"Клацніть по деталях, на які вказує нотатка. Місць:"},"дописал:":{"en":"added:","pl":"dopisał:","uk":"дописав:"},"изменил:":{"en":"changed:","pl":"zmienił:","uk":"змінив:"},"место":{"en":"place","pl":"miejsce","uk":"місце"},"мм":{"en":"mm","pl":"mm","uk":"мм"},"не удалось сжать фото":{"en":"could not compress the photo","pl":"nie udało się skompresować zdjęcia","uk":"не вдалося стиснути фото"},"от:":{"en":"from:","pl":"od:","uk":"від:"},"пишет:":{"en":"writes:","pl":"pisze:","uk":"пише:"},"поз.":{"en":"pos.","pl":"poz.","uk":"поз."},"показ":{"en":"display","pl":"widok","uk":"показ"},"предлагает текст:":{"en":"suggests text:","pl":"proponuje tekst:","uk":"пропонує текст:"},"предлагает удалить заметку":{"en":"suggests deleting the note","pl":"proponuje usunąć notatkę","uk":"пропонує видалити нотатку"},"прислал заметку без изменений":{"en":"sent the note unchanged","pl":"przysłał notatkę bez zmian","uk":"надіслав нотатку без змін"},"ракурс":{"en":"view","pl":"ujęcie","uk":"ракурс"},"фото":{"en":"photos","pl":"zdjęcia","uk":"фото"},"фото в одной заметке.":{"en":"photos in one note.","pl":"zdjęć w jednej notatce.","uk":"фото в одній нотатці."},"…ещё":{"en":"…more","pl":"…więcej","uk":"…ще"},"✕ Выйти":{"en":"✕ Exit","pl":"✕ Wyjdź","uk":"✕ Вийти"},"＋ Заметка":{"en":"＋ Note","pl":"＋ Notatka","uk":"＋ Нотатка"},"＋ Место":{"en":"＋ Place","pl":"＋ Miejsce","uk":"＋ Місце"},"＋ Фото":{"en":"＋ Photo","pl":"＋ Zdjęcie","uk":"＋ Фото"}});
+(globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"Ваш ответ":{"en":"Your reply","pl":"Twoja odpowiedź","uk":"Ваша відповідь"},"Ваш ответ (Ctrl+Enter — отправить)":{"en":"Your reply (Ctrl+Enter to send)","pl":"Twoja odpowiedź (Ctrl+Enter — wyślij)","uk":"Ваша відповідь (Ctrl+Enter — надіслати)"},"Вернуть камеру как было (Esc)":{"en":"Return the camera to where it was (Esc)","pl":"Przywróć kamerę jak było (Esc)","uk":"Повернути камеру як було (Esc)"},"Вернуться в редактор (Enter, Esc)":{"en":"Back to the editor (Enter, Esc)","pl":"Wróć do edytora (Enter, Esc)","uk":"Повернутися в редактор (Enter, Esc)"},"Видно только то, что за плоскостью внутри рамки; всё остальное обрезано":{"en":"Only what lies behind the plane inside the frame is shown; everything else is clipped","pl":"Widać tylko to, co za płaszczyzną wewnątrz ramki; reszta jest obcięta","uk":"Видно лише те, що за площиною всередині рамки; усе інше обрізано"},"Владелец":{"en":"Owner","pl":"Właściciel","uk":"Власник"},"Вы":{"en":"You","pl":"Ty","uk":"Ви"},"Вы меняли заметку после него — сверьте":{"en":"You changed this note after them — compare","pl":"Zmieniłeś notatkę po nim — porównaj","uk":"Ви змінювали нотатку після нього — звірте"},"Вырез":{"en":"Cutout","pl":"Wycięcie","uk":"Виріз"},"Высота окна, мм":{"en":"Window height, mm","pl":"Wysokość okna, mm","uk":"Висота вікна, мм"},"Готово":{"en":"Done","pl":"Gotowe","uk":"Готово"},"Деталь":{"en":"Part","pl":"Element","uk":"Деталь"},"Деталь не входит в сборочную единицу.":{"en":"The part is not in an assembly unit.","pl":"Element nie należy do zespołu.","uk":"Деталь не входить до складальної одиниці."},"Диаметр":{"en":"Diameter","pl":"Średnica","uk":"Діаметр"},"Диаметр сферы, мм":{"en":"Sphere diameter, mm","pl":"Średnica sfery, mm","uk":"Діаметр сфери, мм"},"Забыть ракурс":{"en":"Forget view","pl":"Zapomnij widok","uk":"Забути ракурс"},"Закрыть":{"en":"Close","pl":"Zamknij","uk":"Закрити"},"Закрыть фото":{"en":"Close photo","pl":"Zamknij zdjęcie","uk":"Закрити фото"},"Заметка":{"en":"Note","pl":"Notatka","uk":"Нотатка"},"Заметки":{"en":"Notes","pl":"Notatki","uk":"Нотатки"},"Заметки сохраняются вместе с видом — дискеткой «Сохранить на GitHub».":{"en":"Notes are saved together with the view — with the “Save to GitHub” floppy.","pl":"Notatki zapisują się razem z widokiem — dyskietką „Zapisz na GitHub”.","uk":"Нотатки зберігаються разом із виглядом — дискетою «Зберегти на GitHub»."},"Заметок пока нет":{"en":"No notes yet","pl":"Brak notatek","uk":"Нотаток поки немає"},"Запомнить ракурс":{"en":"Remember view","pl":"Zapamiętaj widok","uk":"Запам'ятати ракурс"},"Изменить":{"en":"Edit","pl":"Edytuj","uk":"Змінити"},"Изменить заметку":{"en":"Edit note","pl":"Edytuj notatkę","uk":"Змінити нотатку"},"Камера встанет в запомненный ракурс при нажатии на заметку.":{"en":"The camera moves to the saved view when the note is clicked.","pl":"Po kliknięciu notatki kamera ustawi się w zapamiętanym widoku.","uk":"Камера стане в запам'ятований ракурс при натисканні на нотатку."},"Клиент":{"en":"Client","pl":"Klient","uk":"Клієнт"},"Края рамки можно тянуть мышью прямо на модели.":{"en":"Drag the frame edges with the mouse right on the model.","pl":"Krawędzie ramki można przeciągać myszą bezpośrednio na modelu.","uk":"Краї рамки можна тягнути мишею прямо на моделі."},"Мест:":{"en":"Places:","pl":"Miejsc:","uk":"Місць:"},"Мимо детали: щёлкните по её поверхности. Esc — отмена.":{"en":"Missed the part: click its surface. Esc — cancel.","pl":"Obok elementu: kliknij jego powierzchnię. Esc — anuluj.","uk":"Повз деталь: клацніть по її поверхні. Esc — скасування."},"Модель целая, а внутри рамки срезано всё перед плоскостью":{"en":"The model stays whole; inside the frame everything in front of the plane is cut away","pl":"Model jest cały, a wewnątrz ramki wycięto wszystko przed płaszczyzną","uk":"Модель ціла, а всередині рамки зрізано все перед площиною"},"Нажмите, чтобы заглянуть в сечение; правая кнопка — меню":{"en":"Click to look into the section; right-click for the menu","pl":"Kliknij, aby zajrzeć w przekrój; prawy przycisk — menu","uk":"Натисніть, щоб зазирнути в переріз; права кнопка — меню"},"Нажмите, чтобы изменить; правая кнопка — меню":{"en":"Click to edit; right button — menu","pl":"Kliknij, aby edytować; prawy przycisk — menu","uk":"Натисніть, щоб змінити; права кнопка — меню"},"Нажмите, чтобы оставить на экране только её сборочную единицу; правая кнопка — меню":{"en":"Click to keep only its assembly unit on screen; right-click for the menu","pl":"Kliknij, aby zostawić na ekranie tylko jej zespół; prawy przycisk — menu","uk":"Натисніть, щоб залишити на екрані лише її складальну одиницю; права кнопка — меню"},"Нажмите, чтобы посмотреть в ракурсе заметки; правая кнопка — меню":{"en":"Click to look from the note's view; right click — menu","pl":"Kliknij, aby zobaczyć w widoku notatki; prawy przycisk — menu","uk":"Натисніть, щоб подивитися в ракурсі нотатки; права кнопка — меню"},"Нажмите, чтобы посмотреть узел крупным планом; правая кнопка — меню":{"en":"Click to see the joint close up; right click — menu","pl":"Kliknij, aby zobaczyć węzeł w zbliżeniu; prawy przycisk — menu","uk":"Натисніть, щоб подивитися вузол великим планом; права кнопка — меню"},"Нажмите, чтобы раскрыть или свернуть":{"en":"Tap to expand or collapse","pl":"Dotknij, aby rozwinąć lub zwinąć","uk":"Натисніть, щоб розгорнути або згорнути"},"Не больше":{"en":"No more than","pl":"Nie więcej niż","uk":"Не більше"},"Не удалось добавить фото:":{"en":"Could not add the photo:","pl":"Nie udało się dodać zdjęcia:","uk":"Не вдалося додати фото:"},"Несколько мест":{"en":"Several places","pl":"Kilka miejsc","uk":"Кілька місць"},"Несовместимый модуль заметок":{"en":"Incompatible notes module","pl":"Niezgodny moduł notatek","uk":"Несумісний модуль нотаток"},"Новая заметка":{"en":"New note","pl":"Nowa notatka","uk":"Нова нотатка"},"Обновить ракурс":{"en":"Update view","pl":"Zaktualizuj widok","uk":"Оновити ракурс"},"Обратная сторона":{"en":"Reverse side","pl":"Druga strona","uk":"Зворотний бік"},"Обсуждение":{"en":"Discussion","pl":"Dyskusja","uk":"Обговорення"},"Обсуждение заметки":{"en":"Note discussion","pl":"Dyskusja notatki","uk":"Обговорення нотатки"},"Ответить":{"en":"Reply","pl":"Odpowiedz","uk":"Відповісти"},"Отклонить":{"en":"Reject","pl":"Odrzuć","uk":"Відхилити"},"Открыт":{"en":"Open","pl":"Otwarte","uk":"Відкрите"},"Открыть заметку":{"en":"Open note","pl":"Otwórz notatkę","uk":"Відкрити нотатку"},"Открыть фото (":{"en":"Open photos (","pl":"Otwórz zdjęcia (","uk":"Відкрити фото ("},"Отмена":{"en":"Cancel","pl":"Anuluj","uk":"Скасувати"},"Перетащите, чтобы сдвинуть окно":{"en":"Drag to move the window","pl":"Przeciągnij, aby przesunąć okno","uk":"Перетягніть, щоб зсунути вікно"},"Плоскость":{"en":"Plane","pl":"Płaszczyzna","uk":"Площина"},"По грани":{"en":"By face","pl":"Wg ściany","uk":"По грані"},"По центру точки":{"en":"Center on point","pl":"Na środku punktu","uk":"По центру точки"},"Показать заметку":{"en":"Show note","pl":"Pokaż notatkę","uk":"Показати нотатку"},"Показывать":{"en":"Show","pl":"Pokazuj","uk":"Показувати"},"Положение":{"en":"Position","pl":"Położenie","uk":"Положення"},"Положение плоскости за точкой, мм":{"en":"Plane position behind the point, mm","pl":"Położenie płaszczyzny za punktem, mm","uk":"Положення площини за точкою, мм"},"Поставьте камеру как нужно и нажмите «Запомнить ракурс».":{"en":"Set the camera as needed and click “Remember view”.","pl":"Ustaw kamerę jak trzeba i kliknij „Zapamiętaj widok”.","uk":"Поставте камеру як потрібно і натисніть «Запам'ятати ракурс»."},"Предложено как решение — ждёт согласия":{"en":"Proposed as the solution — awaiting agreement","pl":"Zaproponowano jako rozwiązanie — czeka na zgodę","uk":"Запропоновано як рішення — чекає згоди"},"Предложено решение — подтвердите":{"en":"Solution proposed — please confirm","pl":"Zaproponowano rozwiązanie — potwierdź","uk":"Запропоновано рішення — підтвердьте"},"Предложить как решение":{"en":"Propose as solution","pl":"Zaproponuj jako rozwiązanie","uk":"Запропонувати як рішення"},"Предыдущее фото":{"en":"Previous photo","pl":"Poprzednie zdjęcie","uk":"Попереднє фото"},"При нажатии на заметку останется только её сборочная единица.":{"en":"Clicking the note leaves only its assembly unit visible.","pl":"Po kliknięciu notatki zostanie tylko jej zespół.","uk":"При натисканні на нотатку залишиться лише її складальна одиниця."},"Принять":{"en":"Accept","pl":"Przyjmij","uk":"Прийняти"},"Размер":{"en":"Size","pl":"Rozmiar","uk":"Розмір"},"Ракурс заметки":{"en":"Note view","pl":"Widok notatki","uk":"Ракурс нотатки"},"Ракурс запомнен: камера встанет так при нажатии на заметку.":{"en":"View saved: the camera moves here when the note is clicked.","pl":"Widok zapamiętany: kamera ustawi się tak po kliknięciu notatki.","uk":"Ракурс запам'ятовано: камера стане так при натисканні на нотатку."},"Режим":{"en":"Mode","pl":"Tryb","uk":"Режим"},"Решение предложено":{"en":"Solution proposed","pl":"Rozwiązanie zaproponowane","uk":"Рішення запропоновано"},"Свернуть заметку":{"en":"Collapse note","pl":"Zwiń notatkę","uk":"Згорнути нотатку"},"Сечение":{"en":"Section","pl":"Przekrój","uk":"Переріз"},"Скрыть заметку":{"en":"Hide note","pl":"Ukryj notatkę","uk":"Приховати нотатку"},"Скрыть остальные":{"en":"Hide the rest","pl":"Ukryj pozostałe","uk":"Сховати інші"},"Следующее фото":{"en":"Next photo","pl":"Następne zdjęcie","uk":"Наступне фото"},"Согласен ✓":{"en":"Agree ✓","pl":"Zgoda ✓","uk":"Згоден ✓"},"Согласованное решение":{"en":"Agreed solution","pl":"Uzgodnione rozwiązanie","uk":"Погоджене рішення"},"Согласовано":{"en":"Agreed","pl":"Uzgodniono","uk":"Погоджено"},"Сохранить":{"en":"Save","pl":"Zapisz","uk":"Зберегти"},"Список (":{"en":"List (","pl":"Lista (","uk":"Список ("},"Список (0)":{"en":"List (0)","pl":"Lista (0)","uk":"Список (0)"},"Текст заметки":{"en":"Note text","pl":"Tekst notatki","uk":"Текст нотатки"},"Только зона":{"en":"Zone only","pl":"Tylko strefa","uk":"Лише зона"},"Точка без привязки к детали":{"en":"Point not attached to a part","pl":"Punkt bez powiązania z elementem","uk":"Точка без прив'язки до деталі"},"Убрать последнее":{"en":"Remove last","pl":"Usuń ostatnie","uk":"Прибрати останнє"},"Убрать фото из заметки":{"en":"Remove photo from note","pl":"Usuń zdjęcie z notatki","uk":"Прибрати фото з нотатки"},"Удалить":{"en":"Delete","pl":"Usuń","uk":"Видалити"},"Удалить заметку":{"en":"Delete note","pl":"Usuń notatkę","uk":"Видалити нотатку"},"Удалить заметку?":{"en":"Delete the note?","pl":"Usunąć notatkę?","uk":"Видалити нотатку?"},"Узел крупным планом (сфера)":{"en":"Joint close-up (sphere)","pl":"Węzeł w zbliżeniu (sfera)","uk":"Вузол великим планом (сфера)"},"Фото":{"en":"Photo","pl":"Zdjęcie","uk":"Фото"},"Фото заметки":{"en":"Note photo","pl":"Zdjęcie notatki","uk":"Фото нотатки"},"Фото уменьшаются до 1600 px и сохраняются дискеткой в публичный репозиторий GitHub рядом со страницей.":{"en":"Photos are reduced to 1600 px and saved with the floppy to the public GitHub repository next to the page.","pl":"Zdjęcia są zmniejszane do 1600 px i zapisywane dyskietką w publicznym repozytorium GitHub obok strony.","uk":"Фото зменшуються до 1600 px і зберігаються дискетою в публічний репозиторій GitHub поруч зі сторінкою."},"Фото:":{"en":"Photos:","pl":"Zdjęcia:","uk":"Фото:"},"Ширина окна, мм":{"en":"Window width, mm","pl":"Szerokość okna, mm","uk":"Ширина вікна, мм"},"Щёлкните по грани модели: плоскость станет параллельной ей.":{"en":"Click a model face: the plane becomes parallel to it.","pl":"Kliknij ścianę modelu: płaszczyzna stanie się do niej równoległa.","uk":"Клацніть по грані моделі: площина стане паралельною їй."},"Щёлкните по детали, куда поставить заметку. Esc — отмена.":{"en":"Click the part where the note goes. Esc — cancel.","pl":"Kliknij element, na którym umieścić notatkę. Esc — anuluj.","uk":"Клацніть по деталі, куди поставити нотатку. Esc — скасування."},"Щёлкните по деталям, на которые указывает заметка":{"en":"Click the parts the note points to","pl":"Kliknij części, na które wskazuje notatka","uk":"Клацніть по деталях, на які вказує нотатка"},"Щёлкните по деталям, на которые указывает заметка. Мест:":{"en":"Click the parts the note points to. Places:","pl":"Kliknij części, na które wskazuje notatka. Miejsc:","uk":"Клацніть по деталях, на які вказує нотатка. Місць:"},"вопрос":{"en":"question","pl":"pytanie","uk":"питання"},"дописал:":{"en":"added:","pl":"dopisał:","uk":"дописав:"},"ждёт ответа":{"en":"awaiting reply","pl":"czeka na odpowiedź","uk":"чекає відповіді"},"изменил:":{"en":"changed:","pl":"zmienił:","uk":"змінив:"},"место":{"en":"place","pl":"miejsce","uk":"місце"},"мм":{"en":"mm","pl":"mm","uk":"мм"},"не удалось сжать фото":{"en":"could not compress the photo","pl":"nie udało się skompresować zdjęcia","uk":"не вдалося стиснути фото"},"от:":{"en":"from:","pl":"od:","uk":"від:"},"пишет:":{"en":"writes:","pl":"pisze:","uk":"пише:"},"поз.":{"en":"pos.","pl":"poz.","uk":"поз."},"показ":{"en":"display","pl":"widok","uk":"показ"},"предлагает решение":{"en":"proposes a solution","pl":"proponuje rozwiązanie","uk":"пропонує рішення"},"предлагает текст:":{"en":"suggests text:","pl":"proponuje tekst:","uk":"пропонує текст:"},"предлагает удалить заметку":{"en":"suggests deleting the note","pl":"proponuje usunąć notatkę","uk":"пропонує видалити нотатку"},"прислал заметку без изменений":{"en":"sent the note unchanged","pl":"przysłał notatkę bez zmian","uk":"надіслав нотатку без змін"},"ракурс":{"en":"view","pl":"ujęcie","uk":"ракурс"},"согласен — решение принято":{"en":"agrees — solution accepted","pl":"zgadza się — rozwiązanie przyjęte","uk":"згоден — рішення прийнято"},"фото":{"en":"photos","pl":"zdjęcia","uk":"фото"},"фото в одной заметке.":{"en":"photos in one note.","pl":"zdjęć w jednej notatce.","uk":"фото в одній нотатці."},"…ещё":{"en":"…more","pl":"…więcej","uk":"…ще"},"✕ Выйти":{"en":"✕ Exit","pl":"✕ Wyjdź","uk":"✕ Вийти"},"＋ Заметка":{"en":"＋ Note","pl":"＋ Notatka","uk":"＋ Нотатка"},"＋ Место":{"en":"＋ Place","pl":"＋ Miejsce","uk":"＋ Місце"},"＋ Фото":{"en":"＋ Photo","pl":"＋ Zdjęcie","uk":"＋ Фото"}});
 (function (root) {
   'use strict';
   // «Однотонная фурнитура». По умолчанию выключена: фурнитура и импортированные тела
@@ -18532,9 +19085,10 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     TOKEN_KEY = 'bazisGhToken',
     INBOX_DIR = 'inbox',
     INBOX_FILE = /^[0-9a-z_-]+\.json$/,
-    CHECK_S = 1;
+    CHECK_S = 1,
+    AUTOSAVE_MS = 2500;
   function install(context, data) {
-    const { document: doc, hooks } = context,
+    const { document: doc, hooks, services = {} } = context,
       win = context.window || root;
     if (data?.schema !== 1) throw new Error('Несовместимый модуль правок клиента');
     const target = context.data?.republish;
@@ -18582,6 +19136,43 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       elapsed = CHECK_S,
       disposed = false,
       sending = false;
+
+    // Роль и имя — модулю заметок (обсуждение: «Вы», подписи реплик; клиент отвечает,
+    // а не правит). Локальный файл — копия владельца.
+    services.viewerRole = () => (isOwner() || !online ? 'owner' : 'client');
+    services.viewerName = () => (isOwner() ? '' : storage.get('bazisClientName') || '');
+    // Автосохранение у владельца: принял правку, ответил, согласовал — через пару
+    // секунд страница сама жмёт дискету (если ключ сохранён): клиент увидит ответ,
+    // ящик очистится. Дискета остаётся для вида, ракурсов и прочего.
+    let saveTimer = null,
+      saving = false,
+      again = false;
+    const saver = () => ((win.__viewer && win.__viewer.features) || []).find(f => f.name === 'github_save');
+    function scheduleSave() {
+      if (!target || !online || !storage.get(TOKEN_KEY) || disposed) return;
+      win.clearTimeout(saveTimer);
+      saveTimer = win.setTimeout(autoSave, AUTOSAVE_MS);
+    }
+    async function autoSave() {
+      if (saving) {
+        again = true;
+        return;
+      }
+      const save = saver()?.save;
+      if (!save) return;
+      saving = true;
+      try {
+        await save();
+      } catch (e) {
+      } finally {
+        saving = false;
+      }
+      if (again) {
+        again = false;
+        scheduleSave();
+      }
+    }
+    services.notesChanged = scheduleSave;
 
     // ---- место кнопок: в верхней строке у языка (перед «Обновить», если она есть)
     function place() {
@@ -18784,8 +19375,11 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       load,
       checkInbox,
       send,
+      autoSave,
       get state() {
         return {
+          saving,
+          saveScheduled: saveTimer != null,
           owner: isOwner(),
           endpoint,
           pending: pendingCount(),
@@ -18804,6 +19398,8 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
           if (at >= 0) list.splice(at, 1);
         }
         doc.documentElement?.classList?.remove('bazisClient');
+        win.clearTimeout(saveTimer);
+        for (const key of ['viewerRole', 'viewerName', 'notesChanged']) delete services[key];
         for (const el of [sendButton, loadButton, dialog]) el.remove();
       }
     };
