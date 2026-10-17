@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "source": "49b15970f84d5d7d1aed254f94468992d4e5a8c59b959ba159d060d68ea70a9b",
- "savedAt": "2026-10-17T13:52:42.189Z",
+ "source": "e4bbe502c8b3166dbc8ace769d34467c5d8c3190eb4a01fc2fb8a5e2ff6dfa8e",
+ "savedAt": "2026-10-17T13:55:54.180Z",
  "features": {
   "outline": false,
   "section": {
@@ -21,6 +21,12 @@
   "finish": "texture",
   "dimension_actions": {
    "colors": []
+  },
+  "dimensions": {
+   "size": 16,
+   "color": "#e60000",
+   "unit": false,
+   "box": false
   },
   "materials": [
    {
@@ -382,6 +388,9 @@
   "sectionPosition": "1598.83543686867",
   "sectionReverse": false,
   "displayModesEnabled": false,
+  "dimensionFontSize": "16",
+  "dimensionUnit": false,
+  "dimensionBox": false,
   "notesShow": true,
   "noteEditorMany": false,
   "noteEditorSphere": false,
@@ -408,9 +417,9 @@
  },
  "camera": {
   "position": [
-   -463.66657504029536,
-   3481.56367351853,
-   6183.100185958259
+   1099.1981784864324,
+   2974.9893825956906,
+   6841.215135588443
   ],
   "target": [
    2057.251359550069,
