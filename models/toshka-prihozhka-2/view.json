@@ -1,0 +1,467 @@
+{
+ "schema": 1,
+ "source": "b0d9d0bce50ba8615197e5fd8a12503c9a1f561c07010b9edbf05cefe85a9c6d",
+ "savedAt": "2026-10-17T11:34:34.635Z",
+ "features": {
+  "outline": false,
+  "section": {
+   "active": false,
+   "axis": "y",
+   "position": 1331.7733095703124,
+   "reversed": false,
+   "showPlane": true,
+   "chosen": false,
+   "normal": [
+    0,
+    1,
+    0
+   ]
+  },
+  "display_modes": null,
+  "finish": "texture",
+  "dimension_actions": {
+   "colors": []
+  },
+  "dimensions": {
+   "size": 16,
+   "color": "#e60000",
+   "unit": false,
+   "box": false
+  },
+  "materials": [
+   {
+    "id": "art:ДСП лам. Egger U961 ST7 Чорный графит 2800х2070х18 мм\r173522",
+    "type": "tex",
+    "name": "ДСП лам. Egger U961 ST7 Чорный графит 2800х2070х18 мм",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "ДСП лам. Egger U961 ST7 Чорный графит 2800х2070х18 мм\r173522",
+     "texData": null,
+     "color": "#373131",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "art:ЛХДФ Антрацит 0164 Kronospan 2800х2070х3мм\r66264",
+    "type": "tex",
+    "name": "ЛХДФ Антрацит 0164 Kronospan 2800х2070х3мм",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "ЛХДФ Антрацит 0164 Kronospan 2800х2070х3мм\r66264",
+     "texData": null,
+     "color": "#2c2a2f",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "col:#42aaff",
+    "type": "col",
+    "name": "Зеркало Серебро 4мм БЦ (с защ. пленкой)",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#d9e7f2",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "art:ДСП лам. Swiss Krono U164 PE Антрацитный 2800х2070х18мм\r67481",
+    "type": "tex",
+    "name": "ДСП лам. Swiss Krono U164 PE Антрацитный 2800х2070х18мм",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "ДСП лам. Swiss Krono U164 PE Антрацитный 2800х2070х18мм\r67481",
+     "texData": null,
+     "color": "#585252",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "col:#2d2d2d",
+    "type": "col",
+    "name": "Порошковая краска черная",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#2d2d2d",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "col:#c0c0c0",
+    "type": "col",
+    "name": "Белый",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#cccccc",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "art:Линза светорассеивающая для профиля L= 2м, поликарбонат, молочная\r83995",
+    "type": "tex",
+    "name": "Линза светорассеивающая для профиля L= 2м, поликарбонат, молочная",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "Линза светорассеивающая для профиля L= 2м, поликарбонат, молочная\r83995",
+     "texData": null,
+     "color": "#d7c18b",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "art:Алюминий\r-2",
+    "type": "tex",
+    "name": "Алюминий",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": "Алюминий\r-2",
+     "texData": null,
+     "color": "#cccccc",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "art:Врезной проф.- ручка Ferro Fiori M 8030 никель анодир., 18 мм\r120666",
+    "type": "tex",
+    "name": "Врезной проф.- ручка Ferro Fiori M 8030 никель анодир., 18 мм",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": "Врезной проф.- ручка Ferro Fiori M 8030 никель анодир., 18 мм\r120666",
+     "texData": null,
+     "color": "#000000",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "art:Врезной проф.- ручка Ferro Fiori M 8050 никель анодир., 18 мм\r120670",
+    "type": "tex",
+    "name": "Врезной проф.- ручка Ferro Fiori M 8050 никель анодир., 18 мм",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": "Врезной проф.- ручка Ferro Fiori M 8050 никель анодир., 18 мм\r120670",
+     "texData": null,
+     "color": "#000000",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "col:#191919",
+    "type": "col",
+    "name": "Пластик черный",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#191919",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "col:#494949",
+    "type": "col",
+    "name": "руба овальная Ferro Fiori M 11080 30х15, L = 3000mm, матовый черный",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#494949",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "col:#00ff00",
+    "type": "col",
+    "name": "Панель",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": null,
+     "texData": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAEbARsDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAT/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwC5AIlQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//2Q==",
+     "color": "#444444",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:ДСП бук",
+    "type": "col",
+    "name": "ДСП бук",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#c0c0c0",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:Mtl0A492BD5",
+    "type": "col",
+    "name": "Mtl0A492BD5",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:Mtl148154BF",
+    "type": "col",
+    "name": "Mtl148154BF",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:Сталь\rСталь",
+    "type": "col",
+    "name": "Сталь",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#c0c0c0",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:Пластик прозрачный\r-456345",
+    "type": "col",
+    "name": "Пластик прозрачный",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#aeaeae",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:Сталь",
+    "type": "col",
+    "name": "Сталь",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#c0c0c0",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:Прозрачность\r-546345634",
+    "type": "col",
+    "name": "Прозрачность",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#f6b67f",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:Белый\r-101",
+    "type": "col",
+    "name": "Белый",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#c0c0c0",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:Пластик черный\r-1",
+    "type": "col",
+    "name": "Пластик черный",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#191919",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:Порошковая краска черная\r-5413543",
+    "type": "col",
+    "name": "Порошковая краска черная",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#2d2d2d",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:сталь краш",
+    "type": "col",
+    "name": "сталь краш",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:Material.001",
+    "type": "col",
+    "name": "Material.001",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   }
+  ],
+  "texture_fit": {
+   "schema": 2,
+   "modes": {}
+  },
+  "material_labels": {
+   "enabled": false,
+   "changedAt": null
+  },
+  "notes": {
+   "enabled": true,
+   "notes": []
+  },
+  "hardware_mono": false,
+  "visibility": {
+   "hidden": [],
+   "objectMode": true
+  },
+  "panel_hardware": {
+   "active": false,
+   "selectedPanelId": null
+  },
+  "assembler": {
+   "active": true,
+   "exploded": false,
+   "separation": 250,
+   "unitId": null,
+   "partDimensionsEnabled": false,
+   "labelPosition": true,
+   "labelName": null,
+   "labelFontSize": 11,
+   "positionsThrough": false,
+   "unitThrough": {},
+   "hiddenUnits": []
+  },
+  "hardware_catalog": {
+   "expanded": false
+  }
+ },
+ "controls": {
+  "panels": true,
+  "profiles": true,
+  "edges": true,
+  "textures": true,
+  "imports": true,
+  "hardware": true,
+  "holes": true,
+  "lines": true,
+  "overlay": false,
+  "opacity": "100",
+  "guides": false,
+  "holeOverlay": false,
+  "nativeDimensions": true,
+  "manualDimensions": true,
+  "githubTokenRemember": true,
+  "sectionEnabled": false,
+  "sectionShowPlane": true,
+  "sectionPosition": "1331.837",
+  "sectionReverse": false,
+  "displayModesEnabled": false,
+  "dimensionFontSize": "16",
+  "dimensionUnit": false,
+  "dimensionBox": false,
+  "notesShow": true,
+  "noteEditorMany": false,
+  "noteEditorSphere": false,
+  "noteEditorDiameter": "60",
+  "noteEditorWindow": false,
+  "noteEditorWindowReverse": false,
+  "noteEditorWindowDepth": "50",
+  "noteEditorIsolate": false,
+  "assemblerSeparation": "250",
+  "assemblerLabelPosition": true,
+  "assemblerLabelName": true,
+  "assemblerLabelFontSize": "11",
+  "assemblerLabelsThrough": false,
+  "usageEnabled": true,
+  "guideIntroOnly": false
+ },
+ "layers": [
+  true,
+  true,
+  true,
+  true
+ ],
+ "layersByName": {
+  "Слой 0": true,
+  "Слой LAYER_1": true,
+  "Слой LEICA_3DDISTO_SURFACESCAN": true,
+  "Линии": true
+ },
+ "camera": {
+  "position": [
+   840.8881202717437,
+   3443.293801302004,
+   4470.434975645143
+  ],
+  "target": [
+   -1274.265009329588,
+   1524.5014831774195,
+   365.27247627934224
+  ],
+  "up": [
+   0,
+   1,
+   0
+  ],
+  "orthographic": false
+ },
+ "dimensions": []
+}
