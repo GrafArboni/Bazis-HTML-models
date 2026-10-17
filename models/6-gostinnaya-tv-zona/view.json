@@ -1,0 +1,428 @@
+{
+ "schema": 1,
+ "source": "49b15970f84d5d7d1aed254f94468992d4e5a8c59b959ba159d060d68ea70a9b",
+ "savedAt": "2026-10-17T13:52:42.189Z",
+ "features": {
+  "outline": false,
+  "section": {
+   "active": false,
+   "axis": "y",
+   "position": 1598.8213073015213,
+   "reversed": false,
+   "showPlane": true,
+   "chosen": false,
+   "normal": [
+    0,
+    1,
+    0
+   ]
+  },
+  "display_modes": null,
+  "finish": "texture",
+  "dimension_actions": {
+   "colors": []
+  },
+  "materials": [
+   {
+    "id": "art:201260",
+    "type": "tex",
+    "name": "ДСП лам. Kronospan K696 PV Дуб Примавера Амбер NEW 2800х2070х18мм",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "201260",
+     "texData": null,
+     "color": "#f6b67f",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "col:#00ff00",
+    "type": "col",
+    "name": "LED-стрічка 2835 SMD, 120 LEDs/m, 9.6W, 24V, IP20, тепле світло, 3000К NEW",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": null,
+     "texData": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAEbARsDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAT/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwC5AIlQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//2Q==",
+     "color": "#444444",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "art:ДСП лам. Swiss Krono U164 PE Антрацитный 2800х2070х18мм\r67481",
+    "type": "tex",
+    "name": "ДСП лам. Swiss Krono U164 PE Антрацитный 2800х2070х18мм",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "ДСП лам. Swiss Krono U164 PE Антрацитный 2800х2070х18мм\r67481",
+     "texData": null,
+     "color": "#585252",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "art:ДСП лам. Egger F235 ST76 Сланец Скиваро 2800х2070х18 мм\r173514",
+    "type": "tex",
+    "name": "ДСП лам. Egger F235 ST76 Сланец Скиваро 2800х2070х18 мм",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "ДСП лам. Egger F235 ST76 Сланец Скиваро 2800х2070х18 мм\r173514",
+     "texData": null,
+     "color": "#454344",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "art:52882",
+    "type": "tex",
+    "name": "ДСП SWISS KRONO 4025 OW Дуб Конкордия 2800х2070х18 мм",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "52882",
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:ДСП бук",
+    "type": "col",
+    "name": "ДСП бук",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#c0c0c0",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:Материал",
+    "type": "col",
+    "name": "Материал",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:diffuse_0.009",
+    "type": "col",
+    "name": "diffuse_0.009",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:diffuse_0.010",
+    "type": "col",
+    "name": "diffuse_0.010",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:diffuse_0.008",
+    "type": "col",
+    "name": "diffuse_0.008",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:черный_цвет.001",
+    "type": "col",
+    "name": "черный_цвет.001",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:diffuse_0.006",
+    "type": "col",
+    "name": "diffuse_0.006",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:diffuse_0.007",
+    "type": "col",
+    "name": "diffuse_0.007",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:diffuse_0",
+    "type": "col",
+    "name": "diffuse_0",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:diffuse_0.001",
+    "type": "col",
+    "name": "diffuse_0.001",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:diffuse_0.002",
+    "type": "col",
+    "name": "diffuse_0.002",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:серый",
+    "type": "col",
+    "name": "серый",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "art:Чёрный",
+    "type": "tex",
+    "name": "Чёрный",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "Чёрный",
+     "texData": null,
+     "color": "#000000",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:Металл",
+    "type": "col",
+    "name": "Металл",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:Сталь",
+    "type": "col",
+    "name": "Сталь",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#c0c0c0",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:сталь",
+    "type": "col",
+    "name": "сталь",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:черный цвет",
+    "type": "col",
+    "name": "черный цвет",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mat:Mtl68A347FA",
+    "type": "col",
+    "name": "Mtl68A347FA",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   }
+  ],
+  "texture_fit": {
+   "schema": 2,
+   "modes": {}
+  },
+  "material_labels": {
+   "enabled": false,
+   "changedAt": null
+  },
+  "notes": {
+   "enabled": true,
+   "notes": []
+  },
+  "hardware_mono": false,
+  "visibility": {
+   "hidden": [],
+   "objectMode": true
+  },
+  "panel_hardware": {
+   "active": false,
+   "selectedPanelId": null
+  },
+  "assembler": {
+   "active": true,
+   "exploded": false,
+   "separation": 250,
+   "unitId": null,
+   "partDimensionsEnabled": false,
+   "labelPosition": true,
+   "labelName": null,
+   "labelFontSize": 11,
+   "positionsThrough": false,
+   "unitThrough": {},
+   "hiddenUnits": []
+  },
+  "hardware_catalog": {
+   "expanded": false
+  }
+ },
+ "controls": {
+  "panels": true,
+  "profiles": true,
+  "edges": true,
+  "textures": true,
+  "imports": true,
+  "hardware": true,
+  "holes": true,
+  "lines": true,
+  "overlay": false,
+  "opacity": "100",
+  "guides": false,
+  "holeOverlay": false,
+  "nativeDimensions": true,
+  "manualDimensions": true,
+  "githubTokenRemember": true,
+  "sectionEnabled": false,
+  "sectionShowPlane": true,
+  "sectionPosition": "1598.83543686867",
+  "sectionReverse": false,
+  "displayModesEnabled": false,
+  "notesShow": true,
+  "noteEditorMany": false,
+  "noteEditorSphere": false,
+  "noteEditorDiameter": "60",
+  "noteEditorWindow": false,
+  "noteEditorWindowReverse": false,
+  "noteEditorWindowDepth": "50",
+  "noteEditorIsolate": false,
+  "assemblerSeparation": "250",
+  "assemblerLabelPosition": true,
+  "assemblerLabelName": true,
+  "assemblerLabelFontSize": "11",
+  "assemblerLabelsThrough": false,
+  "usageEnabled": true,
+  "guideIntroOnly": false
+ },
+ "layers": [
+  true,
+  true
+ ],
+ "layersByName": {
+  "Слой 0": true,
+  "Слой LEICA_3DDISTO_SURFACESCAN": true
+ },
+ "camera": {
+  "position": [
+   -463.66657504029536,
+   3481.56367351853,
+   6183.100185958259
+  ],
+  "target": [
+   2057.251359550069,
+   1784.3593010233076,
+   1269.8637196145262
+  ],
+  "up": [
+   0,
+   1,
+   0
+  ],
+  "orthographic": false
+ },
+ "dimensions": []
+}
