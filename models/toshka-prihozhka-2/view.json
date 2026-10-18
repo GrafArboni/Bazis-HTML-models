@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "source": "b0d9d0bce50ba8615197e5fd8a12503c9a1f561c07010b9edbf05cefe85a9c6d",
- "savedAt": "2026-10-17T11:34:34.635Z",
+ "savedAt": "2026-10-18T22:38:57.209Z",
  "features": {
   "outline": false,
   "section": {
@@ -17,6 +17,7 @@
     0
    ]
   },
+  "section_views": null,
   "display_modes": null,
   "finish": "texture",
   "dimension_actions": {
@@ -368,6 +369,10 @@
    "notes": []
   },
   "hardware_mono": false,
+  "hardware_types": {
+   "on": true,
+   "focus": null
+  },
   "visibility": {
    "hidden": [],
    "objectMode": true
@@ -391,6 +396,1496 @@
   },
   "hardware_catalog": {
    "expanded": false
+  },
+  "drawings": {
+   "schema": 1,
+   "info": {
+    "product": "",
+    "order": "",
+    "customer": "",
+    "address": "",
+    "designer": "",
+    "company": "",
+    "date": "2026-10-18",
+    "note": ""
+   },
+   "style": {
+    "font": "Arial",
+    "size": 3.5,
+    "stretch": 100,
+    "frame": "gost",
+    "stamp": {
+     "rowH": 7,
+     "rows": [
+      [
+       {
+        "f": "product",
+        "w": 3
+       },
+       {
+        "f": "title",
+        "w": 3
+       },
+       {
+        "f": "scale",
+        "w": 1
+       },
+       {
+        "f": "sheet",
+        "w": 1
+       }
+      ],
+      [
+       {
+        "f": "order",
+        "w": 1
+       },
+       {
+        "f": "customer",
+        "w": 2
+       },
+       {
+        "f": "designer",
+        "w": 1
+       },
+       {
+        "f": "company",
+        "w": 2
+       },
+       {
+        "f": "date",
+        "w": 1
+       }
+      ]
+     ]
+    },
+    "displayOrtho": "ghost",
+    "displayIso": "ghost",
+    "displayDetail": "wire",
+    "callouts": "name",
+    "calloutsOn": "iso",
+    "calloutSize": 0,
+    "views": [
+     "front",
+     "left",
+     "top",
+     "iso"
+    ],
+    "zones": {
+     "landscape": {
+      "parts": [
+       0,
+       0,
+       0.42,
+       0.45
+      ],
+      "units": [
+       0,
+       0.46,
+       0.42,
+       0.11
+      ],
+      "hardware": [
+       0,
+       0.58,
+       0.42,
+       0.27
+      ],
+      "linear": [
+       0,
+       0.87,
+       0.42,
+       0.13
+      ],
+      "views": [
+       0.44,
+       0,
+       0.56,
+       0.3
+      ],
+      "iso": [
+       0.44,
+       0.32,
+       0.56,
+       0.46
+      ],
+      "details": [
+       0.44,
+       0.8,
+       0.56,
+       0.2
+      ]
+     },
+     "portrait": {
+      "parts": [
+       0,
+       0.66,
+       0.58,
+       0.24
+      ],
+      "units": [
+       0,
+       0.91,
+       0.58,
+       0.09
+      ],
+      "hardware": [
+       0.6,
+       0.66,
+       0.4,
+       0.21
+      ],
+      "linear": [
+       0.6,
+       0.88,
+       0.4,
+       0.12
+      ],
+      "views": [
+       0,
+       0,
+       1,
+       0.2
+      ],
+      "iso": [
+       0,
+       0.21,
+       1,
+       0.3
+      ],
+      "details": [
+       0,
+       0.52,
+       1,
+       0.12
+      ]
+     }
+    },
+    "unitLayout": "specs",
+    "partSheets": false,
+    "unitParts": {},
+    "noteStyle": {
+     "size": 0,
+     "color": "#111111",
+     "marker": "dot",
+     "frame": false
+    }
+   },
+   "sheets": [
+    {
+     "id": "smveemo5r0",
+     "format": "A4",
+     "orient": "portrait",
+     "kind": "title",
+     "title": "",
+     "blocks": [
+      {
+       "id": "bmveemo5r1",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 185,
+       "h": 14
+      },
+      {
+       "id": "bmveemo5r2",
+       "type": "title",
+       "x": 30,
+       "y": 20,
+       "w": 165,
+       "h": 70
+      },
+      {
+       "id": "bmveemo5r3",
+       "type": "view",
+       "x": 30,
+       "y": 100,
+       "w": 165,
+       "h": 172,
+       "unit": null,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": false,
+       "callouts": "none"
+      }
+     ]
+    },
+    {
+     "id": "smveemo5s4",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "1.0.0 Обшивка двери под 45 Обшивка",
+     "blocks": [
+      {
+       "id": "bmveemo5s5",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmveemo5s6",
+       "type": "view",
+       "x": 194.52,
+       "y": 11,
+       "w": 67.49333333333334,
+       "h": 78.3,
+       "unit": 537,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmveemo5s7",
+       "type": "view",
+       "x": 268.0133333333333,
+       "y": 11,
+       "w": 67.49333333333334,
+       "h": 78.3,
+       "unit": 537,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "link": {
+        "base": "bmveemo5s6",
+        "side": "right"
+       }
+      },
+      {
+       "id": "bmveemo5s8",
+       "type": "view",
+       "x": 341.50666666666666,
+       "y": 11,
+       "w": 67.49333333333334,
+       "h": 78.3,
+       "unit": 537,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "link": {
+        "base": "bmveemo5s6",
+        "side": "right"
+       }
+      },
+      {
+       "id": "bmveemo5s9",
+       "type": "view",
+       "x": 194.52,
+       "y": 94.52,
+       "w": 214.48000000000002,
+       "h": 177.48,
+       "unit": 537,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmveemo5sa",
+       "type": "parts",
+       "auto": true,
+       "unit": 537,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 160.85999999999999,
+       "h": 58.9
+      },
+      {
+       "id": "bmveemo5sb",
+       "type": "units",
+       "auto": true,
+       "unit": 537,
+       "offset": 0,
+       "x": 26,
+       "y": 75.9,
+       "w": 160.85999999999999,
+       "h": 30.1
+      },
+      {
+       "id": "bmveemo5sc",
+       "type": "hardware",
+       "auto": true,
+       "unit": 537,
+       "offset": 0,
+       "x": 26,
+       "y": 112,
+       "w": 160.85999999999999,
+       "h": 160
+      }
+     ],
+     "unit": 537
+    },
+    {
+     "id": "smveemo5td",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "spec",
+     "title": "1.0.0 Обшивка двери под 45 Обшивка",
+     "blocks": [
+      {
+       "id": "bmveemo5te",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmveemo5tf",
+       "type": "hardware",
+       "unit": 537,
+       "offset": 11,
+       "x": 26,
+       "y": 11,
+       "w": 383,
+       "h": 261,
+       "pad": 6
+      }
+     ],
+     "unit": 537
+    },
+    {
+     "id": "smveemo5tg",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "1.1.0 Короб внутренний",
+     "blocks": [
+      {
+       "id": "bmveemo5th",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmveemo5ti",
+       "type": "view",
+       "x": 194.52,
+       "y": 11,
+       "w": 67.49333333333334,
+       "h": 78.3,
+       "unit": 539,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmveemo5tj",
+       "type": "view",
+       "x": 268.0133333333333,
+       "y": 11,
+       "w": 67.49333333333334,
+       "h": 78.3,
+       "unit": 539,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "link": {
+        "base": "bmveemo5ti",
+        "side": "right"
+       }
+      },
+      {
+       "id": "bmveemo5tk",
+       "type": "view",
+       "x": 341.50666666666666,
+       "y": 11,
+       "w": 67.49333333333334,
+       "h": 78.3,
+       "unit": 539,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "link": {
+        "base": "bmveemo5ti",
+        "side": "right"
+       }
+      },
+      {
+       "id": "bmveemo5tl",
+       "type": "view",
+       "x": 194.52,
+       "y": 94.52,
+       "w": 214.48000000000002,
+       "h": 177.48,
+       "unit": 539,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmveemo5tm",
+       "type": "parts",
+       "auto": true,
+       "unit": 539,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 160.85999999999999,
+       "h": 47.5
+      },
+      {
+       "id": "bmveemo5tn",
+       "type": "hardware",
+       "auto": true,
+       "unit": 539,
+       "offset": 0,
+       "x": 26,
+       "y": 64.5,
+       "w": 160.85999999999999,
+       "h": 207.5
+      }
+     ],
+     "unit": 539
+    },
+    {
+     "id": "smveemo5uo",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "2.0.0 Зеркало обклад с подсветкой по периметру Зеркало с подсветкой",
+     "blocks": [
+      {
+       "id": "bmveemo5up",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmveemo5uq",
+       "type": "view",
+       "x": 194.52,
+       "y": 11,
+       "w": 67.49333333333334,
+       "h": 78.3,
+       "unit": 2001,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmveemo5ur",
+       "type": "view",
+       "x": 268.0133333333333,
+       "y": 11,
+       "w": 67.49333333333334,
+       "h": 78.3,
+       "unit": 2001,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "link": {
+        "base": "bmveemo5uq",
+        "side": "right"
+       }
+      },
+      {
+       "id": "bmveemo5us",
+       "type": "view",
+       "x": 341.50666666666666,
+       "y": 11,
+       "w": 67.49333333333334,
+       "h": 78.3,
+       "unit": 2001,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "link": {
+        "base": "bmveemo5uq",
+        "side": "right"
+       }
+      },
+      {
+       "id": "bmveemo5ut",
+       "type": "view",
+       "x": 194.52,
+       "y": 94.52,
+       "w": 214.48000000000002,
+       "h": 177.48,
+       "unit": 2001,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "layers": {
+        "hardware": true,
+        "imports": true,
+        "holes": true
+       }
+      },
+      {
+       "id": "bmveemo5uu",
+       "type": "parts",
+       "auto": true,
+       "unit": 2001,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 160.85999999999999,
+       "h": 76.9
+      },
+      {
+       "id": "bmveemo5uv",
+       "type": "hardware",
+       "auto": true,
+       "unit": 2001,
+       "offset": 0,
+       "x": 26,
+       "y": 93.9,
+       "w": 160.85999999999999,
+       "h": 143
+      },
+      {
+       "id": "bmveemo5uw",
+       "type": "linear",
+       "auto": true,
+       "unit": 2001,
+       "offset": 0,
+       "x": 26,
+       "y": 242.9,
+       "w": 160.85999999999999,
+       "h": 29.1
+      }
+     ],
+     "unit": 2001
+    },
+    {
+     "id": "smveemo5vx",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "spec",
+     "title": "2.0.0 Зеркало обклад с подсветкой по периметру Зеркало с подсветкой",
+     "blocks": [
+      {
+       "id": "bmveemo5vy",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmveemo5vz",
+       "type": "hardware",
+       "unit": 2001,
+       "offset": 9,
+       "x": 26,
+       "y": 11,
+       "w": 226,
+       "h": 261
+      },
+      {
+       "id": "bmveemo5v10",
+       "type": "linear",
+       "unit": 2001,
+       "offset": 1,
+       "x": 258,
+       "y": 11,
+       "w": 151,
+       "h": 261
+      }
+     ],
+     "unit": 2001
+    },
+    {
+     "id": "smveemo5v11",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "3.0.0 Тумба подвесная",
+     "blocks": [
+      {
+       "id": "bmveemo5v12",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmveemo5v13",
+       "type": "view",
+       "x": 194.52,
+       "y": 11,
+       "w": 67.49333333333334,
+       "h": 78.3,
+       "unit": 3025,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmveemo5v14",
+       "type": "view",
+       "x": 268.0133333333333,
+       "y": 11,
+       "w": 67.49333333333334,
+       "h": 78.3,
+       "unit": 3025,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "link": {
+        "base": "bmveemo5v13",
+        "side": "right"
+       }
+      },
+      {
+       "id": "bmveemo5v15",
+       "type": "view",
+       "x": 341.50666666666666,
+       "y": 11,
+       "w": 67.49333333333334,
+       "h": 78.3,
+       "unit": 3025,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "link": {
+        "base": "bmveemo5v13",
+        "side": "right"
+       }
+      },
+      {
+       "id": "bmveemo5v16",
+       "type": "view",
+       "x": 194.52,
+       "y": 94.52,
+       "w": 214.48000000000002,
+       "h": 177.48,
+       "unit": 3025,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmveemo5v17",
+       "type": "parts",
+       "auto": true,
+       "unit": 3025,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 160.85999999999999,
+       "h": 35.5
+      },
+      {
+       "id": "bmveemo5v18",
+       "type": "units",
+       "auto": true,
+       "unit": 3025,
+       "offset": 0,
+       "x": 26,
+       "y": 52.5,
+       "w": 160.85999999999999,
+       "h": 36.1
+      },
+      {
+       "id": "bmveemo5v19",
+       "type": "hardware",
+       "auto": true,
+       "unit": 3025,
+       "offset": 0,
+       "x": 26,
+       "y": 94.6,
+       "w": 160.85999999999999,
+       "h": 177.4
+      }
+     ],
+     "unit": 3025
+    },
+    {
+     "id": "smveemo5w1a",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "3.1.0 Корпус тумбы подвесной, захват снизу Корпуса",
+     "blocks": [
+      {
+       "id": "bmveemo5w1b",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmveemo5w1c",
+       "type": "view",
+       "x": 194.52,
+       "y": 11,
+       "w": 67.49333333333334,
+       "h": 78.3,
+       "unit": 2380,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmveemo5w1d",
+       "type": "view",
+       "x": 268.0133333333333,
+       "y": 11,
+       "w": 67.49333333333334,
+       "h": 78.3,
+       "unit": 2380,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "link": {
+        "base": "bmveemo5w1c",
+        "side": "right"
+       }
+      },
+      {
+       "id": "bmveemo5w1e",
+       "type": "view",
+       "x": 341.50666666666666,
+       "y": 11,
+       "w": 67.49333333333334,
+       "h": 78.3,
+       "unit": 2380,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "link": {
+        "base": "bmveemo5w1c",
+        "side": "right"
+       }
+      },
+      {
+       "id": "bmveemo5w1f",
+       "type": "view",
+       "x": 194.52,
+       "y": 94.52,
+       "w": 214.48000000000002,
+       "h": 177.48,
+       "unit": 2380,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmveemo5w1g",
+       "type": "parts",
+       "auto": true,
+       "unit": 2380,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 160.85999999999999,
+       "h": 70.9
+      },
+      {
+       "id": "bmveemo5w1h",
+       "type": "hardware",
+       "auto": true,
+       "unit": 2380,
+       "offset": 0,
+       "x": 26,
+       "y": 87.9,
+       "w": 160.85999999999999,
+       "h": 184.1
+      }
+     ],
+     "unit": 2380
+    },
+    {
+     "id": "smveemo5x1i",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "3.2.0 T+BM, ЧП, 270 Ящики, Tandem",
+     "blocks": [
+      {
+       "id": "bmveemo5x1j",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmveemo5x1k",
+       "type": "view",
+       "x": 194.52,
+       "y": 11,
+       "w": 67.49333333333334,
+       "h": 78.3,
+       "unit": 2902,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmveemo5x1l",
+       "type": "view",
+       "x": 268.0133333333333,
+       "y": 11,
+       "w": 67.49333333333334,
+       "h": 78.3,
+       "unit": 2902,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "link": {
+        "base": "bmveemo5x1k",
+        "side": "right"
+       }
+      },
+      {
+       "id": "bmveemo5x1m",
+       "type": "view",
+       "x": 341.50666666666666,
+       "y": 11,
+       "w": 67.49333333333334,
+       "h": 78.3,
+       "unit": 2902,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "link": {
+        "base": "bmveemo5x1k",
+        "side": "right"
+       }
+      },
+      {
+       "id": "bmveemo5x1n",
+       "type": "view",
+       "x": 194.52,
+       "y": 94.52,
+       "w": 214.48000000000002,
+       "h": 177.48,
+       "unit": 2902,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmveemo5x1o",
+       "type": "parts",
+       "auto": true,
+       "unit": 2902,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 160.85999999999999,
+       "h": 59.5
+      },
+      {
+       "id": "bmveemo5x1p",
+       "type": "hardware",
+       "auto": true,
+       "unit": 2902,
+       "offset": 0,
+       "x": 26,
+       "y": 76.5,
+       "w": 160.85999999999999,
+       "h": 195.5
+      }
+     ],
+     "unit": 2902
+    },
+    {
+     "id": "smveemo5y1q",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "4.0.0 Шкаф",
+     "blocks": [
+      {
+       "id": "bmveemo5y1r",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmveemo5y1s",
+       "type": "view",
+       "x": 194.52,
+       "y": 11,
+       "w": 67.49333333333334,
+       "h": 78.3,
+       "unit": 6005,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmveemo5y1t",
+       "type": "view",
+       "x": 268.0133333333333,
+       "y": 11,
+       "w": 67.49333333333334,
+       "h": 78.3,
+       "unit": 6005,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "link": {
+        "base": "bmveemo5y1s",
+        "side": "right"
+       }
+      },
+      {
+       "id": "bmveemo5y1u",
+       "type": "view",
+       "x": 341.50666666666666,
+       "y": 11,
+       "w": 67.49333333333334,
+       "h": 78.3,
+       "unit": 6005,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "link": {
+        "base": "bmveemo5y1s",
+        "side": "right"
+       }
+      },
+      {
+       "id": "bmveemo5y1v",
+       "type": "view",
+       "x": 195,
+       "y": 95,
+       "w": 214.48000000000002,
+       "h": 177.48,
+       "unit": 6005,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmveemo5y1w",
+       "type": "parts",
+       "auto": true,
+       "unit": 6005,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 160.85999999999999,
+       "h": 149.7
+      },
+      {
+       "id": "bmveemo5y1x",
+       "type": "units",
+       "auto": true,
+       "unit": 6005,
+       "offset": 0,
+       "x": 26,
+       "y": 166.7,
+       "w": 160.85999999999999,
+       "h": 29.10000000000001
+      },
+      {
+       "id": "bmveemo5y1y",
+       "type": "hardware",
+       "auto": true,
+       "unit": 6005,
+       "offset": 0,
+       "x": 26,
+       "y": 201.8,
+       "w": 160.85999999999999,
+       "h": 35.1
+      },
+      {
+       "id": "bmveemo5y1z",
+       "type": "linear",
+       "auto": true,
+       "unit": 6005,
+       "offset": 0,
+       "x": 26,
+       "y": 242.9,
+       "w": 160.85999999999999,
+       "h": 29.1
+      }
+     ],
+     "unit": 6005
+    },
+    {
+     "id": "smveemo6220",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "spec",
+     "title": "4.0.0 Шкаф (1/2)",
+     "blocks": [
+      {
+       "id": "bmveemo6221",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmveemo6222",
+       "type": "parts",
+       "unit": 6005,
+       "offset": 21,
+       "x": 26,
+       "y": 11,
+       "w": 226,
+       "h": 261
+      },
+      {
+       "id": "bmveemo6223",
+       "type": "hardware",
+       "unit": 6005,
+       "offset": 1,
+       "x": 25,
+       "y": 75,
+       "w": 225,
+       "h": 200
+      },
+      {
+       "id": "bmveemo6224",
+       "type": "linear",
+       "unit": 6005,
+       "offset": 1,
+       "x": 260,
+       "y": 35,
+       "w": 150,
+       "h": 230
+      },
+      {
+       "id": "bmveemo6225",
+       "type": "units",
+       "unit": 6005,
+       "offset": 1,
+       "x": 258,
+       "y": 11,
+       "w": 151,
+       "h": 125
+      }
+     ],
+     "unit": 6005
+    },
+    {
+     "id": "smveemo6226",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "spec",
+     "title": "4.0.0 Шкаф (2/2)",
+     "blocks": [
+      {
+       "id": "bmveemo6227",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmveemo6228",
+       "type": "hardware",
+       "unit": 6005,
+       "offset": 20,
+       "x": 26,
+       "y": 11,
+       "w": 383,
+       "h": 261,
+       "pad": 6
+      }
+     ],
+     "unit": 6005
+    },
+    {
+     "id": "smveemo6229",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "4.1.0 Tandem Blumotion ПВ 500мм",
+     "blocks": [
+      {
+       "id": "bmveemo622a",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmveemo622b",
+       "type": "view",
+       "x": 194.52,
+       "y": 11,
+       "w": 67.49333333333334,
+       "h": 78.3,
+       "unit": 4271,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmveemo622c",
+       "type": "view",
+       "x": 268.0133333333333,
+       "y": 11,
+       "w": 67.49333333333334,
+       "h": 78.3,
+       "unit": 4271,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "link": {
+        "base": "bmveemo622b",
+        "side": "right"
+       }
+      },
+      {
+       "id": "bmveemo622d",
+       "type": "view",
+       "x": 341.50666666666666,
+       "y": 11,
+       "w": 67.49333333333334,
+       "h": 78.3,
+       "unit": 4271,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "link": {
+        "base": "bmveemo622b",
+        "side": "right"
+       }
+      },
+      {
+       "id": "bmveemo622e",
+       "type": "view",
+       "x": 194.52,
+       "y": 94.52,
+       "w": 214.48000000000002,
+       "h": 177.48,
+       "unit": 4271,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmveemo622f",
+       "type": "parts",
+       "auto": true,
+       "unit": 4271,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 160.85999999999999,
+       "h": 71.5
+      },
+      {
+       "id": "bmveemo622g",
+       "type": "hardware",
+       "auto": true,
+       "unit": 4271,
+       "offset": 0,
+       "x": 26,
+       "y": 88.5,
+       "w": 160.85999999999999,
+       "h": 183.5
+      }
+     ],
+     "unit": 4271
+    },
+    {
+     "id": "smveemo622h",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "4.2.0 Tandem Blumotion ПВ 500мм",
+     "blocks": [
+      {
+       "id": "bmveemo622i",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmveemo622j",
+       "type": "view",
+       "x": 194.52,
+       "y": 11,
+       "w": 67.49333333333334,
+       "h": 78.3,
+       "unit": 4413,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmveemo622k",
+       "type": "view",
+       "x": 268.0133333333333,
+       "y": 11,
+       "w": 67.49333333333334,
+       "h": 78.3,
+       "unit": 4413,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "link": {
+        "base": "bmveemo622j",
+        "side": "right"
+       }
+      },
+      {
+       "id": "bmveemo622l",
+       "type": "view",
+       "x": 341.50666666666666,
+       "y": 11,
+       "w": 67.49333333333334,
+       "h": 78.3,
+       "unit": 4413,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "link": {
+        "base": "bmveemo622j",
+        "side": "right"
+       }
+      },
+      {
+       "id": "bmveemo622m",
+       "type": "view",
+       "x": 194.52,
+       "y": 94.52,
+       "w": 214.48000000000002,
+       "h": 177.48,
+       "unit": 4413,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmveemo622n",
+       "type": "parts",
+       "auto": true,
+       "unit": 4413,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 160.85999999999999,
+       "h": 59.5
+      },
+      {
+       "id": "bmveemo622o",
+       "type": "hardware",
+       "auto": true,
+       "unit": 4413,
+       "offset": 0,
+       "x": 26,
+       "y": 76.5,
+       "w": 160.85999999999999,
+       "h": 195.5
+      }
+     ],
+     "unit": 4413
+    }
+   ]
   }
  },
  "controls": {
@@ -413,6 +1908,7 @@
   "sectionShowPlane": true,
   "sectionPosition": "1331.837",
   "sectionReverse": false,
+  "sectionViewsMarks": true,
   "displayModesEnabled": false,
   "dimensionFontSize": "16",
   "dimensionUnit": false,
