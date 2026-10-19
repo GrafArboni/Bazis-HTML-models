@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "source": "c250cbe000b23409851ae540097fc290a27468621405558ed71ed2d278d359fa",
- "savedAt": "2026-10-19T15:30:06.127Z",
+ "savedAt": "2026-10-19T15:38:18.978Z",
  "features": {
   "outline": false,
   "section": {
@@ -1520,8 +1520,8 @@
    "modes": {}
   },
   "material_labels": {
-   "enabled": true,
-   "changedAt": null
+   "enabled": false,
+   "changedAt": "2026-10-19T15:33:09.497Z"
   },
   "notes": {
    "enabled": true,
@@ -1724,6 +1724,150 @@
       "diameter": 600
      },
      "updated": "2026-10-19T15:29:30.350Z"
+    },
+    {
+     "id": "nmvfevnyvugab",
+     "text": "Пока ручка и фасады сделаны так",
+     "point": [
+      3202.282,
+      857.131,
+      -1489.35
+     ],
+     "objectId": 39669,
+     "local": [
+      -14.938,
+      -17.017,
+      -1301.85
+     ],
+     "element": "Профиль латунный · поз. 16.0.0.12",
+     "view": {
+      "position": [
+       3369.189,
+       989.955,
+       -804.759
+      ],
+      "target": [
+       2972.914,
+       852.263,
+       -2101.612
+      ],
+      "up": [
+       0,
+       1,
+       0
+      ],
+      "orthographic": false
+     },
+     "sphere": {
+      "diameter": 240
+     },
+     "updated": "2026-10-19T15:31:08.733Z"
+    },
+    {
+     "id": "nmvfeyu8dqrig",
+     "text": "Крепеж в этом месте.\nПодкладка куда-то пропала.\nСуть в том чтобы крепить ту декоративную штуку винтами с тыла в муфты М6",
+     "point": [
+      2728.416,
+      1721.421,
+      -2270.238
+     ],
+     "objectId": 41021,
+     "local": [
+      208.402,
+      276.53,
+      18.012
+     ],
+     "element": "Боковина, правая · поз. 15.1.0.4",
+     "sphere": {
+      "diameter": 410
+     },
+     "updated": "2026-10-19T15:35:31.910Z",
+     "view": {
+      "position": [
+       2137.747,
+       2130.381,
+       -1987.878
+      ],
+      "target": [
+       2728.416,
+       1721.421,
+       -2270.238
+      ],
+      "up": [
+       0,
+       1,
+       0
+      ],
+      "orthographic": false
+     }
+    },
+    {
+     "id": "nmvff2n4zskbm",
+     "text": "Баг отображения",
+     "point": [
+      3184.345,
+      1993.055,
+      -2325.554
+     ],
+     "objectId": 41247,
+     "local": [
+      499.399,
+      646.678,
+      42.696
+     ],
+     "element": "Боковая накладка · поз. 15.0.0.2",
+     "images": [
+      "8c508c3af0487886.jpg"
+     ],
+     "updated": "2026-10-19T15:36:21.813Z"
+    },
+    {
+     "id": "nmvff38xukuep",
+     "text": "Крепим фанеру с камнем на рейки со спилом под 45",
+     "point": [
+      3186.873,
+      1282.435,
+      -2602.954
+     ],
+     "objectId": 42124,
+     "local": [
+      500.427,
+      1279.435,
+      2.636
+     ],
+     "element": "Столешница · поз. 0.0.0.32",
+     "view": {
+      "position": [
+       4040.454,
+       1559.64,
+       -2406.565
+      ],
+      "target": [
+       3202.79,
+       1245.557,
+       -2610.822
+      ],
+      "up": [
+       0,
+       1,
+       0
+      ],
+      "orthographic": false
+     },
+     "updated": "2026-10-19T15:38:04.774Z",
+     "window": {
+      "mode": "cut",
+      "normal": [
+       1,
+       0,
+       0
+      ],
+      "depth": 25,
+      "width": 300,
+      "height": 300,
+      "du": 0,
+      "dv": 0
+     }
     }
    ]
   },
@@ -1738,7 +1882,7 @@
   },
   "panel_hardware": {
    "active": false,
-   "selectedPanelId": null
+   "selectedPanelId": 41247
   },
   "assembler": {
    "active": false,
@@ -1785,9 +1929,9 @@
   "dimensionBox": false,
   "notesShow": true,
   "noteEditorMany": false,
-  "noteEditorSphere": true,
-  "noteEditorDiameter": "600",
-  "noteEditorWindow": false,
+  "noteEditorSphere": false,
+  "noteEditorDiameter": "290",
+  "noteEditorWindow": true,
   "noteEditorWindowReverse": false,
   "noteEditorWindowDepth": "25",
   "noteEditorIsolate": false,
@@ -1809,14 +1953,14 @@
  },
  "camera": {
   "position": [
-   8535.418175799476,
-   2489.250593793137,
-   -2807.417955906859
+   9711.89436499513,
+   4616.335494921415,
+   1733.546343607076
   ],
   "target": [
-   2578.5830329023315,
-   1078.191780045162,
-   -1118.8482534435373
+   2522.2184261219177,
+   755.6735125570325,
+   -1469.06488249865
   ],
   "up": [
    0,
