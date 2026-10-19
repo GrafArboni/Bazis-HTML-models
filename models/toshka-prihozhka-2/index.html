@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="bazis-viewer" content="2d2e92d2ba73">
+<meta name="bazis-viewer" content="9f0ebf0dc506">
 <title>Передпокій · просмотр модели</title>
 <style>
 :root{color-scheme:dark;--bg:#10171d;--panel:#17232d;--line:#31414b;--text:#e8eef0;--muted:#a6bac4;--accent:#9ee2d0;--popup-border:#526776;--control-border:#46586a;--hover:#304654;--muted-soft:#9fb3bd;--divider:#26343d;--compact-slider:70px}
@@ -23287,7 +23287,10 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       return { x: left, y: top, w: Math.max(10, block.w - left - right), h: Math.max(10, block.h - top - bottom) };
     }
     // block.captionRoom — место под текст выноски под подписью выносного вида
-    return { x: lr + 2, y: 2, w: Math.max(10, block.w - 2 * lr - 4), h: Math.max(10, block.h - 8 - (block.captionRoom || 0)) };
+    const h = Math.max(10, block.h - 8 - (block.captionRoom || 0));
+    // выноски одной колонкой справа (block.labelSide) — поле только с одной стороны
+    if (block.labelSide === 'right') return { x: 2, y: 2, w: Math.max(10, block.w - lr - 4), h };
+    return { x: lr + 2, y: 2, w: Math.max(10, block.w - 2 * lr - 4), h };
   }
   const fitBox = block => {
     const f = fitFrame(block);
@@ -24272,6 +24275,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         calloutsWhich: ['all', 'visible'].includes(b.calloutsWhich) ? b.calloutsWhich : ['all', 'visible'].includes(s?.calloutsWhich) ? s.calloutsWhich : ensureDoc().style.calloutsWhich === 'visible' ? 'visible' : 'all'
       };
       r.labelRoom = labelRoomOf(r);
+      if (r.labelRoom && !(ORTHO.has(b.dir) && b.dims !== false && !b.clip) && labelsHeight(r) <= (b.h - 10) * 0.9) r.labelSide = 'right';
       const dn = detailNote(b);
       if (textUnderDetail(dn)) r.captionRoom = noteLines(dn).length * (noteStyle(dn).size || ensureDoc().style.size) * 1.25 + 1;
       return r;
@@ -24289,6 +24293,22 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       }
       if (cur) out.push(cur);
       return out;
+    }
+    // Высота всех выносок столбиком (мм): позиции единицы (и строки наименований),
+    // тексты заметок — помещаются по высоте блока, значит можно одной колонкой
+    function labelsHeight(b) {
+      const sz = b.calloutSize || docStyle().size;
+      let h = 0;
+      if (b.callouts === 'pos' || b.callouts === 'name') {
+        const seen = new Set();
+        for (const r of partsRows(b.unit ?? null)) {
+          if (!r.pos || seen.has(r.pos)) continue;
+          seen.add(r.pos);
+          h += b.callouts === 'name' ? Math.max(sz * 2.9, sz * (1 + 0.95 * wrapWords(r.name).length) + 1) : sz * 1.7;
+        }
+      }
+      for (const n of b.notes || []) h += sz * (1.2 * Math.max(1, String(n.text || '').split('\n').flatMap(wrapWords).length)) + 2.5;
+      return h;
     }
     // Поле под полки выносок (мм, с каждой стороны вида) — по самой длинной строке
     // подписей: позиции, наименования (с переносом), тексты заметок
@@ -24318,7 +24338,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
 
     // ---- блоки ----
     const viewKey = b =>
-      JSON.stringify([b.unit, b.dir, b.orient || 'facade', b.az, b.el, b.scale, b.style, b.dims !== false, b.callouts || null, (b.notes || []).length, b.layers || null, Math.round(b.w), Math.round(b.h), b.clip || null, b.cut || null, b.labelRoom ?? null, b.captionRoom || 0, hiddenIds().size, b.calloutsWhich || null, (b.hide || []).join(','), JSON.stringify(b.layers || null), ensureDoc().style.lineColor || '']);
+      JSON.stringify([b.unit, b.dir, b.orient || 'facade', b.az, b.el, b.scale, b.style, b.dims !== false, b.callouts || null, (b.notes || []).length, b.layers || null, Math.round(b.w), Math.round(b.h), b.clip || null, b.cut || null, b.labelRoom ?? null, b.labelSide || '', b.captionRoom || 0, hiddenIds().size, b.calloutsWhich || null, (b.hide || []).join(','), JSON.stringify(b.layers || null), ensureDoc().style.lineColor || '']);
     // Позиция для выноски: своя деталь единицы — её позиция; деталь вложенной единицы —
     // позиция этой вложенной единицы (одна выноска на неё); на виде всего изделия —
     // позиция верхней сборочной единицы
@@ -24498,7 +24518,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
           })
           .filter(a => a.top);
       // на проекциях с размерами слева и снизу размеры — все полки справа
-      if (edges.right1) for (const a of items) a.side = 'right';
+      if (edges.right1 || b.labelSide === 'right') for (const a of [...items, ...notes]) a.side = 'right';
       // выноски, перетащенные руками (note.at — левый край полки и её высота), — на своём
       // месте, остальные — общей раскладкой
       const manual = notes.filter(a => a.note.at),
@@ -24920,19 +24940,18 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
           rect(g, 0, 0, b.w, b.h, { stroke: '#1e88e5', 'stroke-width': 0.6, 'stroke-dasharray': '2 1' });
           el('rect', { x: b.w - 3, y: b.h - 3, width: 4, height: 4, fill: '#1e88e5', class: 'drawingsHandle' }, g);
           // зона шаблона тянется за любую сторону и угол
-          if (b.type === 'zone')
-            for (const [edge, x, y] of [['n', b.w / 2, 0], ['s', b.w / 2, b.h], ['w', 0, b.h / 2], ['e', b.w, b.h / 2], ['nw', 0, 0], ['ne', b.w, 0], ['sw', 0, b.h]])
-              el('rect', { x: x - 2, y: y - 2, width: 4, height: 4, fill: '#1e88e5', class: 'drawingsHandle', 'data-edge': edge }, g);
+          for (const [edge, x, y] of [['n', b.w / 2, 0], ['s', b.w / 2, b.h], ['w', 0, b.h / 2], ['e', b.w, b.h / 2], ['nw', 0, 0], ['ne', b.w, 0], ['sw', 0, b.h]])
+            el('rect', { x: x - 2, y: y - 2, width: 4, height: 4, fill: '#1e88e5', class: 'drawingsHandle', 'data-edge': edge }, g);
           // проекции (как в Inventor): тянуть стрелку вбок, вверх, вниз — вид с этой
           // стороны, связанный с главным; уголок по диагонали — изометрия
           if (b.type === 'view' && ORTHO.has(b.dir)) {
             const arrow = (side, x, y, rot) =>
               el('path', { d: 'M-2.4 -2.4 L2.4 0 L-2.4 2.4 Z', transform: `translate(${x} ${y}) rotate(${rot})`, fill: '#1e88e5', class: 'drawingsProject', 'data-side': side }, g);
-            arrow('right', b.w + 4, b.h / 2, 0);
-            arrow('left', -4, b.h / 2, 180);
-            arrow('below', b.w / 2, b.h + 4, 90);
-            arrow('above', b.w / 2, -4, -90);
-            el('circle', { cx: b.w + 3.5, cy: -3.5, r: 2.2, fill: '#1e88e5', class: 'drawingsProject', 'data-side': 'iso' }, g);
+            arrow('right', b.w + 6, b.h / 2, 0);
+            arrow('left', -6, b.h / 2, 180);
+            arrow('below', b.w / 2, b.h + 6, 90);
+            arrow('above', b.w / 2, -6, -90);
+            el('circle', { cx: b.w + 5.5, cy: -5.5, r: 2.2, fill: '#1e88e5', class: 'drawingsProject', 'data-side': 'iso' }, g);
           }
         }
       }
@@ -27962,7 +27981,20 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       }
       const side = drag.b.link && s.blocks.some(x => x.id === drag.b.link.base) ? drag.b.link.side : null,
         next = drag.resize
-          ? { ...drag.b, w: Sheet.snap(drag.start.w + dx), h: Sheet.snap(drag.start.h + dy) }
+          ? (() => {
+              const st = drag.start,
+                e = drag.edge || 'se',
+                MIN = 10;
+              let x0 = st.x,
+                y0 = st.y,
+                x1 = st.x + st.w,
+                y1 = st.y + st.h;
+              if (e.includes('w')) x0 = Math.min(x1 - MIN, Sheet.snap(st.x + dx));
+              if (e.includes('e')) x1 = Math.max(x0 + MIN, Sheet.snap(st.x + st.w + dx));
+              if (e.includes('n')) y0 = Math.min(y1 - MIN, Sheet.snap(st.y + dy));
+              if (e.includes('s')) y1 = Math.max(y0 + MIN, Sheet.snap(st.y + st.h + dy));
+              return { ...drag.b, x: x0, y: y0, w: x1 - x0, h: y1 - y0 };
+            })()
           : {
               ...drag.b,
               x: side === 'below' || side === 'above' ? drag.start.x : Sheet.snap(drag.start.x + dx),
@@ -28003,8 +28035,8 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       const s = sheet(),
         base = done.resize && done.b.link && s.blocks.find(x => x.id === done.b.link.base);
       if (base) {
-        if (done.b.link.side === 'right' || done.b.link.side === 'left') base.h = done.b.h;
-        else base.w = done.b.w;
+        if (done.b.link.side === 'right' || done.b.link.side === 'left') Object.assign(base, { y: done.b.y, h: done.b.h });
+        else Object.assign(base, { x: done.b.x, w: done.b.w });
       }
       // главный вид сдвинут или изменён — связанные встают в линию
       alignLinks(s);
