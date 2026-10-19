@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="bazis-viewer" content="010a4ec5fdd7">
+<meta name="bazis-viewer" content="cec1137ebdce">
 <title>Стена с телеком · просмотр модели</title>
 <style>
 :root{color-scheme:dark;--bg:#10171d;--panel:#17232d;--line:#31414b;--text:#e8eef0;--muted:#a6bac4;--accent:#9ee2d0;--popup-border:#526776;--control-border:#46586a;--hover:#304654;--muted-soft:#9fb3bd;--divider:#26343d;--compact-slider:70px}
@@ -2540,14 +2540,15 @@ html.iconControls #assemblerOpen[aria-pressed='true'] {
     padding: 6px 8px;
   }
 }
-/* Выноски по сборочным единицам: деталь — фон оттенка своей единицы, единица —
-   плотный фон и жирная рамка того же цвета (--unit-color ставит adapter.js) */
+/* Выноски сборщика: все детали — один цвет (синий), все сборочные единицы — другой
+   (янтарный, жирная рамка) — единицу видно среди деталей с первого взгляда */
 #assemblerLabels .assemblerCallout {
-  background: color-mix(in srgb, var(--unit-color, #2d7fb0) 24%, #0d1a23 76%);
-  border-color: var(--unit-color, #6db6df);
+  background: #173246;
+  border-color: #6db6df;
 }
 #assemblerLabels .assemblerCallout.assemblerUnitCallout {
-  background: color-mix(in srgb, var(--unit-color, #2d7fb0) 62%, #0d1a23 38%);
+  background: #7a4e12;
+  border-color: #ffb74d;
   border-width: 2px;
   font-weight: 700;
   color: #fff;
@@ -19016,13 +19017,6 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
           belongs(u.id, unitId) &&
           !units.some(p => p.id !== unitId && p.id !== u.id && belongs(p.id, unitId) && belongs(u.id, p.id))
       );
-    // Цвет сборочной единицы — для выносок: подпись единицы и подписи её деталей одного
-    // оттенка, сразу видно, к какой единице относится деталь (порядок — как в списке).
-    const UNIT_COLORS = ['#4fc3f7', '#81c784', '#ffb74d', '#ba68c8', '#f06292', '#4db6ac', '#dce775', '#9575cd'];
-    const unitColor = unit => {
-      const i = units.findIndex(u => u.id === unit);
-      return i < 0 ? null : UNIT_COLORS[i % UNIT_COLORS.length];
-    };
     const unitOf = id => {
       let r = records.get(id),
         seen = new Set();
@@ -19784,11 +19778,8 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         if (!l) {
           l = doc.createElement('div');
           l.className = 'assemblerCallout';
-          // единица — своя рамка и плотный фон; деталь — фон оттенка её единицы
-          const isUnit = String(id).startsWith('unit'),
-            color = unitColor(isUnit ? Number(String(id).slice(4)) : unitOf(id));
-          l.classList.toggle('assemblerUnitCallout', isUnit);
-          if (color) l.style.setProperty('--unit-color', color);
+          // все сборочные единицы — один цвет, все детали — другой
+          l.classList.toggle('assemblerUnitCallout', String(id).startsWith('unit'));
           l.translate = false; // позиция и название — данные (заглушки — через t)
           l.dataset.part = String(id);
           l.setAttribute('role', 'button');
