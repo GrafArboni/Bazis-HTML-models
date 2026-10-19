@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="bazis-viewer" content="cec1137ebdce">
+<meta name="bazis-viewer" content="be83c8235bad">
 <title>Стена с телеком · просмотр модели</title>
 <style>
 :root{color-scheme:dark;--bg:#10171d;--panel:#17232d;--line:#31414b;--text:#e8eef0;--muted:#a6bac4;--accent:#9ee2d0;--popup-border:#526776;--control-border:#46586a;--hover:#304654;--muted-soft:#9fb3bd;--divider:#26343d;--compact-slider:70px}
@@ -6335,7 +6335,7 @@ window.OrbitControls = OrbitControls;
 <button type="button" id="drawingsOpen" title="Чертежи: листы, виды сборочных единиц, спецификации, печать в PDF">Чертежи</button>
 <div class="tools drawingsKeyTools" id="drawingsKeyTools">
   <span class="subtle" id="drawingsKeyStatus">Чертежи открываются по ключу.</span>
-  <input type="password" id="drawingsKeyInput" placeholder="Ключ к чертежам" autocomplete="off" spellcheck="false">
+  <input type="password" id="drawingsKeyInput" placeholder="Ключ к чертежам" autocomplete="new-password" spellcheck="false">
   <button type="button" id="drawingsKeyEnter">Ввести ключ</button>
   <button type="button" id="drawingsKeyForget" hidden>Забыть ключ</button>
 </div>
@@ -23316,7 +23316,8 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
   // списком publish_viewer.py не делает).
   // keys:begin
   const KEY_HASHES = [
-    '1c9a70fd3dc68d8c8ce7899aadeb8a459cea7f46f27b73a27d91d7a3cdf5ac1d'
+    '1c9a70fd3dc68d8c8ce7899aadeb8a459cea7f46f27b73a27d91d7a3cdf5ac1d',
+    'b3ef579e8be0c50ace27e1473e2d7dba7c39ee51b7dc5727d2ffccb512b282ce'
   ];
   // keys:end
   const STORE = 'bazis.drawings.key';
@@ -29574,7 +29575,11 @@ void main() {
       button.onclick = open;
       (context.extrasMount || context.toolMount)?.append($('drawingsKeyTools'));
       $('drawingsKeyEnter').onclick = enterKey;
-      $('drawingsKeyInput').onkeydown = e => e.key === 'Enter' && enterKey();
+      // не «e => e.key === 'Enter' && …»: false из обработчика-свойства отменяет нажатие,
+      // и в поле не набирается ничего, кроме Enter
+      $('drawingsKeyInput').onkeydown = e => {
+        if (e.key === 'Enter') enterKey();
+      };
       $('drawingsKeyForget').onclick = () => access.forget();
       unwatch = access.onChange(applyAccess);
       applyAccess();
