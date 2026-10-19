@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="bazis-viewer" content="ca86a0df948a">
+<meta name="bazis-viewer" content="6a277cd2d0b3">
 <title>Передпокій · просмотр модели</title>
 <style>
 :root{color-scheme:dark;--bg:#10171d;--panel:#17232d;--line:#31414b;--text:#e8eef0;--muted:#a6bac4;--accent:#9ee2d0;--popup-border:#526776;--control-border:#46586a;--hover:#304654;--muted-soft:#9fb3bd;--divider:#26343d;--compact-slider:70px}
@@ -23206,6 +23206,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         // свои настройки листа (null — как в параметрах комплекта)
         display: typeof s.display === 'string' ? s.display : null,
         calloutsWhich: s.calloutsWhich === 'all' || s.calloutsWhich === 'visible' ? s.calloutsWhich : null,
+        calloutsOn: ['iso', 'views', 'all'].includes(s.calloutsOn) ? s.calloutsOn : null,
         callouts: typeof s.callouts === 'string' ? s.callouts : null,
         views: validViews(s.views),
         blocks: s.blocks
@@ -24350,13 +24351,22 @@ void main() {
       if (b.clip) return DISPLAY.includes(st.displayDetail) ? st.displayDetail : 'wire';
       return (ORTHO.has(b.dir) ? st.displayOrtho : st.displayIso) || 'plain';
     }
+    // «Где выноски»: свой у листа или из параметров
+    const CALLOUTS_ON = ['iso', 'views', 'all'];
+    const calloutsOnOf = s => (CALLOUTS_ON.includes(s?.calloutsOn) ? s.calloutsOn : CALLOUTS_ON.includes(ensureDoc().style.calloutsOn) ? ensureDoc().style.calloutsOn : 'iso');
+    const calloutsOnOptions = () => [
+      ['iso', t('Только изометрия')],
+      ['views', t('Только виды')],
+      ['all', t('Виды и изометрия')]
+    ];
     function effCallouts(b, s) {
       if (CALLOUTS.includes(b.callouts)) return b.callouts;
-      const st = ensureDoc().style;
+      const st = ensureDoc().style,
+        on = calloutsOnOf(s);
       // где выноски: iso — только изометрия (и свой ракурс), views — только проекции,
       // all — и там и там (позиция — на одном виде листа, см. calloutOwners)
-      if (st.calloutsOn !== 'all' && st.calloutsOn !== 'views' && ORTHO.has(b.dir)) return 'none';
-      if (st.calloutsOn === 'views' && !ORTHO.has(b.dir) && !b.clip) return 'none';
+      if (on === 'iso' && ORTHO.has(b.dir)) return 'none';
+      if (on === 'views' && !ORTHO.has(b.dir) && !b.clip) return 'none';
       if (s && CALLOUTS.includes(s.callouts)) return s.callouts;
       return CALLOUTS.includes(st.callouts) ? st.callouts : 'pos';
     }
@@ -24365,6 +24375,7 @@ void main() {
         ...b,
         style: effDisplay(b, s),
         callouts: effCallouts(b, s),
+        calloutsOn: calloutsOnOf(s),
         calloutSize: b.calloutSize || ensureDoc().style.calloutSize || ensureDoc().style.size,
         calloutsWhich: ['all', 'visible'].includes(b.calloutsWhich) ? b.calloutsWhich : ['all', 'visible'].includes(s?.calloutsWhich) ? s.calloutsWhich : ensureDoc().style.calloutsWhich === 'visible' ? 'visible' : 'all'
       };
@@ -24372,7 +24383,7 @@ void main() {
       // позиции (наименования — в спецификации листа), иначе подписи наезжают друг на друга
       // (drawCallouts решает это по числу полок; здесь — место под них по той же оценке)
       // на проекциях при «Виды и изометрия» выносок немного — место только под номер
-      const lab = r.callouts === 'name' && (labelsHeight(r) > 2 * (b.h - 10) * 0.95 || (ensureDoc().style.calloutsOn === 'all' && ORTHO.has(b.dir))) ? { ...r, callouts: 'pos' } : r;
+      const lab = r.callouts === 'name' && (labelsHeight(r) > 2 * (b.h - 10) * 0.95 || (r.calloutsOn === 'all' && ORTHO.has(b.dir))) ? { ...r, callouts: 'pos' } : r;
       r.labelRoom = labelRoomOf(lab);
       if (r.labelRoom && !(ORTHO.has(b.dir) && b.dims !== false && !b.clip) && labelsHeight(lab) <= (b.h - 10) * 0.9) r.labelSide = 'right';
       const dn = detailNote(b);
@@ -24630,7 +24641,7 @@ void main() {
       // сторон — на этом виде только позиции (наименования есть в спецификации)
       // на проекциях при «Виды и изометрия» — только номера (места там мало)
       let two = b.callouts === 'name';
-      if (two && ensureDoc().style.calloutsOn === 'all' && ORTHO.has(b.dir) && !b.clip) {
+      if (two && b.calloutsOn === 'all' && ORTHO.has(b.dir) && !b.clip) {
         two = false;
         for (const a of items) Object.assign(a, { bottom: [], text: a.top, below: 0.5 });
       }
@@ -27105,6 +27116,14 @@ void main() {
             changed();
           })
         );
+        field(
+          props,
+          'Где выноски',
+          selectFor(CALLOUTS_ON.includes(s.calloutsOn) ? s.calloutsOn : '', [['', t('Как в параметрах')], ...calloutsOnOptions()], v => {
+            s.calloutsOn = v || null;
+            changed();
+          })
+        );
       }
       if (s.kind === 'sheet') {
         const own = !!Sheet.validViews(s.views);
@@ -27181,11 +27200,7 @@ void main() {
         'Где выноски',
         selectFor(
           d.style.calloutsOn,
-          [
-            ['iso', t('Только изометрия')],
-            ['views', t('Только виды')],
-            ['all', t('Виды и изометрия')]
-          ],
+          calloutsOnOptions(),
           v => ((d.style.calloutsOn = v), changed())
         )
       );
