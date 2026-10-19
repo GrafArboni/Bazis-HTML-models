@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "source": "b0d9d0bce50ba8615197e5fd8a12503c9a1f561c07010b9edbf05cefe85a9c6d",
- "savedAt": "2026-10-18T22:39:13.635Z",
+ "source": "9fd1d8e7235a91788d8013008e9f0462a23198c65f07b0942f913f4b7bd01f91",
+ "savedAt": "2026-10-19T07:58:46.443Z",
  "features": {
   "outline": false,
   "section": {
@@ -462,6 +462,10 @@
     "displayOrtho": "ghost",
     "displayIso": "ghost",
     "displayDetail": "wire",
+    "calloutsWhich": "all",
+    "modelDimColor": "#1a5d9e",
+    "lineColor": "",
+    "titleOrient": "landscape",
     "callouts": "name",
     "calloutsOn": "iso",
     "calloutSize": 0,
@@ -561,68 +565,105 @@
       ]
      }
     },
+    "overviewZones": {
+     "landscape": {
+      "views": [
+       0,
+       0,
+       1,
+       1
+      ],
+      "iso": [
+       0,
+       0.36,
+       1,
+       0.64
+      ]
+     },
+     "portrait": {
+      "views": [
+       0,
+       0,
+       1,
+       1
+      ],
+      "iso": [
+       0,
+       0.32,
+       1,
+       0.68
+      ]
+     }
+    },
+    "overview": true,
     "unitLayout": "specs",
     "partSheets": false,
     "unitParts": {},
     "noteStyle": {
      "size": 0,
-     "color": "#111111",
+     "color": "#d32f2f",
      "marker": "dot",
      "frame": false
-    }
+    },
+    "overviewLayout": "together",
+    "overviewArrange": "grid"
    },
    "sheets": [
     {
-     "id": "smveemo5r0",
+     "id": "smveygsrf0",
      "format": "A4",
-     "orient": "portrait",
+     "orient": "landscape",
      "kind": "title",
      "title": "",
      "blocks": [
       {
-       "id": "bmveemo5r1",
+       "id": "bmveygsrf1",
        "type": "stamp",
        "dock": true,
        "x": 20,
-       "y": 278,
-       "w": 185,
+       "y": 191,
+       "w": 272,
        "h": 14
       },
       {
-       "id": "bmveemo5r2",
+       "id": "bmveygsrf2",
        "type": "title",
        "x": 30,
        "y": 20,
-       "w": 165,
-       "h": 70
+       "w": 252,
+       "h": 60.9
       },
       {
-       "id": "bmveemo5r3",
+       "id": "bmveygsrf3",
        "type": "view",
        "x": 30,
-       "y": 100,
-       "w": 165,
-       "h": 172,
+       "y": 45,
+       "w": 260,
+       "h": 145,
        "unit": null,
        "dir": "iso",
        "az": 35,
        "el": 25,
        "scale": "auto",
-       "style": "inherit",
+       "style": "texture",
        "caption": false,
-       "callouts": "none"
+       "callouts": "none",
+       "layers": {
+        "modelDims": false,
+        "lines": false
+       }
       }
      ]
     },
     {
-     "id": "smveemo5s4",
+     "id": "smveygsrf4",
      "format": "A3",
      "orient": "landscape",
-     "kind": "sheet",
-     "title": "1.0.0 Обшивка двери под 45 Обшивка",
+     "kind": "overview",
+     "title": "1313_ТошкоПрихожка_",
      "blocks": [
       {
-       "id": "bmveemo5s5",
+       "id": "bmveygsrf5",
        "type": "stamp",
        "dock": true,
        "x": 20,
@@ -631,7 +672,115 @@
        "h": 14
       },
       {
-       "id": "bmveemo5s6",
+       "id": "bmveygsrf6",
+       "type": "view",
+       "x": 26,
+       "y": 11,
+       "w": 188.5,
+       "h": 127.5,
+       "unit": null,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "hide": [
+        211
+       ]
+      },
+      {
+       "id": "bmveygsrf7",
+       "type": "view",
+       "x": 220.5,
+       "y": 11,
+       "w": 188.5,
+       "h": 127.5,
+       "unit": null,
+       "dir": "right",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "link": {
+        "base": "bmveygsrf6",
+        "side": "right"
+       },
+       "hide": [
+        211
+       ]
+      },
+      {
+       "id": "bmveygsrf8",
+       "type": "view",
+       "x": 26,
+       "y": 144.5,
+       "w": 188.5,
+       "h": 127.5,
+       "unit": null,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "link": {
+        "base": "bmveygsrf6",
+        "side": "below"
+       },
+       "hide": [
+        211
+       ]
+      },
+      {
+       "id": "bmveygsrf9",
+       "type": "view",
+       "x": 220.5,
+       "y": 144.5,
+       "w": 188.5,
+       "h": 127.5,
+       "unit": null,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "hide": [
+        211
+       ]
+      }
+     ],
+     "unit": null,
+     "main": true
+    },
+    {
+     "id": "smveygsrga",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "1.0.0 Обшивка двери под 45 Обшивка",
+     "blocks": [
+      {
+       "id": "bmveygsrgb",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmveygsrgc",
        "type": "view",
        "x": 194.52,
        "y": 11,
@@ -648,7 +797,7 @@
        "auto": true
       },
       {
-       "id": "bmveemo5s7",
+       "id": "bmveygsrhd",
        "type": "view",
        "x": 268.0133333333333,
        "y": 11,
@@ -664,12 +813,12 @@
        "callouts": "inherit",
        "auto": true,
        "link": {
-        "base": "bmveemo5s6",
+        "base": "bmveygsrgc",
         "side": "right"
        }
       },
       {
-       "id": "bmveemo5s8",
+       "id": "bmveygsrhe",
        "type": "view",
        "x": 341.50666666666666,
        "y": 11,
@@ -685,12 +834,12 @@
        "callouts": "inherit",
        "auto": true,
        "link": {
-        "base": "bmveemo5s6",
+        "base": "bmveygsrgc",
         "side": "right"
        }
       },
       {
-       "id": "bmveemo5s9",
+       "id": "bmveygsrhf",
        "type": "view",
        "x": 194.52,
        "y": 94.52,
@@ -707,7 +856,7 @@
        "auto": true
       },
       {
-       "id": "bmveemo5sa",
+       "id": "bmveygsrhg",
        "type": "parts",
        "auto": true,
        "unit": 537,
@@ -718,7 +867,7 @@
        "h": 58.9
       },
       {
-       "id": "bmveemo5sb",
+       "id": "bmveygsrhh",
        "type": "units",
        "auto": true,
        "unit": 537,
@@ -729,7 +878,7 @@
        "h": 30.1
       },
       {
-       "id": "bmveemo5sc",
+       "id": "bmveygsrhi",
        "type": "hardware",
        "auto": true,
        "unit": 537,
@@ -743,44 +892,14 @@
      "unit": 537
     },
     {
-     "id": "smveemo5td",
-     "format": "A3",
-     "orient": "landscape",
-     "kind": "spec",
-     "title": "1.0.0 Обшивка двери под 45 Обшивка",
-     "blocks": [
-      {
-       "id": "bmveemo5te",
-       "type": "stamp",
-       "dock": true,
-       "x": 20,
-       "y": 278,
-       "w": 395,
-       "h": 14
-      },
-      {
-       "id": "bmveemo5tf",
-       "type": "hardware",
-       "unit": 537,
-       "offset": 11,
-       "x": 26,
-       "y": 11,
-       "w": 383,
-       "h": 261,
-       "pad": 6
-      }
-     ],
-     "unit": 537
-    },
-    {
-     "id": "smveemo5tg",
+     "id": "smveygsrij",
      "format": "A3",
      "orient": "landscape",
      "kind": "sheet",
      "title": "1.1.0 Короб внутренний",
      "blocks": [
       {
-       "id": "bmveemo5th",
+       "id": "bmveygsrik",
        "type": "stamp",
        "dock": true,
        "x": 20,
@@ -789,7 +908,7 @@
        "h": 14
       },
       {
-       "id": "bmveemo5ti",
+       "id": "bmveygsril",
        "type": "view",
        "x": 194.52,
        "y": 11,
@@ -806,7 +925,7 @@
        "auto": true
       },
       {
-       "id": "bmveemo5tj",
+       "id": "bmveygsrim",
        "type": "view",
        "x": 268.0133333333333,
        "y": 11,
@@ -822,12 +941,12 @@
        "callouts": "inherit",
        "auto": true,
        "link": {
-        "base": "bmveemo5ti",
+        "base": "bmveygsril",
         "side": "right"
        }
       },
       {
-       "id": "bmveemo5tk",
+       "id": "bmveygsrin",
        "type": "view",
        "x": 341.50666666666666,
        "y": 11,
@@ -843,17 +962,17 @@
        "callouts": "inherit",
        "auto": true,
        "link": {
-        "base": "bmveemo5ti",
+        "base": "bmveygsril",
         "side": "right"
        }
       },
       {
-       "id": "bmveemo5tl",
+       "id": "bmveygsrio",
        "type": "view",
        "x": 194.52,
        "y": 94.52,
        "w": 214.48000000000002,
-       "h": 177.48,
+       "h": 120.06,
        "unit": 539,
        "dir": "iso",
        "az": 35,
@@ -862,10 +981,31 @@
        "style": "inherit",
        "caption": true,
        "callouts": "inherit",
-       "auto": true
+       "auto": true,
+       "notes": [
+        {
+         "id": "nmveyiptp2z",
+         "point": [
+          -1788.7,
+          1984.6,
+          -227.1
+         ],
+         "objectId": 542,
+         "text": "Нужно будет досверлить конфирматы",
+         "detail": {
+          "diameter": 210
+         },
+         "letter": "А",
+         "at": {
+          "x": 103.64104765958369,
+          "y": 40.99332720075334
+         },
+         "textOn": "detail"
+        }
+       ]
       },
       {
-       "id": "bmveemo5tm",
+       "id": "bmveygsrip",
        "type": "parts",
        "auto": true,
        "unit": 539,
@@ -876,7 +1016,7 @@
        "h": 47.5
       },
       {
-       "id": "bmveemo5tn",
+       "id": "bmveygsriq",
        "type": "hardware",
        "auto": true,
        "unit": 539,
@@ -885,19 +1025,50 @@
        "y": 64.5,
        "w": 160.85999999999999,
        "h": 207.5
+      },
+      {
+       "id": "bmveyirsn30",
+       "type": "view",
+       "x": 194.52,
+       "y": 219.8,
+       "w": 52.2,
+       "h": 52.2,
+       "unit": 539,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "none",
+       "dims": false,
+       "ofNote": {
+        "block": "bmveygsrio",
+        "note": "nmveyiptp2z",
+        "kind": "detail"
+       },
+       "clip": {
+        "center": [
+         -1788.7,
+         1984.6,
+         -227.1
+        ],
+        "radius": 105
+       },
+       "letter": "А"
       }
      ],
      "unit": 539
     },
     {
-     "id": "smveemo5uo",
+     "id": "smveygsrjr",
      "format": "A3",
      "orient": "landscape",
      "kind": "sheet",
      "title": "2.0.0 Зеркало обклад с подсветкой по периметру Зеркало с подсветкой",
      "blocks": [
       {
-       "id": "bmveemo5up",
+       "id": "bmveygsrjs",
        "type": "stamp",
        "dock": true,
        "x": 20,
@@ -906,12 +1077,12 @@
        "h": 14
       },
       {
-       "id": "bmveemo5uq",
+       "id": "bmveygsrjt",
        "type": "view",
        "x": 194.52,
        "y": 11,
-       "w": 67.49333333333334,
-       "h": 78.3,
+       "w": 115.47999999999999,
+       "h": 99,
        "unit": 2001,
        "dir": "front",
        "az": 35,
@@ -920,15 +1091,51 @@
        "style": "inherit",
        "caption": true,
        "callouts": "inherit",
-       "auto": true
+       "auto": true,
+       "notes": [
+        {
+         "id": "nmveyk2mf31",
+         "point": [
+          -3228.6,
+          410.1,
+          216.5
+         ],
+         "objectId": 2004,
+         "text": "400 до верха",
+         "at": {
+          "x": 68.16302085274279,
+          "y": 68.48178606974284
+         }
+        },
+        {
+         "id": "nmveyla9z32",
+         "point": [
+          -3228.6,
+          1389.4,
+          275
+         ],
+         "objectId": 2004,
+         "text": "1400 до верха"
+        },
+        {
+         "id": "nmveylxai33",
+         "point": [
+          -3228.6,
+          2344.4,
+          226
+         ],
+         "objectId": 2004,
+         "text": "2348 до верха"
+        }
+       ]
       },
       {
-       "id": "bmveemo5ur",
+       "id": "bmveygsrju",
        "type": "view",
-       "x": 268.0133333333333,
+       "x": 300,
        "y": 11,
-       "w": 67.49333333333334,
-       "h": 78.3,
+       "w": 35.50666666666666,
+       "h": 99,
        "unit": 2001,
        "dir": "left",
        "az": 35,
@@ -939,17 +1146,17 @@
        "callouts": "inherit",
        "auto": true,
        "link": {
-        "base": "bmveemo5uq",
+        "base": "bmveygsrjt",
         "side": "right"
        }
       },
       {
-       "id": "bmveemo5us",
+       "id": "bmveygsrjv",
        "type": "view",
        "x": 341.50666666666666,
        "y": 11,
        "w": 67.49333333333334,
-       "h": 78.3,
+       "h": 99,
        "unit": 2001,
        "dir": "top",
        "az": 35,
@@ -960,116 +1167,73 @@
        "callouts": "inherit",
        "auto": true,
        "link": {
-        "base": "bmveemo5uq",
+        "base": "bmveygsrjt",
         "side": "right"
        }
       },
       {
-       "id": "bmveemo5ut",
+       "id": "bmveygsrjw",
        "type": "view",
-       "x": 194.52,
-       "y": 94.52,
-       "w": 214.48000000000002,
-       "h": 177.48,
+       "x": 195,
+       "y": 115,
+       "w": 209.48000000000002,
+       "h": 157.48000000000002,
        "unit": 2001,
-       "dir": "iso",
-       "az": 35,
-       "el": 25,
+       "dir": "custom",
+       "az": 114,
+       "el": 32,
        "scale": "auto",
        "style": "inherit",
        "caption": true,
        "callouts": "inherit",
        "auto": true,
-       "layers": {
-        "hardware": true,
-        "imports": true,
-        "holes": true
-       }
+       "baseDir": "iso"
       },
       {
-       "id": "bmveemo5uu",
+       "id": "bmveygsrjx",
        "type": "parts",
        "auto": true,
        "unit": 2001,
        "offset": 0,
-       "x": 26,
-       "y": 11,
+       "x": 20,
+       "y": 5,
        "w": 160.85999999999999,
        "h": 76.9
       },
       {
-       "id": "bmveemo5uv",
+       "id": "bmveygsrjy",
        "type": "hardware",
        "auto": true,
        "unit": 2001,
        "offset": 0,
-       "x": 26,
-       "y": 93.9,
-       "w": 160.85999999999999,
-       "h": 143
-      },
-      {
-       "id": "bmveemo5uw",
-       "type": "linear",
-       "auto": true,
-       "unit": 2001,
-       "offset": 0,
-       "x": 26,
-       "y": 242.9,
-       "w": 160.85999999999999,
-       "h": 29.1
-      }
-     ],
-     "unit": 2001
-    },
-    {
-     "id": "smveemo5vx",
-     "format": "A3",
-     "orient": "landscape",
-     "kind": "spec",
-     "title": "2.0.0 Зеркало обклад с подсветкой по периметру Зеркало с подсветкой",
-     "blocks": [
-      {
-       "id": "bmveemo5vy",
-       "type": "stamp",
-       "dock": true,
        "x": 20,
-       "y": 278,
-       "w": 395,
-       "h": 14
+       "y": 75,
+       "w": 160.85999999999999,
+       "h": 132.1
       },
       {
-       "id": "bmveemo5vz",
-       "type": "hardware",
-       "unit": 2001,
-       "offset": 9,
-       "x": 26,
-       "y": 11,
-       "w": 226,
-       "h": 261
-      },
-      {
-       "id": "bmveemo5v10",
+       "id": "bmveygsrjz",
        "type": "linear",
+       "auto": true,
        "unit": 2001,
-       "offset": 1,
-       "x": 258,
-       "y": 11,
-       "w": 151,
-       "h": 261
+       "offset": 0,
+       "x": 20,
+       "y": 200,
+       "w": 220,
+       "h": 85
       }
      ],
      "unit": 2001
     },
     {
-     "id": "smveemo5v11",
+     "id": "smveygsrk13",
      "format": "A3",
      "orient": "landscape",
      "kind": "sheet",
      "title": "3.0.0 Тумба подвесная",
      "blocks": [
       {
-       "id": "bmveemo5v12",
+       "id": "bmveygsrk14",
        "type": "stamp",
        "dock": true,
        "x": 20,
@@ -1078,7 +1242,7 @@
        "h": 14
       },
       {
-       "id": "bmveemo5v13",
+       "id": "bmveygsrk15",
        "type": "view",
        "x": 194.52,
        "y": 11,
@@ -1095,7 +1259,7 @@
        "auto": true
       },
       {
-       "id": "bmveemo5v14",
+       "id": "bmveygsrk16",
        "type": "view",
        "x": 268.0133333333333,
        "y": 11,
@@ -1111,12 +1275,12 @@
        "callouts": "inherit",
        "auto": true,
        "link": {
-        "base": "bmveemo5v13",
+        "base": "bmveygsrk15",
         "side": "right"
        }
       },
       {
-       "id": "bmveemo5v15",
+       "id": "bmveygsrk17",
        "type": "view",
        "x": 341.50666666666666,
        "y": 11,
@@ -1132,15 +1296,15 @@
        "callouts": "inherit",
        "auto": true,
        "link": {
-        "base": "bmveemo5v13",
+        "base": "bmveygsrk15",
         "side": "right"
        }
       },
       {
-       "id": "bmveemo5v16",
+       "id": "bmveygsrk18",
        "type": "view",
-       "x": 194.52,
-       "y": 94.52,
+       "x": 195,
+       "y": 95,
        "w": 214.48000000000002,
        "h": 177.48,
        "unit": 3025,
@@ -1154,7 +1318,7 @@
        "auto": true
       },
       {
-       "id": "bmveemo5v17",
+       "id": "bmveygsrk19",
        "type": "parts",
        "auto": true,
        "unit": 3025,
@@ -1165,7 +1329,7 @@
        "h": 35.5
       },
       {
-       "id": "bmveemo5v18",
+       "id": "bmveygsrk1a",
        "type": "units",
        "auto": true,
        "unit": 3025,
@@ -1176,7 +1340,7 @@
        "h": 36.1
       },
       {
-       "id": "bmveemo5v19",
+       "id": "bmveygsrk1b",
        "type": "hardware",
        "auto": true,
        "unit": 3025,
@@ -1190,14 +1354,14 @@
      "unit": 3025
     },
     {
-     "id": "smveemo5w1a",
+     "id": "smveygsrk1c",
      "format": "A3",
      "orient": "landscape",
      "kind": "sheet",
      "title": "3.1.0 Корпус тумбы подвесной, захват снизу Корпуса",
      "blocks": [
       {
-       "id": "bmveemo5w1b",
+       "id": "bmveygsrk1d",
        "type": "stamp",
        "dock": true,
        "x": 20,
@@ -1206,7 +1370,7 @@
        "h": 14
       },
       {
-       "id": "bmveemo5w1c",
+       "id": "bmveygsrk1e",
        "type": "view",
        "x": 194.52,
        "y": 11,
@@ -1223,7 +1387,7 @@
        "auto": true
       },
       {
-       "id": "bmveemo5w1d",
+       "id": "bmveygsrk1f",
        "type": "view",
        "x": 268.0133333333333,
        "y": 11,
@@ -1239,12 +1403,12 @@
        "callouts": "inherit",
        "auto": true,
        "link": {
-        "base": "bmveemo5w1c",
+        "base": "bmveygsrk1e",
         "side": "right"
        }
       },
       {
-       "id": "bmveemo5w1e",
+       "id": "bmveygsrk1g",
        "type": "view",
        "x": 341.50666666666666,
        "y": 11,
@@ -1260,12 +1424,12 @@
        "callouts": "inherit",
        "auto": true,
        "link": {
-        "base": "bmveemo5w1c",
+        "base": "bmveygsrk1e",
         "side": "right"
        }
       },
       {
-       "id": "bmveemo5w1f",
+       "id": "bmveygsrk1h",
        "type": "view",
        "x": 194.52,
        "y": 94.52,
@@ -1282,7 +1446,7 @@
        "auto": true
       },
       {
-       "id": "bmveemo5w1g",
+       "id": "bmveygsrk1i",
        "type": "parts",
        "auto": true,
        "unit": 2380,
@@ -1293,7 +1457,7 @@
        "h": 70.9
       },
       {
-       "id": "bmveemo5w1h",
+       "id": "bmveygsrk1j",
        "type": "hardware",
        "auto": true,
        "unit": 2380,
@@ -1307,14 +1471,14 @@
      "unit": 2380
     },
     {
-     "id": "smveemo5x1i",
+     "id": "smveygsrl1k",
      "format": "A3",
      "orient": "landscape",
      "kind": "sheet",
      "title": "3.2.0 T+BM, ЧП, 270 Ящики, Tandem",
      "blocks": [
       {
-       "id": "bmveemo5x1j",
+       "id": "bmveygsrl1l",
        "type": "stamp",
        "dock": true,
        "x": 20,
@@ -1323,7 +1487,7 @@
        "h": 14
       },
       {
-       "id": "bmveemo5x1k",
+       "id": "bmveygsrl1m",
        "type": "view",
        "x": 194.52,
        "y": 11,
@@ -1340,7 +1504,7 @@
        "auto": true
       },
       {
-       "id": "bmveemo5x1l",
+       "id": "bmveygsrl1n",
        "type": "view",
        "x": 268.0133333333333,
        "y": 11,
@@ -1356,12 +1520,12 @@
        "callouts": "inherit",
        "auto": true,
        "link": {
-        "base": "bmveemo5x1k",
+        "base": "bmveygsrl1m",
         "side": "right"
        }
       },
       {
-       "id": "bmveemo5x1m",
+       "id": "bmveygsrl1o",
        "type": "view",
        "x": 341.50666666666666,
        "y": 11,
@@ -1377,12 +1541,12 @@
        "callouts": "inherit",
        "auto": true,
        "link": {
-        "base": "bmveemo5x1k",
+        "base": "bmveygsrl1m",
         "side": "right"
        }
       },
       {
-       "id": "bmveemo5x1n",
+       "id": "bmveygsrl1p",
        "type": "view",
        "x": 194.52,
        "y": 94.52,
@@ -1399,7 +1563,7 @@
        "auto": true
       },
       {
-       "id": "bmveemo5x1o",
+       "id": "bmveygsrl1q",
        "type": "parts",
        "auto": true,
        "unit": 2902,
@@ -1410,7 +1574,7 @@
        "h": 59.5
       },
       {
-       "id": "bmveemo5x1p",
+       "id": "bmveygsrl1r",
        "type": "hardware",
        "auto": true,
        "unit": 2902,
@@ -1424,14 +1588,14 @@
      "unit": 2902
     },
     {
-     "id": "smveemo5y1q",
+     "id": "smveygsrm1s",
      "format": "A3",
      "orient": "landscape",
      "kind": "sheet",
      "title": "4.0.0 Шкаф",
      "blocks": [
       {
-       "id": "bmveemo5y1r",
+       "id": "bmveygsrm1t",
        "type": "stamp",
        "dock": true,
        "x": 20,
@@ -1440,7 +1604,7 @@
        "h": 14
       },
       {
-       "id": "bmveemo5y1s",
+       "id": "bmveygsrm1u",
        "type": "view",
        "x": 194.52,
        "y": 11,
@@ -1457,7 +1621,7 @@
        "auto": true
       },
       {
-       "id": "bmveemo5y1t",
+       "id": "bmveygsrm1v",
        "type": "view",
        "x": 268.0133333333333,
        "y": 11,
@@ -1473,12 +1637,12 @@
        "callouts": "inherit",
        "auto": true,
        "link": {
-        "base": "bmveemo5y1s",
+        "base": "bmveygsrm1u",
         "side": "right"
        }
       },
       {
-       "id": "bmveemo5y1u",
+       "id": "bmveygsrm1w",
        "type": "view",
        "x": 341.50666666666666,
        "y": 11,
@@ -1494,29 +1658,30 @@
        "callouts": "inherit",
        "auto": true,
        "link": {
-        "base": "bmveemo5y1s",
+        "base": "bmveygsrm1u",
         "side": "right"
        }
       },
       {
-       "id": "bmveemo5y1v",
+       "id": "bmveygsrm1x",
        "type": "view",
-       "x": 195,
-       "y": 95,
+       "x": 190,
+       "y": 90,
        "w": 214.48000000000002,
        "h": 177.48,
        "unit": 6005,
-       "dir": "iso",
-       "az": 35,
-       "el": 25,
+       "dir": "custom",
+       "az": 11,
+       "el": 12,
        "scale": "auto",
-       "style": "inherit",
+       "style": "ghost",
        "caption": true,
        "callouts": "inherit",
-       "auto": true
+       "auto": true,
+       "baseDir": "iso"
       },
       {
-       "id": "bmveemo5y1w",
+       "id": "bmveygsrm1y",
        "type": "parts",
        "auto": true,
        "unit": 6005,
@@ -1527,7 +1692,7 @@
        "h": 149.7
       },
       {
-       "id": "bmveemo5y1x",
+       "id": "bmveygsrm1z",
        "type": "units",
        "auto": true,
        "unit": 6005,
@@ -1538,7 +1703,7 @@
        "h": 29.10000000000001
       },
       {
-       "id": "bmveemo5y1y",
+       "id": "bmveygsrm20",
        "type": "hardware",
        "auto": true,
        "unit": 6005,
@@ -1549,7 +1714,7 @@
        "h": 35.1
       },
       {
-       "id": "bmveemo5y1z",
+       "id": "bmveygsrm21",
        "type": "linear",
        "auto": true,
        "unit": 6005,
@@ -1563,14 +1728,14 @@
      "unit": 6005
     },
     {
-     "id": "smveemo6220",
+     "id": "smveygsrr22",
      "format": "A3",
      "orient": "landscape",
      "kind": "spec",
      "title": "4.0.0 Шкаф (1/2)",
      "blocks": [
       {
-       "id": "bmveemo6221",
+       "id": "bmveygsrr23",
        "type": "stamp",
        "dock": true,
        "x": 20,
@@ -1579,7 +1744,7 @@
        "h": 14
       },
       {
-       "id": "bmveemo6222",
+       "id": "bmveygsrr24",
        "type": "parts",
        "unit": 6005,
        "offset": 21,
@@ -1589,27 +1754,27 @@
        "h": 261
       },
       {
-       "id": "bmveemo6223",
+       "id": "bmveygsrr25",
        "type": "hardware",
        "unit": 6005,
        "offset": 1,
-       "x": 25,
-       "y": 75,
-       "w": 225,
-       "h": 200
+       "x": 258,
+       "y": 142,
+       "w": 151,
+       "h": 75
       },
       {
-       "id": "bmveemo6224",
+       "id": "bmveygsrr26",
        "type": "linear",
        "unit": 6005,
        "offset": 1,
-       "x": 260,
-       "y": 35,
-       "w": 150,
-       "h": 230
+       "x": 258,
+       "y": 223,
+       "w": 151,
+       "h": 49
       },
       {
-       "id": "bmveemo6225",
+       "id": "bmveygsrr27",
        "type": "units",
        "unit": 6005,
        "offset": 1,
@@ -1622,14 +1787,14 @@
      "unit": 6005
     },
     {
-     "id": "smveemo6226",
+     "id": "smveygsrr28",
      "format": "A3",
      "orient": "landscape",
      "kind": "spec",
      "title": "4.0.0 Шкаф (2/2)",
      "blocks": [
       {
-       "id": "bmveemo6227",
+       "id": "bmveygsrr29",
        "type": "stamp",
        "dock": true,
        "x": 20,
@@ -1638,10 +1803,10 @@
        "h": 14
       },
       {
-       "id": "bmveemo6228",
+       "id": "bmveygsrr2a",
        "type": "hardware",
        "unit": 6005,
-       "offset": 20,
+       "offset": 5,
        "x": 26,
        "y": 11,
        "w": 383,
@@ -1652,14 +1817,14 @@
      "unit": 6005
     },
     {
-     "id": "smveemo6229",
+     "id": "smveygsrs2b",
      "format": "A3",
      "orient": "landscape",
      "kind": "sheet",
      "title": "4.1.0 Tandem Blumotion ПВ 500мм",
      "blocks": [
       {
-       "id": "bmveemo622a",
+       "id": "bmveygsrs2c",
        "type": "stamp",
        "dock": true,
        "x": 20,
@@ -1668,7 +1833,7 @@
        "h": 14
       },
       {
-       "id": "bmveemo622b",
+       "id": "bmveygsrs2d",
        "type": "view",
        "x": 194.52,
        "y": 11,
@@ -1685,7 +1850,7 @@
        "auto": true
       },
       {
-       "id": "bmveemo622c",
+       "id": "bmveygsrs2e",
        "type": "view",
        "x": 268.0133333333333,
        "y": 11,
@@ -1701,12 +1866,12 @@
        "callouts": "inherit",
        "auto": true,
        "link": {
-        "base": "bmveemo622b",
+        "base": "bmveygsrs2d",
         "side": "right"
        }
       },
       {
-       "id": "bmveemo622d",
+       "id": "bmveygsrs2f",
        "type": "view",
        "x": 341.50666666666666,
        "y": 11,
@@ -1722,12 +1887,12 @@
        "callouts": "inherit",
        "auto": true,
        "link": {
-        "base": "bmveemo622b",
+        "base": "bmveygsrs2d",
         "side": "right"
        }
       },
       {
-       "id": "bmveemo622e",
+       "id": "bmveygsrs2g",
        "type": "view",
        "x": 194.52,
        "y": 94.52,
@@ -1744,7 +1909,7 @@
        "auto": true
       },
       {
-       "id": "bmveemo622f",
+       "id": "bmveygsrs2h",
        "type": "parts",
        "auto": true,
        "unit": 4271,
@@ -1755,7 +1920,7 @@
        "h": 71.5
       },
       {
-       "id": "bmveemo622g",
+       "id": "bmveygsrs2i",
        "type": "hardware",
        "auto": true,
        "unit": 4271,
@@ -1769,14 +1934,14 @@
      "unit": 4271
     },
     {
-     "id": "smveemo622h",
+     "id": "smveygsrt2j",
      "format": "A3",
      "orient": "landscape",
      "kind": "sheet",
      "title": "4.2.0 Tandem Blumotion ПВ 500мм",
      "blocks": [
       {
-       "id": "bmveemo622i",
+       "id": "bmveygsrt2k",
        "type": "stamp",
        "dock": true,
        "x": 20,
@@ -1785,7 +1950,7 @@
        "h": 14
       },
       {
-       "id": "bmveemo622j",
+       "id": "bmveygsrt2l",
        "type": "view",
        "x": 194.52,
        "y": 11,
@@ -1802,7 +1967,7 @@
        "auto": true
       },
       {
-       "id": "bmveemo622k",
+       "id": "bmveygsrt2m",
        "type": "view",
        "x": 268.0133333333333,
        "y": 11,
@@ -1818,12 +1983,12 @@
        "callouts": "inherit",
        "auto": true,
        "link": {
-        "base": "bmveemo622j",
+        "base": "bmveygsrt2l",
         "side": "right"
        }
       },
       {
-       "id": "bmveemo622l",
+       "id": "bmveygsrt2n",
        "type": "view",
        "x": 341.50666666666666,
        "y": 11,
@@ -1839,12 +2004,12 @@
        "callouts": "inherit",
        "auto": true,
        "link": {
-        "base": "bmveemo622j",
+        "base": "bmveygsrt2l",
         "side": "right"
        }
       },
       {
-       "id": "bmveemo622m",
+       "id": "bmveygsrt2o",
        "type": "view",
        "x": 194.52,
        "y": 94.52,
@@ -1861,7 +2026,7 @@
        "auto": true
       },
       {
-       "id": "bmveemo622n",
+       "id": "bmveygsrt2p",
        "type": "parts",
        "auto": true,
        "unit": 4413,
@@ -1872,7 +2037,7 @@
        "h": 59.5
       },
       {
-       "id": "bmveemo622o",
+       "id": "bmveygsrt2q",
        "type": "hardware",
        "auto": true,
        "unit": 4413,
