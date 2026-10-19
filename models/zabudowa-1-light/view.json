@@ -1,19 +1,19 @@
 {
  "schema": 1,
  "source": "c250cbe000b23409851ae540097fc290a27468621405558ed71ed2d278d359fa",
- "savedAt": "2026-10-19T15:22:34.536Z",
+ "savedAt": "2026-10-19T15:30:06.127Z",
  "features": {
   "outline": false,
   "section": {
    "active": false,
-   "axis": "y",
-   "position": 1295.23148021698,
+   "axis": "face",
+   "position": 2486.115,
    "reversed": false,
-   "showPlane": true,
-   "chosen": false,
+   "showPlane": false,
+   "chosen": true,
    "normal": [
-    0,
     1,
+    0,
     0
    ]
   },
@@ -32,7 +32,8 @@
       ],
       "position": 2486.115,
       "reversed": false
-     }
+     },
+     "image": "data:image/jpeg;base64,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"
     },
     {
      "id": "bz1",
@@ -1524,7 +1525,207 @@
   },
   "notes": {
    "enabled": true,
-   "notes": []
+   "notes": [
+    {
+     "id": "nmvfellyvexd5",
+     "text": "Металлокаркас под основным блоком для усиления",
+     "point": [
+      1724.353,
+      778.073,
+      365.537
+     ],
+     "objectId": 8883,
+     "local": [
+      427.319,
+      -63.52,
+      38.093
+     ],
+     "element": "Тело по траектории1 · поз. 6.3.0.1",
+     "view": {
+      "position": [
+       384.646,
+       1861.186,
+       2083.344
+      ],
+      "target": [
+       2811.928,
+       474.766,
+       -494.813
+      ],
+      "up": [
+       0,
+       1,
+       0
+      ],
+      "orthographic": false
+     },
+     "isolate": true,
+     "updated": "2026-10-19T15:23:23.043Z"
+    },
+    {
+     "id": "nmvfemvhknspd",
+     "text": "Я все еще не до конца уверен что делать с этими ящиками",
+     "point": [
+      56.319,
+      759.458,
+      -2607.713
+     ],
+     "objectId": 17762,
+     "local": [
+      -7.073,
+      -3.627,
+      300.114
+     ],
+     "element": "Релинг · поз. 7.2.0.5",
+     "view": {
+      "position": [
+       -1194.33,
+       1324.257,
+       -3104.649
+      ],
+      "target": [
+       2769.614,
+       -213.79,
+       -1176.223
+      ],
+      "up": [
+       0,
+       1,
+       0
+      ],
+      "orthographic": false
+     },
+     "updated": "2026-10-19T15:24:43.576Z",
+     "isolate": true
+    },
+    {
+     "id": "nmvfeomd851kf",
+     "text": "Поставил тут ламелло для минимизации размеров видимых отверстий.\nМожно поставить Permo Housing чтобы не долбаться с ламелло",
+     "point": [
+      577.458,
+      1779.988,
+      -3044.937
+     ],
+     "objectId": 30949,
+     "local": [
+      420.487,
+      106.063,
+      18.488
+     ],
+     "element": "Фасад шпон · поз. 14.2.0.2",
+     "view": {
+      "position": [
+       -279.837,
+       2622.891,
+       -4972.562
+      ],
+      "target": [
+       1540.402,
+       447.416,
+       7.399
+      ],
+      "up": [
+       0,
+       1,
+       0
+      ],
+      "orthographic": false
+     },
+     "isolate": true,
+     "updated": "2026-10-19T15:26:03.008Z"
+    },
+    {
+     "id": "nmvfeqndhkoab",
+     "text": "Неплохо бы понимать размеры проигрывателя тут",
+     "point": [
+      496.452,
+      975.612,
+      -3101.691
+     ],
+     "objectId": 30936,
+     "local": [
+      468.68,
+      523.309,
+      19.012
+     ],
+     "element": "Крышка · поз. 14.1.0.1",
+     "updated": "2026-10-19T15:27:03.173Z"
+    },
+    {
+     "id": "nmvfer3y36jcc",
+     "text": "Размера кофемашины нет.\nПолка большей глубины чем направляющие, чтобы занять максимум места в модуле, но при этом не упереться в столешницу",
+     "point": [
+      3032.419,
+      974.512,
+      -3048.521
+     ],
+     "objectId": 30025,
+     "local": [
+      -370.979,
+      170.473,
+      -0.012
+     ],
+     "element": "Дно выдвижной галереи · поз. 13.0.0.7",
+     "view": {
+      "position": [
+       2007.348,
+       1560.756,
+       -4100.774
+      ],
+      "target": [
+       4509.167,
+       61.45,
+       -1661.64
+      ],
+      "up": [
+       0,
+       1,
+       0
+      ],
+      "orthographic": false
+     },
+     "isolate": true,
+     "updated": "2026-10-19T15:27:50.542Z"
+    },
+    {
+     "id": "nmvfetnj1bi2g",
+     "text": "Внутрянка и дно темные?",
+     "point": [
+      2298.229,
+      528.542,
+      -3422.976
+     ],
+     "objectId": 28579,
+     "local": [
+      539.716,
+      -328.476,
+      8.542
+     ],
+     "element": "Дно · поз. 11.3.0.6",
+     "view": {
+      "position": [
+       1661.012,
+       269.097,
+       -4183.447
+      ],
+      "target": [
+       3401.196,
+       872.608,
+       -1493.78
+      ],
+      "up": [
+       0,
+       1,
+       0
+      ],
+      "orthographic": false
+     },
+     "sphere": {
+      "diameter": 600
+     },
+     "updated": "2026-10-19T15:29:30.350Z"
+    }
+   ]
   },
   "hardware_mono": false,
   "hardware_types": {
@@ -1574,8 +1775,8 @@
   "manualDimensions": true,
   "githubTokenRemember": true,
   "sectionEnabled": false,
-  "sectionShowPlane": true,
-  "sectionPosition": "1295.25",
+  "sectionShowPlane": false,
+  "sectionPosition": "2486.146",
   "sectionReverse": false,
   "sectionViewsMarks": true,
   "displayModesEnabled": false,
@@ -1584,11 +1785,11 @@
   "dimensionBox": false,
   "notesShow": true,
   "noteEditorMany": false,
-  "noteEditorSphere": false,
-  "noteEditorDiameter": "60",
+  "noteEditorSphere": true,
+  "noteEditorDiameter": "600",
   "noteEditorWindow": false,
   "noteEditorWindowReverse": false,
-  "noteEditorWindowDepth": "50",
+  "noteEditorWindowDepth": "25",
   "noteEditorIsolate": false,
   "assemblerSeparation": "250",
   "assemblerLabelPosition": true,
@@ -1608,14 +1809,14 @@
  },
  "camera": {
   "position": [
-   47.2610684444694,
-   2597.8184953245063,
-   3072.7062533462204
+   8535.418175799476,
+   2489.250593793137,
+   -2807.417955906859
   ],
   "target": [
-   2652.5862720167447,
-   1226.6881975091922,
-   -862.3135206033987
+   2578.5830329023315,
+   1078.191780045162,
+   -1118.8482534435373
   ],
   "up": [
    0,
