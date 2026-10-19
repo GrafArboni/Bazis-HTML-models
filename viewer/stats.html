@@ -232,7 +232,9 @@
   $('key').value = store.get('bazisStatsKey') || '';
   $('load').onclick = load;
   for (const id of ['days', 'role', 'page']) $(id).onchange = () => $('key').value && load();
-  $('key').onkeydown = e => e.key === 'Enter' && load();
+  $('key').onkeydown = e => {
+    if (e.key === 'Enter') load(); // не «&&»: false отменил бы нажатие других клавиш
+  };
   if ($('key').value) load();
 </script>
 </body>
