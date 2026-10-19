@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="bazis-viewer" content="6a277cd2d0b3">
+<meta name="bazis-viewer" content="aece7e7d867e">
 <title>Передпокій · просмотр модели</title>
 <style>
 :root{color-scheme:dark;--bg:#10171d;--panel:#17232d;--line:#31414b;--text:#e8eef0;--muted:#a6bac4;--accent:#9ee2d0;--popup-border:#526776;--control-border:#46586a;--hover:#304654;--muted-soft:#9fb3bd;--divider:#26343d;--compact-slider:70px}
@@ -22883,6 +22883,34 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     Object.assign(list[0], { x: r.x, y: r.y, w: pw, h: r.h });
     placeTables(list.slice(1), { x: r.x + pw + pad, y: r.y, w: r.w - pw - pad, h: r.h }, pad, true);
   }
+  // Таблицы листа спецификации по содержимому (needOf(b, w) — высота блока b при ширине
+  // w от его строки offset): всё входит друг под другом — во всю ширину, каждая своей
+  // высоты; не входит — деталировка слева 60 %, остальные справа потоком
+  function packTables(list, r, pad, needOf) {
+    list = list.filter(Boolean);
+    if (!list.length) return;
+    const hs = list.map(b => needOf(b, r.w));
+    if (hs.reduce((a, h) => a + h, 0) + pad * (list.length - 1) <= r.h) {
+      let y = r.y;
+      list.forEach((b, i) => {
+        Object.assign(b, { x: r.x, y, w: r.w, h: hs[i] });
+        y += hs[i] + pad;
+      });
+      return;
+    }
+    if (list.length === 1) return Object.assign(list[0], r);
+    const pw = Math.round((r.w - pad) * 0.6),
+      rw = r.w - pw - pad,
+      rest = list.slice(1);
+    Object.assign(list[0], { x: r.x, y: r.y, w: pw, h: r.h });
+    let y = r.y;
+    rest.forEach((b, i) => {
+      const left = r.y + r.h - y - pad * (rest.length - 1 - i),
+        h = i === rest.length - 1 ? r.y + r.h - y : Math.max(20, Math.min(needOf(b, rw), left - 20 * (rest.length - 1 - i)));
+      Object.assign(b, { x: r.x + pw + pad, y, w: rw, h });
+      y += h + pad;
+    });
+  }
   // Лист единицы по зонам шаблона. layout 'specs': таблицы (деталировка, фурнитура,
   // погонаж) в свои зоны, виды набора — сеткой в зону видов, выносные виды (блоки
   // узлов выносок, ofNote.kind 'detail') — в свою зону рядом; layout 'views' — только
@@ -23010,7 +23038,8 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         th = Math.min(70, a.h * 0.35);
       if (title) Object.assign(title, { x: a.x + 4, y: a.y + 9, w: a.w - 8, h: th });
       if (view) Object.assign(view, { x: a.x + 4, y: a.y + th + 19, w: a.w - 8, h: a.h - th - 19 });
-    } else if (sheet.kind === 'spec') placeTables([of('parts')[0], of('units')[0], of('hardware')[0], of('linear')[0]], a, pad, sheet.orient === 'portrait');
+    } else if (sheet.kind === 'spec' && o.need) packTables([of('parts')[0], of('units')[0], of('hardware')[0], of('linear')[0]], a, pad, (b, w) => o.need(b.type, w, b.offset || 0));
+    else if (sheet.kind === 'spec') placeTables([of('parts')[0], of('units')[0], of('hardware')[0], of('linear')[0]], a, pad, sheet.orient === 'portrait');
     else if (sheet.kind === 'part') {
       const [part] = of('part');
       if (part) Object.assign(part, { x: a.x - 2, y: a.y - 2, w: a.w + 4, h: a.h + 4 });
@@ -23118,6 +23147,64 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       if (!list.length && !opts.start) list.push(0);
       return list;
     };
+    // по содержимому: таблицы потоком — колонка за колонкой (во всю ширину, если
+    // остаток входит целиком), каждая высотой по своим строкам; оборвалась — на
+    // следующей колонке или листе с того же места
+    if (opts.need && opts.capacity) {
+      const ORDER = ['parts', 'units', 'hardware', 'linear'],
+        at = { ...start },
+        total = t => counts[t] || 0,
+        left = () => ORDER.filter(t => at[t] < total(t)),
+        needOf = (t, w) => opts.need(t, unit.id ?? null, w, at[t]),
+        minH = t => (opts.minH ? opts.minH(t) : 20),
+        sheets = [];
+      for (let guard = 0; left().length && guard < 200; guard++) {
+        const s = newSheet('A3', 'landscape', 'spec', frameKind),
+          a = workArea(s, frameKind, pad),
+          todo = left();
+        s.unit = unit.id ?? null;
+        const push = (t, x, y, w, hh) => s.blocks.push({ id: newId('b'), type: t, unit: unit.id ?? null, offset: at[t], x, y, w, h: hh });
+        const full = todo.map(t => needOf(t, a.w));
+        if (full.reduce((x, y) => x + y, 0) + pad * (todo.length - 1) <= a.h) {
+          let y = a.y;
+          todo.forEach((t, i) => {
+            push(t, a.x, y, a.w, full[i]);
+            at[t] = total(t);
+            y += full[i] + pad;
+          });
+        } else {
+          const pw = Math.round((a.w - pad) * 0.6);
+          for (const [x, w] of [[a.x, pw], [a.x + pw + pad, a.w - pw - pad]]) {
+            let y = a.y;
+            for (const t of ORDER) {
+              if (at[t] >= total(t)) continue;
+              const space = a.y + a.h - y;
+              if (space < minH(t)) break;
+              const need = needOf(t, w);
+              if (need <= space) {
+                push(t, x, y, w, need);
+                at[t] = total(t);
+                y += need + pad;
+                continue;
+              }
+              const cap = opts.capacity(t, unit.id ?? null, w, space, at[t]);
+              if (cap < 1) break;
+              push(t, x, y, w, space);
+              at[t] += cap;
+              break;
+            }
+          }
+          // ничего не встало (строка выше листа) — строку всё равно на лист
+          if (!s.blocks.some(b => b.type !== 'stamp')) {
+            push(todo[0], a.x, a.y, a.w, a.h);
+            at[todo[0]] += Math.max(1, opts.capacity(todo[0], unit.id ?? null, a.w, a.h, at[todo[0]]));
+          }
+        }
+        sheets.push(s);
+      }
+      sheets.forEach((s, i) => (s.title = (unit.name || '') + (sheets.length > 1 ? ' (' + (i + 1) + '/' + sheets.length + ')' : '')));
+      return sheets;
+    }
     const po = offsets('parts', counts.parts, start.parts, partsW),
       ho = offsets('hardware', counts.hardware, start.hardware, hwW),
       lo = (counts.linear || 0) > start.linear ? offsets('linear', counts.linear, start.linear, hwW) : [],
@@ -25391,7 +25478,7 @@ void main() {
         hwRow: HW_ROW,
         // сколько строк таблицы войдёт в блок w×h, начиная со строки from (с переносом)
         capacity: (type, unit, w, h, from) => tableFit({ type, unit, w, h }, from),
-        need: (type, unit, w) => tableNeed(type, unit, w),
+        need: (type, unit, w, from) => tableNeed(type, unit, w, from),
         minH: tableMin,
         counts: u => tableCounts(u.id ?? null),
         views: docData?.style?.views,
@@ -25446,7 +25533,7 @@ void main() {
         overviewZones: d.style.overviewZones,
         viewsLayout: s.kind === 'overview' ? d.style.overviewLayout : d.style.viewsLayout,
         viewsArrange: s.kind === 'overview' ? d.style.overviewArrange : d.style.viewsArrange,
-        need: (type, w) => tableNeed(type, u, w),
+        need: (type, w, from) => tableNeed(type, u, w, from),
         minH: tableMin,
         counts: s.kind === 'sheet' ? tableCounts(u) : null
       });
@@ -25502,20 +25589,26 @@ void main() {
       return null;
     }
     // сколько строк, начиная с from, помещается в блок (не меньше одной)
+    // строк с from, что войдут в блок; место под «Продолжение — лист N» — только
+    // когда таблица обрывается
     function fitRows(b, cols, rows, rowH, from = 0) {
       const head = Sheet.tableHead(docStyle().size),
-        room = b.h - head.title - head.header - docStyle().size * 2,
         geom = tableGeom(b.w, cols),
-        lead = leadHeader(rows, from);
-      let used = lead ? rowGeom(lead, cols, geom, rowH).h : 0,
-        n = 0;
-      for (let i = Math.max(0, from); i < rows.length; i++) {
-        const h = rowGeom(rows[i], cols, geom, rowH).h;
-        if (used + h > room && n) break;
-        used += h;
-        n++;
-      }
-      return Math.max(1, n);
+        lead = leadHeader(rows, from),
+        count = room => {
+          let used = lead ? rowGeom(lead, cols, geom, rowH).h : 0,
+            n = 0;
+          for (let i = Math.max(0, from); i < rows.length; i++) {
+            const h = rowGeom(rows[i], cols, geom, rowH).h;
+            if (used + h > room && n) break;
+            used += h;
+            n++;
+          }
+          return Math.max(1, n);
+        },
+        room = b.h - head.title - head.header,
+        all = count(room);
+      return from + all >= rows.length ? all : count(room - docStyle().size * 2);
     }
     // Таблица: заголовок, шапка, строки с offset, сколько войдёт; остаток — пометкой
     function drawTable(g, b, title, cols, rows, rowH) {
@@ -25639,12 +25732,15 @@ void main() {
       const k = TABLE_KINDS[b.type];
       return fitRows(b, k.cols(), k.rows(b.unit ?? null), k.rowH, from);
     }
-    function tableNeed(type, unit, w) {
+    // высота таблицы по строкам с from (у продолжения — ещё строка заголовка группы)
+    function tableNeed(type, unit, w, from = 0) {
       const k = TABLE_KINDS[type],
         cols = k.cols(),
         geom = tableGeom(w, cols),
-        head = Sheet.tableHead(docStyle().size);
-      return head.title + head.header + k.rows(unit).reduce((a, r) => a + rowGeom(r, cols, geom, k.rowH).h, 0) + docStyle().size * 2 + 1;
+        head = Sheet.tableHead(docStyle().size),
+        rows = k.rows(unit),
+        lead = leadHeader(rows, from);
+      return head.title + head.header + rows.slice(from).reduce((a, r) => a + rowGeom(r, cols, geom, k.rowH).h, 0) + (lead ? rowGeom(lead, cols, geom, k.rowH).h : 0) + 1;
     }
     const tableMin = type => {
       const head = Sheet.tableHead(docStyle().size);
