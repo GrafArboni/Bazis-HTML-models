@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "source": "c250cbe000b23409851ae540097fc290a27468621405558ed71ed2d278d359fa",
- "savedAt": "2026-10-19T16:23:37.462Z",
+ "savedAt": "2026-10-19T20:16:28.308Z",
  "features": {
   "outline": false,
   "section": {
@@ -98,7 +98,7 @@
   },
   "materials": [
    {
-    "id": "art:Пол\r-10",
+    "id": "m:Пол\r-10",
     "type": "tex",
     "name": "Пол",
     "state": {
@@ -111,7 +111,7 @@
     }
    },
    {
-    "id": "art:ДСП лам. Egger U899 ST9 Космос серый 2800х2070х18 мм\r33940",
+    "id": "m:ДСП лам. Egger U899 ST9 Космос серый 2800х2070х18 мм\r33940",
     "type": "tex",
     "name": "ДСП лам. Egger U899 ST9 Космос серый 2800х2070х18 мм",
     "state": {
@@ -124,11 +124,11 @@
     }
    },
    {
-    "id": "art:ALPI ICE WRABLE 12.09\rШпон",
+    "id": "m:ALPI ICE WRABLE 12.09\rШпон",
     "type": "tex",
     "name": "ALPI ICE WRABLE 12.09",
     "state": {
-     "rot": 3,
+     "rot": 0,
      "mode": "tex",
      "texKey": "ALPI ICE WRABLE 12.09\rШпон",
      "texData": null,
@@ -137,7 +137,7 @@
     }
    },
    {
-    "id": "art:Шпон ламельный 5мм\rШпон ламельный 5мм",
+    "id": "m:Шпон ламельный 5мм\rШпон ламельный 5мм",
     "type": "tex",
     "name": "Шпон ламельный 5мм",
     "state": {
@@ -150,11 +150,11 @@
     }
    },
    {
-    "id": "art:Шпон односторонний 19мм\rШпон односторонний 19мм",
+    "id": "m:Шпон односторонний 19мм\rШпон односторонний 19мм",
     "type": "tex",
     "name": "Шпон односторонний 19мм",
     "state": {
-     "rot": 1,
+     "rot": 2,
      "mode": "tex",
      "texKey": "Шпон односторонний 19мм\rШпон односторонний 19мм",
      "texData": null,
@@ -163,7 +163,7 @@
     }
    },
    {
-    "id": "art:Lakier NCS S 2005 - Y50R\rLakier NCS S 2005 - Y50R",
+    "id": "m:Lakier NCS S 2005 - Y50R\rLakier NCS S 2005 - Y50R",
     "type": "tex",
     "name": "Lakier NCS S 2005 - Y50R",
     "state": {
@@ -176,7 +176,7 @@
     }
    },
    {
-    "id": "art:Обои\rОбои",
+    "id": "m:Обои\rОбои",
     "type": "tex",
     "name": "Обои",
     "state": {
@@ -189,7 +189,7 @@
     }
    },
    {
-    "id": "art:89575",
+    "id": "m:МДФ-плита шлифованная Коростень (плотность 835 кг/м³) 2800х2070х8 мм\r89575",
     "type": "tex",
     "name": "МДФ-плита шлифованная Коростень (плотность 835 кг/м³) 2800х2070х8 мм",
     "state": {
@@ -202,7 +202,7 @@
     }
    },
    {
-    "id": "col:#96765b",
+    "id": "m:Зеркало Бронза 4 мм\r81170",
     "type": "col",
     "name": "Зеркало Бронза 4 мм",
     "state": {
@@ -215,7 +215,7 @@
     }
    },
    {
-    "id": "art:ДСП лам. Egger U705 ST9 Ангора серая 2800х2070х18 мм\r173495",
+    "id": "m:ДСП лам. Egger U705 ST9 Ангора серая 2800х2070х18 мм\r173495",
     "type": "tex",
     "name": "ДСП лам. Egger U705 ST9 Ангора серая 2800х2070х18 мм",
     "state": {
@@ -228,7 +228,7 @@
     }
    },
    {
-    "id": "col:#d1d1d1",
+    "id": "m:Зеркало Серебро 4мм БЦ (с защ. пленкой)\r94584",
     "type": "col",
     "name": "Зеркало Серебро 4мм БЦ (с защ. пленкой)",
     "state": {
@@ -241,7 +241,7 @@
     }
    },
    {
-    "id": "art:139190",
+    "id": "m:Фанера ФСФ влагостойкая ВВ/ВВ поперечная 18 мм (1 сорт) 1250х2500х18мм\r139190",
     "type": "tex",
     "name": "Фанера ФСФ влагостойкая ВВ/ВВ поперечная 18 мм (1 сорт) 1250х2500х18мм",
     "state": {
@@ -254,7 +254,7 @@
     }
    },
    {
-    "id": "art:МДФ плита  шлифованная 16мм Коростень\r89311",
+    "id": "m:МДФ плита  шлифованная 16мм Коростень\r89311",
     "type": "tex",
     "name": "МДФ плита  шлифованная 16мм Коростень",
     "state": {
@@ -267,11 +267,11 @@
     }
    },
    {
-    "id": "art:Шпон двусторонний 19мм\rШпон двусторонний 19мм",
+    "id": "m:Шпон двусторонний 19мм\rШпон двусторонний 19мм",
     "type": "tex",
     "name": "Шпон двусторонний 19мм",
     "state": {
-     "rot": 3,
+     "rot": 0,
      "mode": "tex",
      "texKey": "Шпон двусторонний 19мм\rШпон двусторонний 19мм",
      "texData": null,
@@ -280,7 +280,7 @@
     }
    },
    {
-    "id": "col:#191919",
+    "id": "m:Пластик черный\r-1",
     "type": "col",
     "name": "Пластик черный",
     "state": {
@@ -293,7 +293,7 @@
     }
    },
    {
-    "id": "col:#c0c0c0",
+    "id": "m:Металлический лист 3мм\rМетал лист 3мм",
     "type": "col",
     "name": "Металлический лист 3мм",
     "state": {
@@ -306,7 +306,7 @@
     }
    },
    {
-    "id": "art:Латунь\rЛатунь",
+    "id": "m:Латунь\rЛатунь",
     "type": "tex",
     "name": "Латунь",
     "state": {
@@ -319,7 +319,20 @@
     }
    },
    {
-    "id": "art:Краска под металл 10мм\rКраска под металл 10мм",
+    "id": "m:Стекло Planibel Bronze 6 мм\r176273",
+    "type": "col",
+    "name": "Стекло Planibel Bronze 6 мм",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#96765b",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "m:Краска под металл 10мм\rКраска под металл 10мм",
     "type": "tex",
     "name": "Краска под металл 10мм",
     "state": {
@@ -332,7 +345,7 @@
     }
    },
    {
-    "id": "art:Шпон односторонний 15,5мм\rШпон односторонний 15,5мм",
+    "id": "m:Шпон односторонний 15,5мм\rШпон односторонний 15,5мм",
     "type": "tex",
     "name": "Шпон односторонний 15,5мм",
     "state": {
@@ -345,7 +358,20 @@
     }
    },
    {
-    "id": "art:ДСП лам. Egger U899 ST9 Космос серый 2800х2070х10мм\r117781",
+    "id": "m:Стекло Stopsol Classic бронза 4мм\r64091",
+    "type": "col",
+    "name": "Стекло Stopsol Classic бронза 4мм",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#96765b",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "m:ДСП лам. Egger U899 ST9 Космос серый 2800х2070х10мм\r117781",
     "type": "tex",
     "name": "ДСП лам. Egger U899 ST9 Космос серый 2800х2070х10мм",
     "state": {
@@ -358,7 +384,7 @@
     }
    },
    {
-    "id": "art:Blum16",
+    "id": "m:Blum16",
     "type": "tex",
     "name": "Blum16",
     "state": {
@@ -371,7 +397,7 @@
     }
    },
    {
-    "id": "art:Blum21",
+    "id": "m:Blum21",
     "type": "tex",
     "name": "Blum21",
     "state": {
@@ -384,7 +410,7 @@
     }
    },
    {
-    "id": "art:Никель\rНикель",
+    "id": "m:Никель\rНикель",
     "type": "tex",
     "name": "Никель",
     "state": {
@@ -397,7 +423,20 @@
     }
    },
    {
-    "id": "art:Laminam state alaska 2+\rLaminam state alaska 2+",
+    "id": "m:Зеркало-бронза 4мм (с защитной пленкой)\r81170",
+    "type": "col",
+    "name": "Зеркало-бронза 4мм (с защитной пленкой)",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#96765b",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "m:Laminam state alaska 2+\rLaminam state alaska 2+",
     "type": "tex",
     "name": "Laminam state alaska 2+",
     "state": {
@@ -410,7 +449,7 @@
     }
    },
    {
-    "id": "art:МДФ шлифованный (745 кг/м³) (20л) 2800х2070х25мм\r118616",
+    "id": "m:МДФ шлифованный (745 кг/м³) (20л) 2800х2070х25мм\r118616",
     "type": "tex",
     "name": "МДФ шлифованный (745 кг/м³) (20л) 2800х2070х25мм",
     "state": {
@@ -423,7 +462,7 @@
     }
    },
    {
-    "id": "art:Краска под металл 19мм\rКраска под металл 19мм",
+    "id": "m:Краска под металл 19мм\rКраска под металл 19мм",
     "type": "tex",
     "name": "Краска под металл 19мм",
     "state": {
@@ -436,7 +475,7 @@
     }
    },
    {
-    "id": "art:89310",
+    "id": "m:МДФ плита  шлифованная 10мм Коростень\r89310",
     "type": "tex",
     "name": "МДФ плита  шлифованная 10мм Коростень",
     "state": {
@@ -449,7 +488,7 @@
     }
    },
    {
-    "id": "art:Шпон двусторониий 25мм\rШпон двусторониий 25мм",
+    "id": "m:Шпон двусторониий 25мм\rШпон двусторониий 25мм",
     "type": "tex",
     "name": "Шпон двусторониий 25мм",
     "state": {
@@ -462,7 +501,7 @@
     }
    },
    {
-    "id": "art:Шпон односторонний 10мм\rШпон односторонний 10мм",
+    "id": "m:Шпон односторонний 10мм\rШпон односторонний 10мм",
     "type": "tex",
     "name": "Шпон односторонний 10мм",
     "state": {
@@ -475,7 +514,7 @@
     }
    },
    {
-    "id": "art:AL06 Brushed Bronze\rAL06 Brushed Bronze",
+    "id": "m:AL06 Brushed Bronze\rAL06 Brushed Bronze",
     "type": "tex",
     "name": "AL06 Brushed Bronze",
     "state": {
@@ -488,7 +527,7 @@
     }
    },
    {
-    "id": "art:Крашенные фасады под бронзу\rКрашенные фасады под бронзу",
+    "id": "m:Крашенные фасады под бронзу\rКрашенные фасады под бронзу",
     "type": "tex",
     "name": "Крашенные фасады под бронзу",
     "state": {
@@ -501,7 +540,7 @@
     }
    },
    {
-    "id": "art:Laminam Slate Alaska 6mm\rКерамогранит",
+    "id": "m:Laminam Slate Alaska 6mm\rКерамогранит",
     "type": "tex",
     "name": "Laminam Slate Alaska 6mm",
     "state": {
@@ -514,7 +553,7 @@
     }
    },
    {
-    "id": "art:Laminam state alaska 12+\rLaminam state alaska 12+",
+    "id": "m:Laminam state alaska 12+\rLaminam state alaska 12+",
     "type": "tex",
     "name": "Laminam state alaska 12+",
     "state": {
@@ -527,7 +566,7 @@
     }
    },
    {
-    "id": "col:#00ff00",
+    "id": "m:Фанера 15мм\rФанера 15мм",
     "type": "col",
     "name": "Фанера 15мм",
     "state": {
@@ -540,7 +579,33 @@
     }
    },
    {
-    "id": "art:Алюминий\r-2",
+    "id": "m:Фанера 18мм\rФанера 18мм",
+    "type": "col",
+    "name": "Фанера 18мм",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "Латунь\rЛатунь",
+     "texData": null,
+     "color": "#888888",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "m:Белый\r-101",
+    "type": "col",
+    "name": "Белый",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#cccccc",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "m:Алюминий\r-2",
     "type": "tex",
     "name": "Алюминий",
     "state": {
@@ -553,7 +618,7 @@
     }
    },
    {
-    "id": "col:#ffffe6",
+    "id": "m:Стена\r-3",
     "type": "col",
     "name": "Стена",
     "state": {
@@ -566,7 +631,33 @@
     }
    },
    {
-    "id": "col:#7c7c7c",
+    "id": "m:Уголок 20х20х1.5\rУголок 20х20",
+    "type": "col",
+    "name": "Уголок 20х20х1.5",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "Латунь\rЛатунь",
+     "texData": null,
+     "color": "#888888",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "m:LED-лента COB, 320 LEDs/M, 12W, 24V, IP20, теплый свет\r176407",
+    "type": "col",
+    "name": "LED-лента COB, 320 LEDs/M, 12W, 24V, IP20, теплый свет",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "Латунь\rЛатунь",
+     "texData": null,
+     "color": "#888888",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "m:Труба 60х20\rТруба 60х20",
     "type": "col",
     "name": "Труба 60х20",
     "state": {
@@ -579,7 +670,7 @@
     }
    },
    {
-    "id": "col:#5c5c5c",
+    "id": "m:Труба 20х20\rТруба 20х20",
     "type": "col",
     "name": "Труба 20х20",
     "state": {
@@ -592,7 +683,7 @@
     }
    },
    {
-    "id": "col:#2d2d2d",
+    "id": "m:Порошковая краска черная\r-5413543",
     "type": "col",
     "name": "Порошковая краска черная",
     "state": {
@@ -605,7 +696,7 @@
     }
    },
    {
-    "id": "art:Клён\rМассив Клёна",
+    "id": "m:Клён\rМассив Клёна",
     "type": "tex",
     "name": "Клён",
     "state": {
@@ -618,7 +709,7 @@
     }
    },
    {
-    "id": "art:Zobal Z-1 C-33\rZobal Z-1 C-33",
+    "id": "m:Zobal Z-1 C-33\rZobal Z-1 C-33",
     "type": "tex",
     "name": "Zobal Z-1 C-33",
     "state": {
@@ -631,7 +722,7 @@
     }
    },
    {
-    "id": "art:Подушка цвет 1\rПодушка цвет 1",
+    "id": "m:Подушка цвет 1\rПодушка цвет 1",
     "type": "tex",
     "name": "Подушка цвет 1",
     "state": {
@@ -644,7 +735,7 @@
     }
    },
    {
-    "id": "art:Структурный графит",
+    "id": "m:Структурный графит",
     "type": "tex",
     "name": "Структурный графит",
     "state": {
@@ -657,7 +748,7 @@
     }
    },
    {
-    "id": "art:Zobal Z-16 C-33\rZobal Z-16 C-33",
+    "id": "m:Zobal Z-16 C-33\rZobal Z-16 C-33",
     "type": "tex",
     "name": "Zobal Z-16 C-33",
     "state": {
@@ -670,7 +761,7 @@
     }
    },
    {
-    "id": "art:Zobal Z-11 C-33\rZobal Z-11 C-33",
+    "id": "m:Zobal Z-11 C-33\rZobal Z-11 C-33",
     "type": "tex",
     "name": "Zobal Z-11 C-33",
     "state": {
@@ -683,7 +774,20 @@
     }
    },
    {
-    "id": "col:#3e3e3e",
+    "id": "m:матовый хром\rмат хром",
+    "type": "col",
+    "name": "матовый хром",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#cccccc",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "m:Труба 40х20\rТруба 40х20",
     "type": "col",
     "name": "Труба 40х20",
     "state": {
@@ -696,7 +800,7 @@
     }
    },
    {
-    "id": "mat:Сталь\rСталь",
+    "id": "mm:Сталь\rСталь",
     "type": "col",
     "name": "Сталь",
     "state": {
@@ -709,7 +813,20 @@
     }
    },
    {
-    "id": "mat:E6C35Black",
+    "id": "mm:Алюминий\r-2",
+    "type": "tex",
+    "name": "Алюминий",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": "Алюминий\r-2",
+     "texData": null,
+     "color": "#888888",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mm:E6C35Black",
     "type": "col",
     "name": "E6C35Black",
     "state": {
@@ -722,7 +839,7 @@
     }
    },
    {
-    "id": "mat:E6Ev1Natural",
+    "id": "mm:E6Ev1Natural",
     "type": "col",
     "name": "E6Ev1Natural",
     "state": {
@@ -735,7 +852,7 @@
     }
    },
    {
-    "id": "mat:__07-ks-blum-orange",
+    "id": "mm:__07-ks-blum-orange",
     "type": "col",
     "name": "__07-ks-blum-orange",
     "state": {
@@ -748,7 +865,7 @@
     }
    },
    {
-    "id": "mat:__02-st-nickel",
+    "id": "mm:__02-st-nickel",
     "type": "col",
     "name": "__02-st-nickel",
     "state": {
@@ -761,7 +878,7 @@
     }
    },
    {
-    "id": "mat:__06-ks-schwarz",
+    "id": "mm:__06-ks-schwarz",
     "type": "col",
     "name": "__06-ks-schwarz",
     "state": {
@@ -774,7 +891,7 @@
     }
    },
    {
-    "id": "mat:__01-st-verzinkt-blank",
+    "id": "mm:__01-st-verzinkt-blank",
     "type": "col",
     "name": "__01-st-verzinkt-blank",
     "state": {
@@ -787,7 +904,7 @@
     }
    },
    {
-    "id": "mat:Black",
+    "id": "mm:Black",
     "type": "col",
     "name": "Black",
     "state": {
@@ -800,7 +917,7 @@
     }
    },
    {
-    "id": "mat:NickelPlated",
+    "id": "mm:NickelPlated",
     "type": "col",
     "name": "NickelPlated",
     "state": {
@@ -813,7 +930,7 @@
     }
    },
    {
-    "id": "mat:__03-ks-weiss",
+    "id": "mm:__03-ks-weiss",
     "type": "col",
     "name": "__03-ks-weiss",
     "state": {
@@ -826,7 +943,7 @@
     }
    },
    {
-    "id": "mat:__04-ks-hellgrau",
+    "id": "mm:__04-ks-hellgrau",
     "type": "col",
     "name": "__04-ks-hellgrau",
     "state": {
@@ -839,7 +956,7 @@
     }
    },
    {
-    "id": "mat:ZincPlated",
+    "id": "mm:ZincPlated",
     "type": "col",
     "name": "ZincPlated",
     "state": {
@@ -852,7 +969,7 @@
     }
    },
    {
-    "id": "mat:DEFAULT",
+    "id": "mm:DEFAULT",
     "type": "col",
     "name": "DEFAULT",
     "state": {
@@ -865,7 +982,7 @@
     }
    },
    {
-    "id": "mat:__05-ks-dunkelgrau",
+    "id": "mm:__05-ks-dunkelgrau",
     "type": "col",
     "name": "__05-ks-dunkelgrau",
     "state": {
@@ -878,7 +995,7 @@
     }
    },
    {
-    "id": "mat:colourprimary_sw",
+    "id": "mm:colourprimary_sw",
     "type": "col",
     "name": "colourprimary_sw",
     "state": {
@@ -891,7 +1008,7 @@
     }
    },
    {
-    "id": "mat:__6-ks-schwarz",
+    "id": "mm:__6-ks-schwarz",
     "type": "col",
     "name": "__6-ks-schwarz",
     "state": {
@@ -904,7 +1021,7 @@
     }
    },
    {
-    "id": "mat:zincplated",
+    "id": "mm:zincplated",
     "type": "col",
     "name": "zincplated",
     "state": {
@@ -917,7 +1034,7 @@
     }
    },
    {
-    "id": "mat:TerraBlackMatt",
+    "id": "mm:TerraBlackMatt",
     "type": "col",
     "name": "TerraBlackMatt",
     "state": {
@@ -930,7 +1047,7 @@
     }
    },
    {
-    "id": "mat:black",
+    "id": "mm:black",
     "type": "col",
     "name": "black",
     "state": {
@@ -943,7 +1060,7 @@
     }
    },
    {
-    "id": "mat:White",
+    "id": "mm:White",
     "type": "col",
     "name": "White",
     "state": {
@@ -956,7 +1073,7 @@
     }
    },
    {
-    "id": "mat:color",
+    "id": "mm:color",
     "type": "col",
     "name": "color",
     "state": {
@@ -969,7 +1086,7 @@
     }
    },
    {
-    "id": "mat:__4_schwarz",
+    "id": "mm:__4_schwarz",
     "type": "col",
     "name": "__4_schwarz",
     "state": {
@@ -982,7 +1099,7 @@
     }
    },
    {
-    "id": "mat:Зеркало Серебро 4мм БЦ (с защ. пленкой)\r94584",
+    "id": "mm:Зеркало Серебро 4мм БЦ (с защ. пленкой)\r94584",
     "type": "col",
     "name": "Зеркало Серебро 4мм БЦ (с защ. пленкой)",
     "state": {
@@ -995,7 +1112,7 @@
     }
    },
    {
-    "id": "mat:Сталь_ONYX\rONYX",
+    "id": "mm:Сталь_ONYX\rONYX",
     "type": "col",
     "name": "Сталь_ONYX",
     "state": {
@@ -1008,7 +1125,7 @@
     }
    },
    {
-    "id": "mat:colourprimary_hg",
+    "id": "mm:colourprimary_hg",
     "type": "col",
     "name": "colourprimary_hg",
     "state": {
@@ -1021,7 +1138,7 @@
     }
    },
    {
-    "id": "mat:DeepGrey",
+    "id": "mm:DeepGrey",
     "type": "col",
     "name": "DeepGrey",
     "state": {
@@ -1034,7 +1151,7 @@
     }
    },
    {
-    "id": "mat:__5-ks-dunkelgrau",
+    "id": "mm:__5-ks-dunkelgrau",
     "type": "col",
     "name": "__5-ks-dunkelgrau",
     "state": {
@@ -1047,7 +1164,7 @@
     }
    },
    {
-    "id": "mat:white",
+    "id": "mm:white",
     "type": "col",
     "name": "white",
     "state": {
@@ -1060,7 +1177,7 @@
     }
    },
    {
-    "id": "mat:oriongreymatt",
+    "id": "mm:oriongreymatt",
     "type": "col",
     "name": "oriongreymatt",
     "state": {
@@ -1073,7 +1190,7 @@
     }
    },
    {
-    "id": "mat:OrionGreyMatt",
+    "id": "mm:OrionGreyMatt",
     "type": "col",
     "name": "OrionGreyMatt",
     "state": {
@@ -1086,7 +1203,7 @@
     }
    },
    {
-    "id": "mat:__4-ks-hellgrau",
+    "id": "mm:__4-ks-hellgrau",
     "type": "col",
     "name": "__4-ks-hellgrau",
     "state": {
@@ -1099,7 +1216,7 @@
     }
    },
    {
-    "id": "mat:__8-holz",
+    "id": "mm:__8-holz",
     "type": "col",
     "name": "__8-holz",
     "state": {
@@ -1112,7 +1229,7 @@
     }
    },
    {
-    "id": "mat:StainlessSteelLongsideBrushed",
+    "id": "mm:StainlessSteelLongsideBrushed",
     "type": "col",
     "name": "StainlessSteelLongsideBrushed",
     "state": {
@@ -1125,7 +1242,7 @@
     }
    },
    {
-    "id": "mat:__2-st-nickel",
+    "id": "mm:__2-st-nickel",
     "type": "col",
     "name": "__2-st-nickel",
     "state": {
@@ -1138,7 +1255,7 @@
     }
    },
    {
-    "id": "mat:deepgrey",
+    "id": "mm:deepgrey",
     "type": "col",
     "name": "deepgrey",
     "state": {
@@ -1151,7 +1268,7 @@
     }
    },
    {
-    "id": "mat:nickelplated",
+    "id": "mm:nickelplated",
     "type": "col",
     "name": "nickelplated",
     "state": {
@@ -1164,7 +1281,7 @@
     }
    },
    {
-    "id": "mat:Ral2004PureOrange",
+    "id": "mm:Ral2004PureOrange",
     "type": "col",
     "name": "Ral2004PureOrange",
     "state": {
@@ -1177,7 +1294,7 @@
     }
    },
    {
-    "id": "mat:carbonblackmatt",
+    "id": "mm:carbonblackmatt",
     "type": "col",
     "name": "carbonblackmatt",
     "state": {
@@ -1190,7 +1307,7 @@
     }
    },
    {
-    "id": "mat:CarbonBlackMatt",
+    "id": "mm:CarbonBlackMatt",
     "type": "col",
     "name": "CarbonBlackMatt",
     "state": {
@@ -1203,7 +1320,7 @@
     }
    },
    {
-    "id": "mat:Ral7037DustGrey",
+    "id": "mm:Ral7037DustGrey",
     "type": "col",
     "name": "Ral7037DustGrey",
     "state": {
@@ -1216,7 +1333,7 @@
     }
    },
    {
-    "id": "mat:ral7037dustgrey",
+    "id": "mm:ral7037dustgrey",
     "type": "col",
     "name": "ral7037dustgrey",
     "state": {
@@ -1229,7 +1346,7 @@
     }
    },
    {
-    "id": "mat:OrionGrey",
+    "id": "mm:OrionGrey",
     "type": "col",
     "name": "OrionGrey",
     "state": {
@@ -1242,7 +1359,7 @@
     }
    },
    {
-    "id": "mat:__7-ks-blum-orange",
+    "id": "mm:__7-ks-blum-orange",
     "type": "col",
     "name": "__7-ks-blum-orange",
     "state": {
@@ -1255,7 +1372,7 @@
     }
    },
    {
-    "id": "mat:Ral7035LightGrey",
+    "id": "mm:Ral7035LightGrey",
     "type": "col",
     "name": "Ral7035LightGrey",
     "state": {
@@ -1268,7 +1385,20 @@
     }
    },
    {
-    "id": "mat:BlackMatt",
+    "id": "mm:Шпон односторонний 19мм\rШпон односторонний 19мм",
+    "type": "tex",
+    "name": "Шпон односторонний 19мм",
+    "state": {
+     "rot": 1,
+     "mode": "tex",
+     "texKey": "Шпон односторонний 19мм\rШпон односторонний 19мм",
+     "texData": null,
+     "color": "#40372c",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mm:BlackMatt",
     "type": "col",
     "name": "BlackMatt",
     "state": {
@@ -1281,7 +1411,7 @@
     }
    },
    {
-    "id": "mat:blackmatt",
+    "id": "mm:blackmatt",
     "type": "col",
     "name": "blackmatt",
     "state": {
@@ -1294,7 +1424,7 @@
     }
    },
    {
-    "id": "mat:e6c35black",
+    "id": "mm:e6c35black",
     "type": "col",
     "name": "e6c35black",
     "state": {
@@ -1307,7 +1437,7 @@
     }
    },
    {
-    "id": "mat:StainlessSteel",
+    "id": "mm:StainlessSteel",
     "type": "col",
     "name": "StainlessSteel",
     "state": {
@@ -1320,7 +1450,7 @@
     }
    },
    {
-    "id": "mat:MetalGrey",
+    "id": "mm:MetalGrey",
     "type": "col",
     "name": "MetalGrey",
     "state": {
@@ -1333,7 +1463,7 @@
     }
    },
    {
-    "id": "mat:OnyxBlack",
+    "id": "mm:OnyxBlack",
     "type": "col",
     "name": "OnyxBlack",
     "state": {
@@ -1346,7 +1476,7 @@
     }
    },
    {
-    "id": "mat:Ral7036PlatinumGrey",
+    "id": "mm:Ral7036PlatinumGrey",
     "type": "col",
     "name": "Ral7036PlatinumGrey",
     "state": {
@@ -1359,7 +1489,7 @@
     }
    },
    {
-    "id": "mat:Белый\rar140",
+    "id": "mm:Белый\rar140",
     "type": "col",
     "name": "Белый",
     "state": {
@@ -1372,7 +1502,7 @@
     }
    },
    {
-    "id": "mat:хром",
+    "id": "mm:хром",
     "type": "col",
     "name": "хром",
     "state": {
@@ -1385,7 +1515,7 @@
     }
    },
    {
-    "id": "mat:Порошковая краска черная\r-5413543",
+    "id": "mm:Порошковая краска черная\r-5413543",
     "type": "col",
     "name": "Порошковая краска черная",
     "state": {
@@ -1398,7 +1528,20 @@
     }
    },
    {
-    "id": "mat:Прозрачность\r-546345634",
+    "id": "mm:Клён\rМассив Клёна",
+    "type": "tex",
+    "name": "Клён",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "Клён\rМассив Клёна",
+     "texData": null,
+     "color": "#dab083",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mm:Прозрачность\r-546345634",
     "type": "col",
     "name": "Прозрачность",
     "state": {
@@ -1411,7 +1554,7 @@
     }
    },
    {
-    "id": "mat:Белый\r-101",
+    "id": "mm:Белый\r-101",
     "type": "col",
     "name": "Белый",
     "state": {
@@ -1424,7 +1567,7 @@
     }
    },
    {
-    "id": "mat:Хром\rхром",
+    "id": "mm:Хром\rхром",
     "type": "col",
     "name": "Хром",
     "state": {
@@ -1437,7 +1580,20 @@
     }
    },
    {
-    "id": "mat:Пластик черный",
+    "id": "mm:Структурный графит",
+    "type": "tex",
+    "name": "Структурный графит",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": "Структурный графит",
+     "texData": null,
+     "color": "#232323",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mm:Пластик черный",
     "type": "col",
     "name": "Пластик черный",
     "state": {
@@ -1450,7 +1606,7 @@
     }
    },
    {
-    "id": "mat:Сталь",
+    "id": "mm:Сталь",
     "type": "col",
     "name": "Сталь",
     "state": {
@@ -1463,7 +1619,7 @@
     }
    },
    {
-    "id": "mat:# Сірий",
+    "id": "mm:# Сірий",
     "type": "col",
     "name": "# Сірий",
     "state": {
@@ -1476,7 +1632,7 @@
     }
    },
    {
-    "id": "mat:Стекло бутылочное",
+    "id": "mm:Стекло бутылочное",
     "type": "col",
     "name": "Стекло бутылочное",
     "state": {
@@ -1489,7 +1645,7 @@
     }
    },
    {
-    "id": "mat:Коричневый\r-645645",
+    "id": "mm:Коричневый\r-645645",
     "type": "col",
     "name": "Коричневый",
     "state": {
@@ -1502,7 +1658,7 @@
     }
    },
    {
-    "id": "art:Хром",
+    "id": "mm:Хром",
     "type": "tex",
     "name": "Хром",
     "state": {
@@ -1520,8 +1676,8 @@
    "modes": {}
   },
   "material_labels": {
-   "enabled": false,
-   "changedAt": "2026-10-19T15:33:09.497Z"
+   "enabled": true,
+   "changedAt": "2026-10-19T20:16:11.556Z"
   },
   "notes": {
    "enabled": true,
@@ -1541,6 +1697,9 @@
       38.093
      ],
      "element": "Тело по траектории1 · поз. 6.3.0.1",
+     "updated": "2026-10-19T15:23:23.043Z",
+     "hidden": false,
+     "isolate": true,
      "view": {
       "position": [
        384.646,
@@ -1558,9 +1717,7 @@
        0
       ],
       "orthographic": false
-     },
-     "isolate": true,
-     "updated": "2026-10-19T15:23:23.043Z"
+     }
     },
     {
      "id": "nmvfemvhknspd",
@@ -1577,6 +1734,9 @@
       300.114
      ],
      "element": "Релинг · поз. 7.2.0.5",
+     "updated": "2026-10-19T15:24:43.576Z",
+     "hidden": false,
+     "isolate": true,
      "view": {
       "position": [
        -1194.33,
@@ -1594,9 +1754,7 @@
        0
       ],
       "orthographic": false
-     },
-     "updated": "2026-10-19T15:24:43.576Z",
-     "isolate": true
+     }
     },
     {
      "id": "nmvfeomd851kf",
@@ -1613,6 +1771,9 @@
       18.488
      ],
      "element": "Фасад шпон · поз. 14.2.0.2",
+     "updated": "2026-10-19T15:26:03.008Z",
+     "hidden": false,
+     "isolate": true,
      "view": {
       "position": [
        -279.837,
@@ -1630,9 +1791,7 @@
        0
       ],
       "orthographic": false
-     },
-     "isolate": true,
-     "updated": "2026-10-19T15:26:03.008Z"
+     }
     },
     {
      "id": "nmvfeqndhkoab",
@@ -1649,7 +1808,8 @@
       19.012
      ],
      "element": "Крышка · поз. 14.1.0.1",
-     "updated": "2026-10-19T15:27:03.173Z"
+     "updated": "2026-10-19T15:27:03.173Z",
+     "hidden": false
     },
     {
      "id": "nmvfer3y36jcc",
@@ -1666,6 +1826,9 @@
       -0.012
      ],
      "element": "Дно выдвижной галереи · поз. 13.0.0.7",
+     "updated": "2026-10-19T15:27:50.542Z",
+     "hidden": false,
+     "isolate": true,
      "view": {
       "position": [
        2007.348,
@@ -1683,9 +1846,7 @@
        0
       ],
       "orthographic": false
-     },
-     "isolate": true,
-     "updated": "2026-10-19T15:27:50.542Z"
+     }
     },
     {
      "id": "nmvfetnj1bi2g",
@@ -1702,6 +1863,11 @@
       8.542
      ],
      "element": "Дно · поз. 11.3.0.6",
+     "updated": "2026-10-19T15:29:30.350Z",
+     "hidden": false,
+     "sphere": {
+      "diameter": 600
+     },
      "view": {
       "position": [
        1661.012,
@@ -1719,11 +1885,7 @@
        0
       ],
       "orthographic": false
-     },
-     "sphere": {
-      "diameter": 600
-     },
-     "updated": "2026-10-19T15:29:30.350Z"
+     }
     },
     {
      "id": "nmvfevnyvugab",
@@ -1740,6 +1902,11 @@
       -1301.85
      ],
      "element": "Профиль латунный · поз. 16.0.0.12",
+     "updated": "2026-10-19T15:31:08.733Z",
+     "hidden": false,
+     "sphere": {
+      "diameter": 240
+     },
      "view": {
       "position": [
        3369.189,
@@ -1757,11 +1924,7 @@
        0
       ],
       "orthographic": false
-     },
-     "sphere": {
-      "diameter": 240
-     },
-     "updated": "2026-10-19T15:31:08.733Z"
+     }
     },
     {
      "id": "nmvfeyu8dqrig",
@@ -1778,10 +1941,11 @@
       18.012
      ],
      "element": "Боковина, правая · поз. 15.1.0.4",
+     "updated": "2026-10-19T15:35:31.910Z",
+     "hidden": false,
      "sphere": {
       "diameter": 410
      },
-     "updated": "2026-10-19T15:35:31.910Z",
      "view": {
       "position": [
        2137.747,
@@ -1816,10 +1980,11 @@
       42.696
      ],
      "element": "Боковая накладка · поз. 15.0.0.2",
+     "updated": "2026-10-19T15:36:21.813Z",
+     "hidden": false,
      "images": [
       "8c508c3af0487886.jpg"
-     ],
-     "updated": "2026-10-19T15:36:21.813Z"
+     ]
     },
     {
      "id": "nmvff38xukuep",
@@ -1836,6 +2001,21 @@
       2.636
      ],
      "element": "Столешница · поз. 0.0.0.32",
+     "updated": "2026-10-19T15:38:04.774Z",
+     "hidden": false,
+     "window": {
+      "mode": "cut",
+      "normal": [
+       1,
+       0,
+       0
+      ],
+      "depth": 25,
+      "width": 300,
+      "height": 300,
+      "du": 0,
+      "dv": 0
+     },
      "view": {
       "position": [
        4040.454,
@@ -1853,20 +2033,6 @@
        0
       ],
       "orthographic": false
-     },
-     "updated": "2026-10-19T15:38:04.774Z",
-     "window": {
-      "mode": "cut",
-      "normal": [
-       1,
-       0,
-       0
-      ],
-      "depth": 25,
-      "width": 300,
-      "height": 300,
-      "du": 0,
-      "dv": 0
      }
     }
    ]
@@ -1930,7 +2096,7 @@
   "notesShow": true,
   "noteEditorMany": false,
   "noteEditorSphere": false,
-  "noteEditorDiameter": "290",
+  "noteEditorDiameter": "100",
   "noteEditorWindow": true,
   "noteEditorWindowReverse": false,
   "noteEditorWindowDepth": "25",
@@ -1953,14 +2119,14 @@
  },
  "camera": {
   "position": [
-   7797.280764521457,
-   2832.396646841163,
-   -6521.839003209269
+   -863.1785720749958,
+   4167.3851841449705,
+   5316.587668597517
   ],
   "target": [
-   1980.656963798738,
-   853.6797849731003,
-   363.44250521114355
+   1938.8181304642412,
+   9.913028880176144,
+   -803.9827680018626
   ],
   "up": [
    0,
