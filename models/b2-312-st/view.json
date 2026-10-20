@@ -1,0 +1,1671 @@
+{
+ "schema": 1,
+ "source": "663b3d4f85f6381cd9213eea1bf0b63d256c065ec753d26e45b0aac59458015a",
+ "savedAt": "2026-10-20T16:33:46.533Z",
+ "features": {
+  "outline": false,
+  "section": {
+   "active": false,
+   "axis": "y",
+   "position": 391.25001255905875,
+   "reversed": false,
+   "showPlane": true,
+   "chosen": false,
+   "normal": [
+    0,
+    1,
+    0
+   ]
+  },
+  "section_views": null,
+  "display_modes": null,
+  "finish": "texture",
+  "dimension_actions": {
+   "colors": []
+  },
+  "dimensions": {
+   "size": 16,
+   "color": "#e60000",
+   "unit": false,
+   "box": false
+  },
+  "materials": [
+   {
+    "id": "m:ДСП Kronospan K357 PW Дуб Кастелло Серый 2800х2070х18мм\r69968",
+    "type": "tex",
+    "name": "ДСП Kronospan K357 PW Дуб Кастелло Серый 2800х2070х18мм",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "69968",
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "m:ДСП Kronospan K357 PW Дуб Кастелло Серый 2800х2070х18мм Сращ.(2)\r69968",
+    "type": "tex",
+    "name": "ДСП Kronospan K357 PW Дуб Кастелло Серый 2800х2070х18мм Сращ.(2)",
+    "state": {
+     "rot": 0,
+     "mode": "tex",
+     "texKey": "69968",
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "m:Пластик Черный",
+    "type": "col",
+    "name": "Пластик Черный",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#2e3236",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "m:Ручка U 9, 5 м, черный\r50773",
+    "type": "col",
+    "name": "Ручка U 9, 5 м, черный",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": "Латунь\rЛатунь",
+     "texData": null,
+     "color": "#cccccc",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mm:color",
+    "type": "col",
+    "name": "color",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#414141",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mm:grau_220",
+    "type": "col",
+    "name": "grau_220",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#616161",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mm:color-1",
+    "type": "col",
+    "name": "color-1",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#ffffff",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mm:__09_standard_blau",
+    "type": "col",
+    "name": "__09_standard_blau",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#ffffff",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mm:dunkelgrau",
+    "type": "col",
+    "name": "dunkelgrau",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#414141",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mm:__3_dunkelgrau",
+    "type": "col",
+    "name": "__3_dunkelgrau",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#c0c0c0",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mm:__2_hellgrau",
+    "type": "col",
+    "name": "__2_hellgrau",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#ffffff",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mm:Пластик Черный",
+    "type": "col",
+    "name": "Пластик Черный",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#2e3236",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mm:Сталь",
+    "type": "col",
+    "name": "Сталь",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#c0c0c0",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "mm:Сталь 1мм",
+    "type": "col",
+    "name": "Сталь 1мм",
+    "state": {
+     "rot": 0,
+     "mode": "col",
+     "texKey": null,
+     "texData": null,
+     "color": "#00ff00",
+     "transparency": 0
+    }
+   }
+  ],
+  "texture_fit": {
+   "schema": 2,
+   "modes": {}
+  },
+  "material_labels": {
+   "enabled": false,
+   "changedAt": null
+  },
+  "notes": {
+   "enabled": true,
+   "notes": []
+  },
+  "hardware_mono": false,
+  "hardware_types": {
+   "on": true,
+   "focus": null
+  },
+  "visibility": {
+   "hidden": [],
+   "objectMode": true
+  },
+  "panel_hardware": {
+   "active": false,
+   "selectedPanelId": null
+  },
+  "assembler": {
+   "active": false,
+   "exploded": false,
+   "separation": 250,
+   "unitId": null,
+   "partDimensionsEnabled": false,
+   "labelPosition": true,
+   "labelName": null,
+   "labelFontSize": 11,
+   "positionsThrough": false,
+   "unitThrough": {},
+   "hiddenUnits": []
+  },
+  "hardware_catalog": {
+   "expanded": false
+  },
+  "drawings": {
+   "schema": 1,
+   "info": {
+    "product": "",
+    "order": "",
+    "customer": "",
+    "address": "",
+    "designer": "",
+    "company": "",
+    "date": "2026-10-20",
+    "note": ""
+   },
+   "style": {
+    "font": "Arial",
+    "size": 3.5,
+    "stretch": 100,
+    "frame": "gost",
+    "stamp": {
+     "rowH": 7,
+     "rows": [
+      [
+       {
+        "f": "product",
+        "w": 3
+       },
+       {
+        "f": "title",
+        "w": 3
+       },
+       {
+        "f": "scale",
+        "w": 1
+       },
+       {
+        "f": "sheet",
+        "w": 1
+       }
+      ],
+      [
+       {
+        "f": "order",
+        "w": 1
+       },
+       {
+        "f": "customer",
+        "w": 2
+       },
+       {
+        "f": "designer",
+        "w": 1
+       },
+       {
+        "f": "company",
+        "w": 2
+       },
+       {
+        "f": "date",
+        "w": 1
+       }
+      ]
+     ]
+    },
+    "displayOrtho": "ghost",
+    "displayIso": "ghost",
+    "displayDetail": "wire",
+    "calloutsWhich": "all",
+    "modelDimColor": "#1a5d9e",
+    "calloutColor": "#111111",
+    "calloutHalo": false,
+    "lineColor": "",
+    "titleOrient": "landscape",
+    "callouts": "name",
+    "calloutsOn": "iso",
+    "calloutSize": 0,
+    "views": [
+     "front",
+     "left",
+     "top",
+     "iso"
+    ],
+    "zones": {
+     "landscape": {
+      "parts": [
+       0,
+       0,
+       0.43,
+       1
+      ],
+      "units": [
+       0,
+       0.5,
+       0.43,
+       0.5
+      ],
+      "hardware": [
+       0,
+       0.7,
+       0.43,
+       0.3
+      ],
+      "linear": [
+       0,
+       0.25,
+       0.43,
+       0.75
+      ],
+      "views": [
+       0.43,
+       0,
+       0.57,
+       0.31
+      ],
+      "iso": [
+       0.43,
+       0.31,
+       0.57,
+       0.49
+      ],
+      "details": [
+       0.43,
+       0.8,
+       0.57,
+       0.2
+      ]
+     },
+     "portrait": {
+      "parts": [
+       0,
+       0.65,
+       0.59,
+       0.35
+      ],
+      "units": [
+       0,
+       0.85,
+       0.59,
+       0.15
+      ],
+      "hardware": [
+       0.59,
+       0.65,
+       0.41,
+       0.35
+      ],
+      "linear": [
+       0,
+       0.75,
+       0.59,
+       0.25
+      ],
+      "views": [
+       0,
+       0,
+       1,
+       0.21
+      ],
+      "iso": [
+       0,
+       0.21,
+       1,
+       0.31
+      ],
+      "details": [
+       0,
+       0.52,
+       1,
+       0.13
+      ]
+     }
+    },
+    "overviewZones": {
+     "landscape": {
+      "views": [
+       0,
+       0,
+       1,
+       0.35
+      ],
+      "iso": [
+       0,
+       0.35,
+       1,
+       0.65
+      ]
+     },
+     "portrait": {
+      "views": [
+       0,
+       0,
+       1,
+       0.31
+      ],
+      "iso": [
+       0,
+       0.31,
+       1,
+       0.69
+      ]
+     }
+    },
+    "overview": true,
+    "unitLayout": "specs",
+    "partSheets": false,
+    "unitParts": {},
+    "noteStyle": {
+     "size": 0,
+     "color": "#d32f2f",
+     "marker": "dot",
+     "frame": false
+    },
+    "formats": {
+     "sheet": "A4",
+     "overview": "A4",
+     "spec": "A4"
+    }
+   },
+   "sheets": [
+    {
+     "id": "smvgw2trw0",
+     "format": "A4",
+     "orient": "landscape",
+     "kind": "title",
+     "title": "",
+     "blocks": [
+      {
+       "id": "bmvgw2trw1",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 191,
+       "w": 272,
+       "h": 14
+      },
+      {
+       "id": "bmvgw2trw2",
+       "type": "title",
+       "x": 26,
+       "y": 11,
+       "w": 260,
+       "h": 26
+      },
+      {
+       "id": "bmvgw2trw3",
+       "type": "view",
+       "x": 26,
+       "y": 37,
+       "w": 260,
+       "h": 148,
+       "unit": null,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "plain",
+       "caption": false,
+       "callouts": "none",
+       "layers": {
+        "hardware": false,
+        "imports": false,
+        "holes": false,
+        "lines": false,
+        "modelDims": false
+       }
+      }
+     ]
+    },
+    {
+     "id": "smvgw2trw4",
+     "format": "A4",
+     "orient": "landscape",
+     "kind": "overview",
+     "title": "Б2_312_СТ",
+     "blocks": [
+      {
+       "id": "bmvgw2trw5",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 191,
+       "w": 272,
+       "h": 14
+      },
+      {
+       "id": "bmvgw2trw6",
+       "type": "view",
+       "x": 26,
+       "y": 11,
+       "w": 86.66666666666667,
+       "h": 60.9,
+       "unit": null,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2trw7",
+       "type": "view",
+       "x": 112.66666666666667,
+       "y": 11,
+       "w": 86.66666666666667,
+       "h": 60.9,
+       "unit": null,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2trw8",
+       "type": "view",
+       "x": 199.33333333333334,
+       "y": 11,
+       "w": 86.66666666666667,
+       "h": 60.9,
+       "unit": null,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2trw9",
+       "type": "view",
+       "x": 26,
+       "y": 71.9,
+       "w": 260,
+       "h": 113.10000000000001,
+       "unit": null,
+       "dir": "custom",
+       "az": 22,
+       "el": 19,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "baseDir": "iso"
+      }
+     ],
+     "unit": null,
+     "main": true
+    },
+    {
+     "id": "smvgw2trya",
+     "format": "A4",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "Стол Левый",
+     "blocks": [
+      {
+       "id": "bmvgw2tryb",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 191,
+       "w": 272,
+       "h": 14
+      },
+      {
+       "id": "bmvgw2tryc",
+       "type": "view",
+       "x": 30,
+       "y": 45,
+       "w": 100,
+       "h": 55,
+       "unit": 224,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2tryd",
+       "type": "view",
+       "x": 15,
+       "y": 95,
+       "w": 125,
+       "h": 55,
+       "unit": 224,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2trye",
+       "type": "view",
+       "x": 5,
+       "y": 140,
+       "w": 100,
+       "h": 63.94,
+       "unit": 224,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2tryf",
+       "type": "view",
+       "x": 140,
+       "y": 35,
+       "w": 148.20000000000002,
+       "h": 120.05999999999999,
+       "unit": 224,
+       "dir": "custom",
+       "az": -43,
+       "el": 31,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "baseDir": "iso"
+      },
+      {
+       "id": "bmvgw2tryg",
+       "type": "units",
+       "auto": true,
+       "unit": 224,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 111.8,
+       "h": 38.454
+      }
+     ],
+     "unit": 224
+    },
+    {
+     "id": "smvgw2trzh",
+     "format": "A4",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "Фасады",
+     "blocks": [
+      {
+       "id": "bmvgw2trzi",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 191,
+       "w": 272,
+       "h": 14
+      },
+      {
+       "id": "bmvgw2trzj",
+       "type": "view",
+       "x": 137.8,
+       "y": 11,
+       "w": 49.4,
+       "h": 53.94,
+       "unit": 1759,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2trzk",
+       "type": "view",
+       "x": 187.20000000000002,
+       "y": 11,
+       "w": 49.4,
+       "h": 53.94,
+       "unit": 1759,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2trzl",
+       "type": "view",
+       "x": 236.60000000000002,
+       "y": 11,
+       "w": 49.4,
+       "h": 53.94,
+       "unit": 1759,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2trzm",
+       "type": "view",
+       "x": 137.8,
+       "y": 64.94,
+       "w": 148.20000000000002,
+       "h": 120.05999999999999,
+       "unit": 1759,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2trzn",
+       "type": "parts",
+       "auto": true,
+       "unit": 1759,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 111.8,
+       "h": 43.854
+      },
+      {
+       "id": "bmvgw2trzo",
+       "type": "hardware",
+       "auto": true,
+       "unit": 1759,
+       "offset": 0,
+       "x": 26,
+       "y": 90.708,
+       "w": 111.8,
+       "h": 32.454
+      },
+      {
+       "id": "bmvgw2trzp",
+       "type": "linear",
+       "auto": true,
+       "unit": 1759,
+       "offset": 0,
+       "x": 26,
+       "y": 54.854,
+       "w": 111.8,
+       "h": 35.854
+      }
+     ],
+     "unit": 1759
+    },
+    {
+     "id": "smvgw2ts0q",
+     "format": "A4",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "Ящики",
+     "blocks": [
+      {
+       "id": "bmvgw2ts0r",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 191,
+       "w": 272,
+       "h": 14
+      },
+      {
+       "id": "bmvgw2ts0s",
+       "type": "view",
+       "x": 137.8,
+       "y": 11,
+       "w": 49.4,
+       "h": 53.94,
+       "unit": 1760,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2ts0t",
+       "type": "view",
+       "x": 187.20000000000002,
+       "y": 11,
+       "w": 49.4,
+       "h": 53.94,
+       "unit": 1760,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2ts0u",
+       "type": "view",
+       "x": 236.60000000000002,
+       "y": 11,
+       "w": 49.4,
+       "h": 53.94,
+       "unit": 1760,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2ts0v",
+       "type": "view",
+       "x": 137.8,
+       "y": 64.94,
+       "w": 148.20000000000002,
+       "h": 120.05999999999999,
+       "unit": 1760,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2ts0w",
+       "type": "parts",
+       "auto": true,
+       "unit": 1760,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 111.8,
+       "h": 79.854
+      },
+      {
+       "id": "bmvgw2ts0x",
+       "type": "hardware",
+       "auto": true,
+       "unit": 1760,
+       "offset": 0,
+       "x": 25,
+       "y": 90,
+       "w": 111.80000000000001,
+       "h": 110
+      }
+     ],
+     "unit": 1760
+    },
+    {
+     "id": "smvgw2ts2y",
+     "format": "A4",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "Корпус",
+     "blocks": [
+      {
+       "id": "bmvgw2ts2z",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 191,
+       "w": 272,
+       "h": 14
+      },
+      {
+       "id": "bmvgw2ts210",
+       "type": "view",
+       "x": 137.8,
+       "y": 11,
+       "w": 49.4,
+       "h": 53.94,
+       "unit": 228,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2ts211",
+       "type": "view",
+       "x": 187.20000000000002,
+       "y": 11,
+       "w": 49.4,
+       "h": 53.94,
+       "unit": 228,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2ts212",
+       "type": "view",
+       "x": 236.60000000000002,
+       "y": 11,
+       "w": 49.4,
+       "h": 53.94,
+       "unit": 228,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2ts213",
+       "type": "view",
+       "x": 137.8,
+       "y": 64.94,
+       "w": 148.20000000000002,
+       "h": 120.05999999999999,
+       "unit": 228,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2ts214",
+       "type": "parts",
+       "auto": true,
+       "unit": 228,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 111.8,
+       "h": 88.254
+      },
+      {
+       "id": "bmvgw2ts215",
+       "type": "hardware",
+       "auto": true,
+       "unit": 228,
+       "offset": 0,
+       "x": 26,
+       "y": 128.388,
+       "w": 111.8,
+       "h": 56.611999999999995
+      },
+      {
+       "id": "bmvgw2ts216",
+       "type": "linear",
+       "auto": true,
+       "unit": 228,
+       "offset": 0,
+       "x": 26,
+       "y": 99.254,
+       "w": 111.8,
+       "h": 29.134
+      }
+     ],
+     "unit": 228,
+     "display": "wire"
+    },
+    {
+     "id": "smvgwj0cg29",
+     "format": "A4",
+     "orient": "landscape",
+     "kind": "spec",
+     "title": "Корпус",
+     "blocks": [
+      {
+       "id": "bmvgwj0cg2a",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 191,
+       "w": 272,
+       "h": 14
+      },
+      {
+       "id": "bmvgwj0cg2b",
+       "type": "hardware",
+       "unit": 228,
+       "offset": 1,
+       "x": 26,
+       "y": 11,
+       "w": 260,
+       "h": 84.89999999999999
+      }
+     ],
+     "unit": 228
+    },
+    {
+     "id": "smvgw2ts317",
+     "format": "A4",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "Стол Правый",
+     "blocks": [
+      {
+       "id": "bmvgw2ts318",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 191,
+       "w": 272,
+       "h": 14
+      },
+      {
+       "id": "bmvgw2ts319",
+       "type": "view",
+       "x": 137.8,
+       "y": 11,
+       "w": 49.4,
+       "h": 53.94,
+       "unit": 2365,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2ts31a",
+       "type": "view",
+       "x": 187.20000000000002,
+       "y": 11,
+       "w": 49.4,
+       "h": 53.94,
+       "unit": 2365,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2ts31b",
+       "type": "view",
+       "x": 236.60000000000002,
+       "y": 11,
+       "w": 49.4,
+       "h": 53.94,
+       "unit": 2365,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2ts31c",
+       "type": "view",
+       "x": 137.8,
+       "y": 64.94,
+       "w": 148.20000000000002,
+       "h": 120.05999999999999,
+       "unit": 2365,
+       "dir": "custom",
+       "az": 37,
+       "el": 29,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "baseDir": "iso"
+      },
+      {
+       "id": "bmvgw2ts31d",
+       "type": "units",
+       "auto": true,
+       "unit": 2365,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 111.8,
+       "h": 38.454
+      }
+     ],
+     "unit": 2365,
+     "display": "wire"
+    },
+    {
+     "id": "smvgw2ts31e",
+     "format": "A4",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "Фасады",
+     "blocks": [
+      {
+       "id": "bmvgw2ts31f",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvgw2ts31g",
+       "type": "view",
+       "x": 137.8,
+       "y": 11,
+       "w": 49.4,
+       "h": 53.94,
+       "unit": 2366,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2ts31h",
+       "type": "view",
+       "x": 187.20000000000002,
+       "y": 11,
+       "w": 49.4,
+       "h": 53.94,
+       "unit": 2366,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2ts31i",
+       "type": "view",
+       "x": 236.60000000000002,
+       "y": 11,
+       "w": 49.4,
+       "h": 53.94,
+       "unit": 2366,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2ts31j",
+       "type": "view",
+       "x": 137.8,
+       "y": 64.94,
+       "w": 148.20000000000002,
+       "h": 120.05999999999999,
+       "unit": 2366,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2ts31k",
+       "type": "parts",
+       "auto": true,
+       "unit": 2366,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 111.8,
+       "h": 43.854
+      },
+      {
+       "id": "bmvgw2ts31l",
+       "type": "hardware",
+       "auto": true,
+       "unit": 2366,
+       "offset": 0,
+       "x": 26,
+       "y": 90.708,
+       "w": 111.8,
+       "h": 32.454
+      },
+      {
+       "id": "bmvgw2ts31m",
+       "type": "linear",
+       "auto": true,
+       "unit": 2366,
+       "offset": 0,
+       "x": 26,
+       "y": 54.854,
+       "w": 111.8,
+       "h": 35.854
+      }
+     ],
+     "unit": 2366,
+     "display": "wire"
+    },
+    {
+     "id": "smvgw2ts31n",
+     "format": "A4",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "Ящики",
+     "blocks": [
+      {
+       "id": "bmvgw2ts31o",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvgw2ts31p",
+       "type": "view",
+       "x": 137.8,
+       "y": 11,
+       "w": 49.4,
+       "h": 53.94,
+       "unit": 2427,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2ts31q",
+       "type": "view",
+       "x": 187.20000000000002,
+       "y": 11,
+       "w": 49.4,
+       "h": 53.94,
+       "unit": 2427,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2ts31r",
+       "type": "view",
+       "x": 236.60000000000002,
+       "y": 11,
+       "w": 49.4,
+       "h": 53.94,
+       "unit": 2427,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2ts31s",
+       "type": "view",
+       "x": 137.8,
+       "y": 64.94,
+       "w": 148.20000000000002,
+       "h": 120.05999999999999,
+       "unit": 2427,
+       "dir": "custom",
+       "az": 39,
+       "el": 27,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "baseDir": "iso"
+      },
+      {
+       "id": "bmvgw2ts31t",
+       "type": "parts",
+       "auto": true,
+       "unit": 2427,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 111.8,
+       "h": 79.854
+      },
+      {
+       "id": "bmvgw2ts31u",
+       "type": "hardware",
+       "auto": true,
+       "unit": 2427,
+       "offset": 0,
+       "x": 26,
+       "y": 90.854,
+       "w": 111.8,
+       "h": 94.146
+      }
+     ],
+     "unit": 2427,
+     "display": "plain"
+    },
+    {
+     "id": "smvgwj0ch2c",
+     "format": "A4",
+     "orient": "landscape",
+     "kind": "spec",
+     "title": "Ящики",
+     "blocks": [
+      {
+       "id": "bmvgwj0ch2d",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvgwj0ch2e",
+       "type": "hardware",
+       "unit": 2427,
+       "offset": 5,
+       "x": 26,
+       "y": 11,
+       "w": 260,
+       "h": 48.9
+      }
+     ],
+     "unit": 2427
+    },
+    {
+     "id": "smvgw2ts41v",
+     "format": "A4",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "Корпус",
+     "blocks": [
+      {
+       "id": "bmvgw2ts41w",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvgw2ts41x",
+       "type": "view",
+       "x": 137.8,
+       "y": 11,
+       "w": 49.4,
+       "h": 53.94,
+       "unit": 3078,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2ts41y",
+       "type": "view",
+       "x": 187.20000000000002,
+       "y": 11,
+       "w": 49.4,
+       "h": 53.94,
+       "unit": 3078,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2ts41z",
+       "type": "view",
+       "x": 236.60000000000002,
+       "y": 11,
+       "w": 49.4,
+       "h": 53.94,
+       "unit": 3078,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvgw2ts420",
+       "type": "view",
+       "x": 137.8,
+       "y": 64.94,
+       "w": 148.20000000000002,
+       "h": 120.05999999999999,
+       "unit": 3078,
+       "dir": "custom",
+       "az": 33,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "baseDir": "iso"
+      },
+      {
+       "id": "bmvgw2ts421",
+       "type": "parts",
+       "auto": true,
+       "unit": 3078,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 111.8,
+       "h": 88.254
+      },
+      {
+       "id": "bmvgw2ts422",
+       "type": "hardware",
+       "auto": true,
+       "unit": 3078,
+       "offset": 0,
+       "x": 26,
+       "y": 128.388,
+       "w": 111.8,
+       "h": 56.611999999999995
+      },
+      {
+       "id": "bmvgw2ts423",
+       "type": "linear",
+       "auto": true,
+       "unit": 3078,
+       "offset": 0,
+       "x": 26,
+       "y": 99.254,
+       "w": 111.8,
+       "h": 29.134
+      }
+     ],
+     "unit": 3078,
+     "display": "wire"
+    },
+    {
+     "id": "smvgwj0ch2f",
+     "format": "A4",
+     "orient": "landscape",
+     "kind": "spec",
+     "title": "Корпус",
+     "blocks": [
+      {
+       "id": "bmvgwj0ch2g",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvgwj0ch2h",
+       "type": "hardware",
+       "unit": 3078,
+       "offset": 1,
+       "x": 26,
+       "y": 11,
+       "w": 260,
+       "h": 84.89999999999999
+      }
+     ],
+     "unit": 3078
+    }
+   ]
+  }
+ },
+ "controls": {
+  "panels": true,
+  "profiles": true,
+  "edges": true,
+  "textures": true,
+  "imports": true,
+  "hardware": true,
+  "holes": true,
+  "lines": true,
+  "overlay": false,
+  "opacity": "100",
+  "guides": false,
+  "holeOverlay": false,
+  "nativeDimensions": true,
+  "manualDimensions": true,
+  "githubTokenRemember": true,
+  "sectionEnabled": false,
+  "sectionShowPlane": true,
+  "sectionPosition": "391.320000171661",
+  "sectionReverse": false,
+  "sectionViewsMarks": true,
+  "displayModesEnabled": false,
+  "dimensionFontSize": "16",
+  "dimensionUnit": false,
+  "dimensionBox": false,
+  "notesShow": true,
+  "noteEditorMany": false,
+  "noteEditorSphere": false,
+  "noteEditorDiameter": "60",
+  "noteEditorWindow": false,
+  "noteEditorWindowReverse": false,
+  "noteEditorWindowDepth": "50",
+  "noteEditorIsolate": false,
+  "assemblerSeparation": "250",
+  "assemblerLabelPosition": true,
+  "assemblerLabelName": true,
+  "assemblerLabelFontSize": "11",
+  "assemblerLabelsThrough": false,
+  "usageEnabled": true,
+  "guideIntroOnly": false
+ },
+ "layers": [
+  true
+ ],
+ "layersByName": {
+  "Линии": true
+ },
+ "camera": {
+  "position": [
+   4300.510821343922,
+   2941.62922410501,
+   5451.674617808345
+  ],
+  "target": [
+   1500,
+   392.4820018299911,
+   799.9994751744958
+  ],
+  "up": [
+   0,
+   1,
+   0
+  ],
+  "orthographic": false
+ },
+ "dimensions": []
+}
