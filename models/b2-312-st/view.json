@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "source": "663b3d4f85f6381cd9213eea1bf0b63d256c065ec753d26e45b0aac59458015a",
- "savedAt": "2026-10-20T16:33:46.533Z",
+ "savedAt": "2026-10-20T16:38:18.798Z",
  "features": {
   "outline": false,
   "section": {
@@ -503,11 +503,11 @@
        "w": 260,
        "h": 148,
        "unit": null,
-       "dir": "iso",
-       "az": 35,
-       "el": 25,
+       "dir": "custom",
+       "az": -27,
+       "el": 23,
        "scale": "auto",
-       "style": "plain",
+       "style": "texture",
        "caption": false,
        "callouts": "none",
        "layers": {
@@ -516,7 +516,8 @@
         "holes": false,
         "lines": false,
         "modelDims": false
-       }
+       },
+       "baseDir": "iso"
       }
      ]
     },
@@ -1199,8 +1200,8 @@
        "type": "stamp",
        "dock": true,
        "x": 20,
-       "y": 278,
-       "w": 395,
+       "y": 191,
+       "w": 272,
        "h": 14
       },
       {
@@ -1320,8 +1321,8 @@
        "type": "stamp",
        "dock": true,
        "x": 20,
-       "y": 278,
-       "w": 395,
+       "y": 191,
+       "w": 272,
        "h": 14
       },
       {
@@ -1431,8 +1432,8 @@
        "type": "stamp",
        "dock": true,
        "x": 20,
-       "y": 278,
-       "w": 395,
+       "y": 191,
+       "w": 272,
        "h": 14
       },
       {
@@ -1460,8 +1461,8 @@
        "type": "stamp",
        "dock": true,
        "x": 20,
-       "y": 278,
-       "w": 395,
+       "y": 191,
+       "w": 272,
        "h": 14
       },
       {
@@ -1582,8 +1583,8 @@
        "type": "stamp",
        "dock": true,
        "x": 20,
-       "y": 278,
-       "w": 395,
+       "y": 191,
+       "w": 272,
        "h": 14
       },
       {
