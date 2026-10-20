@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "source": "663b3d4f85f6381cd9213eea1bf0b63d256c065ec753d26e45b0aac59458015a",
- "savedAt": "2026-10-20T16:38:18.798Z",
+ "savedAt": "2026-10-20T17:31:50.712Z",
  "features": {
   "outline": false,
   "section": {
@@ -223,7 +223,85 @@
   },
   "notes": {
    "enabled": true,
-   "notes": []
+   "notes": [
+    {
+     "id": "nmvgyjyanm5xw",
+     "text": "Заметка",
+     "point": [
+      1501.496,
+      779.988,
+      1567.345
+     ],
+     "objectId": 3079,
+     "local": [
+      -198.504,
+      62.655,
+      35.988
+     ],
+     "element": "Столешка · поз. 1",
+     "updated": "2026-10-20T17:29:33.126Z",
+     "hidden": false,
+     "from": "Саня",
+     "sphere": {
+      "diameter": 710
+     },
+     "view": {
+      "position": [
+       3952.243,
+       3596.639,
+       5222.214
+      ],
+      "target": [
+       1832.465,
+       -120.53,
+       -109.096
+      ],
+      "up": [
+       0,
+       1,
+       0
+      ],
+      "orthographic": false
+     }
+    },
+    {
+     "id": "nmvgykpyrkquj",
+     "text": "Вырез под провода",
+     "point": [
+      2998.012,
+      116.88,
+      274.453
+     ],
+     "objectId": 3081,
+     "local": [
+      -244.453,
+      127.772,
+      18.012
+     ],
+     "element": "СТ_Пр · поз. 12",
+     "updated": "2026-10-20T17:30:04.372Z",
+     "hidden": false,
+     "from": "Саня",
+     "view": {
+      "position": [
+       3859.64,
+       516.798,
+       346.118
+      ],
+      "target": [
+       2526.453,
+       -158.037,
+       -44.801
+      ],
+      "up": [
+       0,
+       1,
+       0
+      ],
+      "orthographic": false
+     }
+    }
+   ]
   },
   "hardware_mono": false,
   "hardware_types": {
@@ -477,6 +555,14 @@
      "orient": "landscape",
      "kind": "title",
      "title": "",
+     "unit": null,
+     "display": null,
+     "calloutsWhich": null,
+     "calloutsOn": null,
+     "commonScale": null,
+     "viewLinks": null,
+     "callouts": null,
+     "views": null,
      "blocks": [
       {
        "id": "bmvgw2trw1",
@@ -527,6 +613,15 @@
      "orient": "landscape",
      "kind": "overview",
      "title": "Б2_312_СТ",
+     "unit": null,
+     "main": true,
+     "display": null,
+     "calloutsWhich": null,
+     "calloutsOn": null,
+     "commonScale": null,
+     "viewLinks": null,
+     "callouts": null,
+     "views": null,
      "blocks": [
       {
        "id": "bmvgw2trw5",
@@ -606,9 +701,7 @@
        "auto": true,
        "baseDir": "iso"
       }
-     ],
-     "unit": null,
-     "main": true
+     ]
     },
     {
      "id": "smvgw2trya",
@@ -616,6 +709,14 @@
      "orient": "landscape",
      "kind": "sheet",
      "title": "Стол Левый",
+     "unit": 224,
+     "display": null,
+     "calloutsWhich": null,
+     "calloutsOn": null,
+     "commonScale": null,
+     "viewLinks": null,
+     "callouts": null,
+     "views": null,
      "blocks": [
       {
        "id": "bmvgw2tryb",
@@ -706,8 +807,7 @@
        "w": 111.8,
        "h": 38.454
       }
-     ],
-     "unit": 224
+     ]
     },
     {
      "id": "smvgw2trzh",
@@ -715,6 +815,14 @@
      "orient": "landscape",
      "kind": "sheet",
      "title": "Фасады",
+     "unit": 1759,
+     "display": null,
+     "calloutsWhich": null,
+     "calloutsOn": null,
+     "commonScale": null,
+     "viewLinks": null,
+     "callouts": null,
+     "views": null,
      "blocks": [
       {
        "id": "bmvgw2trzi",
@@ -826,8 +934,7 @@
        "w": 111.8,
        "h": 35.854
       }
-     ],
-     "unit": 1759
+     ]
     },
     {
      "id": "smvgw2ts0q",
@@ -835,6 +942,14 @@
      "orient": "landscape",
      "kind": "sheet",
      "title": "Ящики",
+     "unit": 1760,
+     "display": null,
+     "calloutsWhich": null,
+     "calloutsOn": null,
+     "commonScale": null,
+     "viewLinks": null,
+     "callouts": null,
+     "views": null,
      "blocks": [
       {
        "id": "bmvgw2ts0r",
@@ -935,8 +1050,7 @@
        "w": 111.80000000000001,
        "h": 110
       }
-     ],
-     "unit": 1760
+     ]
     },
     {
      "id": "smvgw2ts2y",
@@ -944,6 +1058,14 @@
      "orient": "landscape",
      "kind": "sheet",
      "title": "Корпус",
+     "unit": 228,
+     "display": "wire",
+     "calloutsWhich": null,
+     "calloutsOn": null,
+     "commonScale": null,
+     "viewLinks": null,
+     "callouts": null,
+     "views": null,
      "blocks": [
       {
        "id": "bmvgw2ts2z",
@@ -1055,9 +1177,7 @@
        "w": 111.8,
        "h": 29.134
       }
-     ],
-     "unit": 228,
-     "display": "wire"
+     ]
     },
     {
      "id": "smvgwj0cg29",
@@ -1065,6 +1185,14 @@
      "orient": "landscape",
      "kind": "spec",
      "title": "Корпус",
+     "unit": 228,
+     "display": null,
+     "calloutsWhich": null,
+     "calloutsOn": null,
+     "commonScale": null,
+     "viewLinks": null,
+     "callouts": null,
+     "views": null,
      "blocks": [
       {
        "id": "bmvgwj0cg2a",
@@ -1085,8 +1213,7 @@
        "w": 260,
        "h": 84.89999999999999
       }
-     ],
-     "unit": 228
+     ]
     },
     {
      "id": "smvgw2ts317",
@@ -1094,6 +1221,14 @@
      "orient": "landscape",
      "kind": "sheet",
      "title": "Стол Правый",
+     "unit": 2365,
+     "display": "wire",
+     "calloutsWhich": null,
+     "calloutsOn": null,
+     "commonScale": null,
+     "viewLinks": null,
+     "callouts": null,
+     "views": null,
      "blocks": [
       {
        "id": "bmvgw2ts318",
@@ -1184,9 +1319,7 @@
        "w": 111.8,
        "h": 38.454
       }
-     ],
-     "unit": 2365,
-     "display": "wire"
+     ]
     },
     {
      "id": "smvgw2ts31e",
@@ -1194,6 +1327,14 @@
      "orient": "landscape",
      "kind": "sheet",
      "title": "Фасады",
+     "unit": 2366,
+     "display": "wire",
+     "calloutsWhich": null,
+     "calloutsOn": null,
+     "commonScale": null,
+     "viewLinks": null,
+     "callouts": null,
+     "views": null,
      "blocks": [
       {
        "id": "bmvgw2ts31f",
@@ -1305,9 +1446,7 @@
        "w": 111.8,
        "h": 35.854
       }
-     ],
-     "unit": 2366,
-     "display": "wire"
+     ]
     },
     {
      "id": "smvgw2ts31n",
@@ -1315,6 +1454,14 @@
      "orient": "landscape",
      "kind": "sheet",
      "title": "Ящики",
+     "unit": 2427,
+     "display": "plain",
+     "calloutsWhich": null,
+     "calloutsOn": null,
+     "commonScale": null,
+     "viewLinks": null,
+     "callouts": null,
+     "views": null,
      "blocks": [
       {
        "id": "bmvgw2ts31o",
@@ -1416,9 +1563,7 @@
        "w": 111.8,
        "h": 94.146
       }
-     ],
-     "unit": 2427,
-     "display": "plain"
+     ]
     },
     {
      "id": "smvgwj0ch2c",
@@ -1426,6 +1571,14 @@
      "orient": "landscape",
      "kind": "spec",
      "title": "Ящики",
+     "unit": 2427,
+     "display": null,
+     "calloutsWhich": null,
+     "calloutsOn": null,
+     "commonScale": null,
+     "viewLinks": null,
+     "callouts": null,
+     "views": null,
      "blocks": [
       {
        "id": "bmvgwj0ch2d",
@@ -1446,8 +1599,7 @@
        "w": 260,
        "h": 48.9
       }
-     ],
-     "unit": 2427
+     ]
     },
     {
      "id": "smvgw2ts41v",
@@ -1455,6 +1607,14 @@
      "orient": "landscape",
      "kind": "sheet",
      "title": "Корпус",
+     "unit": 3078,
+     "display": "wire",
+     "calloutsWhich": null,
+     "calloutsOn": null,
+     "commonScale": null,
+     "viewLinks": null,
+     "callouts": null,
+     "views": null,
      "blocks": [
       {
        "id": "bmvgw2ts41w",
@@ -1567,9 +1727,7 @@
        "w": 111.8,
        "h": 29.134
       }
-     ],
-     "unit": 3078,
-     "display": "wire"
+     ]
     },
     {
      "id": "smvgwj0ch2f",
@@ -1577,6 +1735,14 @@
      "orient": "landscape",
      "kind": "spec",
      "title": "Корпус",
+     "unit": 3078,
+     "display": null,
+     "calloutsWhich": null,
+     "calloutsOn": null,
+     "commonScale": null,
+     "viewLinks": null,
+     "callouts": null,
+     "views": null,
      "blocks": [
       {
        "id": "bmvgwj0ch2g",
@@ -1597,8 +1763,7 @@
        "w": 260,
        "h": 84.89999999999999
       }
-     ],
-     "unit": 3078
+     ]
     }
    ]
   }
@@ -1652,9 +1817,9 @@
  },
  "camera": {
   "position": [
-   4300.510821343922,
-   2941.62922410501,
-   5451.674617808345
+   5016.700441044151,
+   3433.5015902712785,
+   4590.001048336588
   ],
   "target": [
    1500,
