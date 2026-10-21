@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="bazis-viewer" content="b1a0ddf52068">
+<meta name="bazis-viewer" content="f8ce754b9e63">
 <title>СВ 1 поверх · просмотр модели</title>
 <style>
 :root{color-scheme:dark;--bg:#10171d;--panel:#17232d;--line:#31414b;--text:#e8eef0;--muted:#a6bac4;--accent:#9ee2d0;--popup-border:#526776;--control-border:#46586a;--hover:#304654;--muted-soft:#9fb3bd;--divider:#26343d;--compact-slider:70px}
@@ -5755,10 +5755,6 @@ window.OrbitControls = OrbitControls;
 </details>
 <div class="sectionMarkLabels" id="sectionMarkLabels"></div>
 </div>
-<div data-feature-markup="transparency">
-<!-- Показывается в меню «Ещё», только если устройство не тянет гладкую прозрачность -->
-<span class="subtle" id="transparencyFallbackHint">Гладкая прозрачность недоступна на этом устройстве; используется сетка.</span>
-</div>
 <div data-feature-markup="line_width">
 <!-- В «☰ → Ещё» (extrasMount): толщина рёбер и обводки среза в сечении -->
 <label class="opacityTool lineWidthTool" id="lineWidthControl" title="Толщина видимых рёбер деталей и обводки среза в сечении">
@@ -9156,273 +9152,109 @@ window.OrbitControls = OrbitControls;
 (globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"АБВГДЕЖИКЛМНПРСТУФХЦШЭЮЯ":{"en":"АБВГДЕЖИКЛМНПРСТУФХЦШЭЮЯ","pl":"АБВГДЕЖИКЛМНПРСТУФХЦШЭЮЯ","uk":"АБВГДЕЖИКЛМНПРСТУФХЦШЭЮЯ"},"Без сечения":{"en":"No section","pl":"Bez przekroju","uk":"Без перерізу"},"Записать в этот пункт текущее сечение и ракурс":{"en":"Write the current section and view into this item","pl":"Zapisz w tej pozycji bieżący przekrój i widok","uk":"Записати в цей пункт поточний переріз і ракурс"},"Несовместимый модуль сохранённых сечений":{"en":"Incompatible saved sections module","pl":"Niezgodny moduł zapisanych przekrojów","uk":"Несумісний модуль збережених перерізів"},"Обозначение сечения":{"en":"Section label","pl":"Oznaczenie przekroju","uk":"Позначення перерізу"},"Обозначения на модели":{"en":"Marks on the model","pl":"Oznaczenia na modelu","uk":"Позначення на моделі"},"Поставьте сечение (галочка «Включить» и плоскость), выберите ракурс и сохраните. Включено может быть только одно сечение из списка.":{"en":"Set up a section (the “Enable” box and a plane), choose a view and save it. Only one section from the list can be on at a time.","pl":"Ustaw przekrój (pole „Włącz” i płaszczyzna), wybierz widok i zapisz. Włączony może być tylko jeden przekrój z listy.","uk":"Поставте переріз (галочка «Увімкнути» і площина), оберіть ракурс і збережіть. Увімкнено може бути лише один переріз зі списку."},"Превью сечения":{"en":"Section preview","pl":"Podgląd przekroju","uk":"Прев'ю перерізу"},"Сечение":{"en":"Section","pl":"Przekrój","uk":"Переріз"},"Сечение изменено — записать правки в этот пункт":{"en":"Section changed — write the changes into this item","pl":"Przekrój zmieniony — zapisz zmiany w tej pozycji","uk":"Переріз змінено — записати правки в цей пункт"},"Сечения (":{"en":"Sections (","pl":"Przekroje (","uk":"Перерізи ("},"Сечения (0)":{"en":"Sections (0)","pl":"Przekroje (0)","uk":"Перерізи (0)"},"Сохранить текущее сечение с ракурсом и превью":{"en":"Save the current section with its view and preview","pl":"Zapisz bieżący przekrój z widokiem i podglądem","uk":"Зберегти поточний переріз із ракурсом і прев'ю"},"Удалить сечение":{"en":"Delete section","pl":"Usuń przekrój","uk":"Видалити переріз"},"Удалить сечение «":{"en":"Delete section “","pl":"Usunąć przekrój „","uk":"Видалити переріз «"},"мм":{"en":"mm","pl":"mm","uk":"мм"},"＋ Сохранить текущее":{"en":"＋ Save current","pl":"＋ Zapisz bieżący","uk":"＋ Зберегти поточний"}});
 (function (root) {
   'use strict';
-  // McGuire/Bavoil weighted blended OIT. Linear light; separate accumulation
-  // and revealage passes work with the bundled Three r160 without MRT blending.
+  // Прозрачность деталей — как «Полупрозрачная» в чертеже, но в цветах материалов.
+  // Ниже 100 % на время кадра материал каждой панели/профиля (hooks.surfaceMaterial)
+  // подменяется полупрозрачной копией: тот же цвет, текстура и подсветка выбора,
+  // видна с обеих сторон, глубину НЕ пишет — поэтому детали за ней не пропадают и
+  // нет мути от усреднения слоёв (так было с weighted OIT). Рёбра рисуются как
+  // обычно и остаются чёткими. Один проход обычного рендерера — работает на любой
+  // графике, отдельный запасной режим не нужен.
+  // Порядок наложения — по объектам (Three.js сортирует прозрачные от дальних к
+  // ближним); при малой непрозрачности редкая ошибка порядка на глаз не видна.
+  const MIN = 0.25,
+    HOLE_GHOST = 0.12; // отверстия сквозь полупрозрачные детали — едва заметны
+  // непрозрачность граней по ползунку: 25 % → 0,325 (как удачно смотрелось в
+  // прототипе), 100 % → 1
+  const faceOpacity = alpha => 0.1 + 0.9 * alpha;
   function install(context, bundle) {
-    const { THREE: T, renderer, scene, camera, controls, hooks, services, document: doc } = context;
+    const { THREE: T, renderer, scene, camera, hooks, services, document: doc } = context;
     if (bundle?.schema !== 1 || !hooks?.surfaceMaterial || !hooks?.render)
       throw new Error('Несовместимый модуль прозрачности');
-    const supported =
-      !context.graphics?.safe &&
-      !!(renderer.capabilities?.isWebGL2 && renderer.extensions.has('EXT_color_buffer_float'));
     const materials = new Set(),
-      variants = new Map(),
-      fallbackHooks = new Map();
-    const alpha = { value: 1 },
-      size = { value: new T.Vector2(1, 1) },
-      distance = { value: 1 },
-      depth = { value: null };
-    let disposed = false,
-      targets = null,
-      composite = null,
-      quad = null,
-      passScene = null;
-    const fallbackUniform = { value: 0 };
-    function applyFallback(m) {
-      m.onBeforeCompile = shader => {
-        shader.uniforms.uDither = fallbackUniform;
-        // Своя varying с видовой глубиной фрагмента (мм): экранный шаблон СМЕЩАЕТСЯ по
-        // срезам глубины, иначе у фасада и полки за ним «оставленные» пиксели совпадают
-        // пиксель-в-пиксель и заднюю панель не видно совсем. Со смещением дырки
-        // переднего слоя открывают задний.
-        shader.vertexShader =
-          'varying float vDitherDepth;\n' +
-          shader.vertexShader.replace(
-            '#include <project_vertex>',
-            '#include <project_vertex>\nvDitherDepth=-(modelViewMatrix*vec4(transformed,1.0)).z;'
-          );
-        shader.fragmentShader =
-          'uniform float uDither;\nvarying float vDitherDepth;\n' +
-          shader.fragmentShader.replace(
-            '#include <clipping_planes_fragment>',
-            '#include <clipping_planes_fragment>\n' +
-              'if(uDither>0.001){' +
-              'vec2 dof=vec2(mod(floor(vDitherDepth*0.2),4.0),mod(floor(vDitherDepth*0.05),4.0));' +
-              'vec2 dp=floor(gl_FragCoord.xy)+dof;vec2 dh=floor((gl_FragCoord.xy+dof)*0.5);' +
-              'float b1=fract(dp.x*0.5+dp.y*dp.y*0.75);' + // Bayer 2×2 в полном разрешении
-              'float b2=fract(dh.x*0.5+dh.y*dh.y*0.75);' + // Bayer 2×2 в половинном
-              'float bayer=b2*0.25+b1;' + // → равномерный Bayer 4×4, 16 уровней
-              'if(bayer<uDither)discard;}'
-          );
-      };
-      m.customProgramCacheKey = () => 'dither';
-      return m;
-    }
-
-    function register(material) {
-      materials.add(material);
-      if (!supported) {
-        fallbackHooks.set(material, [material.onBeforeCompile, material.customProgramCacheKey]);
-        applyFallback(material);
-      }
-    }
+      ghosts = new Map(); // исходный материал → полупрозрачная копия
+    let alpha = 1,
+      disposed = false;
+    const register = material => materials.add(material);
     function setOpacity(value) {
       if (!Number.isFinite(value)) throw new Error('Некорректная непрозрачность');
-      alpha.value = Math.min(1, Math.max(0.25, value));
-      fallbackUniform.value = 1 - alpha.value;
-      const boost = Math.pow((1 - alpha.value) / 0.75, 0.7);
+      alpha = Math.min(1, Math.max(MIN, value));
+      // фурнитура, линии и рамки ярче по мере прозрачности панелей (своё дно у каждого)
+      const boost = Math.pow((1 - alpha) / (1 - MIN), 0.7);
       for (const entry of services.fadeables || []) {
         const floor = Number.isFinite(entry.min) ? entry.min : 0.18;
         entry.mat.opacity = entry.base * (floor + (1 - floor) * boost);
       }
       for (const material of services.holeMaterials || []) {
-        material.depthTest = alpha.value === 1 && !doc.getElementById('holeOverlay').checked;
+        material.depthTest = alpha === 1 && !doc.getElementById('holeOverlay')?.checked;
         material.needsUpdate = true;
       }
     }
-    const declarations = `uniform sampler2D oitDepth;
-uniform vec2 oitSize;
-uniform float oitAlpha;
-uniform float oitDistance;
-varying float oitViewDepth;
-`;
-    const depthTest = `float fragmentDepth=gl_FragCoord.z;
-#if defined(USE_LOGDEPTHBUF) && defined(USE_LOGDEPTHBUF_EXT)
-fragmentDepth=vIsPerspective==0.0?gl_FragCoord.z:log2(vFragDepth)*logDepthBufFC*0.5;
-#endif
-if(fragmentDepth>texture2D(oitDepth,gl_FragCoord.xy/oitSize).r+0.0000001)discard;
-`;
-    function variant(original, pass) {
-      let pair = variants.get(original);
-      if (!pair) {
-        pair = {};
-        variants.set(original, pair);
+    function ghost(original) {
+      let m = ghosts.get(original);
+      if (!m) {
+        m = original.clone();
+        m.transparent = true;
+        m.depthWrite = false;
+        m.side = T.DoubleSide;
+        // рёбра — поверх своих граней
+        m.polygonOffset = true;
+        m.polygonOffsetFactor = 1;
+        m.polygonOffsetUnits = 1;
+        ghosts.set(original, m);
       }
-      let material = pair[pass];
-      if (!material) {
-        material = original.clone();
-        pair[pass] = material;
-        material.transparent = true;
-        material.depthWrite = false;
-        material.depthTest = false;
-        // Closed solids contribute the face facing the viewer once, not both skins.
-        material.side = T.FrontSide;
-        material.blending = T.CustomBlending;
-        material.blendEquation = T.AddEquation;
-        material.blendSrc = pass === 'accum' ? T.OneFactor : T.ZeroFactor;
-        material.blendDst = pass === 'accum' ? T.OneFactor : T.OneMinusSrcAlphaFactor;
-        material.onBeforeCompile = shader => {
-          Object.assign(shader.uniforms, {
-            oitDepth: depth,
-            oitSize: size,
-            oitAlpha: alpha,
-            oitDistance: distance
-          });
-          shader.vertexShader =
-            'varying float oitViewDepth;\n' +
-            shader.vertexShader.replace(
-              '#include <project_vertex>',
-              '#include <project_vertex>\noitViewDepth=-mvPosition.z;'
-            );
-          shader.fragmentShader =
-            declarations +
-            shader.fragmentShader
-              .replace(
-                '#include <opaque_fragment>',
-                depthTest +
-                  (pass === 'accum'
-                    ? 'float weight=clamp(10.0/(0.01+pow(max(oitViewDepth,0.01)/oitDistance,4.0)),0.01,100.0);\ngl_FragColor=vec4(outgoingLight*oitAlpha,oitAlpha)*weight;'
-                    : 'gl_FragColor=vec4(oitAlpha);')
-              )
-              .replace('#include <tonemapping_fragment>', '')
-              .replace('#include <colorspace_fragment>', '');
-        };
-        material.customProgramCacheKey = () => `panel-oit-${pass}-v1`;
+      // смена текстуры, цвета (редактор материалов), подсветка выбора — живые;
+      // правка шейдера исходного (onBeforeCompile, needsUpdate) доходит и до копии
+      if (m.map !== original.map) {
+        m.map = original.map;
+        m.needsUpdate = true;
       }
-      // Texture switches operate on the original material and remain live in OIT.
-      if (material.map !== original.map) {
-        material.map = original.map;
-        material.needsUpdate = true;
+      if (m.onBeforeCompile !== original.onBeforeCompile || m.userData.sourceVersion !== original.version) {
+        m.onBeforeCompile = original.onBeforeCompile;
+        m.customProgramCacheKey = original.customProgramCacheKey;
+        m.userData.sourceVersion = original.version;
+        m.needsUpdate = true;
       }
-      material.color.copy(original.color);
-      material.emissive.copy(original.emissive);
-      material.roughness = original.roughness;
-      material.metalness = original.metalness;
-      return material;
-    }
-    function allocate() {
-      if (targets) return;
-      const options = { minFilter: T.NearestFilter, magFilter: T.NearestFilter, generateMipmaps: false };
-      const base = new T.WebGLRenderTarget(1, 1, { ...options, type: T.HalfFloatType });
-      base.depthTexture = new T.DepthTexture(1, 1, T.UnsignedIntType);
-      const accum = new T.WebGLRenderTarget(1, 1, { ...options, type: T.HalfFloatType, depthBuffer: false });
-      const reveal = new T.WebGLRenderTarget(1, 1, { ...options, depthBuffer: false });
-      targets = { base, accum, reveal };
-      depth.value = base.depthTexture;
-      composite = new T.ShaderMaterial({
-        depthTest: false,
-        depthWrite: false,
-        uniforms: {
-          base: { value: base.texture },
-          accum: { value: accum.texture },
-          reveal: { value: reveal.texture }
-        },
-        vertexShader: 'varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.0,1.0);}',
-        fragmentShader: `uniform sampler2D base,accum,reveal;varying vec2 vUv;
-void main(){vec4 sum=texture2D(accum,vUv);float transmittance=texture2D(reveal,vUv).r;
-vec3 color=sum.rgb/max(sum.a,0.00001);
-gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittance,1.0);
-#include <tonemapping_fragment>
-#include <colorspace_fragment>
-}`
-      });
-      quad = new T.Mesh(new T.PlaneGeometry(2, 2), composite);
-      quad.frustumCulled = false;
-      passScene = new T.Scene();
-      passScene.add(quad);
+      m.color.copy(original.color);
+      if (m.emissive && original.emissive) {
+        m.emissive.copy(original.emissive);
+        m.emissiveIntensity = original.emissiveIntensity;
+      }
+      m.visible = original.visible;
+      m.opacity = faceOpacity(alpha) * (original.transparent ? original.opacity : 1);
+      return m;
     }
     function render() {
-      if (disposed || !supported || alpha.value === 1) return false;
-      allocate();
-      const drawSize = renderer.getDrawingBufferSize(new T.Vector2());
-      if (!drawSize.equals(size.value)) {
-        size.value.copy(drawSize);
-        for (const target of Object.values(targets)) target.setSize(drawSize.x, drawSize.y);
-      }
-      distance.value = Math.max(camera.position.distanceTo(controls.target), 1);
-      const objects = [];
+      if (disposed || alpha === 1) return false;
+      const swapped = [];
       scene.traverse(object => {
-        if (!object.material) return;
-        const panel = materials.has(object.material);
-        const overlay =
-          !panel &&
-          (Array.isArray(object.material)
-            ? object.material.every(m => !m.depthTest)
-            : !object.material.depthTest);
-        objects.push({ object, mask: object.layers.mask, material: object.material, panel, overlay });
-      });
-      const previous = {
-        target: renderer.getRenderTarget(),
-        clear: renderer.getClearColor(new T.Color()),
-        alpha: renderer.getClearAlpha(),
-        auto: renderer.autoClear,
-        autoReset: renderer.info.autoReset,
-        background: scene.background
-      };
-      function selectPass(pass) {
-        for (const entry of objects) {
-          const show =
-            pass === 'base'
-              ? !entry.panel && !entry.overlay
-              : pass === 'overlay'
-                ? entry.overlay
-                : entry.panel;
-          entry.object.layers.mask = show ? entry.mask : 0;
-          entry.object.material =
-            entry.panel && (pass === 'accum' || pass === 'reveal')
-              ? variant(entry.material, pass)
-              : entry.material;
+        const material = object.material;
+        if (!material) return;
+        if (Array.isArray(material)) {
+          if (!material.some(m => materials.has(m))) return;
+          swapped.push([object, material]);
+          object.material = material.map(m => (materials.has(m) ? ghost(m) : m));
+        } else if (materials.has(material)) {
+          swapped.push([object, material]);
+          object.material = ghost(material);
         }
-      }
+      });
+      // Грани глубину не пишут — отверстия на всех деталях проступили бы россыпью
+      // цветных точек. Без «Отверстия сквозь поверхности» на этот кадр они приглушены.
+      const dimmed = [];
+      if (!doc.getElementById('holeOverlay')?.checked)
+        for (const material of services.holeMaterials || []) {
+          dimmed.push([material, material.opacity]);
+          material.opacity = Math.min(material.opacity, HOLE_GHOST);
+        }
       try {
-        renderer.autoClear = false;
-        if (previous.autoReset) renderer.info.reset();
-        renderer.info.autoReset = false;
-        selectPass('base');
-        renderer.setRenderTarget(targets.base);
-        renderer.setClearColor(previous.clear, previous.alpha);
-        renderer.clear();
-        renderer.render(scene, camera);
-        scene.background = null;
-        selectPass('accum');
-        renderer.setRenderTarget(targets.accum);
-        renderer.setClearColor(0, 0);
-        renderer.clear();
-        renderer.render(scene, camera);
-        selectPass('reveal');
-        renderer.setRenderTarget(targets.reveal);
-        renderer.setClearColor(0xffffff, 1);
-        renderer.clear();
-        renderer.render(scene, camera);
-        renderer.setRenderTarget(previous.target);
-        renderer.setClearColor(previous.clear, previous.alpha);
-        renderer.clear();
-        renderer.render(passScene, camera);
-        selectPass('overlay');
         renderer.render(scene, camera);
       } finally {
-        for (const entry of objects) {
-          entry.object.layers.mask = entry.mask;
-          entry.object.material = entry.material;
-        }
-        scene.background = previous.background;
-        renderer.setRenderTarget(previous.target);
-        renderer.setClearColor(previous.clear, previous.alpha);
-        renderer.autoClear = previous.auto;
-        renderer.info.autoReset = previous.autoReset;
+        for (const [object, material] of swapped) object.material = material;
+        for (const [material, opacity] of dimmed) material.opacity = opacity;
       }
       return true;
     }
-    const ready = () => {
-      setOpacity(Number(doc.getElementById('opacity').value) / 100);
-      if (!supported) {
-        // Разметка — markup.html (сборщик кладёт её в #featureMarkup)
-        const hint = doc.getElementById('transparencyFallbackHint');
-        context.extrasMount?.append(hint);
-        fallbackHint = hint;
-      }
-    };
-    let fallbackHint = null;
+    const ready = () => setOpacity(Number(doc.getElementById('opacity').value) / 100);
     hooks.surfaceMaterial.push(register);
     hooks.opacity.push(setOpacity);
     hooks.render.push(render);
@@ -9439,17 +9271,8 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
         const at = list.indexOf(fn);
         if (at >= 0) list.splice(at, 1);
       }
-      for (const pair of variants.values()) for (const material of Object.values(pair)) material.dispose();
-      variants.clear();
-      for (const [material, callbacks] of fallbackHooks) {
-        [material.onBeforeCompile, material.customProgramCacheKey] = callbacks;
-        material.needsUpdate = true;
-      }
-      fallbackHooks.clear();
-      if (targets) for (const target of Object.values(targets)) target.dispose();
-      quad?.geometry.dispose();
-      composite?.dispose();
-      fallbackHint?.remove();
+      for (const m of ghosts.values()) m.dispose();
+      ghosts.clear();
     }
     return {
       name: 'transparency',
@@ -9457,10 +9280,10 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       render,
       dispose,
       get opacity() {
-        return alpha.value;
+        return alpha;
       },
       get mode() {
-        return supported ? 'weighted-oit' : 'screen-door-fallback';
+        return 'ghost';
       }
     };
   }
@@ -9469,7 +9292,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
   else (root.BazisViewerFeatures || (root.BazisViewerFeatures = [])).push({ name: 'transparency', install });
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 
-(globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"Гладкая прозрачность недоступна на этом устройстве; используется сетка.":{"en":"Smooth transparency is unavailable on this device; a dither pattern is used.","pl":"Płynna przezroczystość jest niedostępna na tym urządzeniu; używana jest siatka.","uk":"Плавна прозорість недоступна на цьому пристрої; використовується сітка."},"Некорректная непрозрачность":{"en":"Invalid opacity","pl":"Nieprawidłowa nieprzezroczystość","uk":"Некоректна непрозорість"},"Несовместимый модуль прозрачности":{"en":"Incompatible transparency module","pl":"Niezgodny moduł przezroczystości","uk":"Несумісний модуль прозорості"}});
+(globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"Некорректная непрозрачность":{"en":"Invalid opacity","pl":"Nieprawidłowa nieprzezroczystość","uk":"Некоректна непрозорість"},"Несовместимый модуль прозрачности":{"en":"Incompatible transparency module","pl":"Niezgodny moduł przezroczystości","uk":"Несумісний модуль прозорості"}});
 (function (root) {
   'use strict';
   // Толщина линий: ползунок в «☰ → Ещё». WebGL рисует линии в 1 пиксель, поэтому
@@ -11221,7 +11044,7 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
       g.mats = new Set(copies.values());
     };
     // Прозрачность материала (стекло): 0..0.95. Общие материалы панелей подчинены
-    // ползунку «Прозрачность» (fadeables/OIT), а стекло держит свою альфу — поэтому
+    // ползунку «Прозрачность» (fadeables, полупрозрачные копии), а стекло держит свою альфу — поэтому
     // непрозрачному материалу при первой прозрачности даём свои копии (как стеклу из
     // БАЗИС), а при возврате к 0 возвращаем исходные. userData.glass — метка для
     // расчётов перекрытия: сквозь стекло подписи, заметки и позиции видны.
@@ -24475,11 +24298,15 @@ gl_FragColor=vec4(color*(1.0-transmittance)+texture2D(base,vUv).rgb*transmittanc
     const lr = labelRoom(block),
       m = Number.isFinite(block.margin) ? block.margin : Math.max(2, Math.min(6, Math.min(block.w, block.h) * 0.03)); // поле вида (resolve: своё или из параметров)
     if (block.dims !== false && !block.clip && ORTHO.has(block.dir)) {
+      // размеры — со стороны модулей (block.dimV 'right' / block.dimH 'top'), место под
+      // них — с той же стороны
       const ch = block.chain ? 7 : 0,
-        left = DIM_ROOM + ch + m,
-        bottom = DIM_ROOM + ch + 4 + m,
-        right = Math.max(11, lr + 11) + m,
-        top = 3 + m;
+        onRight = block.dimV === 'right',
+        onTop = block.dimH === 'top',
+        left = (onRight ? 4 : DIM_ROOM + ch) + m,
+        bottom = (onTop ? 4 : DIM_ROOM + ch + 4) + m,
+        right = Math.max(11, lr + 11) + m + (onRight ? DIM_ROOM + ch : 0),
+        top = (onTop ? DIM_ROOM + ch + 4 : 3) + m;
       return { x: left, y: top, w: Math.max(10, block.w - left - right), h: Math.max(10, block.h - top - bottom) };
     }
     // block.captionRoom — место под текст выноски под подписью выносного вида
@@ -25464,6 +25291,7 @@ void main() {
       openNote = null, // выноска, открытая в свойствах
       zoom = 0, // 0 — «по размеру»
       focus = null, // блок, открытый отдельно (двойной щелчок): лист обрезан до него
+      focusZoom = 1, // приближение блока, открытого отдельно (масштаб блока не меняется)
       lastTap = null, // прошлое нажатие (двойной щелчок)
       app = null,
       paper = null,
@@ -25838,6 +25666,8 @@ void main() {
       r.labelRoom = labelRoomOf(lab);
       if (r.labelRoom && !(ORTHO.has(b.dir) && b.dims !== false && !b.clip) && labelsHeight(lab) <= (b.h - 10) * 0.9) r.labelSide = 'right';
       r.margin = blockMargin(b);
+      const ds = dimSides.get(b.id);
+      if (ds) Object.assign(r, { dimV: ds.v, dimH: ds.h });
       const dn = detailNote(b);
       if (textUnderDetail(dn)) r.captionRoom = noteLines(dn).length * (noteStyle(dn).size || ensureDoc().style.size) * 1.25 + 1;
       return r;
@@ -25911,7 +25741,7 @@ void main() {
 
     // ---- блоки ----
     const viewKey = b =>
-      JSON.stringify([b.unit, b.dir, b.orient || 'facade', b.az, b.el, b.scale, b.style, b.dims !== false, b.callouts || null, (b.notes || []).length, b.layers || null, Math.round(b.w), Math.round(b.h), b.clip || null, b.cut || null, b.labelRoom ?? null, b.labelSide || '', b.captionRoom || 0, b.margin ?? null, hiddenIds().size, b.calloutsWhich || null, (b.hide || []).join(','), JSON.stringify(b.layers || null), ensureDoc().style.lineColor || '', ensureDoc().style.wireColor || '', ensureDoc().style.lineWidth ?? '', ensureDoc().style.hiddenWidth ?? '']);
+      JSON.stringify([b.unit, b.dir, b.orient || 'facade', b.az, b.el, b.scale, b.style, b.dims !== false, b.callouts || null, (b.notes || []).length, b.layers || null, Math.round(b.w), Math.round(b.h), b.clip || null, b.cut || null, b.labelRoom ?? null, b.labelSide || '', b.captionRoom || 0, b.margin ?? null, b.dimV || '', b.dimH || '', hiddenIds().size, b.calloutsWhich || null, (b.hide || []).join(','), JSON.stringify(b.layers || null), overviewHide().join('|'), ensureDoc().style.lineColor || '', ensureDoc().style.wireColor || '', ensureDoc().style.lineWidth ?? '', ensureDoc().style.hiddenWidth ?? '']);
     // Позиция для выноски: своя деталь единицы — её позиция; деталь вложенной единицы —
     // позиция этой вложенной единицы (одна выноска на неё); на виде всего изделия —
     // позиция верхней сборочной единицы
@@ -25973,8 +25803,24 @@ void main() {
         all = (s ? s.blocks : [b]).filter(x => x.type === 'view' && x.scale === 'auto' && ORTHO.has(x.dir) && !x.clip);
       return Math.max(...all.map(fitOf).filter(Number.isFinite));
     }
+    // Сторона размеров вида — где его модули: вертикальные — справа, если модули (по
+    // высоте) правее середины, горизонтальные — сверху, если (по ширине) выше. Узнаётся
+    // по первому кадру и запоминается (dimSides), кадр перерисовывается один раз.
+    const dimSides = new Map();
+    function sideOf(d) {
+      const gs = d.groups || [];
+      if (!gs.length) return { v: 'left', h: 'bottom' };
+      const wv = gs.reduce((a, g) => a + (g.y1 - g.y0), 0) || 1,
+        wh = gs.reduce((a, g) => a + (g.x1 - g.x0), 0) || 1,
+        cx = gs.reduce((a, g) => a + ((g.x0 + g.x1) / 2) * (g.y1 - g.y0), 0) / wv,
+        cy = gs.reduce((a, g) => a + ((g.y0 + g.y1) / 2) * (g.x1 - g.x0), 0) / wh,
+        mx = (d.x0 + d.x1) / 2,
+        my = (d.y0 + d.y1) / 2;
+      return { v: cx > mx + (d.x1 - d.x0) * 0.05 ? 'right' : 'left', h: cy < my - (d.y1 - d.y0) * 0.05 ? 'top' : 'bottom' };
+    }
     function viewImage(b, dpi = SCREEN_DPI) {
-      const eff = scaleOf(b);
+      const eff = scaleOf(b),
+        orig = b;
       b = resolve(b);
       const key = viewKey(b) + '|' + eff + '|' + dpi;
       if (!images.has(key)) {
@@ -26004,12 +25850,23 @@ void main() {
           r = null;
         }
         images.set(key, r);
+        // размеры — со стороны модулей: сторона другая — запомнить и перерисовать
+        if (r?.dims?.groups?.length && ORTHO.has(b.dir) && b.dims !== false) {
+          const want = sideOf(r.dims),
+            had = dimSides.get(orig.id);
+          if (want.v !== (b.dimV || 'left') || want.h !== (b.dimH || 'bottom')) {
+            if (!had || had.v !== want.v || had.h !== want.h) {
+              dimSides.set(orig.id, want);
+              return viewImage(orig, dpi);
+            }
+          }
+        }
       }
       return images.get(key);
     }
     // Размер по ГОСТ 2.307: выносные линии от габарита (с выступом 2 мм за размерную),
     // размерная линия со стрелками, число над ней. horizontal — снизу, иначе — слева.
-    function dimension(g, a, c, at, value, horizontal) {
+    function dimension(g, a, c, at, value, horizontal, slot = 0) {
       const sz = ensureDoc().style.size * 0.85,
         arrow = 2.5,
         w = 0.18;
@@ -26024,11 +25881,21 @@ void main() {
         line(g, x0, at, x1, at, w);
         head(x0, at, 1, 0);
         head(x1, at, -1, 0);
-        // число не мельче 3/4 шрифта; не влезает между выносными — за правым концом
+        // число не мельче 3/4 шрифта; не влезает между выносными — на полочке: выноска от
+        // середины размерной линии, соседние короткие размеры — на разной высоте (slot)
         const fs = Math.max(sz * 0.75, fitSize(value, sz, Math.abs(x1 - x0) - 1)),
           tw = textWidth(value, fs),
           inside = tw <= Math.abs(x1 - x0) - 1;
-        text(g, inside ? (x0 + x1) / 2 : Math.max(x0, x1) + 1.2, at - 1, value, { anchor: inside ? 'middle' : 'start', size: fs });
+        if (inside) text(g, (x0 + x1) / 2, at - 1, value, { anchor: 'middle', size: fs });
+        else {
+          const cx = (x0 + x1) / 2,
+            up = sh > 0 ? 1 : -1, // полочка — от вида
+            sy = at + up * (4 + (slot % 2) * 4.5),
+            sx = cx + 2.5;
+          line(g, cx, at, sx, sy, w);
+          line(g, sx, sy, sx + tw + 1.5, sy, w);
+          text(g, sx + 0.8, sy - 0.8, value, { anchor: 'start', size: fs });
+        }
       } else {
         const [x, y0] = a,
           [, y1] = c,
@@ -26040,10 +25907,19 @@ void main() {
         head(at, y1, 0, -1);
         const fs = Math.max(sz * 0.75, fitSize(value, sz, Math.abs(y1 - y0) - 1)),
           tw = textWidth(value, fs),
-          inside = tw <= Math.abs(y1 - y0) - 1,
-          cy = inside ? (y0 + y1) / 2 : Math.min(y0, y1) - 1.2 - tw / 2; // не влезает — над верхним концом
-        const e = text(g, 0, 0, value, { anchor: 'middle', size: fs });
-        e.setAttribute('transform', `translate(${at - 1} ${cy}) rotate(-90) scale(${(ensureDoc().style.stretch || 100) / 100} 1)`);
+          inside = tw <= Math.abs(y1 - y0) - 1;
+        if (inside) {
+          const e = text(g, 0, 0, value, { anchor: 'middle', size: fs });
+          e.setAttribute('transform', `translate(${at - 1} ${(y0 + y1) / 2}) rotate(-90) scale(${(ensureDoc().style.stretch || 100) / 100} 1)`);
+        } else {
+          // не влезает — на полочке наружу от вида (текст горизонтально)
+          const cy = (y0 + y1) / 2,
+            sx = at + sg * (3 + (slot % 2) * 4.5),
+            sy = cy - 2.5;
+          line(g, at, cy, sx, sy, w);
+          line(g, sx, sy, sx + sg * (tw + 1.5), sy, w);
+          text(g, sg > 0 ? sx + 0.8 : sx - 0.8, sy - 0.8, value, { anchor: sg > 0 ? 'start' : 'end', size: fs });
+        }
       }
     }
     const mm = v => String(Math.round(v));
@@ -26438,12 +26314,32 @@ void main() {
         };
         const hs = chain(r => r.x0, r => r.x1),
           vs = chain(r => r.y0, r => r.y1);
-        for (const [a, c] of hs) dimension(g, [a, d.y1], [c, d.y1], d.y1 + 7, mm((c - a) * d.scale), true);
-        for (const [a, c] of vs) dimension(g, [d.x0, a], [d.x0, c], d.x0 - 7, mm((c - a) * d.scale), false);
-        dimension(g, [d.x0, d.y1], [d.x1, d.y1], d.y1 + (hs.length ? 14 : 7), mm(d.w), true);
-        dimension(g, [d.x0, d.y0], [d.x0, d.y1], d.x0 - (vs.length ? 14 : 7), mm(d.h), false);
-        // высота опор: от дна корпуса до низа ножки — справа от вида
-        if (d.leg) dimension(g, [d.x1, d.leg.y0], [d.x1, d.leg.y1], d.x1 + 7, mm(d.leg.h), false);
+        // сторона — где модули (b.dimV/dimH из resolve); ряды можно отодвинуть (b.dimOff,
+        // тянут мышью в режиме «блок отдельно»)
+        const rb = resolve(b),
+          onR = rb.dimV === 'right',
+          onT = rb.dimH === 'top',
+          oh = Number(b.dimOff?.h) || 0,
+          ov = Number(b.dimOff?.v) || 0,
+          xv = onR ? d.x1 : d.x0,
+          sv = onR ? 1 : -1,
+          yh = onT ? d.y0 : d.y1,
+          shh = onT ? -1 : 1,
+          hg = el('g', { class: 'drawingsDimRow', 'data-axis': 'h' }, g),
+          vg = el('g', { class: 'drawingsDimRow', 'data-axis': 'v' }, g);
+        hs.forEach(([a, c], i) => dimension(hg, [a, yh], [c, yh], yh + shh * (7 + oh), mm((c - a) * d.scale), true, i));
+        vs.forEach(([a, c], i) => dimension(vg, [xv, a], [xv, c], xv + sv * (7 + ov), mm((c - a) * d.scale), false, i));
+        const hAt = yh + shh * ((hs.length ? 14 : 7) + oh),
+          vAt = xv + sv * ((vs.length ? 14 : 7) + ov);
+        dimension(hg, [d.x0, yh], [d.x1, yh], hAt, mm(d.w), true);
+        dimension(vg, [xv, d.y0], [xv, d.y1], vAt, mm(d.h), false);
+        // за ряд тянут мышью (только в режиме «блок отдельно»)
+        if (focus === b.id) {
+          el('rect', { x: d.x0, y: Math.min(yh, hAt) - 2, width: d.x1 - d.x0, height: Math.abs(hAt - yh) + 4, fill: 'transparent', class: 'drawingsDimHit' }, hg);
+          el('rect', { x: Math.min(xv, vAt) - 2, y: d.y0, width: Math.abs(vAt - xv) + 4, height: d.y1 - d.y0, fill: 'transparent', class: 'drawingsDimHit' }, vg);
+        }
+        // высота опор: от дна корпуса до низа ножки — с другой стороны от вертикальных
+        if (d.leg) dimension(g, [onR ? d.x0 : d.x1, d.leg.y0], [onR ? d.x0 : d.x1, d.leg.y1], onR ? d.x0 - 7 : d.x1 + 7, mm(d.leg.h), false);
       }
       if (b.caption !== false) {
         const name = b.dir === 'custom' ? 'Вид' : Sheet.VIEW_NAMES[b.dir] || 'Вид';
@@ -26654,12 +26550,27 @@ void main() {
         order = opts.edit && !zones ? [...s.blocks.filter(b => b.id !== selected), ...s.blocks.filter(b => b.id === selected)] : s.blocks;
       for (const b of order) {
         const dim = opts.focus && b.id !== opts.focus,
-          g = drawBlock(svg, b, s, index, total, { ...opts, deferSelection: zones, dpi: opts.focus === b.id ? FOCUS_DPI : opts.dpi });
+          g = drawBlock(svg, b, s, index, total, { ...opts, deferSelection: zones, dpi: opts.focus === b.id ? Math.min(600, Math.round(FOCUS_DPI * Math.max(1, focusZoom))) : opts.dpi });
         // блок отдельно: соседи приглушены и не мешают щелчкам
         if (dim) Object.assign(g.style, { opacity: '0.18', pointerEvents: 'none' });
       }
       const sel = opts.edit && zones && s.blocks.find(b => b.id === selected);
       if (sel) drawSelection(el('g', { transform: `translate(${sel.x} ${sel.y})`, 'data-block': sel.id }, svg), sel);
+      // выбрана проекция — общий блок проекций листа: оранжевая рамка и ярлык, за который
+      // тянут всю полосу (выбранный вид — синей рамкой внутри)
+      const pick = opts.edit && !zones && !opts.focus && s.blocks.find(b => b.id === selected),
+        group = pick && pick.type === 'view' && ORTHO.has(pick.baseDir || pick.dir) && !pick.clip && !pick.ofNote ? projections(s) : [];
+      if (group.length > 1) {
+        const x0 = Math.min(...group.map(b => b.x)) - 2,
+          y0 = Math.min(...group.map(b => b.y)) - 2,
+          x1 = Math.max(...group.map(b => b.x + b.w)) + 2,
+          y1 = Math.max(...group.map(b => b.y + b.h)) + 2,
+          gg = el('g', { class: 'drawingsGroup' }, svg);
+        el('rect', { x: x0, y: y0, width: x1 - x0, height: y1 - y0, fill: 'none', stroke: '#ef6c00', 'stroke-width': 0.6, 'stroke-dasharray': '4 1.5', 'pointer-events': 'none' }, gg);
+        el('rect', { x: x0, y: y0 - 7, width: 30, height: 7, rx: 1, fill: '#ef6c00', class: 'drawingsGroupTab' }, gg);
+        const tt = text(gg, x0 + 15, y0 - 2, '✥ ' + t('Проекции'), { anchor: 'middle', size: 3.6, weight: 700, fill: '#fff' });
+        tt.setAttribute('pointer-events', 'none');
+      }
       return svg;
     }
 
@@ -26777,7 +26688,32 @@ void main() {
     }
     // скрытое на виде: исключения «на видах» + блоки модели, снятые в структуре (b.hide —
     // id узлов; скрываются со всем содержимым)
+    // Скрывать на общем виде и титуле: узлы модели, в названии которых есть строка из
+    // списка (style.overviewHide; по умолчанию — сетка 3D-скана LEICA), со всем
+    // содержимым
+    const overviewHide = () => (Array.isArray(docStyle().overviewHide) ? docStyle().overviewHide : ['LEICA_3DDISTO_SURFACESCAN']).map(s => String(s).trim()).filter(Boolean);
+    const hideByName = new Map();
+    function hiddenByName() {
+      const pats = overviewHide(),
+        key = pats.join('\n');
+      if (!hideByName.has(key)) {
+        const out = new Set();
+        if (pats.length)
+          for (const o of objects())
+            if (pats.some(p => String(o.name || '').includes(p))) for (const x of services.descendants?.(o.id) || [o.id]) out.add(x);
+        hideByName.clear();
+        hideByName.set(key, out);
+      }
+      return hideByName.get(key);
+    }
     function hiddenFor(b) {
+      const kind = sheetOf(b)?.kind,
+        byName = kind === 'overview' || kind === 'title' ? hiddenByName() : null;
+      if (byName?.size) {
+        const out = new Set([...hiddenIds(), ...byName]);
+        for (const id of b.hide || []) for (const x of services.descendants?.(id) || [id]) out.add(x);
+        return out;
+      }
       if (!b.hide?.length) return hiddenIds();
       const out = new Set(hiddenIds());
       for (const id of b.hide) for (const x of services.descendants?.(id) || [id]) out.add(x);
@@ -27760,7 +27696,7 @@ void main() {
         const pad = 10,
           r = { x: fb.x - pad, y: fb.y - pad, w: fb.w + pad * 2, h: fb.h + pad * 2 },
           stage = $('drawingsStage'),
-          kf = Math.max(0.2, Math.min((stage.clientWidth - 48) / (r.w * PX_PER_MM), (stage.clientHeight - 60) / (r.h * PX_PER_MM)) || 1);
+          kf = Math.max(0.2, Math.min((stage.clientWidth - 48) / (r.w * PX_PER_MM), (stage.clientHeight - 60) / (r.h * PX_PER_MM)) || 1) * focusZoom;
         svg.setAttribute('viewBox', `${r.x} ${r.y} ${r.w} ${r.h}`);
         svg.setAttribute('width', r.w * PX_PER_MM * kf);
         svg.setAttribute('height', r.h * PX_PER_MM * kf);
@@ -28028,6 +27964,7 @@ void main() {
         back.textContent = '← ' + t('К листу') + ' (Esc)';
         back.onclick = () => {
           focus = null;
+          focusZoom = 1;
           draw();
         };
         props.append(back);
@@ -28116,6 +28053,8 @@ void main() {
               ['together', t('Вместе с проекциями')]
             ],
             v => {
+              // вместе с проекциями — по умолчанию сеткой (2×2 с изометрией)
+              if (v === 'together') d.style[arrangeKey(zoneTarget)] = 'grid';
               // вместе — зона изометрии отдаётся проекциям (и в шаблоне её нет); отдельно —
               // изометрия и проекции по умолчанию
               const merge = (zones, defs) => {
@@ -29282,6 +29221,19 @@ void main() {
       ovBtn.textContent = t('Разметить зоны общего вида…');
       ovBtn.onclick = () => openZones(zoneOrient, 'overview');
       ovTpl.append(ovBtn);
+      // скрывать на общем виде и титуле — по названию узла (строка на строку)
+      const hideBox = inputFor(overviewHide().join('\n'), v => {
+        d.style.overviewHide = String(v)
+          .split('\n')
+          .map(s => s.trim())
+          .filter(Boolean);
+        images.clear();
+        fits.clear();
+        changed();
+      }, 'textarea');
+      hideBox.rows = 3;
+      hideBox.setAttribute('data-i18n-skip', '');
+      field(ovTpl, 'Скрывать по названию', hideBox).title = t('Узлы модели, в названии которых есть одна из строк (по строке на узел), на общем виде и титуле скрыты со всем содержимым — например, сетка 3D-скана');
       const titleTpl = section('Шаблон титула', 'title');
       field(
         titleTpl,
@@ -30015,6 +29967,15 @@ void main() {
       return m ? p.matrixTransform(m.inverse()) : { x: 0, y: 0 };
     }
     function pointerDown(e) {
+      // ярлык общего блока проекций — тянем всю полосу
+      if (e.target.classList?.contains('drawingsGroupTab')) {
+        const s0 = sheet(),
+          list = projections(s0),
+          p0 = toMm(e.currentTarget, e);
+        drag = { groupDrag: list.map(b => ({ b, x: b.x, y: b.y })), x: p0.x, y: p0.y, svg: e.currentTarget };
+        e.preventDefault();
+        return;
+      }
       const svg = e.currentTarget,
         g = e.target.closest?.('[data-block]');
       if (!g) {
@@ -30067,6 +30028,16 @@ void main() {
             changed();
           }
         }
+        e.preventDefault();
+        return;
+      }
+      // ряд размеров вида (режим «блок отдельно») — дальше или ближе к модели
+      const dr = e.target.classList?.contains('drawingsDimHit') && e.target.closest?.('.drawingsDimRow');
+      if (dr && b.type === 'view' && focus === b.id) {
+        const axis = dr.getAttribute('data-axis'),
+          rb = resolve(b);
+        selected = b.id;
+        drag = { dimDrag: axis, b, x: p.x, y: p.y, sign: axis === 'h' ? (rb.dimH === 'top' ? -1 : 1) : rb.dimV === 'right' ? 1 : -1, start: { off: Number(b.dimOff?.[axis]) || 0 }, svg: paper.querySelector('svg') };
         e.preventDefault();
         return;
       }
@@ -30136,8 +30107,20 @@ void main() {
         dy = p.y - drag.y,
         s = sheet(),
         [w, h] = Sheet.size(s.format, s.orient);
-      if (drag.measureDrag || drag.calloutDrag) {
-        if (drag.measureDrag) drag.measureDrag.off = Math.round((drag.start.off + (drag.measureDrag.kind === 'v' ? dx : dy)) * 10) / 10;
+      if (drag.groupDrag) {
+        for (const it of drag.groupDrag) Object.assign(it.b, { x: it.x + Sheet.snap(dx), y: it.y + Sheet.snap(dy) });
+        if (!drag.frame)
+          drag.frame = win.requestAnimationFrame(() => {
+            if (!drag) return;
+            drag.frame = null;
+            draw();
+            drag.svg = paper.querySelector('svg');
+          });
+        return;
+      }
+      if (drag.measureDrag || drag.calloutDrag || drag.dimDrag) {
+        if (drag.dimDrag) drag.b.dimOff = { ...(drag.b.dimOff || {}), [drag.dimDrag]: Math.max(-6, Math.round((drag.start.off + drag.sign * (drag.dimDrag === 'h' ? dy : dx)) * 10) / 10) };
+        else if (drag.measureDrag) drag.measureDrag.off = Math.round((drag.start.off + (drag.measureDrag.kind === 'v' ? dx : dy)) * 10) / 10;
         else drag.b.calloutAt = { ...(drag.b.calloutAt || {}), [drag.calloutDrag]: { x: drag.start.x0 + dx, y: drag.start.ly + dy } };
         if (!drag.frame)
           drag.frame = win.requestAnimationFrame(() => {
@@ -30228,6 +30211,16 @@ void main() {
     function pointerUp() {
       if (!drag) return;
       const done = drag;
+      // полосу проекций передвинули — лист «разложен руками»
+      if (done.groupDrag) {
+        drag = null;
+        if (done.groupDrag.some(it => it.b.x !== it.x || it.b.y !== it.y)) {
+          sheet().touched = true;
+          for (const it of done.groupDrag) delete it.b.link;
+        }
+        changed();
+        return;
+      }
       // таблицу листа спецификации подвинули или растянули — лист «ручной»: его блоки
       // остаются как поставили, список течёт дальше по следующим листам
       const moved = done.start && Number.isFinite(done.start.w) && ['x', 'y', 'w', 'h'].some(k => Math.abs((done.b[k] || 0) - (done.start[k] || 0)) > 0.01);
@@ -30332,6 +30325,7 @@ void main() {
       if (e.key === 'Escape') {
         if (focus && !picking) {
           focus = null;
+          focusZoom = 1;
           draw();
         } else if (picking) {
           picking = null;
@@ -30390,9 +30384,10 @@ void main() {
       ])
         $(id).onclick = () => openTemplate(key);
       $('drawingsPrint').onclick = print;
-      $('drawingsZoomIn').onclick = () => ((zoom = paperScale() * 1.25), draw());
-      $('drawingsZoomOut').onclick = () => ((zoom = paperScale() / 1.25), draw());
-      $('drawingsZoomFit').onclick = () => ((zoom = 0), draw());
+      // в режиме «блок отдельно» — приближение самого блока (его масштаб не меняется)
+      $('drawingsZoomIn').onclick = () => (focus ? (focusZoom = Math.min(8, focusZoom * 1.25)) : (zoom = paperScale() * 1.25), draw());
+      $('drawingsZoomOut').onclick = () => (focus ? (focusZoom = Math.max(0.5, focusZoom / 1.25)) : (zoom = paperScale() / 1.25), draw());
+      $('drawingsZoomFit').onclick = () => (focus ? (focusZoom = 1) : (zoom = 0), draw());
       win.addEventListener('pointermove', pointerMove);
       paper.addEventListener('wheel', wheel, { passive: false });
       win.addEventListener('pointerup', pointerUp);
@@ -30581,7 +30576,7 @@ void main() {
   else (root.BazisViewerFeatures || (root.BazisViewerFeatures = [])).push({ name: 'drawings', install });
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 
-(globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"(продолжение)":{"en":"(continued)","pl":"(ciąg dalszy)","uk":"(продовження)"},"Shift + колесо мыши над выносным видом — диаметр показанной зоны ±10 мм за щелчок.":{"en":"Shift + mouse wheel over a detail view — shown area diameter ±10 mm per notch.","pl":"Shift + kółko myszy nad widokiem szczegółu — średnica pokazanego obszaru ±10 mm na skok.","uk":"Shift + коліщатко миші над виносним видом — діаметр показаної зони ±10 мм за клацання."},"Shift + перетаскивание по виду — повернуть модель. Стрелки у выбранной проекции — потянуть, чтобы поставить связанный вид.":{"en":"Shift + drag on a view rotates the model. Drag the arrows of a selected projection to place a linked view.","pl":"Shift + przeciąganie po widoku obraca model. Przeciągnij strzałki wybranego rzutu, aby wstawić powiązany widok.","uk":"Shift + перетягування по виду — повернути модель. Стрілки біля вибраної проєкції — потягніть, щоб поставити пов’язаний вид."},"«Спец.» — попадает ли в таблицы, «Вид» — видно ли на видах чертежей. Запоминается в этом браузере для всех моделей.":{"en":"“List” — whether it goes into the tables, “View” — whether it shows in drawing views. Remembered in this browser for all models.","pl":"„Wykaz” — czy trafia do tabel, „Widok” — czy widać na widokach rysunków. Zapamiętywane w tej przeglądarce dla wszystkich modeli.","uk":"«Спец.» — чи потрапляє до таблиць, «Вид» — чи видно на видах креслень. Запам’ятовується в цьому браузері для всіх моделей."},"А":{"en":"A","pl":"A","uk":"А"},"АБ":{"en":"AB","pl":"AB","uk":"АБ"},"Адрес":{"en":"Address","pl":"Adres","uk":"Адреса"},"Альбомная":{"en":"Landscape","pl":"Pozioma","uk":"Альбомна"},"Артикул":{"en":"Article","pl":"Indeks","uk":"Артикул"},"Б":{"en":"B","pl":"B","uk":"Б"},"Без кромки":{"en":"No edging","pl":"Bez obrzeża","uk":"Без кромки"},"Без рамки":{"en":"No frame","pl":"Bez ramki","uk":"Без рамки"},"Без текста":{"en":"No text","pl":"Bez tekstu","uk":"Без тексту"},"Белая обводка выносок":{"en":"White callout outline","pl":"Biały obrys odnośników","uk":"Біла обвідка виносок"},"Белая подложка под линиями и текстом выносок — читаются на тёмных деталях":{"en":"White backing under callout lines and text — readable over dark parts","pl":"Białe tło pod liniami i tekstem odnośników — czytelne na ciemnych częściach","uk":"Біла підкладка під лініями й текстом виносок — читаються на темних деталях"},"Бесцветная":{"en":"Colorless","pl":"Bezbarwny","uk":"Безбарвна"},"Блок открыт отдельно. Размерные линии и полки выносок тянутся мышью; размеры по точкам — «Размер» с привязкой к вершинам.":{"en":"The block is open on its own. Drag dimension lines and callout shelves with the mouse; point dimensions — \"Dimension\" with vertex snapping.","pl":"Blok otwarty osobno. Linie wymiarowe i półki odnośników przeciąga się myszą; wymiary między punktami — „Wymiar” z przyciąganiem do wierzchołków.","uk":"Блок відкрито окремо. Розмірні лінії та полиці виносок тягнуться мишею; розміри за точками — «Розмір» із прив'язкою до вершин."},"Блоки этого листа двигали руками: выносные виды и общие настройки его не перекладывают. Разложить по зонам шаблона?":{"en":"Blocks on this sheet were moved by hand: detail views and general settings don't re-lay it out. Lay it out by the template zones?","pl":"Bloki tego arkusza przesuwano ręcznie: widoki szczegółów i ustawienia ogólne go nie przestawiają. Rozmieścić według stref szablonu?","uk":"Блоки цього аркуша рухали вручну: виносні види й загальні налаштування його не перекладають. Розкласти за зонами шаблону?"},"В ряд":{"en":"In a row","pl":"W rzędzie","uk":"В ряд"},"В спецификации":{"en":"In the lists","pl":"W wykazie","uk":"У специфікації"},"В столбец":{"en":"In a column","pl":"W kolumnie","uk":"У стовпчик"},"В этом порядке таблицы занимают место: следующая — сразу под предыдущей, пока есть место в её зоне":{"en":"Tables take space in this order: each next one goes right below the previous while its zone has room","pl":"W tej kolejności tabele zajmują miejsce: następna — tuż pod poprzednią, póki jest miejsce w jej strefie","uk":"У цьому порядку таблиці займають місце: наступна — одразу під попередньою, поки є місце в її зоні"},"Ввести ключ":{"en":"Enter key","pl":"Wprowadź klucz","uk":"Ввести ключ"},"Вернуть на лист":{"en":"Return to sheet","pl":"Przywróć na arkusz","uk":"Повернути на аркуш"},"Вернуть полку на место":{"en":"Reset shelf position","pl":"Przywróć półkę na miejsce","uk":"Повернути полицю на місце"},"Вернуться к модели":{"en":"Back to the model","pl":"Powrót do modelu","uk":"Повернутися до моделі"},"Вертикальное":{"en":"Vertical","pl":"Pionowy","uk":"Вертикальний"},"Вертикальный":{"en":"Vertical","pl":"Pionowy","uk":"Вертикальний"},"Вид":{"en":"View","pl":"Widok","uk":"Вид"},"Вид модели":{"en":"Model view","pl":"Widok modelu","uk":"Вид моделі"},"Вид на пласть А":{"en":"View on face A","pl":"Widok na płaszczyznę A","uk":"Вид на пласть А"},"Вид сверху":{"en":"Top view","pl":"Widok z góry","uk":"Вид зверху"},"Вид сзади":{"en":"Rear view","pl":"Widok z tyłu","uk":"Вид ззаду"},"Вид слева":{"en":"Left view","pl":"Widok z lewej","uk":"Вид зліва"},"Вид снизу":{"en":"Bottom view","pl":"Widok z dołu","uk":"Вид знизу"},"Вид спереди":{"en":"Front view","pl":"Widok z przodu","uk":"Вид спереду"},"Вид справа":{"en":"Right view","pl":"Widok z prawej","uk":"Вид справа"},"Видимые позиции":{"en":"Visible positions","pl":"Widoczne pozycje","uk":"Видимі позиції"},"Виды":{"en":"Views","pl":"Widoki","uk":"Види"},"Виды и изометрия":{"en":"Views and isometric","pl":"Widoki i izometria","uk":"Види та ізометрія"},"Виды как в параметрах":{"en":"Views as in settings","pl":"Widoki jak w ustawieniach","uk":"Види як у параметрах"},"Вкл.":{"en":"On","pl":"Wł.","uk":"Увімк."},"Вкл. — виды в ряд с видом спереди меняют размер вместе с ним":{"en":"On — views in line with the front view resize together with it","pl":"Wł. — widoki w rzędzie z widokiem z przodu zmieniają rozmiar razem z nim","uk":"Увімк. — види в ряд з видом спереду змінюють розмір разом із ним"},"Вкл. — проекции листа в одном масштабе (самом мелком из нужных); выкл. — каждая вписана в свой блок":{"en":"On — the sheet's projections share one scale (the smallest needed); off — each fits its own block","pl":"Wł. — rzuty arkusza w jednej skali (najmniejszej z potrzebnych); wył. — każdy dopasowany do swojego bloku","uk":"Увімк. — проєкції аркуша в одному масштабі (найменшому з потрібних); вимк. — кожна вписана у свій блок"},"Вместе с проекциями":{"en":"With the projections","pl":"Razem z rzutami","uk":"Разом із проєкціями"},"Внизу по ширине рамки":{"en":"Along the bottom of the frame","pl":"Na dole na szerokość ramki","uk":"Внизу на ширину рамки"},"Вписать":{"en":"Fit","pl":"Dopasuj","uk":"Вписати"},"Вписать на следующий лист":{"en":"Place on the next sheet","pl":"Umieść na następnym arkuszu","uk":"Вписати на наступний аркуш"},"Все позиции":{"en":"All positions","pl":"Wszystkie pozycje","uk":"Усі позиції"},"Все — и закрытые другими деталями (полая точка); видимые — только те, что видно на виде":{"en":"All — including those hidden behind other parts (hollow dot); visible — only those seen in the view","pl":"Wszystkie — także zasłonięte innymi częściami (pusta kropka); widoczne — tylko te widoczne na widoku","uk":"Усі — і закриті іншими деталями (порожня точка); видимі — лише ті, що видно на виді"},"Всего, м":{"en":"Total, m","pl":"Razem, m","uk":"Усього, м"},"Всё изделие":{"en":"Whole product","pl":"Cały wyrób","uk":"Весь виріб"},"Всё изделие сразу за титулом: виды набора, структура модели, перенос видов на свои листы":{"en":"The whole product right after the title page: view set, model structure, moving views to their own sheets","pl":"Cały wyrób zaraz po stronie tytułowej: zestaw widoków, struktura modelu, przenoszenie widoków na osobne arkusze","uk":"Увесь виріб одразу за титулом: види набору, структура моделі, перенесення видів на окремі аркуші"},"Вторая точка…":{"en":"Second point…","pl":"Drugi punkt…","uk":"Друга точка…"},"Выкл.":{"en":"Off","pl":"Wył.","uk":"Вимк."},"Выкл. — у каждой фурнитуры свой цвет":{"en":"Off — each hardware item keeps its own colour","pl":"Wył. — każde okucie ma swój kolor","uk":"Вимк. — у кожної фурнітури свій колір"},"Выкл. — цвета линий как в модели":{"en":"Off — line colours as in the model","pl":"Wył. — kolory linii jak w modelu","uk":"Вимк. — кольори ліній як у моделі"},"Выноски":{"en":"Callouts","pl":"Odnośniki","uk":"Виноски"},"Выноски по умолчанию":{"en":"Default callouts","pl":"Odnośniki domyślnie","uk":"Виноски за замовчуванням"},"Выноски-заметки":{"en":"Note callouts","pl":"Odnośniki-notatki","uk":"Виноски-нотатки"},"Выносной вид":{"en":"Detail view","pl":"Widok szczegółu","uk":"Виносний вид"},"Выносные виды":{"en":"Detail views","pl":"Widoki szczegółów","uk":"Виносні види"},"Высота ряда, мм":{"en":"Row height, mm","pl":"Wysokość wiersza, mm","uk":"Висота ряду, мм"},"Выше":{"en":"Up","pl":"Wyżej","uk":"Вище"},"ГОСТ":{"en":"GOST","pl":"GOST","uk":"ГОСТ"},"ГОСТ (поле 20 мм)":{"en":"GOST (20 mm margin)","pl":"GOST (margines 20 mm)","uk":"ГОСТ (поле 20 мм)"},"Габариты":{"en":"Overall dimensions","pl":"Wymiary gabarytowe","uk":"Габарити"},"Где выноски":{"en":"Callouts on","pl":"Gdzie odnośniki","uk":"Де виноски"},"Где на листе единицы спецификации, погонаж, виды и выносные виды — двигать и тянуть зоны":{"en":"Where the lists, linear materials, views and detail views go on a unit sheet — move and resize zones","pl":"Gdzie na arkuszu zespołu są wykazy, materiały liniowe, widoki i szczegóły — przesuwaj i rozciągaj strefy","uk":"Де на аркуші одиниці специфікації, погонаж, види та виносні види — рухати й тягнути зони"},"Глуб.":{"en":"Depth","pl":"Głęb.","uk":"Глиб."},"Горизонтальное":{"en":"Horizontal","pl":"Poziomy","uk":"Горизонтальний"},"Горизонтальный":{"en":"Horizontal","pl":"Poziomy","uk":"Горизонтальний"},"Готовлю печать…":{"en":"Preparing print…","pl":"Przygotowuję wydruk…","uk":"Готую друк…"},"Готово":{"en":"Done","pl":"Gotowe","uk":"Готово"},"Группировать по материалу":{"en":"Group by material","pl":"Grupuj wg materiału","uk":"Групувати за матеріалом"},"Да":{"en":"Yes","pl":"Tak","uk":"Так"},"Дата":{"en":"Date","pl":"Data","uk":"Дата"},"Двигайте зоны и тяните за угол. Пустая зона отдаётся соседней: нет выносных видов — видам, нет погонажа — фурнитуре.":{"en":"Move zones and drag a corner to resize. An empty zone goes to its neighbour: no detail views — to views, no linear materials — to hardware.","pl":"Przesuwaj strefy i ciągnij za róg. Pusta strefa przechodzi do sąsiedniej: brak szczegółów — do widoków, brak materiałów liniowych — do okuć.","uk":"Рухайте зони й тягніть за кут. Порожня зона віддається сусідній: немає виносних видів — видам, немає погонажу — фурнітурі."},"Демпферы и тип-он":{"en":"Dampers and tip-on","pl":"Amortyzatory i tip-on","uk":"Демпфери й тип-он"},"Деталь":{"en":"Part","pl":"Element","uk":"Деталь"},"Деталь не найдена":{"en":"Part not found","pl":"Nie znaleziono elementu","uk":"Деталь не знайдено"},"Диаметр, мм":{"en":"Diameter, mm","pl":"Średnica, mm","uk":"Діаметр, мм"},"Длина":{"en":"Length","pl":"Długość","uk":"Довжина"},"Длина, мм":{"en":"Length, mm","pl":"Długość, mm","uk":"Довжина, мм"},"Для клиента":{"en":"For the client","pl":"Dla klienta","uk":"Для клієнта"},"Для режимов «Каркас» и «Каркас, невидимые серым»":{"en":"For the \"Wireframe\" and \"Wireframe, hidden lines grey\" modes","pl":"Dla trybów „Szkielet” i „Szkielet, niewidoczne szare”","uk":"Для режимів «Каркас» і «Каркас, невидимі сірим»"},"Добавить вид модели на лист":{"en":"Add a model view to the sheet","pl":"Dodaj widok modelu na arkusz","uk":"Додати вид моделі на аркуш"},"Добавить заметки модели, чьи точки видны на этом виде (сфера заметки — узел)":{"en":"Add model notes whose points are visible in this view (a note's sphere becomes a detail)","pl":"Dodaj notatki modelu, których punkty widać na tym widoku (sfera notatki — szczegół)","uk":"Додати нотатки моделі, чиї точки видно на цьому виді (сфера нотатки — вузол)"},"Добавить пустой лист":{"en":"Add an empty sheet","pl":"Dodaj pusty arkusz","uk":"Додати порожній аркуш"},"Доля ширины":{"en":"Width share","pl":"Udział szerokości","uk":"Частка ширини"},"Забыть ключ":{"en":"Forget key","pl":"Zapomnij klucz","uk":"Забути ключ"},"Заказ":{"en":"Order","pl":"Zamówienie","uk":"Замовлення"},"Заказчик":{"en":"Customer","pl":"Klient","uk":"Замовник"},"Заметки модели":{"en":"Model notes","pl":"Notatki modelu","uk":"Нотатки моделі"},"Знаков в строке":{"en":"Characters per line","pl":"Znaków w wierszu","uk":"Знаків у рядку"},"Зона шаблона":{"en":"Template zone","pl":"Strefa szablonu","uk":"Зона шаблону"},"Зоны листа":{"en":"Sheet zones","pl":"Strefy arkusza","uk":"Зони аркуша"},"Зоны листа единицы":{"en":"Unit sheet zones","pl":"Strefy arkusza zespołu","uk":"Зони аркуша одиниці"},"Зоны листа единицы: где спецификации, погонаж, виды и выносные виды":{"en":"Unit sheet zones: where lists, linear materials, views and detail views go","pl":"Strefy arkusza zespołu: wykazy, materiały liniowe, widoki i szczegóły","uk":"Зони аркуша одиниці: де специфікації, погонаж, види та виносні види"},"Зоны общего вида":{"en":"Overview zones","pl":"Strefy widoku ogólnego","uk":"Зони загального виду"},"Зоны по умолчанию":{"en":"Default zones","pl":"Domyślne strefy","uk":"Зони за замовчуванням"},"Из общих настроек":{"en":"From global settings","pl":"Z ustawień ogólnych","uk":"Із загальних налаштувань"},"Изделие":{"en":"Product","pl":"Wyrób","uk":"Виріб"},"Изометрия":{"en":"Isometric","pl":"Izometria","uk":"Ізометрія"},"Исключения":{"en":"Exclusions","pl":"Wykluczenia","uk":"Винятки"},"Исключения из спецификаций":{"en":"Exclusions from parts lists","pl":"Wykluczenia z wykazów","uk":"Винятки зі специфікацій"},"Исполнитель":{"en":"Contractor","pl":"Wykonawca","uk":"Виконавець"},"К листу":{"en":"Back to sheet","pl":"Do arkusza","uk":"До аркуша"},"Как в параметрах":{"en":"As in settings","pl":"Jak w ustawieniach","uk":"Як у параметрах"},"Как на листе":{"en":"As on sheet","pl":"Jak na arkuszu","uk":"Як на аркуші"},"Какие материалы и фурнитура не попадают в спецификации (для всех моделей)":{"en":"Which materials and hardware are left out of the lists (for all models)","pl":"Jakie materiały i okucia nie trafiają do wykazów (dla wszystkich modeli)","uk":"Які матеріали та фурнітура не потрапляють до специфікацій (для всіх моделей)"},"Какие позиции":{"en":"Which positions","pl":"Które pozycje","uk":"Які позиції"},"Каркас":{"en":"Wireframe","pl":"Szkielet","uk":"Каркас"},"Каркас, невидимые серым":{"en":"Wireframe, hidden lines grey","pl":"Szkielet, niewidoczne szare","uk":"Каркас, невидимі сірим"},"Ключ к чертежам":{"en":"Drawings key","pl":"Klucz do rysunków","uk":"Ключ до креслень"},"Ключ не подошёл.":{"en":"The key does not match.","pl":"Klucz nie pasuje.","uk":"Ключ не підійшов."},"Книжная":{"en":"Portrait","pl":"Pionowa","uk":"Книжкова"},"Кол.":{"en":"Qty","pl":"Ilość","uk":"К-сть"},"Колонки спецификации деталей":{"en":"Parts list columns","pl":"Kolumny wykazu części","uk":"Колонки специфікації деталей"},"Колонки спецификации фурнитуры":{"en":"Hardware list columns","pl":"Kolumny wykazu okuć","uk":"Колонки специфікації фурнітури"},"Колонки таблицы погонных материалов":{"en":"Linear materials columns","pl":"Kolumny materiałów liniowych","uk":"Колонки таблиці погонних матеріалів"},"Компактный":{"en":"Compact","pl":"Kompaktowy","uk":"Компактний"},"Конфирмат, саморез":{"en":"Confirmat, screw","pl":"Konfirmat, wkręt","uk":"Конфірмат, саморіз"},"Край зоны тянет за собой соседние зоны на той же линии; с Shift — меняется только эта зона. Зону можно перетащить на место другой — они поменяются. Зоны таблиц кладутся друг на друга: таблицы идут по очереди сверху вниз.":{"en":"A zone edge pulls neighbouring zones on the same line; with Shift only this zone changes. Drag a zone onto another to swap them. Table zones can be stacked: tables follow one another from top to bottom.","pl":"Krawędź strefy ciągnie sąsiednie strefy na tej samej linii; z Shift zmienia się tylko ta strefa. Strefę można przeciągnąć na miejsce innej — zamienią się. Strefy tabel można nakładać: tabele idą kolejno z góry na dół.","uk":"Край зони тягне за собою сусідні зони на тій самій лінії; з Shift — змінюється лише ця зона. Зону можна перетягнути на місце іншої — вони поміняються. Зони таблиць кладуться одна на одну: таблиці йдуть по черзі згори вниз."},"Кромка":{"en":"Edging","pl":"Obrzeże","uk":"Кромка"},"Кромки":{"en":"Edging","pl":"Obrzeża","uk":"Кромки"},"Линии и замер":{"en":"Lines and survey","pl":"Linie i pomiar","uk":"Лінії та замір"},"Лист":{"en":"Sheet","pl":"Arkusz","uk":"Аркуш"},"Лист / листов":{"en":"Sheet / sheets","pl":"Arkusz / arkuszy","uk":"Аркуш / аркушів"},"Лист единицы":{"en":"Unit sheet","pl":"Arkusz zespołu","uk":"Аркуш одиниці"},"Лист общего вида":{"en":"Overview sheet","pl":"Arkusz widoku ogólnego","uk":"Аркуш загального виду"},"Лист целиком":{"en":"Whole sheet","pl":"Cały arkusz","uk":"Аркуш повністю"},"Листы":{"en":"Sheets","pl":"Arkusze","uk":"Аркуші"},"Листы деталей":{"en":"Part sheets","pl":"Arkusze elementów","uk":"Аркуші деталей"},"Лупа у курсора; красный квадрат — привязка к вершине. Esc — отмена.":{"en":"Magnifier at the cursor; red square — snapped to a vertex. Esc — cancel.","pl":"Lupa przy kursorze; czerwony kwadrat — przyciąganie do wierzchołka. Esc — anuluj.","uk":"Лупа біля курсора; червоний квадрат — прив’язка до вершини. Esc — скасувати."},"Маркер":{"en":"Marker","pl":"Znacznik","uk":"Маркер"},"Масштаб":{"en":"Scale","pl":"Skala","uk":"Масштаб"},"Материал":{"en":"Material","pl":"Materiał","uk":"Матеріал"},"Материалы":{"en":"Materials","pl":"Materiały","uk":"Матеріали"},"Меньше — таблица целиком уходит на лист спецификации":{"en":"Fewer — the whole table goes to a specification sheet","pl":"Mniej — cała tabela przechodzi na arkusz specyfikacji","uk":"Менше — таблиця повністю йде на аркуш специфікації"},"Минификс, эксцентрик":{"en":"Minifix, cam lock","pl":"Minifix, mimośród","uk":"Мініфікс, ексцентрик"},"На видах":{"en":"In views","pl":"Na widokach","uk":"На видах"},"На виде с выноской":{"en":"On the view with the callout","pl":"Na widoku z odnośnikiem","uk":"На виді з виноскою"},"На этом виде нет заметок модели":{"en":"No model notes in this view","pl":"Na tym widoku nie ma notatek modelu","uk":"На цьому виді немає нотаток моделі"},"Набор видов на листах сборочных единиц":{"en":"View set on assembly unit sheets","pl":"Zestaw widoków na arkuszach zespołów","uk":"Набір видів на аркушах складальних одиниць"},"Назад":{"en":"Back","pl":"Wstecz","uk":"Назад"},"Название":{"en":"Title","pl":"Nazwa","uk":"Назва"},"Название пресета":{"en":"Preset name","pl":"Nazwa ustawienia","uk":"Назва пресету"},"Название пресета зон":{"en":"Zone preset name","pl":"Nazwa presetu stref","uk":"Назва пресету зон"},"Наименование":{"en":"Name","pl":"Nazwa","uk":"Найменування"},"Наименование выноски переносится по словам, не длиннее этого":{"en":"Callout name wraps by words, no longer than this","pl":"Nazwa odnośnika zawija się po słowach, nie dłużej niż to","uk":"Найменування виноски переноситься за словами, не довше цього"},"Наименование листа":{"en":"Sheet title","pl":"Nazwa arkusza","uk":"Назва аркуша"},"Наклон, °":{"en":"Tilt, °","pl":"Nachylenie, °","uk":"Нахил, °"},"Начинать таблицу, если входит строк":{"en":"Start a table if this many rows fit","pl":"Zaczynaj tabelę, jeśli mieści się wierszy","uk":"Починати таблицю, якщо вміщується рядків"},"Не сборочная единица (убрать её листы)":{"en":"Not an assembly unit (remove its sheets)","pl":"Nie zespół (usuń jego arkusze)","uk":"Не складальна одиниця (прибрати її аркуші)"},"Несовместимый модуль чертежей":{"en":"Incompatible drawings module","pl":"Niezgodny moduł rysunków","uk":"Несумісний модуль креслень"},"Нет":{"en":"None","pl":"Brak","uk":"Немає"},"Нет геометрии":{"en":"No geometry","pl":"Brak geometrii","uk":"Немає геометрії"},"Нет данных":{"en":"No data","pl":"Brak danych","uk":"Немає даних"},"Нет такого листа":{"en":"No such sheet","pl":"Nie ma takiego arkusza","uk":"Немає такого аркуша"},"Ниже":{"en":"Down","pl":"Niżej","uk":"Нижче"},"Номер листа":{"en":"Sheet number","pl":"Numer arkusza","uk":"Номер аркуша"},"Обозначение":{"en":"Designation","pl":"Oznaczenie","uk":"Позначення"},"Общие настройки всех листов. Лист и блок могут задать своё — у них «как в параметрах» значит взять отсюда.":{"en":"Global settings for all sheets. A sheet or block can set its own — “as in settings” there means take it from here.","pl":"Ustawienia ogólne wszystkich arkuszy. Arkusz i blok mogą ustawić własne — „jak w ustawieniach” oznacza wziąć stąd.","uk":"Загальні налаштування всіх аркушів. Аркуш і блок можуть задати своє — у них «як у параметрах» означає взяти звідси."},"Общий вид":{"en":"Overview","pl":"Widok ogólny","uk":"Загальний вид"},"Общий масштаб проекций":{"en":"Common scale for projections","pl":"Wspólna skala rzutów","uk":"Спільний масштаб проєкцій"},"Ориентация":{"en":"Orientation","pl":"Orientacja","uk":"Орієнтація"},"Основная надпись":{"en":"Title block","pl":"Tabliczka rysunkowa","uk":"Основний напис"},"Отверстия":{"en":"Holes","pl":"Otwory","uk":"Отвори"},"Отвязать от главного вида":{"en":"Unlink from base view","pl":"Odłącz od widoku głównego","uk":"Відв’язати від головного виду"},"Отдельной зоной":{"en":"Own zone","pl":"Osobna strefa","uk":"Окремою зоною"},"Отображение":{"en":"Display","pl":"Wyświetlanie","uk":"Відображення"},"Отступ внутри блока от его края: у вида — от меньшей стороны, у таблицы — от половины ширины; у блока можно задать своё поле в мм":{"en":"Inner margin of a block: for a view — from its shorter side, for a table — from half its width; a block can have its own margin in mm","pl":"Margines wewnątrz bloku: dla widoku — od krótszego boku, dla tabeli — od połowy szerokości; blok może mieć własny margines w mm","uk":"Відступ усередині блока від його краю: у виду — від меншої сторони, у таблиці — від половини ширини; у блока можна задати своє поле в мм"},"Отступ, мм":{"en":"Offset, mm","pl":"Odsunięcie, mm","uk":"Відступ, мм"},"Оформление":{"en":"Styling","pl":"Wygląd","uk":"Оформлення"},"Очерёдность таблиц":{"en":"Table order","pl":"Kolejność tabel","uk":"Черговість таблиць"},"Параметры комплекта":{"en":"Set settings","pl":"Ustawienia kompletu","uk":"Параметри комплекту"},"Первая точка…":{"en":"First point…","pl":"Pierwszy punkt…","uk":"Перша точка…"},"Перенести на лист":{"en":"Move to sheet","pl":"Przenieś na arkusz","uk":"Перенести на аркуш"},"Перенести на следующий лист":{"en":"Move to next sheet","pl":"Przenieś na następny arkusz","uk":"Перенести на наступний аркуш"},"Перенос вида":{"en":"Move view","pl":"Przeniesienie widoku","uk":"Перенесення виду"},"Пересобрать комплект: титул и лист на каждую сборочную единицу":{"en":"Rebuild the set: title page and a sheet per assembly unit","pl":"Złóż komplet od nowa: strona tytułowa i arkusz na każdy zespół","uk":"Перезібрати комплект: титул і аркуш на кожну складальну одиницю"},"Петли, ящики с доводчиком":{"en":"Soft-close hinges and drawers","pl":"Zawiasy, szuflady z cichym domykiem","uk":"Петлі, шухляди з доводчиком"},"Петли, ящики тип-он":{"en":"Tip-on hinges and drawers","pl":"Zawiasy, szuflady tip-on","uk":"Петлі, шухляди тип-он"},"Печать / PDF":{"en":"Print / PDF","pl":"Drukuj / PDF","uk":"Друк / PDF"},"Печать или сохранение в PDF — каждый лист своим форматом":{"en":"Print or save as PDF — each sheet in its own format","pl":"Drukuj lub zapisz jako PDF — każdy arkusz w swoim formacie","uk":"Друк або збереження в PDF — кожен аркуш своїм форматом"},"Пл.":{"en":"Face","pl":"Pł.","uk":"Пл."},"Пл. А — вид на чертеже (лицевая), Б — тыльная (штрихом)":{"en":"Face A — shown in the drawing (front), B — back (dashed)","pl":"Pł. A — widok na rysunku (licowa), B — tylna (przerywana)","uk":"Пл. А — вид на кресленні (лицьова), Б — тильна (штрихом)"},"По осям модели":{"en":"By model axes","pl":"Wg osi modelu","uk":"За осями моделі"},"По размеру":{"en":"Fit","pl":"Dopasuj","uk":"За розміром"},"По умолчанию":{"en":"Default","pl":"Domyślnie","uk":"За замовчуванням"},"По фасаду":{"en":"By the front","pl":"Wg frontu","uk":"За фасадом"},"Повернуть виды на 90°":{"en":"Rotate views by 90°","pl":"Obróć widoki o 90°","uk":"Повернути види на 90°"},"Повернуть проекции на 90°":{"en":"Rotate projections by 90°","pl":"Obróć rzuty o 90°","uk":"Повернути проєкції на 90°"},"Поворот, °":{"en":"Rotation, °","pl":"Obrót, °","uk":"Поворот, °"},"Погонаж":{"en":"Linear","pl":"Liniowe","uk":"Погонаж"},"Погонные материалы":{"en":"Linear materials","pl":"Materiały liniowe","uk":"Погонні матеріали"},"Погонные материалы: профили и тела по траектории, длина отреза":{"en":"Linear materials: profiles and swept bodies, cut length","pl":"Materiały liniowe: profile i bryły po ścieżce, długość cięcia","uk":"Погонні матеріали: профілі та тіла по траєкторії, довжина відрізу"},"Под выносным видом":{"en":"Under the detail view","pl":"Pod widokiem szczegółu","uk":"Під виносним видом"},"Подпись":{"en":"Caption","pl":"Podpis","uk":"Підпис"},"Поз.":{"en":"Item","pl":"Poz.","uk":"Поз."},"Позиции":{"en":"Item numbers","pl":"Pozycje","uk":"Позиції"},"Позиции и наименования":{"en":"Item numbers and names","pl":"Pozycje i nazwy","uk":"Позиції й найменування"},"Поиск листа…":{"en":"Find sheet…","pl":"Szukaj arkusza…","uk":"Пошук аркуша…"},"Покупные изделия":{"en":"Bought-in parts","pl":"Elementy kupowane","uk":"Покупні вироби"},"Поле, мм":{"en":"Margin, mm","pl":"Margines, mm","uk":"Поле, мм"},"Полки выносок позиций, поставленные руками, — снова по автоматической раскладке":{"en":"Position callout shelves placed by hand go back to automatic layout","pl":"Półki odnośników pozycji ustawione ręcznie wracają do automatycznego rozmieszczenia","uk":"Полиці виносок позицій, поставлені вручну, — знову за автоматичним розкладом"},"Полкодержатели":{"en":"Shelf supports","pl":"Podpórki półek","uk":"Поличкотримачі"},"Полупрозрачная":{"en":"Semi-transparent","pl":"Półprzezroczysty","uk":"Напівпрозора"},"Поля блоков, %":{"en":"Block margins, %","pl":"Marginesy bloków, %","uk":"Поля блоків, %"},"Пресет":{"en":"Preset","pl":"Ustawienie","uk":"Пресет"},"Пресеты зон":{"en":"Zone presets","pl":"Presety stref","uk":"Пресети зон"},"Применить":{"en":"Apply","pl":"Zastosuj","uk":"Застосувати"},"Примечание":{"en":"Note","pl":"Uwagi","uk":"Примітка"},"Продолжение не размещено":{"en":"Continuation not placed","pl":"Ciąg dalszy nie umieszczony","uk":"Продовження не розміщено"},"Продолжение — лист":{"en":"Continued — sheet","pl":"Ciąg dalszy — arkusz","uk":"Продовження — аркуш"},"Проекции":{"en":"Projections","pl":"Rzuty","uk":"Проєкції"},"Проекции листа (без изометрии и выносных видов) встают из ряда в столбец или обратно в том же месте":{"en":"The sheet's projections (without the isometric and detail views) switch between a row and a column in the same place","pl":"Rzuty arkusza (bez izometrii i widoków szczegółów) przechodzą z rzędu w kolumnę lub z powrotem w tym samym miejscu","uk":"Проєкції аркуша (без ізометрії та виносних видів) стають із ряду в стовпчик або назад на тому ж місці"},"Произвольный текст":{"en":"Free text","pl":"Dowolny tekst","uk":"Довільний текст"},"Простая":{"en":"Simple","pl":"Prosta","uk":"Проста"},"Прочее":{"en":"Other","pl":"Inne","uk":"Інше"},"Пусто — как в параметрах («Поля блоков, %»)":{"en":"Empty — as in settings (\"Block margins, %\")","pl":"Puste — jak w ustawieniach („Marginesy bloków, %”)","uk":"Порожньо — як у параметрах («Поля блоків, %»)"},"Разделить ряд — добавить ячейку":{"en":"Split the row — add a cell","pl":"Podziel wiersz — dodaj komórkę","uk":"Розділити ряд — додати комірку"},"Разложить лист заново":{"en":"Re-lay out the sheet","pl":"Rozmieść arkusz ponownie","uk":"Розкласти аркуш заново"},"Разложить таблицы заново":{"en":"Re-lay out tables","pl":"Rozmieść tabele ponownie","uk":"Розкласти таблиці заново"},"Размер":{"en":"Dimension","pl":"Wymiar","uk":"Розмір"},"Размер выносок":{"en":"Callout size","pl":"Rozmiar odnośników","uk":"Розмір виносок"},"Размер между двумя точками модели (с привязкой к вершинам)":{"en":"Dimension between two model points (snaps to vertices)","pl":"Wymiar między dwoma punktami modelu (przyciąganie do wierzchołków)","uk":"Розмір між двома точками моделі (з прив’язкою до вершин)"},"Размер наименования":{"en":"Name size","pl":"Rozmiar nazwy","uk":"Розмір найменування"},"Размер текста, мм":{"en":"Text size, mm","pl":"Rozmiar tekstu, mm","uk":"Розмір тексту, мм"},"Размер, мм":{"en":"Size, mm","pl":"Rozmiar, mm","uk":"Розмір, мм"},"Размеры модели":{"en":"Model dimensions","pl":"Wymiary modelu","uk":"Розміри моделі"},"Разметить зоны листа…":{"en":"Lay out sheet zones…","pl":"Rozmieść strefy arkusza…","uk":"Розмітити зони аркуша…"},"Разметить зоны общего вида…":{"en":"Lay out overview zones…","pl":"Rozmieść strefy widoku ogólnego…","uk":"Розмітити зони загального виду…"},"Разработал":{"en":"Designed by","pl":"Opracował","uk":"Розробив"},"Рамка":{"en":"Frame","pl":"Ramka","uk":"Рамка"},"Рамка изделия":{"en":"Product frame","pl":"Ramka wyrobu","uk":"Рамка виробу"},"Рамка с информацией об изделии":{"en":"Frame with product information","pl":"Ramka z informacjami o wyrobie","uk":"Рамка з інформацією про виріб"},"Рамка текста":{"en":"Text frame","pl":"Ramka tekstu","uk":"Рамка тексту"},"Раскладка листа сборочной единицы: таблицы, виды":{"en":"Assembly unit sheet layout: tables, views","pl":"Układ arkusza zespołu: tabele, widoki","uk":"Розкладка аркуша складальної одиниці: таблиці, види"},"Ряд":{"en":"Row","pl":"Wiersz","uk":"Ряд"},"Ряды и ячейки основной надписи":{"en":"Title block rows and cells","pl":"Wiersze i komórki tabliczki","uk":"Ряди та комірки основного напису"},"СЕ":{"en":"Unit","pl":"Zesp.","uk":"СО"},"Сборка":{"en":"Assembly","pl":"Zespół","uk":"Збірка"},"Сборочные единицы":{"en":"Assembly units","pl":"Zespoły","uk":"Складальні одиниці"},"Свои настройки листа":{"en":"Sheet's own settings","pl":"Własne ustawienia arkusza","uk":"Власні налаштування аркуша"},"Свой ракурс":{"en":"Custom angle","pl":"Własny widok","uk":"Свій ракурс"},"Свой текст":{"en":"Custom text","pl":"Własny tekst","uk":"Свій текст"},"Свойства":{"en":"Properties","pl":"Właściwości","uk":"Властивості"},"Своё оформление":{"en":"Own style","pl":"Własny styl","uk":"Власне оформлення"},"Связывать размеры видов":{"en":"Link view sizes","pl":"Łącz rozmiary widoków","uk":"Пов'язувати розміри видів"},"Сделать сборочной единицей: свой лист и спецификация":{"en":"Make an assembly unit: its own sheet and specification","pl":"Uczyń zespołem: własny arkusz i specyfikacja","uk":"Зробити складальною одиницею: свій аркуш і специфікація"},"Сеткой":{"en":"Grid","pl":"Siatką","uk":"Сіткою"},"Сечение":{"en":"Section","pl":"Przekrój","uk":"Переріз"},"Сжатие, %":{"en":"Condensing, %","pl":"Zwężenie, %","uk":"Стиснення, %"},"Собрать комплект":{"en":"Build set","pl":"Złóż komplet","uk":"Зібрати комплект"},"Собрать комплект заново? Текущие листы будут заменены.":{"en":"Rebuild the set? Current sheets will be replaced.","pl":"Złożyć komplet od nowa? Obecne arkusze zostaną zastąpione.","uk":"Зібрати комплект заново? Поточні аркуші буде замінено."},"Состав рядов — в «Шаблон рамки» (свойства листа, без выбранного блока)":{"en":"Row contents are in “Frame template” (sheet properties, with no block selected)","pl":"Zawartość wierszy — w „Szablon ramki” (właściwości arkusza, bez zaznaczonego bloku)","uk":"Склад рядів — у «Шаблон рамки» (властивості аркуша, без вибраного блоку)"},"Сохранить как…":{"en":"Save as…","pl":"Zapisz jako…","uk":"Зберегти як…"},"Спец.":{"en":"List","pl":"Wykaz","uk":"Спец."},"Спецификация":{"en":"Bill of materials","pl":"Specyfikacja","uk":"Специфікація"},"Спецификация деталей":{"en":"Parts list","pl":"Wykaz elementów","uk":"Специфікація деталей"},"Спецификация деталей (деталировка) сборочной единицы":{"en":"Parts list of the assembly unit","pl":"Wykaz elementów zespołu","uk":"Специфікація деталей (деталювання) складальної одиниці"},"Спецификация фурнитуры с превью, артикулом и количеством":{"en":"Hardware list with previews, article numbers and quantities","pl":"Wykaz okuć z podglądem, indeksem i ilością","uk":"Специфікація фурнітури з прев'ю, артикулом і кількістю"},"Стрелка":{"en":"Arrow","pl":"Strzałka","uk":"Стрілка"},"Строки и размер титульного листа":{"en":"Title page lines and size","pl":"Wiersze i rozmiar strony tytułowej","uk":"Рядки та розмір титульного аркуша"},"Структура модели — все виды листа":{"en":"Model structure — all views on the sheet","pl":"Struktura modelu — wszystkie widoki arkusza","uk":"Структура моделі — усі види аркуша"},"Структура модели — этот вид":{"en":"Model structure — this view","pl":"Struktura modelu — ten widok","uk":"Структура моделі — цей вид"},"Стяжки":{"en":"Connectors","pl":"Łączniki","uk":"Стяжки"},"Таблицы и виды":{"en":"Tables and views","pl":"Tabele i widoki","uk":"Таблиці та види"},"Таблицы на этом листе двигали руками — разложить их по содержимому":{"en":"Tables on this sheet were moved by hand — lay them out by content","pl":"Tabele na tym arkuszu przesuwano ręcznie — rozmieść je według zawartości","uk":"Таблиці на цьому аркуші рухали вручну — розкласти їх за вмістом"},"Таблицы, перенесённые с этого листа дальше":{"en":"Tables moved on from this sheet","pl":"Tabele przeniesione z tego arkusza dalej","uk":"Таблиці, перенесені з цього аркуша далі"},"Текст":{"en":"Text","pl":"Tekst","uk":"Текст"},"Текст выноски":{"en":"Callout text","pl":"Tekst odnośnika","uk":"Текст виноски"},"Текстура":{"en":"Texture","pl":"Tekstura","uk":"Текстура"},"Тип":{"en":"Type","pl":"Typ","uk":"Тип"},"Титул":{"en":"Title","pl":"Tytuł","uk":"Титул"},"Титульный лист":{"en":"Title page","pl":"Strona tytułowa","uk":"Титульний аркуш"},"Толщ.":{"en":"Thk.","pl":"Grub.","uk":"Товщ."},"Толщина видимых линий, мм":{"en":"Visible line width, mm","pl":"Grubość linii widocznych, mm","uk":"Товщина видимих ліній, мм"},"Толщина невидимых линий, мм":{"en":"Hidden line width, mm","pl":"Grubość linii niewidocznych, mm","uk":"Товщина невидимих ліній, мм"},"Только виды":{"en":"Views only","pl":"Tylko widoki","uk":"Лише види"},"Только изометрия":{"en":"Isometric only","pl":"Tylko izometria","uk":"Лише ізометрія"},"Торец сверху":{"en":"Top edge","pl":"Krawędź górna","uk":"Торець зверху"},"Торец слева":{"en":"Left edge","pl":"Krawędź lewa","uk":"Торець зліва"},"Торец снизу":{"en":"Bottom edge","pl":"Krawędź dolna","uk":"Торець знизу"},"Торец справа":{"en":"Right edge","pl":"Krawędź prawa","uk":"Торець справа"},"Точка":{"en":"Dot","pl":"Kropka","uk":"Точка"},"Убрать ячейку":{"en":"Remove cell","pl":"Usuń komórkę","uk":"Прибрати комірку"},"Увеличить":{"en":"Zoom in","pl":"Powiększ","uk":"Збільшити"},"Удалить":{"en":"Delete","pl":"Usuń","uk":"Видалити"},"Удалить блок":{"en":"Delete block","pl":"Usuń blok","uk":"Видалити блок"},"Удалить выноску":{"en":"Delete callout","pl":"Usuń odnośnik","uk":"Видалити виноску"},"Удалить лист":{"en":"Delete sheet","pl":"Usuń arkusz","uk":"Видалити аркуш"},"Удалить лист?":{"en":"Delete the sheet?","pl":"Usunąć arkusz?","uk":"Видалити аркуш?"},"Удалить размер":{"en":"Delete dimension","pl":"Usuń wymiar","uk":"Видалити розмір"},"Узлы и сечения":{"en":"Details and sections","pl":"Szczegóły i przekroje","uk":"Вузли та перерізи"},"Уменьшить":{"en":"Zoom out","pl":"Pomniejsz","uk":"Зменшити"},"Формат":{"en":"Format","pl":"Format","uk":"Формат"},"Формат листа детали":{"en":"Part sheet format","pl":"Format arkusza części","uk":"Формат аркуша деталі"},"Формат листа единицы":{"en":"Unit sheet format","pl":"Format arkusza zespołu","uk":"Формат аркуша одиниці"},"Формат общего вида":{"en":"General view format","pl":"Format widoku ogólnego","uk":"Формат загального вигляду"},"Формат спецификации":{"en":"Specification format","pl":"Format specyfikacji","uk":"Формат специфікації"},"Формат титула":{"en":"Title sheet format","pl":"Format strony tytułowej","uk":"Формат титулу"},"Фурнитура":{"en":"Hardware","pl":"Okucia","uk":"Фурнітура"},"Цвет":{"en":"Color","pl":"Kolor","uk":"Колір"},"Цвет выносок":{"en":"Callout colour","pl":"Kolor odnośników","uk":"Колір виносок"},"Цвет линий и замера":{"en":"Lines and survey colour","pl":"Kolor linii i pomiaru","uk":"Колір ліній і заміру"},"Цвет размеров модели":{"en":"Model dimensions colour","pl":"Kolor wymiarów modelu","uk":"Колір розмірів моделі"},"Цвет фурнитуры в каркасе":{"en":"Hardware colour in wireframe","pl":"Kolor okuć w szkielecie","uk":"Колір фурнітури в каркасі"},"Цвета по умолчанию":{"en":"Default colors","pl":"Kolory domyślne","uk":"Кольори за замовчуванням"},"Цвета фурнитуры":{"en":"Hardware colors","pl":"Kolory okuć","uk":"Кольори фурнітури"},"Чертежи":{"en":"Drawings","pl":"Rysunki","uk":"Креслення"},"Чертежи открываются по ключу.":{"en":"Drawings are opened with a key.","pl":"Rysunki otwierają się kluczem.","uk":"Креслення відкриваються за ключем."},"Чертежи открыты ключом.":{"en":"Drawings are unlocked with a key.","pl":"Rysunki odblokowane kluczem.","uk":"Креслення відкрито ключем."},"Чертежи: листы, виды сборочных единиц, спецификации, печать в PDF":{"en":"Drawings: sheets, assembly views, bills of materials, PDF printing","pl":"Rysunki: arkusze, widoki zespołów, specyfikacje, druk do PDF","uk":"Креслення: аркуші, види складальних одиниць, специфікації, друк у PDF"},"Чертёж детали":{"en":"Part drawing","pl":"Rysunek elementu","uk":"Креслення деталі"},"Шаблон":{"en":"Template","pl":"Szablon","uk":"Шаблон"},"Шаблон листа единицы":{"en":"Unit sheet template","pl":"Szablon arkusza zespołu","uk":"Шаблон аркуша одиниці"},"Шаблон по умолчанию":{"en":"Default template","pl":"Szablon domyślny","uk":"Шаблон за замовчуванням"},"Шаблон погонажа":{"en":"Linear materials template","pl":"Szablon materiałów liniowych","uk":"Шаблон погонажу"},"Шаблон рамки":{"en":"Frame template","pl":"Szablon ramki","uk":"Шаблон рамки"},"Шаблон спецификации":{"en":"Parts list template","pl":"Szablon wykazu części","uk":"Шаблон специфікації"},"Шаблон таблицы сборочных единиц":{"en":"Assembly units table template","pl":"Szablon tabeli zespołów","uk":"Шаблон таблиці складальних одиниць"},"Шаблон титула":{"en":"Title page template","pl":"Szablon strony tytułowej","uk":"Шаблон титулу"},"Шаблон фурнитуры":{"en":"Hardware template","pl":"Szablon okuć","uk":"Шаблон фурнітури"},"Шаблоны:":{"en":"Templates:","pl":"Szablony:","uk":"Шаблони:"},"Ширина":{"en":"Width","pl":"Szerokość","uk":"Ширина"},"Шкант":{"en":"Dowel","pl":"Kołek","uk":"Шкант"},"Шрифт":{"en":"Font","pl":"Czcionka","uk":"Шрифт"},"Щёлкните по виду…":{"en":"Click on the view…","pl":"Kliknij widok…","uk":"Клацніть по виду…"},"Электрика":{"en":"Electrics","pl":"Elektryka","uk":"Електрика"},"альбомная":{"en":"landscape","pl":"pozioma","uk":"альбомна"},"вкл.":{"en":"on","pl":"wł.","uk":"увімк."},"выкл.":{"en":"off","pl":"wył.","uk":"вимк."},"ещё":{"en":"more","pl":"jeszcze","uk":"ще"},"книжная":{"en":"portrait","pl":"pionowa","uk":"книжкова"},"кромка":{"en":"edging","pl":"obrzeże","uk":"кромка"},"скв.":{"en":"thru","pl":"przel.","uk":"наскр."},"см. вид":{"en":"see view","pl":"zob. widok","uk":"див. вид"},"т.верх":{"en":"e.top","pl":"kr.góra","uk":"т.верх"},"т.лев":{"en":"e.left","pl":"kr.lewa","uk":"т.лів"},"т.низ":{"en":"e.bottom","pl":"kr.dół","uk":"т.низ"},"т.пр":{"en":"e.right","pl":"kr.prawa","uk":"т.пр"},"толщ.":{"en":"thk.","pl":"grub.","uk":"товщ."},"— выберите —":{"en":"— choose —","pl":"— wybierz —","uk":"— оберіть —"},"✕ Закрыть":{"en":"✕ Close","pl":"✕ Zamknij","uk":"✕ Закрити"},"✕ ряд":{"en":"✕ row","pl":"✕ wiersz","uk":"✕ ряд"},"＋ Вид":{"en":"＋ View","pl":"＋ Widok","uk":"＋ Вид"},"＋ Выноска":{"en":"＋ Callout","pl":"＋ Odnośnik","uk":"＋ Виноска"},"＋ Детали":{"en":"＋ Parts","pl":"＋ Elementy","uk":"＋ Деталі"},"＋ Лист":{"en":"＋ Sheet","pl":"＋ Arkusz","uk":"＋ Аркуш"},"＋ Погонаж":{"en":"＋ Linear","pl":"＋ Liniowe","uk":"＋ Погонаж"},"＋ Размер":{"en":"＋ Dimension","pl":"＋ Wymiar","uk":"＋ Розмір"},"＋ Рамка изделия":{"en":"＋ Product frame","pl":"＋ Ramka wyrobu","uk":"＋ Рамка виробу"},"＋ Текст":{"en":"＋ Text","pl":"＋ Tekst","uk":"＋ Текст"},"＋ Фурнитура":{"en":"＋ Hardware","pl":"＋ Okucia","uk":"＋ Фурнітура"},"＋ ряд":{"en":"＋ row","pl":"＋ wiersz","uk":"＋ ряд"},"＋ ячейка":{"en":"＋ cell","pl":"＋ komórka","uk":"＋ комірка"}});</script>
+(globalThis.BazisI18nData = globalThis.BazisI18nData || []).push({"(продолжение)":{"en":"(continued)","pl":"(ciąg dalszy)","uk":"(продовження)"},"Shift + колесо мыши над выносным видом — диаметр показанной зоны ±10 мм за щелчок.":{"en":"Shift + mouse wheel over a detail view — shown area diameter ±10 mm per notch.","pl":"Shift + kółko myszy nad widokiem szczegółu — średnica pokazanego obszaru ±10 mm na skok.","uk":"Shift + коліщатко миші над виносним видом — діаметр показаної зони ±10 мм за клацання."},"Shift + перетаскивание по виду — повернуть модель. Стрелки у выбранной проекции — потянуть, чтобы поставить связанный вид.":{"en":"Shift + drag on a view rotates the model. Drag the arrows of a selected projection to place a linked view.","pl":"Shift + przeciąganie po widoku obraca model. Przeciągnij strzałki wybranego rzutu, aby wstawić powiązany widok.","uk":"Shift + перетягування по виду — повернути модель. Стрілки біля вибраної проєкції — потягніть, щоб поставити пов’язаний вид."},"«Спец.» — попадает ли в таблицы, «Вид» — видно ли на видах чертежей. Запоминается в этом браузере для всех моделей.":{"en":"“List” — whether it goes into the tables, “View” — whether it shows in drawing views. Remembered in this browser for all models.","pl":"„Wykaz” — czy trafia do tabel, „Widok” — czy widać na widokach rysunków. Zapamiętywane w tej przeglądarce dla wszystkich modeli.","uk":"«Спец.» — чи потрапляє до таблиць, «Вид» — чи видно на видах креслень. Запам’ятовується в цьому браузері для всіх моделей."},"А":{"en":"A","pl":"A","uk":"А"},"АБ":{"en":"AB","pl":"AB","uk":"АБ"},"Адрес":{"en":"Address","pl":"Adres","uk":"Адреса"},"Альбомная":{"en":"Landscape","pl":"Pozioma","uk":"Альбомна"},"Артикул":{"en":"Article","pl":"Indeks","uk":"Артикул"},"Б":{"en":"B","pl":"B","uk":"Б"},"Без кромки":{"en":"No edging","pl":"Bez obrzeża","uk":"Без кромки"},"Без рамки":{"en":"No frame","pl":"Bez ramki","uk":"Без рамки"},"Без текста":{"en":"No text","pl":"Bez tekstu","uk":"Без тексту"},"Белая обводка выносок":{"en":"White callout outline","pl":"Biały obrys odnośników","uk":"Біла обвідка виносок"},"Белая подложка под линиями и текстом выносок — читаются на тёмных деталях":{"en":"White backing under callout lines and text — readable over dark parts","pl":"Białe tło pod liniami i tekstem odnośników — czytelne na ciemnych częściach","uk":"Біла підкладка під лініями й текстом виносок — читаються на темних деталях"},"Бесцветная":{"en":"Colorless","pl":"Bezbarwny","uk":"Безбарвна"},"Блок открыт отдельно. Размерные линии и полки выносок тянутся мышью; размеры по точкам — «Размер» с привязкой к вершинам.":{"en":"The block is open on its own. Drag dimension lines and callout shelves with the mouse; point dimensions — \"Dimension\" with vertex snapping.","pl":"Blok otwarty osobno. Linie wymiarowe i półki odnośników przeciąga się myszą; wymiary między punktami — „Wymiar” z przyciąganiem do wierzchołków.","uk":"Блок відкрито окремо. Розмірні лінії та полиці виносок тягнуться мишею; розміри за точками — «Розмір» із прив'язкою до вершин."},"Блоки этого листа двигали руками: выносные виды и общие настройки его не перекладывают. Разложить по зонам шаблона?":{"en":"Blocks on this sheet were moved by hand: detail views and general settings don't re-lay it out. Lay it out by the template zones?","pl":"Bloki tego arkusza przesuwano ręcznie: widoki szczegółów i ustawienia ogólne go nie przestawiają. Rozmieścić według stref szablonu?","uk":"Блоки цього аркуша рухали вручну: виносні види й загальні налаштування його не перекладають. Розкласти за зонами шаблону?"},"В ряд":{"en":"In a row","pl":"W rzędzie","uk":"В ряд"},"В спецификации":{"en":"In the lists","pl":"W wykazie","uk":"У специфікації"},"В столбец":{"en":"In a column","pl":"W kolumnie","uk":"У стовпчик"},"В этом порядке таблицы занимают место: следующая — сразу под предыдущей, пока есть место в её зоне":{"en":"Tables take space in this order: each next one goes right below the previous while its zone has room","pl":"W tej kolejności tabele zajmują miejsce: następna — tuż pod poprzednią, póki jest miejsce w jej strefie","uk":"У цьому порядку таблиці займають місце: наступна — одразу під попередньою, поки є місце в її зоні"},"Ввести ключ":{"en":"Enter key","pl":"Wprowadź klucz","uk":"Ввести ключ"},"Вернуть на лист":{"en":"Return to sheet","pl":"Przywróć na arkusz","uk":"Повернути на аркуш"},"Вернуть полку на место":{"en":"Reset shelf position","pl":"Przywróć półkę na miejsce","uk":"Повернути полицю на місце"},"Вернуться к модели":{"en":"Back to the model","pl":"Powrót do modelu","uk":"Повернутися до моделі"},"Вертикальное":{"en":"Vertical","pl":"Pionowy","uk":"Вертикальний"},"Вертикальный":{"en":"Vertical","pl":"Pionowy","uk":"Вертикальний"},"Вид":{"en":"View","pl":"Widok","uk":"Вид"},"Вид модели":{"en":"Model view","pl":"Widok modelu","uk":"Вид моделі"},"Вид на пласть А":{"en":"View on face A","pl":"Widok na płaszczyznę A","uk":"Вид на пласть А"},"Вид сверху":{"en":"Top view","pl":"Widok z góry","uk":"Вид зверху"},"Вид сзади":{"en":"Rear view","pl":"Widok z tyłu","uk":"Вид ззаду"},"Вид слева":{"en":"Left view","pl":"Widok z lewej","uk":"Вид зліва"},"Вид снизу":{"en":"Bottom view","pl":"Widok z dołu","uk":"Вид знизу"},"Вид спереди":{"en":"Front view","pl":"Widok z przodu","uk":"Вид спереду"},"Вид справа":{"en":"Right view","pl":"Widok z prawej","uk":"Вид справа"},"Видимые позиции":{"en":"Visible positions","pl":"Widoczne pozycje","uk":"Видимі позиції"},"Виды":{"en":"Views","pl":"Widoki","uk":"Види"},"Виды и изометрия":{"en":"Views and isometric","pl":"Widoki i izometria","uk":"Види та ізометрія"},"Виды как в параметрах":{"en":"Views as in settings","pl":"Widoki jak w ustawieniach","uk":"Види як у параметрах"},"Вкл.":{"en":"On","pl":"Wł.","uk":"Увімк."},"Вкл. — виды в ряд с видом спереди меняют размер вместе с ним":{"en":"On — views in line with the front view resize together with it","pl":"Wł. — widoki w rzędzie z widokiem z przodu zmieniają rozmiar razem z nim","uk":"Увімк. — види в ряд з видом спереду змінюють розмір разом із ним"},"Вкл. — проекции листа в одном масштабе (самом мелком из нужных); выкл. — каждая вписана в свой блок":{"en":"On — the sheet's projections share one scale (the smallest needed); off — each fits its own block","pl":"Wł. — rzuty arkusza w jednej skali (najmniejszej z potrzebnych); wył. — każdy dopasowany do swojego bloku","uk":"Увімк. — проєкції аркуша в одному масштабі (найменшому з потрібних); вимк. — кожна вписана у свій блок"},"Вместе с проекциями":{"en":"With the projections","pl":"Razem z rzutami","uk":"Разом із проєкціями"},"Внизу по ширине рамки":{"en":"Along the bottom of the frame","pl":"Na dole na szerokość ramki","uk":"Внизу на ширину рамки"},"Вписать":{"en":"Fit","pl":"Dopasuj","uk":"Вписати"},"Вписать на следующий лист":{"en":"Place on the next sheet","pl":"Umieść na następnym arkuszu","uk":"Вписати на наступний аркуш"},"Все позиции":{"en":"All positions","pl":"Wszystkie pozycje","uk":"Усі позиції"},"Все — и закрытые другими деталями (полая точка); видимые — только те, что видно на виде":{"en":"All — including those hidden behind other parts (hollow dot); visible — only those seen in the view","pl":"Wszystkie — także zasłonięte innymi częściami (pusta kropka); widoczne — tylko te widoczne na widoku","uk":"Усі — і закриті іншими деталями (порожня точка); видимі — лише ті, що видно на виді"},"Всего, м":{"en":"Total, m","pl":"Razem, m","uk":"Усього, м"},"Всё изделие":{"en":"Whole product","pl":"Cały wyrób","uk":"Весь виріб"},"Всё изделие сразу за титулом: виды набора, структура модели, перенос видов на свои листы":{"en":"The whole product right after the title page: view set, model structure, moving views to their own sheets","pl":"Cały wyrób zaraz po stronie tytułowej: zestaw widoków, struktura modelu, przenoszenie widoków na osobne arkusze","uk":"Увесь виріб одразу за титулом: види набору, структура моделі, перенесення видів на окремі аркуші"},"Вторая точка…":{"en":"Second point…","pl":"Drugi punkt…","uk":"Друга точка…"},"Выкл.":{"en":"Off","pl":"Wył.","uk":"Вимк."},"Выкл. — у каждой фурнитуры свой цвет":{"en":"Off — each hardware item keeps its own colour","pl":"Wył. — każde okucie ma swój kolor","uk":"Вимк. — у кожної фурнітури свій колір"},"Выкл. — цвета линий как в модели":{"en":"Off — line colours as in the model","pl":"Wył. — kolory linii jak w modelu","uk":"Вимк. — кольори ліній як у моделі"},"Выноски":{"en":"Callouts","pl":"Odnośniki","uk":"Виноски"},"Выноски по умолчанию":{"en":"Default callouts","pl":"Odnośniki domyślnie","uk":"Виноски за замовчуванням"},"Выноски-заметки":{"en":"Note callouts","pl":"Odnośniki-notatki","uk":"Виноски-нотатки"},"Выносной вид":{"en":"Detail view","pl":"Widok szczegółu","uk":"Виносний вид"},"Выносные виды":{"en":"Detail views","pl":"Widoki szczegółów","uk":"Виносні види"},"Высота ряда, мм":{"en":"Row height, mm","pl":"Wysokość wiersza, mm","uk":"Висота ряду, мм"},"Выше":{"en":"Up","pl":"Wyżej","uk":"Вище"},"ГОСТ":{"en":"GOST","pl":"GOST","uk":"ГОСТ"},"ГОСТ (поле 20 мм)":{"en":"GOST (20 mm margin)","pl":"GOST (margines 20 mm)","uk":"ГОСТ (поле 20 мм)"},"Габариты":{"en":"Overall dimensions","pl":"Wymiary gabarytowe","uk":"Габарити"},"Где выноски":{"en":"Callouts on","pl":"Gdzie odnośniki","uk":"Де виноски"},"Где на листе единицы спецификации, погонаж, виды и выносные виды — двигать и тянуть зоны":{"en":"Where the lists, linear materials, views and detail views go on a unit sheet — move and resize zones","pl":"Gdzie na arkuszu zespołu są wykazy, materiały liniowe, widoki i szczegóły — przesuwaj i rozciągaj strefy","uk":"Де на аркуші одиниці специфікації, погонаж, види та виносні види — рухати й тягнути зони"},"Глуб.":{"en":"Depth","pl":"Głęb.","uk":"Глиб."},"Горизонтальное":{"en":"Horizontal","pl":"Poziomy","uk":"Горизонтальний"},"Горизонтальный":{"en":"Horizontal","pl":"Poziomy","uk":"Горизонтальний"},"Готовлю печать…":{"en":"Preparing print…","pl":"Przygotowuję wydruk…","uk":"Готую друк…"},"Готово":{"en":"Done","pl":"Gotowe","uk":"Готово"},"Группировать по материалу":{"en":"Group by material","pl":"Grupuj wg materiału","uk":"Групувати за матеріалом"},"Да":{"en":"Yes","pl":"Tak","uk":"Так"},"Дата":{"en":"Date","pl":"Data","uk":"Дата"},"Двигайте зоны и тяните за угол. Пустая зона отдаётся соседней: нет выносных видов — видам, нет погонажа — фурнитуре.":{"en":"Move zones and drag a corner to resize. An empty zone goes to its neighbour: no detail views — to views, no linear materials — to hardware.","pl":"Przesuwaj strefy i ciągnij za róg. Pusta strefa przechodzi do sąsiedniej: brak szczegółów — do widoków, brak materiałów liniowych — do okuć.","uk":"Рухайте зони й тягніть за кут. Порожня зона віддається сусідній: немає виносних видів — видам, немає погонажу — фурнітурі."},"Демпферы и тип-он":{"en":"Dampers and tip-on","pl":"Amortyzatory i tip-on","uk":"Демпфери й тип-он"},"Деталь":{"en":"Part","pl":"Element","uk":"Деталь"},"Деталь не найдена":{"en":"Part not found","pl":"Nie znaleziono elementu","uk":"Деталь не знайдено"},"Диаметр, мм":{"en":"Diameter, mm","pl":"Średnica, mm","uk":"Діаметр, мм"},"Длина":{"en":"Length","pl":"Długość","uk":"Довжина"},"Длина, мм":{"en":"Length, mm","pl":"Długość, mm","uk":"Довжина, мм"},"Для клиента":{"en":"For the client","pl":"Dla klienta","uk":"Для клієнта"},"Для режимов «Каркас» и «Каркас, невидимые серым»":{"en":"For the \"Wireframe\" and \"Wireframe, hidden lines grey\" modes","pl":"Dla trybów „Szkielet” i „Szkielet, niewidoczne szare”","uk":"Для режимів «Каркас» і «Каркас, невидимі сірим»"},"Добавить вид модели на лист":{"en":"Add a model view to the sheet","pl":"Dodaj widok modelu na arkusz","uk":"Додати вид моделі на аркуш"},"Добавить заметки модели, чьи точки видны на этом виде (сфера заметки — узел)":{"en":"Add model notes whose points are visible in this view (a note's sphere becomes a detail)","pl":"Dodaj notatki modelu, których punkty widać na tym widoku (sfera notatki — szczegół)","uk":"Додати нотатки моделі, чиї точки видно на цьому виді (сфера нотатки — вузол)"},"Добавить пустой лист":{"en":"Add an empty sheet","pl":"Dodaj pusty arkusz","uk":"Додати порожній аркуш"},"Доля ширины":{"en":"Width share","pl":"Udział szerokości","uk":"Частка ширини"},"Забыть ключ":{"en":"Forget key","pl":"Zapomnij klucz","uk":"Забути ключ"},"Заказ":{"en":"Order","pl":"Zamówienie","uk":"Замовлення"},"Заказчик":{"en":"Customer","pl":"Klient","uk":"Замовник"},"Заметки модели":{"en":"Model notes","pl":"Notatki modelu","uk":"Нотатки моделі"},"Знаков в строке":{"en":"Characters per line","pl":"Znaków w wierszu","uk":"Знаків у рядку"},"Зона шаблона":{"en":"Template zone","pl":"Strefa szablonu","uk":"Зона шаблону"},"Зоны листа":{"en":"Sheet zones","pl":"Strefy arkusza","uk":"Зони аркуша"},"Зоны листа единицы":{"en":"Unit sheet zones","pl":"Strefy arkusza zespołu","uk":"Зони аркуша одиниці"},"Зоны листа единицы: где спецификации, погонаж, виды и выносные виды":{"en":"Unit sheet zones: where lists, linear materials, views and detail views go","pl":"Strefy arkusza zespołu: wykazy, materiały liniowe, widoki i szczegóły","uk":"Зони аркуша одиниці: де специфікації, погонаж, види та виносні види"},"Зоны общего вида":{"en":"Overview zones","pl":"Strefy widoku ogólnego","uk":"Зони загального виду"},"Зоны по умолчанию":{"en":"Default zones","pl":"Domyślne strefy","uk":"Зони за замовчуванням"},"Из общих настроек":{"en":"From global settings","pl":"Z ustawień ogólnych","uk":"Із загальних налаштувань"},"Изделие":{"en":"Product","pl":"Wyrób","uk":"Виріб"},"Изометрия":{"en":"Isometric","pl":"Izometria","uk":"Ізометрія"},"Исключения":{"en":"Exclusions","pl":"Wykluczenia","uk":"Винятки"},"Исключения из спецификаций":{"en":"Exclusions from parts lists","pl":"Wykluczenia z wykazów","uk":"Винятки зі специфікацій"},"Исполнитель":{"en":"Contractor","pl":"Wykonawca","uk":"Виконавець"},"К листу":{"en":"Back to sheet","pl":"Do arkusza","uk":"До аркуша"},"Как в параметрах":{"en":"As in settings","pl":"Jak w ustawieniach","uk":"Як у параметрах"},"Как на листе":{"en":"As on sheet","pl":"Jak na arkuszu","uk":"Як на аркуші"},"Какие материалы и фурнитура не попадают в спецификации (для всех моделей)":{"en":"Which materials and hardware are left out of the lists (for all models)","pl":"Jakie materiały i okucia nie trafiają do wykazów (dla wszystkich modeli)","uk":"Які матеріали та фурнітура не потрапляють до специфікацій (для всіх моделей)"},"Какие позиции":{"en":"Which positions","pl":"Które pozycje","uk":"Які позиції"},"Каркас":{"en":"Wireframe","pl":"Szkielet","uk":"Каркас"},"Каркас, невидимые серым":{"en":"Wireframe, hidden lines grey","pl":"Szkielet, niewidoczne szare","uk":"Каркас, невидимі сірим"},"Ключ к чертежам":{"en":"Drawings key","pl":"Klucz do rysunków","uk":"Ключ до креслень"},"Ключ не подошёл.":{"en":"The key does not match.","pl":"Klucz nie pasuje.","uk":"Ключ не підійшов."},"Книжная":{"en":"Portrait","pl":"Pionowa","uk":"Книжкова"},"Кол.":{"en":"Qty","pl":"Ilość","uk":"К-сть"},"Колонки спецификации деталей":{"en":"Parts list columns","pl":"Kolumny wykazu części","uk":"Колонки специфікації деталей"},"Колонки спецификации фурнитуры":{"en":"Hardware list columns","pl":"Kolumny wykazu okuć","uk":"Колонки специфікації фурнітури"},"Колонки таблицы погонных материалов":{"en":"Linear materials columns","pl":"Kolumny materiałów liniowych","uk":"Колонки таблиці погонних матеріалів"},"Компактный":{"en":"Compact","pl":"Kompaktowy","uk":"Компактний"},"Конфирмат, саморез":{"en":"Confirmat, screw","pl":"Konfirmat, wkręt","uk":"Конфірмат, саморіз"},"Край зоны тянет за собой соседние зоны на той же линии; с Shift — меняется только эта зона. Зону можно перетащить на место другой — они поменяются. Зоны таблиц кладутся друг на друга: таблицы идут по очереди сверху вниз.":{"en":"A zone edge pulls neighbouring zones on the same line; with Shift only this zone changes. Drag a zone onto another to swap them. Table zones can be stacked: tables follow one another from top to bottom.","pl":"Krawędź strefy ciągnie sąsiednie strefy na tej samej linii; z Shift zmienia się tylko ta strefa. Strefę można przeciągnąć na miejsce innej — zamienią się. Strefy tabel można nakładać: tabele idą kolejno z góry na dół.","uk":"Край зони тягне за собою сусідні зони на тій самій лінії; з Shift — змінюється лише ця зона. Зону можна перетягнути на місце іншої — вони поміняються. Зони таблиць кладуться одна на одну: таблиці йдуть по черзі згори вниз."},"Кромка":{"en":"Edging","pl":"Obrzeże","uk":"Кромка"},"Кромки":{"en":"Edging","pl":"Obrzeża","uk":"Кромки"},"Линии и замер":{"en":"Lines and survey","pl":"Linie i pomiar","uk":"Лінії та замір"},"Лист":{"en":"Sheet","pl":"Arkusz","uk":"Аркуш"},"Лист / листов":{"en":"Sheet / sheets","pl":"Arkusz / arkuszy","uk":"Аркуш / аркушів"},"Лист единицы":{"en":"Unit sheet","pl":"Arkusz zespołu","uk":"Аркуш одиниці"},"Лист общего вида":{"en":"Overview sheet","pl":"Arkusz widoku ogólnego","uk":"Аркуш загального виду"},"Лист целиком":{"en":"Whole sheet","pl":"Cały arkusz","uk":"Аркуш повністю"},"Листы":{"en":"Sheets","pl":"Arkusze","uk":"Аркуші"},"Листы деталей":{"en":"Part sheets","pl":"Arkusze elementów","uk":"Аркуші деталей"},"Лупа у курсора; красный квадрат — привязка к вершине. Esc — отмена.":{"en":"Magnifier at the cursor; red square — snapped to a vertex. Esc — cancel.","pl":"Lupa przy kursorze; czerwony kwadrat — przyciąganie do wierzchołka. Esc — anuluj.","uk":"Лупа біля курсора; червоний квадрат — прив’язка до вершини. Esc — скасувати."},"Маркер":{"en":"Marker","pl":"Znacznik","uk":"Маркер"},"Масштаб":{"en":"Scale","pl":"Skala","uk":"Масштаб"},"Материал":{"en":"Material","pl":"Materiał","uk":"Матеріал"},"Материалы":{"en":"Materials","pl":"Materiały","uk":"Матеріали"},"Меньше — таблица целиком уходит на лист спецификации":{"en":"Fewer — the whole table goes to a specification sheet","pl":"Mniej — cała tabela przechodzi na arkusz specyfikacji","uk":"Менше — таблиця повністю йде на аркуш специфікації"},"Минификс, эксцентрик":{"en":"Minifix, cam lock","pl":"Minifix, mimośród","uk":"Мініфікс, ексцентрик"},"На видах":{"en":"In views","pl":"Na widokach","uk":"На видах"},"На виде с выноской":{"en":"On the view with the callout","pl":"Na widoku z odnośnikiem","uk":"На виді з виноскою"},"На этом виде нет заметок модели":{"en":"No model notes in this view","pl":"Na tym widoku nie ma notatek modelu","uk":"На цьому виді немає нотаток моделі"},"Набор видов на листах сборочных единиц":{"en":"View set on assembly unit sheets","pl":"Zestaw widoków na arkuszach zespołów","uk":"Набір видів на аркушах складальних одиниць"},"Назад":{"en":"Back","pl":"Wstecz","uk":"Назад"},"Название":{"en":"Title","pl":"Nazwa","uk":"Назва"},"Название пресета":{"en":"Preset name","pl":"Nazwa ustawienia","uk":"Назва пресету"},"Название пресета зон":{"en":"Zone preset name","pl":"Nazwa presetu stref","uk":"Назва пресету зон"},"Наименование":{"en":"Name","pl":"Nazwa","uk":"Найменування"},"Наименование выноски переносится по словам, не длиннее этого":{"en":"Callout name wraps by words, no longer than this","pl":"Nazwa odnośnika zawija się po słowach, nie dłużej niż to","uk":"Найменування виноски переноситься за словами, не довше цього"},"Наименование листа":{"en":"Sheet title","pl":"Nazwa arkusza","uk":"Назва аркуша"},"Наклон, °":{"en":"Tilt, °","pl":"Nachylenie, °","uk":"Нахил, °"},"Начинать таблицу, если входит строк":{"en":"Start a table if this many rows fit","pl":"Zaczynaj tabelę, jeśli mieści się wierszy","uk":"Починати таблицю, якщо вміщується рядків"},"Не сборочная единица (убрать её листы)":{"en":"Not an assembly unit (remove its sheets)","pl":"Nie zespół (usuń jego arkusze)","uk":"Не складальна одиниця (прибрати її аркуші)"},"Несовместимый модуль чертежей":{"en":"Incompatible drawings module","pl":"Niezgodny moduł rysunków","uk":"Несумісний модуль креслень"},"Нет":{"en":"None","pl":"Brak","uk":"Немає"},"Нет геометрии":{"en":"No geometry","pl":"Brak geometrii","uk":"Немає геометрії"},"Нет данных":{"en":"No data","pl":"Brak danych","uk":"Немає даних"},"Нет такого листа":{"en":"No such sheet","pl":"Nie ma takiego arkusza","uk":"Немає такого аркуша"},"Ниже":{"en":"Down","pl":"Niżej","uk":"Нижче"},"Номер листа":{"en":"Sheet number","pl":"Numer arkusza","uk":"Номер аркуша"},"Обозначение":{"en":"Designation","pl":"Oznaczenie","uk":"Позначення"},"Общие настройки всех листов. Лист и блок могут задать своё — у них «как в параметрах» значит взять отсюда.":{"en":"Global settings for all sheets. A sheet or block can set its own — “as in settings” there means take it from here.","pl":"Ustawienia ogólne wszystkich arkuszy. Arkusz i blok mogą ustawić własne — „jak w ustawieniach” oznacza wziąć stąd.","uk":"Загальні налаштування всіх аркушів. Аркуш і блок можуть задати своє — у них «як у параметрах» означає взяти звідси."},"Общий вид":{"en":"Overview","pl":"Widok ogólny","uk":"Загальний вид"},"Общий масштаб проекций":{"en":"Common scale for projections","pl":"Wspólna skala rzutów","uk":"Спільний масштаб проєкцій"},"Ориентация":{"en":"Orientation","pl":"Orientacja","uk":"Орієнтація"},"Основная надпись":{"en":"Title block","pl":"Tabliczka rysunkowa","uk":"Основний напис"},"Отверстия":{"en":"Holes","pl":"Otwory","uk":"Отвори"},"Отвязать от главного вида":{"en":"Unlink from base view","pl":"Odłącz od widoku głównego","uk":"Відв’язати від головного виду"},"Отдельной зоной":{"en":"Own zone","pl":"Osobna strefa","uk":"Окремою зоною"},"Отображение":{"en":"Display","pl":"Wyświetlanie","uk":"Відображення"},"Отступ внутри блока от его края: у вида — от меньшей стороны, у таблицы — от половины ширины; у блока можно задать своё поле в мм":{"en":"Inner margin of a block: for a view — from its shorter side, for a table — from half its width; a block can have its own margin in mm","pl":"Margines wewnątrz bloku: dla widoku — od krótszego boku, dla tabeli — od połowy szerokości; blok może mieć własny margines w mm","uk":"Відступ усередині блока від його краю: у виду — від меншої сторони, у таблиці — від половини ширини; у блока можна задати своє поле в мм"},"Отступ, мм":{"en":"Offset, mm","pl":"Odsunięcie, mm","uk":"Відступ, мм"},"Оформление":{"en":"Styling","pl":"Wygląd","uk":"Оформлення"},"Очерёдность таблиц":{"en":"Table order","pl":"Kolejność tabel","uk":"Черговість таблиць"},"Параметры комплекта":{"en":"Set settings","pl":"Ustawienia kompletu","uk":"Параметри комплекту"},"Первая точка…":{"en":"First point…","pl":"Pierwszy punkt…","uk":"Перша точка…"},"Перенести на лист":{"en":"Move to sheet","pl":"Przenieś na arkusz","uk":"Перенести на аркуш"},"Перенести на следующий лист":{"en":"Move to next sheet","pl":"Przenieś na następny arkusz","uk":"Перенести на наступний аркуш"},"Перенос вида":{"en":"Move view","pl":"Przeniesienie widoku","uk":"Перенесення виду"},"Пересобрать комплект: титул и лист на каждую сборочную единицу":{"en":"Rebuild the set: title page and a sheet per assembly unit","pl":"Złóż komplet od nowa: strona tytułowa i arkusz na każdy zespół","uk":"Перезібрати комплект: титул і аркуш на кожну складальну одиницю"},"Петли, ящики с доводчиком":{"en":"Soft-close hinges and drawers","pl":"Zawiasy, szuflady z cichym domykiem","uk":"Петлі, шухляди з доводчиком"},"Петли, ящики тип-он":{"en":"Tip-on hinges and drawers","pl":"Zawiasy, szuflady tip-on","uk":"Петлі, шухляди тип-он"},"Печать / PDF":{"en":"Print / PDF","pl":"Drukuj / PDF","uk":"Друк / PDF"},"Печать или сохранение в PDF — каждый лист своим форматом":{"en":"Print or save as PDF — each sheet in its own format","pl":"Drukuj lub zapisz jako PDF — każdy arkusz w swoim formacie","uk":"Друк або збереження в PDF — кожен аркуш своїм форматом"},"Пл.":{"en":"Face","pl":"Pł.","uk":"Пл."},"Пл. А — вид на чертеже (лицевая), Б — тыльная (штрихом)":{"en":"Face A — shown in the drawing (front), B — back (dashed)","pl":"Pł. A — widok na rysunku (licowa), B — tylna (przerywana)","uk":"Пл. А — вид на кресленні (лицьова), Б — тильна (штрихом)"},"По осям модели":{"en":"By model axes","pl":"Wg osi modelu","uk":"За осями моделі"},"По размеру":{"en":"Fit","pl":"Dopasuj","uk":"За розміром"},"По умолчанию":{"en":"Default","pl":"Domyślnie","uk":"За замовчуванням"},"По фасаду":{"en":"By the front","pl":"Wg frontu","uk":"За фасадом"},"Повернуть виды на 90°":{"en":"Rotate views by 90°","pl":"Obróć widoki o 90°","uk":"Повернути види на 90°"},"Повернуть проекции на 90°":{"en":"Rotate projections by 90°","pl":"Obróć rzuty o 90°","uk":"Повернути проєкції на 90°"},"Поворот, °":{"en":"Rotation, °","pl":"Obrót, °","uk":"Поворот, °"},"Погонаж":{"en":"Linear","pl":"Liniowe","uk":"Погонаж"},"Погонные материалы":{"en":"Linear materials","pl":"Materiały liniowe","uk":"Погонні матеріали"},"Погонные материалы: профили и тела по траектории, длина отреза":{"en":"Linear materials: profiles and swept bodies, cut length","pl":"Materiały liniowe: profile i bryły po ścieżce, długość cięcia","uk":"Погонні матеріали: профілі та тіла по траєкторії, довжина відрізу"},"Под выносным видом":{"en":"Under the detail view","pl":"Pod widokiem szczegółu","uk":"Під виносним видом"},"Подпись":{"en":"Caption","pl":"Podpis","uk":"Підпис"},"Поз.":{"en":"Item","pl":"Poz.","uk":"Поз."},"Позиции":{"en":"Item numbers","pl":"Pozycje","uk":"Позиції"},"Позиции и наименования":{"en":"Item numbers and names","pl":"Pozycje i nazwy","uk":"Позиції й найменування"},"Поиск листа…":{"en":"Find sheet…","pl":"Szukaj arkusza…","uk":"Пошук аркуша…"},"Покупные изделия":{"en":"Bought-in parts","pl":"Elementy kupowane","uk":"Покупні вироби"},"Поле, мм":{"en":"Margin, mm","pl":"Margines, mm","uk":"Поле, мм"},"Полки выносок позиций, поставленные руками, — снова по автоматической раскладке":{"en":"Position callout shelves placed by hand go back to automatic layout","pl":"Półki odnośników pozycji ustawione ręcznie wracają do automatycznego rozmieszczenia","uk":"Полиці виносок позицій, поставлені вручну, — знову за автоматичним розкладом"},"Полкодержатели":{"en":"Shelf supports","pl":"Podpórki półek","uk":"Поличкотримачі"},"Полупрозрачная":{"en":"Semi-transparent","pl":"Półprzezroczysty","uk":"Напівпрозора"},"Поля блоков, %":{"en":"Block margins, %","pl":"Marginesy bloków, %","uk":"Поля блоків, %"},"Пресет":{"en":"Preset","pl":"Ustawienie","uk":"Пресет"},"Пресеты зон":{"en":"Zone presets","pl":"Presety stref","uk":"Пресети зон"},"Применить":{"en":"Apply","pl":"Zastosuj","uk":"Застосувати"},"Примечание":{"en":"Note","pl":"Uwagi","uk":"Примітка"},"Продолжение не размещено":{"en":"Continuation not placed","pl":"Ciąg dalszy nie umieszczony","uk":"Продовження не розміщено"},"Продолжение — лист":{"en":"Continued — sheet","pl":"Ciąg dalszy — arkusz","uk":"Продовження — аркуш"},"Проекции":{"en":"Projections","pl":"Rzuty","uk":"Проєкції"},"Проекции листа (без изометрии и выносных видов) встают из ряда в столбец или обратно в том же месте":{"en":"The sheet's projections (without the isometric and detail views) switch between a row and a column in the same place","pl":"Rzuty arkusza (bez izometrii i widoków szczegółów) przechodzą z rzędu w kolumnę lub z powrotem w tym samym miejscu","uk":"Проєкції аркуша (без ізометрії та виносних видів) стають із ряду в стовпчик або назад на тому ж місці"},"Произвольный текст":{"en":"Free text","pl":"Dowolny tekst","uk":"Довільний текст"},"Простая":{"en":"Simple","pl":"Prosta","uk":"Проста"},"Прочее":{"en":"Other","pl":"Inne","uk":"Інше"},"Пусто — как в параметрах («Поля блоков, %»)":{"en":"Empty — as in settings (\"Block margins, %\")","pl":"Puste — jak w ustawieniach („Marginesy bloków, %”)","uk":"Порожньо — як у параметрах («Поля блоків, %»)"},"Разделить ряд — добавить ячейку":{"en":"Split the row — add a cell","pl":"Podziel wiersz — dodaj komórkę","uk":"Розділити ряд — додати комірку"},"Разложить лист заново":{"en":"Re-lay out the sheet","pl":"Rozmieść arkusz ponownie","uk":"Розкласти аркуш заново"},"Разложить таблицы заново":{"en":"Re-lay out tables","pl":"Rozmieść tabele ponownie","uk":"Розкласти таблиці заново"},"Размер":{"en":"Dimension","pl":"Wymiar","uk":"Розмір"},"Размер выносок":{"en":"Callout size","pl":"Rozmiar odnośników","uk":"Розмір виносок"},"Размер между двумя точками модели (с привязкой к вершинам)":{"en":"Dimension between two model points (snaps to vertices)","pl":"Wymiar między dwoma punktami modelu (przyciąganie do wierzchołków)","uk":"Розмір між двома точками моделі (з прив’язкою до вершин)"},"Размер наименования":{"en":"Name size","pl":"Rozmiar nazwy","uk":"Розмір найменування"},"Размер текста, мм":{"en":"Text size, mm","pl":"Rozmiar tekstu, mm","uk":"Розмір тексту, мм"},"Размер, мм":{"en":"Size, mm","pl":"Rozmiar, mm","uk":"Розмір, мм"},"Размеры модели":{"en":"Model dimensions","pl":"Wymiary modelu","uk":"Розміри моделі"},"Разметить зоны листа…":{"en":"Lay out sheet zones…","pl":"Rozmieść strefy arkusza…","uk":"Розмітити зони аркуша…"},"Разметить зоны общего вида…":{"en":"Lay out overview zones…","pl":"Rozmieść strefy widoku ogólnego…","uk":"Розмітити зони загального виду…"},"Разработал":{"en":"Designed by","pl":"Opracował","uk":"Розробив"},"Рамка":{"en":"Frame","pl":"Ramka","uk":"Рамка"},"Рамка изделия":{"en":"Product frame","pl":"Ramka wyrobu","uk":"Рамка виробу"},"Рамка с информацией об изделии":{"en":"Frame with product information","pl":"Ramka z informacjami o wyrobie","uk":"Рамка з інформацією про виріб"},"Рамка текста":{"en":"Text frame","pl":"Ramka tekstu","uk":"Рамка тексту"},"Раскладка листа сборочной единицы: таблицы, виды":{"en":"Assembly unit sheet layout: tables, views","pl":"Układ arkusza zespołu: tabele, widoki","uk":"Розкладка аркуша складальної одиниці: таблиці, види"},"Ряд":{"en":"Row","pl":"Wiersz","uk":"Ряд"},"Ряды и ячейки основной надписи":{"en":"Title block rows and cells","pl":"Wiersze i komórki tabliczki","uk":"Ряди та комірки основного напису"},"СЕ":{"en":"Unit","pl":"Zesp.","uk":"СО"},"Сборка":{"en":"Assembly","pl":"Zespół","uk":"Збірка"},"Сборочные единицы":{"en":"Assembly units","pl":"Zespoły","uk":"Складальні одиниці"},"Свои настройки листа":{"en":"Sheet's own settings","pl":"Własne ustawienia arkusza","uk":"Власні налаштування аркуша"},"Свой ракурс":{"en":"Custom angle","pl":"Własny widok","uk":"Свій ракурс"},"Свой текст":{"en":"Custom text","pl":"Własny tekst","uk":"Свій текст"},"Свойства":{"en":"Properties","pl":"Właściwości","uk":"Властивості"},"Своё оформление":{"en":"Own style","pl":"Własny styl","uk":"Власне оформлення"},"Связывать размеры видов":{"en":"Link view sizes","pl":"Łącz rozmiary widoków","uk":"Пов'язувати розміри видів"},"Сделать сборочной единицей: свой лист и спецификация":{"en":"Make an assembly unit: its own sheet and specification","pl":"Uczyń zespołem: własny arkusz i specyfikacja","uk":"Зробити складальною одиницею: свій аркуш і специфікація"},"Сеткой":{"en":"Grid","pl":"Siatką","uk":"Сіткою"},"Сечение":{"en":"Section","pl":"Przekrój","uk":"Переріз"},"Сжатие, %":{"en":"Condensing, %","pl":"Zwężenie, %","uk":"Стиснення, %"},"Скрывать по названию":{},"Собрать комплект":{"en":"Build set","pl":"Złóż komplet","uk":"Зібрати комплект"},"Собрать комплект заново? Текущие листы будут заменены.":{"en":"Rebuild the set? Current sheets will be replaced.","pl":"Złożyć komplet od nowa? Obecne arkusze zostaną zastąpione.","uk":"Зібрати комплект заново? Поточні аркуші буде замінено."},"Состав рядов — в «Шаблон рамки» (свойства листа, без выбранного блока)":{"en":"Row contents are in “Frame template” (sheet properties, with no block selected)","pl":"Zawartość wierszy — w „Szablon ramki” (właściwości arkusza, bez zaznaczonego bloku)","uk":"Склад рядів — у «Шаблон рамки» (властивості аркуша, без вибраного блоку)"},"Сохранить как…":{"en":"Save as…","pl":"Zapisz jako…","uk":"Зберегти як…"},"Спец.":{"en":"List","pl":"Wykaz","uk":"Спец."},"Спецификация":{"en":"Bill of materials","pl":"Specyfikacja","uk":"Специфікація"},"Спецификация деталей":{"en":"Parts list","pl":"Wykaz elementów","uk":"Специфікація деталей"},"Спецификация деталей (деталировка) сборочной единицы":{"en":"Parts list of the assembly unit","pl":"Wykaz elementów zespołu","uk":"Специфікація деталей (деталювання) складальної одиниці"},"Спецификация фурнитуры с превью, артикулом и количеством":{"en":"Hardware list with previews, article numbers and quantities","pl":"Wykaz okuć z podglądem, indeksem i ilością","uk":"Специфікація фурнітури з прев'ю, артикулом і кількістю"},"Стрелка":{"en":"Arrow","pl":"Strzałka","uk":"Стрілка"},"Строки и размер титульного листа":{"en":"Title page lines and size","pl":"Wiersze i rozmiar strony tytułowej","uk":"Рядки та розмір титульного аркуша"},"Структура модели — все виды листа":{"en":"Model structure — all views on the sheet","pl":"Struktura modelu — wszystkie widoki arkusza","uk":"Структура моделі — усі види аркуша"},"Структура модели — этот вид":{"en":"Model structure — this view","pl":"Struktura modelu — ten widok","uk":"Структура моделі — цей вид"},"Стяжки":{"en":"Connectors","pl":"Łączniki","uk":"Стяжки"},"Таблицы и виды":{"en":"Tables and views","pl":"Tabele i widoki","uk":"Таблиці та види"},"Таблицы на этом листе двигали руками — разложить их по содержимому":{"en":"Tables on this sheet were moved by hand — lay them out by content","pl":"Tabele na tym arkuszu przesuwano ręcznie — rozmieść je według zawartości","uk":"Таблиці на цьому аркуші рухали вручну — розкласти їх за вмістом"},"Таблицы, перенесённые с этого листа дальше":{"en":"Tables moved on from this sheet","pl":"Tabele przeniesione z tego arkusza dalej","uk":"Таблиці, перенесені з цього аркуша далі"},"Текст":{"en":"Text","pl":"Tekst","uk":"Текст"},"Текст выноски":{"en":"Callout text","pl":"Tekst odnośnika","uk":"Текст виноски"},"Текстура":{"en":"Texture","pl":"Tekstura","uk":"Текстура"},"Тип":{"en":"Type","pl":"Typ","uk":"Тип"},"Титул":{"en":"Title","pl":"Tytuł","uk":"Титул"},"Титульный лист":{"en":"Title page","pl":"Strona tytułowa","uk":"Титульний аркуш"},"Толщ.":{"en":"Thk.","pl":"Grub.","uk":"Товщ."},"Толщина видимых линий, мм":{"en":"Visible line width, mm","pl":"Grubość linii widocznych, mm","uk":"Товщина видимих ліній, мм"},"Толщина невидимых линий, мм":{"en":"Hidden line width, mm","pl":"Grubość linii niewidocznych, mm","uk":"Товщина невидимих ліній, мм"},"Только виды":{"en":"Views only","pl":"Tylko widoki","uk":"Лише види"},"Только изометрия":{"en":"Isometric only","pl":"Tylko izometria","uk":"Лише ізометрія"},"Торец сверху":{"en":"Top edge","pl":"Krawędź górna","uk":"Торець зверху"},"Торец слева":{"en":"Left edge","pl":"Krawędź lewa","uk":"Торець зліва"},"Торец снизу":{"en":"Bottom edge","pl":"Krawędź dolna","uk":"Торець знизу"},"Торец справа":{"en":"Right edge","pl":"Krawędź prawa","uk":"Торець справа"},"Точка":{"en":"Dot","pl":"Kropka","uk":"Точка"},"Убрать ячейку":{"en":"Remove cell","pl":"Usuń komórkę","uk":"Прибрати комірку"},"Увеличить":{"en":"Zoom in","pl":"Powiększ","uk":"Збільшити"},"Удалить":{"en":"Delete","pl":"Usuń","uk":"Видалити"},"Удалить блок":{"en":"Delete block","pl":"Usuń blok","uk":"Видалити блок"},"Удалить выноску":{"en":"Delete callout","pl":"Usuń odnośnik","uk":"Видалити виноску"},"Удалить лист":{"en":"Delete sheet","pl":"Usuń arkusz","uk":"Видалити аркуш"},"Удалить лист?":{"en":"Delete the sheet?","pl":"Usunąć arkusz?","uk":"Видалити аркуш?"},"Удалить размер":{"en":"Delete dimension","pl":"Usuń wymiar","uk":"Видалити розмір"},"Узлы и сечения":{"en":"Details and sections","pl":"Szczegóły i przekroje","uk":"Вузли та перерізи"},"Узлы модели, в названии которых есть одна из строк (по строке на узел), на общем виде и титуле скрыты со всем содержимым — например, сетка 3D-скана":{},"Уменьшить":{"en":"Zoom out","pl":"Pomniejsz","uk":"Зменшити"},"Формат":{"en":"Format","pl":"Format","uk":"Формат"},"Формат листа детали":{"en":"Part sheet format","pl":"Format arkusza części","uk":"Формат аркуша деталі"},"Формат листа единицы":{"en":"Unit sheet format","pl":"Format arkusza zespołu","uk":"Формат аркуша одиниці"},"Формат общего вида":{"en":"General view format","pl":"Format widoku ogólnego","uk":"Формат загального вигляду"},"Формат спецификации":{"en":"Specification format","pl":"Format specyfikacji","uk":"Формат специфікації"},"Формат титула":{"en":"Title sheet format","pl":"Format strony tytułowej","uk":"Формат титулу"},"Фурнитура":{"en":"Hardware","pl":"Okucia","uk":"Фурнітура"},"Цвет":{"en":"Color","pl":"Kolor","uk":"Колір"},"Цвет выносок":{"en":"Callout colour","pl":"Kolor odnośników","uk":"Колір виносок"},"Цвет линий и замера":{"en":"Lines and survey colour","pl":"Kolor linii i pomiaru","uk":"Колір ліній і заміру"},"Цвет размеров модели":{"en":"Model dimensions colour","pl":"Kolor wymiarów modelu","uk":"Колір розмірів моделі"},"Цвет фурнитуры в каркасе":{"en":"Hardware colour in wireframe","pl":"Kolor okuć w szkielecie","uk":"Колір фурнітури в каркасі"},"Цвета по умолчанию":{"en":"Default colors","pl":"Kolory domyślne","uk":"Кольори за замовчуванням"},"Цвета фурнитуры":{"en":"Hardware colors","pl":"Kolory okuć","uk":"Кольори фурнітури"},"Чертежи":{"en":"Drawings","pl":"Rysunki","uk":"Креслення"},"Чертежи открываются по ключу.":{"en":"Drawings are opened with a key.","pl":"Rysunki otwierają się kluczem.","uk":"Креслення відкриваються за ключем."},"Чертежи открыты ключом.":{"en":"Drawings are unlocked with a key.","pl":"Rysunki odblokowane kluczem.","uk":"Креслення відкрито ключем."},"Чертежи: листы, виды сборочных единиц, спецификации, печать в PDF":{"en":"Drawings: sheets, assembly views, bills of materials, PDF printing","pl":"Rysunki: arkusze, widoki zespołów, specyfikacje, druk do PDF","uk":"Креслення: аркуші, види складальних одиниць, специфікації, друк у PDF"},"Чертёж детали":{"en":"Part drawing","pl":"Rysunek elementu","uk":"Креслення деталі"},"Шаблон":{"en":"Template","pl":"Szablon","uk":"Шаблон"},"Шаблон листа единицы":{"en":"Unit sheet template","pl":"Szablon arkusza zespołu","uk":"Шаблон аркуша одиниці"},"Шаблон по умолчанию":{"en":"Default template","pl":"Szablon domyślny","uk":"Шаблон за замовчуванням"},"Шаблон погонажа":{"en":"Linear materials template","pl":"Szablon materiałów liniowych","uk":"Шаблон погонажу"},"Шаблон рамки":{"en":"Frame template","pl":"Szablon ramki","uk":"Шаблон рамки"},"Шаблон спецификации":{"en":"Parts list template","pl":"Szablon wykazu części","uk":"Шаблон специфікації"},"Шаблон таблицы сборочных единиц":{"en":"Assembly units table template","pl":"Szablon tabeli zespołów","uk":"Шаблон таблиці складальних одиниць"},"Шаблон титула":{"en":"Title page template","pl":"Szablon strony tytułowej","uk":"Шаблон титулу"},"Шаблон фурнитуры":{"en":"Hardware template","pl":"Szablon okuć","uk":"Шаблон фурнітури"},"Шаблоны:":{"en":"Templates:","pl":"Szablony:","uk":"Шаблони:"},"Ширина":{"en":"Width","pl":"Szerokość","uk":"Ширина"},"Шкант":{"en":"Dowel","pl":"Kołek","uk":"Шкант"},"Шрифт":{"en":"Font","pl":"Czcionka","uk":"Шрифт"},"Щёлкните по виду…":{"en":"Click on the view…","pl":"Kliknij widok…","uk":"Клацніть по виду…"},"Электрика":{"en":"Electrics","pl":"Elektryka","uk":"Електрика"},"альбомная":{"en":"landscape","pl":"pozioma","uk":"альбомна"},"вкл.":{"en":"on","pl":"wł.","uk":"увімк."},"выкл.":{"en":"off","pl":"wył.","uk":"вимк."},"ещё":{"en":"more","pl":"jeszcze","uk":"ще"},"книжная":{"en":"portrait","pl":"pionowa","uk":"книжкова"},"кромка":{"en":"edging","pl":"obrzeże","uk":"кромка"},"скв.":{"en":"thru","pl":"przel.","uk":"наскр."},"см. вид":{"en":"see view","pl":"zob. widok","uk":"див. вид"},"т.верх":{"en":"e.top","pl":"kr.góra","uk":"т.верх"},"т.лев":{"en":"e.left","pl":"kr.lewa","uk":"т.лів"},"т.низ":{"en":"e.bottom","pl":"kr.dół","uk":"т.низ"},"т.пр":{"en":"e.right","pl":"kr.prawa","uk":"т.пр"},"толщ.":{"en":"thk.","pl":"grub.","uk":"товщ."},"— выберите —":{"en":"— choose —","pl":"— wybierz —","uk":"— оберіть —"},"✕ Закрыть":{"en":"✕ Close","pl":"✕ Zamknij","uk":"✕ Закрити"},"✕ ряд":{"en":"✕ row","pl":"✕ wiersz","uk":"✕ ряд"},"＋ Вид":{"en":"＋ View","pl":"＋ Widok","uk":"＋ Вид"},"＋ Выноска":{"en":"＋ Callout","pl":"＋ Odnośnik","uk":"＋ Виноска"},"＋ Детали":{"en":"＋ Parts","pl":"＋ Elementy","uk":"＋ Деталі"},"＋ Лист":{"en":"＋ Sheet","pl":"＋ Arkusz","uk":"＋ Аркуш"},"＋ Погонаж":{"en":"＋ Linear","pl":"＋ Liniowe","uk":"＋ Погонаж"},"＋ Размер":{"en":"＋ Dimension","pl":"＋ Wymiar","uk":"＋ Розмір"},"＋ Рамка изделия":{"en":"＋ Product frame","pl":"＋ Ramka wyrobu","uk":"＋ Рамка виробу"},"＋ Текст":{"en":"＋ Text","pl":"＋ Tekst","uk":"＋ Текст"},"＋ Фурнитура":{"en":"＋ Hardware","pl":"＋ Okucia","uk":"＋ Фурнітура"},"＋ ряд":{"en":"＋ row","pl":"＋ wiersz","uk":"＋ ряд"},"＋ ячейка":{"en":"＋ cell","pl":"＋ komórka","uk":"＋ комірка"}});</script>
 <script>
 'use strict';
 let DATA;
