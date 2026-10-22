@@ -5,10 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex" />
 <title>Статистика просмотрщика</title>
-<!-- Страница владельца: что нажимают на опубликованных моделях и предложения по
-     улучшению. Данные — у Worker приёмника (GET /stats, ключ администратора — секрет
-     ADMIN_KEY в Cloudflare); адрес Worker — из inbox.json рядом. Без ключа пусто.
-     Источник — visualizer/features/usage/stats.html, на сайт кладёт выпуск просмотрщика. -->
+<!-- Страница владельца: что нажимают на опубликованных моделях и в приложении, и
+     предложения по улучшению. Данные — у Worker приёмника (GET /stats и выгрузка
+     GET /export, ключ администратора — секрет ADMIN_KEY в Cloudflare); адрес Worker —
+     из inbox.json рядом, каталог действий — actions.json рядом (кладёт выпуск).
+     Без ключа пусто. Источник — visualizer/features/usage/stats.html. -->
 <style>
   :root {
     --bg: #0d151b;
@@ -56,6 +57,9 @@
   .fb .meta { color: var(--muted); font-size: 12px; margin-bottom: 4px; }
   .fb .text { white-space: pre-wrap; overflow-wrap: anywhere; }
   .empty { color: var(--muted); padding: 10px 0; }
+  .zeros { display: flex; flex-wrap: wrap; gap: 5px; }
+  .zeros span { font-size: 12px; padding: 2px 8px; border-radius: 10px; background: var(--panel); border: 1px solid var(--line); }
+  .zeros small { color: var(--muted); margin-left: 4px; }
   @media (max-width: 640px) { header, main { padding-left: 12px; padding-right: 12px; } }
 </style>
 </head>
@@ -77,6 +81,7 @@
     </select>
     <select id="page"><option value="">все модели</option></select>
     <button type="button" class="primary" id="load">Показать</button>
+    <button type="button" id="export">Выгрузить JSON</button>
     <span id="status"></span>
   </div>
 </header>
@@ -84,6 +89,8 @@
   <div class="cards" id="cards"></div>
   <h2>Кнопки и действия</h2>
   <div class="wrap"><table id="buttons"></table></div>
+  <h2>Ни разу не вызывали</h2>
+  <div id="zeros" class="zeros"></div>
   <h2>Модели</h2>
   <div class="wrap"><table id="pages"></table></div>
   <h2>Последние визиты</h2>
@@ -114,14 +121,28 @@
     for (const kid of kids) if (kid != null) node.append(kid);
     return node;
   };
-  const slug = page => String(page || '').replace(/^models\//, '').replace(/\/index\.html$/, '');
+  const slug = page => (page === 'local' ? 'локальный файл' : String(page || '').replace(/^models\//, '').replace(/\/index\.html$/, ''));
+  const KINDS = { nav: 'навигация', action: 'действие', setting: 'настройка', camera: 'камера', model: 'модель', visit: 'визит' };
+  const DEVICES = { phone: 'телефон', desktop: 'ПК', 'desktop-app': 'приложение' };
   const when = iso => {
     const d = new Date(iso);
     return isNaN(d) ? '' : d.toLocaleString('ru-RU', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
   };
-  const titleOf = row => SYSTEM[row.name] || row.label || row.name;
+  const titleOf = row => SYSTEM[row.name] || row.label || catalog[row.action]?.label || row.action || row.name;
   const roleTag = role => el('span', { className: 'tag ' + role, textContent: role === 'owner' ? 'владелец' : 'клиент' });
-  let endpoint = null;
+  let endpoint = null,
+    catalog = {};
+
+  // каталог действий (actions.json рядом): чего ни разу не вызывали
+  async function readCatalog() {
+    try {
+      const response = await fetch('actions.json?t=' + Date.now(), { cache: 'no-store' });
+      const data = response.ok ? await response.json() : null;
+      catalog = (data && data.actions) || {};
+    } catch (e) {
+      catalog = {};
+    }
+  }
 
   async function readEndpoint() {
     const response = await fetch('inbox.json?t=' + Date.now(), { cache: 'no-store' });
@@ -135,7 +156,7 @@
     store.set('bazisStatsKey', key);
     $('status').textContent = 'Загружаю…';
     try {
-      if (!endpoint) await readEndpoint();
+      if (!endpoint) await Promise.all([readEndpoint(), readCatalog()]);
       const query = new URLSearchParams({ days: $('days').value, role: $('role').value, page: $('page').value });
       const response = await fetch(endpoint + '/stats?' + query, { headers: { Authorization: 'Bearer ' + key }, cache: 'no-store' });
       const data = await response.json().catch(() => ({}));
@@ -161,19 +182,35 @@
     // кнопки
     const max = Math.max(1, ...data.buttons.map(b => b.clicks));
     const buttons = $('buttons');
-    buttons.replaceChildren(el('tr', {}, ...['#', 'Кнопка / действие', 'Нажатий', 'В визитах', ''].map(h => el('th', { textContent: h }))));
+    buttons.replaceChildren(
+      el('tr', {}, ...['#', 'Кнопка / действие', 'Вид', 'Нажатий', 'В визитах', 'Клавишей', 'ПКМ / удерж.', ''].map(h => el('th', { textContent: h })))
+    );
     data.buttons.forEach((b, i) =>
       buttons.append(
         el('tr', {},
           el('td', { className: 'num', textContent: i + 1 }),
-          el('td', {}, titleOf(b), el('small', { textContent: b.name })),
+          el('td', {}, titleOf(b), el('small', { textContent: b.action && b.action !== b.name ? b.action + ' · ' + b.name : b.name })),
+          el('td', { textContent: KINDS[b.kind] || '' }),
           el('td', { className: 'num', textContent: b.clicks }),
           el('td', { className: 'num', textContent: b.visits }),
-          el('td', { style: 'width:30%' }, el('div', { className: 'bar', style: 'width:' + (100 * b.clicks) / max + '%' }))
+          el('td', { className: 'num', textContent: b.viaKey || '' }),
+          el('td', { className: 'num', textContent: b.viaMenu || '' }),
+          el('td', { style: 'width:24%' }, el('div', { className: 'bar', style: 'width:' + (100 * b.clicks) / max + '%' }))
         )
       )
     );
-    if (!data.buttons.length) buttons.append(el('tr', {}, el('td', { colSpan: 5, className: 'empty', textContent: 'Пока нет данных.' })));
+    if (!data.buttons.length) buttons.append(el('tr', {}, el('td', { colSpan: 8, className: 'empty', textContent: 'Пока нет данных.' })));
+    // каталог минус вызванное
+    const used = new Set(data.buttons.map(b => b.action).filter(Boolean));
+    const zeros = Object.keys(catalog).filter(a => !used.has(a)).sort();
+    $('zeros').replaceChildren(...zeros.map(a => el('span', { title: a }, catalog[a].label || a, el('small', { textContent: a }))));
+    if (!zeros.length)
+      $('zeros').append(
+        el('div', {
+          className: 'empty',
+          textContent: Object.keys(catalog).length ? 'Всё из каталога вызывали.' : 'Нет каталога действий (actions.json).'
+        })
+      );
     // модели + фильтр
     const pages = $('pages'),
       select = $('page'),
@@ -182,7 +219,7 @@
     for (const p of data.pages)
       pages.append(
         el('tr', {},
-          el('td', {}, el('a', { href: '../' + p.page, textContent: slug(p.page), target: '_blank', style: 'color:var(--accent)' })),
+          el('td', {}, p.page === 'local' ? slug(p.page) : el('a', { href: '../' + p.page, textContent: slug(p.page), target: '_blank', style: 'color:var(--accent)' })),
           el('td', { className: 'num', textContent: p.visits }),
           el('td', { className: 'num', textContent: p.events || 0 }),
           el('td', { className: 'num', textContent: when(p.last) })
@@ -201,13 +238,13 @@
             el('b', { textContent: slug(v.page) }),
             el('span', { textContent: when(v.started) }),
             roleTag(v.role),
-            el('span', { className: 'tag', textContent: v.device === 'phone' ? 'телефон' : 'ПК' }),
+            el('span', { className: 'tag', textContent: DEVICES[v.device] || 'ПК' }),
             v.lang ? el('span', { className: 'tag', textContent: v.lang }) : null,
             el('span', { className: 'tag', textContent: Math.round(last / 1000) + ' с · ' + v.steps.length + ' шагов' })
           ),
           el('div', { className: 'steps' },
             ...v.steps.map(s =>
-              el('span', { className: 'step' + (SYSTEM[s.name] ? ' sys' : ''), title: s.name + ' · ' + Math.round(s.t / 1000) + ' с' },
+              el('span', { className: 'step' + (SYSTEM[s.name] ? ' sys' : ''), title: [s.action, s.name, KINDS[s.kind], s.via].filter(Boolean).join(' · ') + ' · ' + Math.round(s.t / 1000) + ' с' },
                 el('i', { textContent: Math.round(s.t / 1000) + 'с' }),
                 titleOf(s) + (s.n > 1 ? ' ×' + s.n : '')
               )
@@ -229,8 +266,45 @@
     if (!data.feedback.length) $('feedback').append(el('div', { className: 'empty', textContent: 'Предложений пока нет.' }));
   }
 
+  // выгрузка для анализа: все события срока постранично, визиты и каталог
+  async function exportJson() {
+    const key = $('key').value.trim();
+    if (!key) return ($('status').textContent = 'Введите ключ администратора.');
+    $('status').textContent = 'Выгружаю…';
+    try {
+      if (!endpoint) await Promise.all([readEndpoint(), readCatalog()]);
+      const filters = { days: $('days').value, role: $('role').value, page: $('page').value },
+        out = { schema: 2, exported: new Date().toISOString(), filters, visits: [], events: [], actions: catalog };
+      const visits = new Map();
+      let after = 0;
+      do {
+        const query = new URLSearchParams({ ...filters, after });
+        const response = await fetch(endpoint + '/export?' + query, { headers: { Authorization: 'Bearer ' + key }, cache: 'no-store' });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || !data.ok) throw new Error(data.error || 'ошибка ' + response.status);
+        // визиты приходят к своим событиям — на разных страницах бывают одни и те же
+        for (const v of data.visits) visits.set(v.id, v);
+        out.events.push(...data.events);
+        after = data.next;
+      } while (after);
+      out.visits = [...visits.values()];
+      const link = el('a', {
+        href: URL.createObjectURL(new Blob([JSON.stringify(out)], { type: 'application/json' })),
+        download: 'usage-' + new Date().toISOString().slice(0, 10) + '.json'
+      });
+      document.body.append(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+      $('status').textContent = 'Выгружено: ' + out.visits.length + ' визитов, ' + out.events.length + ' событий';
+    } catch (error) {
+      $('status').textContent = 'Не удалось: ' + error.message;
+    }
+  }
+
   $('key').value = store.get('bazisStatsKey') || '';
   $('load').onclick = load;
+  $('export').onclick = exportJson;
   for (const id of ['days', 'role', 'page']) $(id).onchange = () => $('key').value && load();
   $('key').onkeydown = e => {
     if (e.key === 'Enter') load(); // не «&&»: false отменил бы нажатие других клавиш

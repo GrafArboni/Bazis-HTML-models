@@ -1,0 +1,1027 @@
+{
+ "schema": 1,
+ "actions": {
+  "assembler.explode": {
+   "module": "assembler",
+   "kind": "action",
+   "label": "Взрыв-схема",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/assembler/markup.html"
+   ]
+  },
+  "assembler.labelFontSize": {
+   "module": "assembler",
+   "kind": "setting",
+   "label": "Размер шрифта наименований, px",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/assembler/markup.html"
+   ]
+  },
+  "assembler.labelName": {
+   "module": "assembler",
+   "kind": "setting",
+   "label": "Наименование",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/assembler/markup.html"
+   ]
+  },
+  "assembler.labelPosition": {
+   "module": "assembler",
+   "kind": "setting",
+   "label": "Позиция",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/assembler/markup.html"
+   ]
+  },
+  "assembler.labelsThrough": {
+   "module": "assembler",
+   "kind": "setting",
+   "label": "Позиции с прозрачностью",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/assembler/markup.html"
+   ]
+  },
+  "assembler.open": {
+   "module": "assembler",
+   "kind": "nav",
+   "label": "Сборщик",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/assembler/adapter.js"
+   ]
+  },
+  "assembler.partDimensions": {
+   "module": "assembler",
+   "kind": "action",
+   "label": "Размер детали",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/assembler/markup.html"
+   ]
+  },
+  "assembler.partDrawing": {
+   "module": "assembler",
+   "kind": "action",
+   "label": "Чертёж детали",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/assembler/markup.html"
+   ]
+  },
+  "assembler.separation": {
+   "module": "assembler",
+   "kind": "setting",
+   "label": "Разнос деталей, мм",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/assembler/markup.html"
+   ]
+  },
+  "assembler.settings": {
+   "module": "assembler",
+   "kind": "nav",
+   "label": "Настройки",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/assembler/markup.html"
+   ]
+  },
+  "camera.keys": {
+   "module": "navigation",
+   "kind": "camera",
+   "label": "Движение клавишами",
+   "via": [
+    "key"
+   ],
+   "files": [
+    "visualizer/features/navigation/adapter.js"
+   ]
+  },
+  "dimension.color": {
+   "module": "dimension_actions",
+   "kind": "action",
+   "label": "Изменить цвет",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/dimension_actions/markup.html"
+   ]
+  },
+  "dimension.menu": {
+   "module": "dimension_actions",
+   "kind": "nav",
+   "label": "Меню замера",
+   "via": [],
+   "files": [
+    "visualizer/features/dimension_actions/adapter.js"
+   ]
+  },
+  "dimension.remove": {
+   "module": "dimension_actions",
+   "kind": "action",
+   "label": "Удалить замер",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/dimension_actions/markup.html"
+   ]
+  },
+  "display.edges": {
+   "module": "template",
+   "kind": "setting",
+   "label": "Контур (обводка)",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/templates/interactive_model_template.html"
+   ]
+  },
+  "display.guides": {
+   "module": "template",
+   "kind": "setting",
+   "label": "Рамки и схемы крепежа",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/templates/interactive_model_template.html"
+   ]
+  },
+  "display.hardware": {
+   "module": "template",
+   "kind": "setting",
+   "label": "Фурнитура",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/templates/interactive_model_template.html"
+   ]
+  },
+  "display.holeOverlay": {
+   "module": "template",
+   "kind": "setting",
+   "label": "Отверстия сквозь поверхности",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/templates/interactive_model_template.html"
+   ]
+  },
+  "display.holes": {
+   "module": "template",
+   "kind": "setting",
+   "label": "Отверстия",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/templates/interactive_model_template.html"
+   ]
+  },
+  "display.imports": {
+   "module": "template",
+   "kind": "setting",
+   "label": "Импорт",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/templates/interactive_model_template.html"
+   ]
+  },
+  "display.opacity": {
+   "module": "template",
+   "kind": "setting",
+   "label": "Прозрачность панелей",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/templates/interactive_model_template.html"
+   ]
+  },
+  "display.panels": {
+   "module": "template",
+   "kind": "setting",
+   "label": "Панели",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/templates/interactive_model_template.html"
+   ]
+  },
+  "display.profiles": {
+   "module": "template",
+   "kind": "setting",
+   "label": "Профили",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/templates/interactive_model_template.html"
+   ]
+  },
+  "display.textures": {
+   "module": "template",
+   "kind": "setting",
+   "label": "Текстуры",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/templates/interactive_model_template.html"
+   ]
+  },
+  "finish.edges": {
+   "module": "finish",
+   "kind": "setting",
+   "label": "Кромки",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/finish/markup.html"
+   ]
+  },
+  "finish.mono": {
+   "module": "finish",
+   "kind": "setting",
+   "label": "Монотон",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/finish/markup.html"
+   ]
+  },
+  "finish.texture": {
+   "module": "finish",
+   "kind": "setting",
+   "label": "Текстура",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/finish/markup.html"
+   ]
+  },
+  "github.save": {
+   "module": "github_save",
+   "kind": "action",
+   "label": "Сохранить на GitHub",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/github_save/markup.html"
+   ]
+  },
+  "guide.close": {
+   "module": "guide",
+   "kind": "nav",
+   "label": "Закончить",
+   "via": [
+    "key"
+   ],
+   "files": [
+    "visualizer/features/guide/adapter.js"
+   ]
+  },
+  "guide.next": {
+   "module": "guide",
+   "kind": "nav",
+   "label": "Далее",
+   "via": [
+    "key"
+   ],
+   "files": [
+    "visualizer/features/guide/adapter.js"
+   ]
+  },
+  "guide.open": {
+   "module": "guide",
+   "kind": "nav",
+   "label": "Демонстрация",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/guide/markup.html"
+   ]
+  },
+  "guide.prev": {
+   "module": "guide",
+   "kind": "nav",
+   "label": "Назад",
+   "via": [
+    "key"
+   ],
+   "files": [
+    "visualizer/features/guide/adapter.js"
+   ]
+  },
+  "guide.rowHelp": {
+   "module": "guide",
+   "kind": "nav",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/guide/adapter.js"
+   ]
+  },
+  "hardwareTypes.toggle": {
+   "module": "hardware_types",
+   "kind": "setting",
+   "label": "Фурнитура по типам",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/hardware_types/markup.html"
+   ]
+  },
+  "i18n.language": {
+   "module": "i18n",
+   "kind": "setting",
+   "label": "Русский",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/i18n/markup.html"
+   ]
+  },
+  "i18n.menu": {
+   "module": "i18n",
+   "kind": "nav",
+   "label": "RU",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/i18n/markup.html"
+   ]
+  },
+  "materialLabels.all": {
+   "module": "material_labels",
+   "kind": "action",
+   "label": "Все",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/material_labels/markup.html"
+   ]
+  },
+  "materialLabels.none": {
+   "module": "material_labels",
+   "kind": "action",
+   "label": "Никого",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/material_labels/markup.html"
+   ]
+  },
+  "materialLabels.pick": {
+   "module": "material_labels",
+   "kind": "nav",
+   "label": "В сносках…",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/material_labels/markup.html"
+   ]
+  },
+  "materialLabels.toggle": {
+   "module": "material_labels",
+   "kind": "setting",
+   "label": "Выноски материалов",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/material_labels/markup.html"
+   ]
+  },
+  "materials.editor": {
+   "module": "materials",
+   "kind": "nav",
+   "label": "Редактор материалов",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/materials/markup.html"
+   ]
+  },
+  "materials.list": {
+   "module": "materials",
+   "kind": "nav",
+   "label": "Все материалы",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/materials/markup.html"
+   ]
+  },
+  "materials.open": {
+   "module": "toolbar",
+   "kind": "nav",
+   "label": "Материалы",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/toolbar/adapter.js"
+   ]
+  },
+  "measure.clear": {
+   "module": "template",
+   "kind": "action",
+   "label": "Очистить",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/templates/interactive_model_template.html"
+   ]
+  },
+  "measure.manual": {
+   "module": "template",
+   "kind": "setting",
+   "label": "Созданные в HTML",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/templates/interactive_model_template.html"
+   ]
+  },
+  "measure.native": {
+   "module": "template",
+   "kind": "setting",
+   "label": "Из БАЗИСа",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/templates/interactive_model_template.html"
+   ]
+  },
+  "measure.open": {
+   "module": "toolbar",
+   "kind": "nav",
+   "label": "Замеры",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/toolbar/adapter.js"
+   ]
+  },
+  "measure.twoPoints": {
+   "module": "template",
+   "kind": "action",
+   "label": "Измерить 2 точки",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/templates/interactive_model_template.html"
+   ]
+  },
+  "menu.more": {
+   "module": "template",
+   "kind": "nav",
+   "label": "Ещё",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/templates/interactive_model_template.html"
+   ]
+  },
+  "menu.open": {
+   "module": "toolbar",
+   "kind": "nav",
+   "label": "☰",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/toolbar/markup.html"
+   ]
+  },
+  "menu.show": {
+   "module": "template",
+   "kind": "nav",
+   "label": "Показать",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/templates/interactive_model_template.html"
+   ]
+  },
+  "notes.add": {
+   "module": "notes",
+   "kind": "action",
+   "label": "＋ Заметка",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/notes/markup.html"
+   ]
+  },
+  "notes.list": {
+   "module": "notes",
+   "kind": "nav",
+   "label": "Список (0)",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/notes/markup.html"
+   ]
+  },
+  "notes.menu": {
+   "module": "notes",
+   "kind": "nav",
+   "label": "Меню заметки",
+   "via": [
+    "contextmenu",
+    "longpress"
+   ],
+   "files": [
+    "visualizer/features/notes/adapter.js"
+   ]
+  },
+  "notes.open": {
+   "module": "notes",
+   "kind": "nav",
+   "label": "Заметки",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/notes/adapter.js"
+   ]
+  },
+  "notes.show": {
+   "module": "notes",
+   "kind": "setting",
+   "label": "Показывать",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/notes/markup.html"
+   ]
+  },
+  "panelHardware.toggle": {
+   "module": "panel_hardware",
+   "kind": "setting",
+   "label": "Крепёж панели",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/panel_hardware/markup.html"
+   ]
+  },
+  "projection.parallel": {
+   "module": "projection",
+   "kind": "setting",
+   "label": "Параллельная проекция",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/projection/markup.html"
+   ]
+  },
+  "projection.perspective": {
+   "module": "projection",
+   "kind": "setting",
+   "label": "Перспектива",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/projection/markup.html"
+   ]
+  },
+  "rangeEntry.open": {
+   "module": "range_entry",
+   "kind": "nav",
+   "label": "Ввод значения",
+   "via": [
+    "key"
+   ],
+   "files": [
+    "visualizer/features/range_entry/adapter.js"
+   ]
+  },
+  "sceneTheme.light": {
+   "module": "scene_theme",
+   "kind": "setting",
+   "label": "Светлый фон",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/scene_theme/markup.html"
+   ]
+  },
+  "section.alignView": {
+   "module": "section",
+   "kind": "action",
+   "label": "Вид на сечение",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/section/markup.html"
+   ]
+  },
+  "section.axis": {
+   "module": "section",
+   "kind": "setting",
+   "label": "Плоскость сечения",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/section/markup.html"
+   ]
+  },
+  "section.chooseFace": {
+   "module": "section",
+   "kind": "action",
+   "label": "Выбрать грань",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/section/markup.html"
+   ]
+  },
+  "section.clear": {
+   "module": "section",
+   "kind": "action",
+   "label": "Очистить",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/section/markup.html"
+   ]
+  },
+  "section.coordinate": {
+   "module": "section",
+   "kind": "setting",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/section/markup.html"
+   ]
+  },
+  "section.enable": {
+   "module": "section",
+   "kind": "setting",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/section/markup.html"
+   ]
+  },
+  "section.help": {
+   "module": "section",
+   "kind": "nav",
+   "label": "?",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/section/markup.html"
+   ]
+  },
+  "section.middle": {
+   "module": "section",
+   "kind": "action",
+   "label": "По центру",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/section/markup.html"
+   ]
+  },
+  "section.more": {
+   "module": "section",
+   "kind": "nav",
+   "label": "⋯",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/section/markup.html"
+   ]
+  },
+  "section.open": {
+   "module": "section",
+   "kind": "nav",
+   "label": "Сечение",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/section/adapter.js",
+    "visualizer/features/section/markup.html"
+   ]
+  },
+  "section.position": {
+   "module": "section",
+   "kind": "setting",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/section/markup.html"
+   ]
+  },
+  "section.reverse": {
+   "module": "section",
+   "kind": "setting",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/section/markup.html"
+   ]
+  },
+  "section.showPlane": {
+   "module": "section",
+   "kind": "setting",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/section/markup.html"
+   ]
+  },
+  "sectionViews.list": {
+   "module": "section_views",
+   "kind": "nav",
+   "label": "Сечения (0)",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/section_views/markup.html"
+   ]
+  },
+  "sectionViews.marks": {
+   "module": "section_views",
+   "kind": "setting",
+   "label": "Обозначения на модели",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/section_views/markup.html"
+   ]
+  },
+  "sectionViews.save": {
+   "module": "section_views",
+   "kind": "action",
+   "label": "＋ Сохранить текущее",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/section_views/markup.html"
+   ]
+  },
+  "structure.close": {
+   "module": "toolbar",
+   "kind": "nav",
+   "label": "×",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/toolbar/markup.html"
+   ]
+  },
+  "structure.open": {
+   "module": "toolbar",
+   "kind": "nav",
+   "label": "Структура",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/toolbar/markup.html",
+    "visualizer/templates/interactive_model_template.html"
+   ]
+  },
+  "tree.down": {
+   "module": "tree_keys",
+   "kind": "action",
+   "label": "Ниже по структуре",
+   "via": [
+    "key"
+   ],
+   "files": [
+    "visualizer/features/tree_keys/adapter.js"
+   ]
+  },
+  "tree.up": {
+   "module": "tree_keys",
+   "kind": "action",
+   "label": "Выше по структуре",
+   "via": [
+    "key"
+   ],
+   "files": [
+    "visualizer/features/tree_keys/adapter.js"
+   ]
+  },
+  "view.fit": {
+   "module": "template",
+   "kind": "action",
+   "label": "Вписать",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/templates/interactive_model_template.html"
+   ]
+  },
+  "visibility.hideBlock": {
+   "module": "visibility",
+   "kind": "action",
+   "label": "Скрыть блок",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/visibility/markup.html"
+   ]
+  },
+  "visibility.hideMaterial": {
+   "module": "visibility",
+   "kind": "action",
+   "label": "Скрыть материал",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/visibility/markup.html"
+   ]
+  },
+  "visibility.hideSameBlocks": {
+   "module": "visibility",
+   "kind": "action",
+   "label": "Скрыть все такие блоки",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/visibility/markup.html"
+   ]
+  },
+  "visibility.hideSameParts": {
+   "module": "visibility",
+   "kind": "action",
+   "label": "Скрыть все такие детали",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/visibility/markup.html"
+   ]
+  },
+  "visibility.hideSelected": {
+   "module": "visibility",
+   "kind": "action",
+   "label": "Скрыть выбранное",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/visibility/markup.html"
+   ]
+  },
+  "visibility.hideUnit": {
+   "module": "visibility",
+   "kind": "action",
+   "label": "Скрыть сборочную единицу",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/visibility/markup.html"
+   ]
+  },
+  "visibility.isolate": {
+   "module": "visibility",
+   "kind": "action",
+   "label": "Оставить только выбранное",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/visibility/markup.html"
+   ]
+  },
+  "visibility.menu": {
+   "module": "visibility",
+   "kind": "nav",
+   "label": "Меню видимости",
+   "via": [],
+   "files": [
+    "visualizer/features/visibility/adapter.js"
+   ]
+  },
+  "visibility.mode": {
+   "module": "visibility",
+   "kind": "setting",
+   "label": "Переключить выбор отдельного объекта и сборочной единицы",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/visibility/markup.html"
+   ]
+  },
+  "visibility.restoreAll": {
+   "module": "visibility",
+   "kind": "action",
+   "label": "Вернуть скрытые",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/visibility/markup.html"
+   ]
+  },
+  "visibility.restoreSelected": {
+   "module": "visibility",
+   "kind": "action",
+   "label": "Восстановить видимость",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/visibility/markup.html"
+   ]
+  }
+ }
+}
