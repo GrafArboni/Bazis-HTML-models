@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "source": "ec8df4f4298979366ad84828cb1a562126ade3454e38e1e7470623f9143dde62",
- "savedAt": "2026-10-22T17:01:07.422Z",
+ "source": "0f68a263f35bc19ff053c278e0474b77e53f3fc711e1e9d204e0dad65cf19634",
+ "savedAt": "2026-10-22T17:07:40.825Z",
  "features": {
   "outline": false,
   "section": {
@@ -23,12 +23,6 @@
   "finish": "texture",
   "dimension_actions": {
    "colors": []
-  },
-  "dimensions": {
-   "size": 16,
-   "color": "#e60000",
-   "unit": false,
-   "box": false
   },
   "materials": [
    {
@@ -591,10 +585,7 @@
    "notes": []
   },
   "hardware_mono": false,
-  "hardware_types": {
-   "on": true,
-   "focus": null
-  },
+  "hardware_types": false,
   "visibility": {
    "hidden": [],
    "objectMode": true
@@ -644,9 +635,6 @@
   "sectionViewsMarks": true,
   "lineWidth": "1",
   "displayModesEnabled": false,
-  "dimensionFontSize": "16",
-  "dimensionUnit": false,
-  "dimensionBox": false,
   "notesShow": true,
   "noteEditorMany": false,
   "noteEditorSphere": false,
@@ -673,14 +661,14 @@
  },
  "camera": {
   "position": [
-   -220.4852273448746,
-   2138.1127943461593,
-   3424.6575247490837
+   -933.73005250151,
+   1803.618460071837,
+   2836.0596297930806
   ],
   "target": [
-   2228.101041960603,
-   470.8633271417312,
-   1316.123310967303
+   1626.3187211998973,
+   457.61450474893115,
+   632.5089352689408
   ],
   "up": [
    0,
