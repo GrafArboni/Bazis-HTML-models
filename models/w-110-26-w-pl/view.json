@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "source": "0f68a263f35bc19ff053c278e0474b77e53f3fc711e1e9d204e0dad65cf19634",
- "savedAt": "2026-10-22T17:07:40.825Z",
+ "source": "b846545cfcdfaf52316994b873cb6fbe11820c22b846fd7fce2f8f9fee3d896b",
+ "savedAt": "2026-10-22T17:50:08.324Z",
  "features": {
   "outline": false,
   "section": {
@@ -17,7 +17,43 @@
     0
    ]
   },
-  "section_views": null,
+  "section_views": {
+   "views": [
+    {
+     "id": "bz0",
+     "label": "1",
+     "name": "Горизонталь1",
+     "section": {
+      "axis": "",
+      "normal": [
+       0,
+       -1,
+       0
+      ],
+      "position": -644.605,
+      "reversed": false
+     }
+    },
+    {
+     "id": "bz1",
+     "label": "2",
+     "name": "Вертикаль1",
+     "section": {
+      "axis": "",
+      "normal": [
+       1,
+       0,
+       0
+      ],
+      "position": 706.467,
+      "reversed": false
+     }
+    }
+   ],
+   "active": null,
+   "marks": true,
+   "seeded": true
+  },
   "line_width": 1,
   "display_modes": null,
   "finish": "texture",
@@ -582,7 +618,31 @@
   },
   "notes": {
    "enabled": true,
-   "notes": []
+   "notes": [
+    {
+     "id": "bz-19597",
+     "text": "Gniazdko",
+     "point": [
+      2,
+      750.557,
+      649.443
+     ],
+     "objectId": 162,
+     "local": [
+      -648.557,
+      550.557,
+      16.5
+     ],
+     "element": "Front fornirowany · поз. 0.0.1",
+     "updated": null,
+     "hidden": false,
+     "kind": "detail",
+     "origin": "bazis",
+     "sphere": {
+      "diameter": 250
+     }
+    }
+   ]
   },
   "hardware_mono": false,
   "hardware_types": false,
@@ -610,7 +670,3121 @@
   "hardware_catalog": {
    "expanded": false
   },
-  "drawings": null
+  "drawings": {
+   "schema": 1,
+   "info": {
+    "product": "",
+    "order": "",
+    "customer": "Adintsov Eugeniusz",
+    "address": "",
+    "designer": "Artem Bobukh",
+    "company": "",
+    "date": "2026-10-22",
+    "note": ""
+   },
+   "style": {
+    "font": "Arial",
+    "size": 3.5,
+    "stretch": 100,
+    "frame": "gost",
+    "stamp": {
+     "rowH": 7,
+     "rows": [
+      [
+       {
+        "f": "product",
+        "w": 3
+       },
+       {
+        "f": "title",
+        "w": 3
+       },
+       {
+        "f": "scale",
+        "w": 1
+       },
+       {
+        "f": "sheet",
+        "w": 1
+       }
+      ],
+      [
+       {
+        "f": "order",
+        "w": 1
+       },
+       {
+        "f": "customer",
+        "w": 2
+       },
+       {
+        "f": "designer",
+        "w": 1
+       },
+       {
+        "f": "company",
+        "w": 2
+       },
+       {
+        "f": "date",
+        "w": 1
+       }
+      ]
+     ]
+    },
+    "displayOrtho": "ghost",
+    "displayIso": "ghost",
+    "displayDetail": "wire",
+    "calloutsWhich": "all",
+    "modelDimColor": "#1a5d9e",
+    "calloutColor": "#111111",
+    "calloutHalo": false,
+    "lineColor": "",
+    "titleOrient": "landscape",
+    "callouts": "none",
+    "calloutsOn": "iso",
+    "calloutSize": 0,
+    "views": [
+     "front",
+     "left",
+     "top",
+     "iso"
+    ],
+    "zones": {
+     "landscape": {
+      "parts": [
+       0,
+       0,
+       0.285,
+       1
+      ],
+      "units": [
+       0,
+       0.5,
+       0.285,
+       0.5
+      ],
+      "hardware": [
+       0,
+       0.7,
+       0.285,
+       0.3
+      ],
+      "linear": [
+       0,
+       0.25,
+       0.285,
+       0.75
+      ],
+      "views": [
+       0.285,
+       0,
+       0.715,
+       0.398
+      ],
+      "iso": [
+       0.285,
+       0.398,
+       0.715,
+       0.402
+      ],
+      "details": [
+       0.285,
+       0.8,
+       0.715,
+       0.2
+      ]
+     },
+     "portrait": {
+      "parts": [
+       0,
+       0.65,
+       0.59,
+       0.35
+      ],
+      "units": [
+       0,
+       0.85,
+       0.59,
+       0.15
+      ],
+      "hardware": [
+       0.59,
+       0.65,
+       0.41,
+       0.35
+      ],
+      "linear": [
+       0,
+       0.75,
+       0.59,
+       0.25
+      ],
+      "views": [
+       0,
+       0,
+       1,
+       0.21
+      ],
+      "iso": [
+       0,
+       0.21,
+       1,
+       0.31
+      ],
+      "details": [
+       0,
+       0.52,
+       1,
+       0.13
+      ]
+     }
+    },
+    "overviewZones": {
+     "landscape": {
+      "views": [
+       0,
+       0,
+       1,
+       0.35
+      ],
+      "iso": [
+       0,
+       0.35,
+       1,
+       0.65
+      ]
+     },
+     "portrait": {
+      "views": [
+       0,
+       0,
+       1,
+       0.31
+      ],
+      "iso": [
+       0,
+       0.31,
+       1,
+       0.69
+      ]
+     }
+    },
+    "overview": true,
+    "unitLayout": "specs",
+    "partSheets": false,
+    "unitParts": {},
+    "noteStyle": {
+     "size": 0,
+     "color": "#d32f2f",
+     "marker": "dot",
+     "frame": false
+    },
+    "noteViewsDrop": [
+     "bz-19597"
+    ]
+   },
+   "sheets": [
+    {
+     "id": "smvjtsgeq5b",
+     "format": "A4",
+     "orient": "landscape",
+     "kind": "title",
+     "title": "",
+     "blocks": [
+      {
+       "id": "bmvjtsgeq5c",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 191,
+       "w": 272,
+       "h": 14
+      },
+      {
+       "id": "bmvjtsgeq5d",
+       "type": "title",
+       "x": 26,
+       "y": 11,
+       "w": 260,
+       "h": 26
+      },
+      {
+       "id": "bmvjtsgeq5e",
+       "type": "view",
+       "x": 25,
+       "y": 40,
+       "w": 260,
+       "h": 148,
+       "unit": null,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "texture",
+       "caption": false,
+       "callouts": "none",
+       "layers": {
+        "hardware": false,
+        "imports": false,
+        "holes": false,
+        "lines": false,
+        "modelDims": false
+       }
+      }
+     ]
+    },
+    {
+     "id": "smvjtsgeq5f",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "overview",
+     "title": "W-110.26_W_",
+     "blocks": [
+      {
+       "id": "bmvjtsgeq5g",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjtsgeq5h",
+       "type": "view",
+       "x": 26,
+       "y": 11,
+       "w": 127.66666666666667,
+       "h": 91.35,
+       "unit": null,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgeq5i",
+       "type": "view",
+       "x": 153.66666666666669,
+       "y": 11,
+       "w": 127.66666666666667,
+       "h": 91.35,
+       "unit": null,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgeq5j",
+       "type": "view",
+       "x": 281.33333333333337,
+       "y": 11,
+       "w": 127.66666666666667,
+       "h": 91.35,
+       "unit": null,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgeq5k",
+       "type": "view",
+       "x": 25,
+       "y": 105,
+       "w": 383,
+       "h": 169.65,
+       "unit": null,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      }
+     ],
+     "unit": null,
+     "main": true,
+     "touched": true
+    },
+    {
+     "id": "smvjtsgfdad",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "Узлы и сечения — W-110.26_W_",
+     "blocks": [
+      {
+       "id": "bmvjtsgfdae",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjttxf8ak",
+       "type": "view",
+       "x": 25,
+       "y": 105,
+       "w": 385,
+       "h": 172.06600000000003,
+       "unit": null,
+       "dir": "custom",
+       "az": 216,
+       "el": 21,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "baseDir": "iso"
+      },
+      {
+       "id": "bmvju0u0xfs",
+       "type": "view",
+       "x": 20,
+       "y": 5,
+       "w": 395,
+       "h": 155,
+       "unit": null,
+       "dir": "custom",
+       "az": 39,
+       "el": 15,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "baseDir": "iso"
+      }
+     ],
+     "unit": null,
+     "extraOf": "smvjtsgeq5f",
+     "skip": [
+      "parts",
+      "linear",
+      "hardware"
+     ],
+     "zones": {
+      "landscape": {
+       "parts": [
+        0,
+        0,
+        0.037,
+        1
+       ],
+       "units": [
+        0,
+        0.5,
+        0.037,
+        0.5
+       ],
+       "hardware": [
+        0,
+        0.7,
+        0.037,
+        0.3
+       ],
+       "linear": [
+        0,
+        0.25,
+        0.037,
+        0.75
+       ],
+       "views": [
+        0.037,
+        0,
+        0.963,
+        0.494
+       ],
+       "iso": [
+        0.037,
+        0.494,
+        0.963,
+        0.306
+       ],
+       "details": [
+        0.037,
+        0.8,
+        0.963,
+        0.2
+       ]
+      },
+      "portrait": {
+       "parts": [
+        0,
+        0.65,
+        0.59,
+        0.35
+       ],
+       "units": [
+        0,
+        0.85,
+        0.59,
+        0.15
+       ],
+       "hardware": [
+        0.59,
+        0.65,
+        0.41,
+        0.35
+       ],
+       "linear": [
+        0,
+        0.75,
+        0.59,
+        0.25
+       ],
+       "views": [
+        0,
+        0,
+        1,
+        0.21
+       ],
+       "iso": [
+        0,
+        0.21,
+        1,
+        0.31
+       ],
+       "details": [
+        0,
+        0.52,
+        1,
+        0.13
+       ]
+      }
+     },
+     "touched": true,
+     "views": [
+      "iso"
+     ]
+    },
+    {
+     "id": "smvjtzq1he2",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "spec",
+     "title": "W-110.26_W_PL (1/4)",
+     "blocks": [
+      {
+       "id": "bmvjtzq1he3",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvju022qeu",
+       "type": "parts",
+       "unit": null,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 230,
+       "h": 261
+      },
+      {
+       "id": "bmvju022qev",
+       "type": "parts",
+       "unit": null,
+       "offset": 38,
+       "x": 256,
+       "y": 11,
+       "w": 153,
+       "h": 261
+      }
+     ],
+     "unit": null
+    },
+    {
+     "id": "smvjtzznpej",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "spec",
+     "title": "W-110.26_W_PL (2/4)",
+     "blocks": [
+      {
+       "id": "bmvjtzznpek",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvju04izfb",
+       "type": "parts",
+       "unit": null,
+       "offset": 75,
+       "x": 26,
+       "y": 11,
+       "w": 230,
+       "h": 261
+      },
+      {
+       "id": "bmvju04izfc",
+       "type": "parts",
+       "unit": null,
+       "offset": 112,
+       "x": 256,
+       "y": 11,
+       "w": 153,
+       "h": 51.09
+      },
+      {
+       "id": "bmvju04izfd",
+       "type": "linear",
+       "unit": null,
+       "offset": 0,
+       "x": 256,
+       "y": 62.09,
+       "w": 153,
+       "h": 161.85000000000005
+      },
+      {
+       "id": "bmvjtzznpel",
+       "type": "hardware",
+       "unit": null,
+       "offset": 0,
+       "x": 256,
+       "y": 223.94000000000005,
+       "w": 153,
+       "h": 48.059999999999945
+      }
+     ],
+     "unit": null
+    },
+    {
+     "id": "smvju022qf0",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "spec",
+     "title": "W-110.26_W_PL (3/4)",
+     "blocks": [
+      {
+       "id": "bmvju022qf1",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvju022qf2",
+       "type": "hardware",
+       "unit": null,
+       "offset": 1,
+       "x": 26,
+       "y": 11,
+       "w": 230,
+       "h": 261
+      },
+      {
+       "id": "bmvju022qf3",
+       "type": "hardware",
+       "unit": null,
+       "offset": 20,
+       "x": 256,
+       "y": 11,
+       "w": 153,
+       "h": 261
+      }
+     ],
+     "unit": null
+    },
+    {
+     "id": "smvju04izfh",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "spec",
+     "title": "W-110.26_W_PL (4/4)",
+     "blocks": [
+      {
+       "id": "bmvju04izfi",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvju04izfj",
+       "type": "hardware",
+       "unit": null,
+       "offset": 39,
+       "x": 26,
+       "y": 11,
+       "w": 230,
+       "h": 261
+      },
+      {
+       "id": "bmvju04izfk",
+       "type": "hardware",
+       "unit": null,
+       "offset": 58,
+       "x": 256,
+       "y": 11,
+       "w": 153,
+       "h": 93.69
+      }
+     ],
+     "unit": null
+    },
+    {
+     "id": "smvju2zguh8",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "Узлы и сечения — W-110.26_W_ — Вид сверху",
+     "blocks": [
+      {
+       "id": "bmvju2zguh9",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjttxf8aj",
+       "type": "view",
+       "x": 26,
+       "y": 11,
+       "w": 383,
+       "h": 261,
+       "unit": null,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit"
+      }
+     ],
+     "unit": null,
+     "free": true
+    },
+    {
+     "id": "smvju2rpbgr",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "Узлы и сечения — W-110.26_W_ — Вид слева",
+     "blocks": [
+      {
+       "id": "bmvju2rpbgs",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjttxf8ai",
+       "type": "view",
+       "x": 26,
+       "y": 11,
+       "w": 383,
+       "h": 261,
+       "unit": null,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit"
+      }
+     ],
+     "unit": null,
+     "free": true
+    },
+    {
+     "id": "smvju2h4nga",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "Узлы и сечения — W-110.26_W_ — Вид спереди",
+     "blocks": [
+      {
+       "id": "bmvju2h4ngb",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjttxf8ah",
+       "type": "view",
+       "x": 26,
+       "y": 11,
+       "w": 383,
+       "h": 144,
+       "unit": null,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "plain",
+       "caption": true,
+       "callouts": "inherit",
+       "measures": [
+        {
+         "id": "mmvju5u1qje",
+         "a": [
+          3113.2,
+          891.2,
+          4374
+         ],
+         "b": [
+          2086.8,
+          891.2,
+          4374
+         ],
+         "kind": "h",
+         "off": -33.2
+        },
+        {
+         "id": "mmvju5w7wk9",
+         "a": [
+          2088.7,
+          891.2,
+          4374
+         ],
+         "b": [
+          1061.3,
+          891.2,
+          4374
+         ],
+         "kind": "h",
+         "off": -33.3
+        },
+        {
+         "id": "mmvju5y8gl4",
+         "a": [
+          1063.7,
+          891.2,
+          4374
+         ],
+         "b": [
+          37.3,
+          891.2,
+          4374
+         ],
+         "kind": "h",
+         "off": -33.1
+        },
+        {
+         "id": "mmvju61yalz",
+         "a": [
+          37.3,
+          891.2,
+          4374
+         ],
+         "b": [
+          37.3,
+          198.8,
+          4374
+         ],
+         "kind": "v",
+         "off": 10
+        }
+       ]
+      },
+      {
+       "id": "bmvju4xroi4",
+       "type": "view",
+       "x": 30,
+       "y": 105,
+       "w": 380,
+       "h": 165,
+       "unit": null,
+       "dir": "back",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "plain",
+       "caption": true,
+       "callouts": "inherit"
+      }
+     ],
+     "unit": null,
+     "free": true,
+     "touched": true
+    },
+    {
+     "id": "smvjtsgeq5l",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sections",
+     "title": "1–1, 2–2",
+     "blocks": [
+      {
+       "id": "bmvjtsgeq5m",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjtsgeq5n",
+       "type": "view",
+       "x": 26,
+       "y": 11,
+       "w": 191.5,
+       "h": 261,
+       "unit": null,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "orient": "model",
+       "cut": {
+        "point": [
+         3150,
+         644.605,
+         0
+        ],
+        "normal": [
+         0,
+         -1,
+         0
+        ]
+       },
+       "section": "bz0",
+       "letter": "1",
+       "secName": "Горизонталь1"
+      },
+      {
+       "id": "bmvjtsgeq5o",
+       "type": "view",
+       "x": 217.5,
+       "y": 11,
+       "w": 191.5,
+       "h": 261,
+       "unit": null,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "orient": "model",
+       "cut": {
+        "point": [
+         706.467,
+         200,
+         1298
+        ],
+        "normal": [
+         1,
+         0,
+         0
+        ]
+       },
+       "section": "bz1",
+       "letter": "2",
+       "secName": "Вертикаль1"
+      }
+     ],
+     "unit": null
+    },
+    {
+     "id": "smvjtsger5p",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "1.0.0 Strona 1",
+     "blocks": [
+      {
+       "id": "bmvjtsger5q",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjtsger5r",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 10612,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsger5s",
+       "type": "view",
+       "x": 226.4366666666666,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 10612,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsger5t",
+       "type": "view",
+       "x": 317.71833333333325,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 10612,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsger5u",
+       "type": "view",
+       "x": 135,
+       "y": 115,
+       "w": 273.845,
+       "h": 157.12199999999999,
+       "unit": 10612,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "name",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsger5v",
+       "type": "units",
+       "auto": true,
+       "unit": 10612,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 109.15499999999999,
+       "h": 50.37465
+      },
+      {
+       "id": "bmvjtsger5w",
+       "type": "hardware",
+       "auto": true,
+       "unit": 10612,
+       "offset": 0,
+       "x": 26,
+       "y": 61.37465,
+       "w": 109.15499999999999,
+       "h": 32.37465
+      }
+     ],
+     "unit": 10612,
+     "touched": true
+    },
+    {
+     "id": "smvjtsges5x",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "1.1.0 Moduł SPACE TWIN",
+     "blocks": [
+      {
+       "id": "bmvjtsges5y",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjtsges5z",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 5533,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsges60",
+       "type": "view",
+       "x": 226.4366666666666,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 5533,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsges61",
+       "type": "view",
+       "x": 317.71833333333325,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 5533,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsges62",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 114.878,
+       "w": 273.845,
+       "h": 157.12199999999999,
+       "unit": 5533,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsges63",
+       "type": "parts",
+       "auto": true,
+       "unit": 5533,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 109.15499999999999,
+       "h": 102.57465
+      },
+      {
+       "id": "bmvjtsges64",
+       "type": "hardware",
+       "auto": true,
+       "unit": 5533,
+       "offset": 0,
+       "x": 26,
+       "y": 113.57465,
+       "w": 109.15499999999997,
+       "h": 166.42534999999998
+      }
+     ],
+     "unit": 5533,
+     "touched": true
+    },
+    {
+     "id": "smvjtsget68",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "1.2.0 Moduł zmywarki",
+     "blocks": [
+      {
+       "id": "bmvjtsget69",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjtsget6a",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 6127,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsget6b",
+       "type": "view",
+       "x": 226.4366666666666,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 6127,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsget6c",
+       "type": "view",
+       "x": 317.71833333333325,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 6127,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsget6d",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 114.878,
+       "w": 273.845,
+       "h": 157.12199999999999,
+       "unit": 6127,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsget6e",
+       "type": "parts",
+       "auto": true,
+       "unit": 6127,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 109.15499999999999,
+       "h": 108.57465
+      },
+      {
+       "id": "bmvjtsget6f",
+       "type": "hardware",
+       "auto": true,
+       "unit": 6127,
+       "offset": 0,
+       "x": 26,
+       "y": 151.9493,
+       "w": 109.15499999999999,
+       "h": 120.0507
+      },
+      {
+       "id": "bmvjtsget6g",
+       "type": "linear",
+       "auto": true,
+       "unit": 6127,
+       "offset": 0,
+       "x": 26,
+       "y": 119.57465,
+       "w": 109.15499999999999,
+       "h": 32.37465
+      }
+     ],
+     "unit": 6127
+    },
+    {
+     "id": "smvjtsgeu6h",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "spec",
+     "title": "1.2.0 Moduł zmywarki",
+     "blocks": [
+      {
+       "id": "bmvjtsgeu6i",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjtsgeu6j",
+       "type": "hardware",
+       "unit": 6127,
+       "offset": 7,
+       "x": 26,
+       "y": 11,
+       "w": 383,
+       "h": 124.58999999999999
+      }
+     ],
+     "unit": 6127
+    },
+    {
+     "id": "smvjtsgeu6k",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "1.3.0 Moduł zlewozmywaka",
+     "blocks": [
+      {
+       "id": "bmvjtsgeu6l",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjtsgeu6m",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 6609,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgeu6n",
+       "type": "view",
+       "x": 226.4366666666666,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 6609,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgeu6o",
+       "type": "view",
+       "x": 317.71833333333325,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 6609,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgeu6p",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 114.878,
+       "w": 273.845,
+       "h": 157.12199999999999,
+       "unit": 6609,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgeu6q",
+       "type": "parts",
+       "auto": true,
+       "unit": 6609,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 109.15499999999999,
+       "h": 96.57465
+      },
+      {
+       "id": "bmvjtsgeu6r",
+       "type": "hardware",
+       "auto": true,
+       "unit": 6609,
+       "offset": 0,
+       "x": 26,
+       "y": 107.57465,
+       "w": 109.15499999999999,
+       "h": 140.45465000000002
+      }
+     ],
+     "unit": 6609
+    },
+    {
+     "id": "smvjtsgev6s",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "1.4.0 Moduł środkowy",
+     "blocks": [
+      {
+       "id": "bmvjtsgev6t",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjtsgev6u",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 6783,
+       "dir": "back",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgev6v",
+       "type": "view",
+       "x": 226.4366666666666,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 6783,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgev6w",
+       "type": "view",
+       "x": 317.71833333333325,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 6783,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgev6x",
+       "type": "view",
+       "x": 135,
+       "y": 115,
+       "w": 273.845,
+       "h": 157.12199999999999,
+       "unit": 6783,
+       "dir": "custom",
+       "az": 40,
+       "el": 28,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true,
+       "baseDir": "iso"
+      },
+      {
+       "id": "bmvjtsgev6y",
+       "type": "parts",
+       "auto": true,
+       "unit": 6783,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 109.15499999999999,
+       "h": 102.57465
+      },
+      {
+       "id": "bmvjtsgev6z",
+       "type": "hardware",
+       "auto": true,
+       "unit": 6783,
+       "offset": 0,
+       "x": 26,
+       "y": 113.57465,
+       "w": 109.15499999999999,
+       "h": 140.45465000000002
+      }
+     ],
+     "unit": 6783,
+     "touched": true
+    },
+    {
+     "id": "smvjtsgev70",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "1.5.0 Moduł płyty grzewczej",
+     "blocks": [
+      {
+       "id": "bmvjtsgev71",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjtsgev72",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 6953,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgev73",
+       "type": "view",
+       "x": 226.4366666666666,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 6953,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgev74",
+       "type": "view",
+       "x": 317.71833333333325,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 6953,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgev75",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 114.878,
+       "w": 273.845,
+       "h": 157.12199999999999,
+       "unit": 6953,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgev76",
+       "type": "parts",
+       "auto": true,
+       "unit": 6953,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 109.15499999999999,
+       "h": 102.57465
+      },
+      {
+       "id": "bmvjtsgev77",
+       "type": "hardware",
+       "auto": true,
+       "unit": 6953,
+       "offset": 0,
+       "x": 26,
+       "y": 139.9493,
+       "w": 109.15499999999999,
+       "h": 132.0507
+      },
+      {
+       "id": "bmvjtsgev78",
+       "type": "linear",
+       "auto": true,
+       "unit": 6953,
+       "offset": 0,
+       "x": 26,
+       "y": 113.57465,
+       "w": 109.15499999999999,
+       "h": 26.374650000000003
+      }
+     ],
+     "unit": 6953
+    },
+    {
+     "id": "smvjtsgew79",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "spec",
+     "title": "1.5.0 Moduł płyty grzewczej",
+     "blocks": [
+      {
+       "id": "bmvjtsgew7a",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjtsgex7b",
+       "type": "hardware",
+       "unit": 6953,
+       "offset": 8,
+       "x": 26,
+       "y": 11,
+       "w": 383,
+       "h": 148.59
+      }
+     ],
+     "unit": 6953
+    },
+    {
+     "id": "smvjtsgex7c",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "2.0.0 Strona 2",
+     "blocks": [
+      {
+       "id": "bmvjtsgex7d",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjtsgex7e",
+       "type": "view",
+       "x": 35,
+       "y": 10,
+       "w": 124.73033333333332,
+       "h": 119.016,
+       "unit": 10613,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgex7f",
+       "type": "view",
+       "x": 160,
+       "y": 10,
+       "w": 124.73033333333332,
+       "h": 119.016,
+       "unit": 10613,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgex7g",
+       "type": "view",
+       "x": 285,
+       "y": 10,
+       "w": 124.73033333333332,
+       "h": 119.016,
+       "unit": 10613,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgex7h",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 130.01600000000002,
+       "w": 273.845,
+       "h": 141.984,
+       "unit": 10613,
+       "dir": "custom",
+       "az": 211,
+       "el": 19,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "name",
+       "auto": true,
+       "baseDir": "iso"
+      },
+      {
+       "id": "bmvjtsgex7i",
+       "type": "units",
+       "auto": true,
+       "unit": 10613,
+       "offset": 0,
+       "x": 25,
+       "y": 135,
+       "w": 109.15499999999999,
+       "h": 38.37465
+      },
+      {
+       "id": "bmvjtsgex7j",
+       "type": "hardware",
+       "auto": true,
+       "unit": 10613,
+       "offset": 0,
+       "x": 25,
+       "y": 175,
+       "w": 109.15499999999999,
+       "h": 32.37465
+      }
+     ],
+     "unit": 10613,
+     "zones": {
+      "landscape": {
+       "parts": [
+        0,
+        0.475,
+        0.285,
+        0.525
+       ],
+       "units": [
+        0,
+        0.5,
+        0.285,
+        0.5
+       ],
+       "hardware": [
+        0,
+        0.7,
+        0.285,
+        0.3
+       ],
+       "linear": [
+        0,
+        0.552,
+        0.285,
+        0.448
+       ],
+       "views": [
+        0.023,
+        0,
+        0.977,
+        0.456
+       ],
+       "iso": [
+        0.285,
+        0.456,
+        0.715,
+        0.344
+       ],
+       "details": [
+        0.285,
+        0.8,
+        0.715,
+        0.2
+       ]
+      },
+      "portrait": {
+       "parts": [
+        0,
+        0.65,
+        0.59,
+        0.35
+       ],
+       "units": [
+        0,
+        0.85,
+        0.59,
+        0.15
+       ],
+       "hardware": [
+        0.59,
+        0.65,
+        0.41,
+        0.35
+       ],
+       "linear": [
+        0,
+        0.75,
+        0.59,
+        0.25
+       ],
+       "views": [
+        0,
+        0,
+        1,
+        0.21
+       ],
+       "iso": [
+        0,
+        0.21,
+        1,
+        0.31
+       ],
+       "details": [
+        0,
+        0.52,
+        1,
+        0.13
+       ]
+      }
+     },
+     "touched": true
+    },
+    {
+     "id": "smvjtsgey7k",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "2.1.0 Moduł SERVO-DRIVE",
+     "blocks": [
+      {
+       "id": "bmvjtsgey7l",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjtsgey7m",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 941,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgey7n",
+       "type": "view",
+       "x": 226.4366666666666,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 941,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgey7o",
+       "type": "view",
+       "x": 317.71833333333325,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 941,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgey7p",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 114.878,
+       "w": 273.845,
+       "h": 157.12199999999999,
+       "unit": 941,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgey7q",
+       "type": "parts",
+       "auto": true,
+       "unit": 941,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 109.15499999999999,
+       "h": 108.57465
+      },
+      {
+       "id": "bmvjtsgey7r",
+       "type": "hardware",
+       "auto": true,
+       "unit": 941,
+       "offset": 0,
+       "x": 26,
+       "y": 119.57465,
+       "w": 114,
+       "h": 152.42534999999998
+      }
+     ],
+     "unit": 941,
+     "touched": true
+    },
+    {
+     "id": "smvjtsgez7s",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "spec",
+     "title": "2.1.0 Moduł SERVO-DRIVE",
+     "blocks": [
+      {
+       "id": "bmvjtsgez7t",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjtsgez7u",
+       "type": "hardware",
+       "unit": 941,
+       "offset": 9,
+       "x": 26,
+       "y": 11,
+       "w": 383,
+       "h": 214
+      }
+     ],
+     "unit": 941,
+     "manual": true
+    },
+    {
+     "id": "smvjtsgez7v",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "2.2.0 Moduł SERVO-DRIVE",
+     "blocks": [
+      {
+       "id": "bmvjtsgez7w",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjtsgez7x",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 955,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgez7y",
+       "type": "view",
+       "x": 226.4366666666666,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 955,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgez7z",
+       "type": "view",
+       "x": 317.71833333333325,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 955,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgez80",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 114.878,
+       "w": 273.845,
+       "h": 157.12199999999999,
+       "unit": 955,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgez81",
+       "type": "parts",
+       "auto": true,
+       "unit": 955,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 109.15499999999999,
+       "h": 102.57465
+      },
+      {
+       "id": "bmvjtsgez82",
+       "type": "hardware",
+       "auto": true,
+       "unit": 955,
+       "offset": 0,
+       "x": 26,
+       "y": 113.57465,
+       "w": 109.15499999999999,
+       "h": 158.42534999999998
+      }
+     ],
+     "unit": 955
+    },
+    {
+     "id": "smvjtsgf083",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "spec",
+     "title": "2.2.0 Moduł SERVO-DRIVE",
+     "blocks": [
+      {
+       "id": "bmvjtsgf084",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjtsgf085",
+       "type": "hardware",
+       "unit": 955,
+       "offset": 9,
+       "x": 26,
+       "y": 11,
+       "w": 383,
+       "h": 196.59
+      }
+     ],
+     "unit": 955
+    },
+    {
+     "id": "smvjtsgf186",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "2.3.0 Moduł SERVO-DRIVE",
+     "blocks": [
+      {
+       "id": "bmvjtsgf187",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjtsgf188",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 970,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf189",
+       "type": "view",
+       "x": 226.4366666666666,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 970,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf18a",
+       "type": "view",
+       "x": 317.71833333333325,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 970,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf18b",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 114.878,
+       "w": 273.845,
+       "h": 157.12199999999999,
+       "unit": 970,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf18c",
+       "type": "parts",
+       "auto": true,
+       "unit": 970,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 109.15499999999999,
+       "h": 102.57465
+      },
+      {
+       "id": "bmvjtsgf18d",
+       "type": "hardware",
+       "auto": true,
+       "unit": 970,
+       "offset": 0,
+       "x": 26,
+       "y": 113.57465,
+       "w": 109.15499999999999,
+       "h": 158.42534999999998
+      }
+     ],
+     "unit": 970
+    },
+    {
+     "id": "smvjtsgf18e",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "spec",
+     "title": "2.3.0 Moduł SERVO-DRIVE",
+     "blocks": [
+      {
+       "id": "bmvjtsgf18f",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjtsgf28g",
+       "type": "hardware",
+       "unit": 970,
+       "offset": 9,
+       "x": 26,
+       "y": 11,
+       "w": 383,
+       "h": 196.59
+      }
+     ],
+     "unit": 970
+    },
+    {
+     "id": "smvjtsgf28h",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "3.0.0 Elementy dystansowe",
+     "blocks": [
+      {
+       "id": "bmvjtsgf28i",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjtsgf28j",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 14186,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf28k",
+       "type": "view",
+       "x": 226.4366666666666,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 14186,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf28l",
+       "type": "view",
+       "x": 317.71833333333325,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 14186,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf28m",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 114.878,
+       "w": 273.845,
+       "h": 157.12199999999999,
+       "unit": 14186,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf28n",
+       "type": "units",
+       "auto": true,
+       "unit": 14186,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 109.15499999999999,
+       "h": 38.37465
+      }
+     ],
+     "unit": 14186
+    },
+    {
+     "id": "smvjtsgf28o",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "3.1.0 Korpus",
+     "blocks": [
+      {
+       "id": "bmvjtsgf28p",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjtsgf28q",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 11112,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf28r",
+       "type": "view",
+       "x": 226.4366666666666,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 11112,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf28s",
+       "type": "view",
+       "x": 317.71833333333325,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 11112,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf28t",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 114.878,
+       "w": 273.845,
+       "h": 157.12199999999999,
+       "unit": 11112,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf28u",
+       "type": "parts",
+       "auto": true,
+       "unit": 11112,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 109.15499999999999,
+       "h": 52.77465
+      },
+      {
+       "id": "bmvjtsgf28v",
+       "type": "hardware",
+       "auto": true,
+       "unit": 11112,
+       "offset": 0,
+       "x": 26,
+       "y": 63.77465,
+       "w": 109.15499999999999,
+       "h": 44.37465
+      }
+     ],
+     "unit": 11112
+    },
+    {
+     "id": "smvjtsgf38w",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "3.2.0 Korpus",
+     "blocks": [
+      {
+       "id": "bmvjtsgf38x",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjtsgf38y",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 11328,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf38z",
+       "type": "view",
+       "x": 226.4366666666666,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 11328,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf390",
+       "type": "view",
+       "x": 317.71833333333325,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 11328,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf391",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 114.878,
+       "w": 273.845,
+       "h": 157.12199999999999,
+       "unit": 11328,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf392",
+       "type": "parts",
+       "auto": true,
+       "unit": 11328,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 109.15499999999999,
+       "h": 52.77465
+      },
+      {
+       "id": "bmvjtsgf393",
+       "type": "hardware",
+       "auto": true,
+       "unit": 11328,
+       "offset": 0,
+       "x": 26,
+       "y": 63.77465,
+       "w": 109.15499999999999,
+       "h": 44.37465
+      }
+     ],
+     "unit": 11328
+    },
+    {
+     "id": "smvjtsgf394",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "3.3.0 Korpus",
+     "blocks": [
+      {
+       "id": "bmvjtsgf395",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjtsgf396",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 13510,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf397",
+       "type": "view",
+       "x": 226.4366666666666,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 13510,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf398",
+       "type": "view",
+       "x": 317.71833333333325,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 13510,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf399",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 114.878,
+       "w": 273.845,
+       "h": 157.12199999999999,
+       "unit": 13510,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf39a",
+       "type": "parts",
+       "auto": true,
+       "unit": 13510,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 109.15499999999999,
+       "h": 52.77465
+      },
+      {
+       "id": "bmvjtsgf39b",
+       "type": "hardware",
+       "auto": true,
+       "unit": 13510,
+       "offset": 0,
+       "x": 26,
+       "y": 63.77465,
+       "w": 109.15499999999999,
+       "h": 44.37465
+      }
+     ],
+     "unit": 13510
+    },
+    {
+     "id": "smvjtsgf39c",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "4.0.0 Podpora",
+     "blocks": [
+      {
+       "id": "bmvjtsgf39d",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjtsgf39e",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 11907,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf39f",
+       "type": "view",
+       "x": 226.4366666666666,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 11907,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf39g",
+       "type": "view",
+       "x": 317.71833333333325,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 11907,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf39h",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 114.878,
+       "w": 273.845,
+       "h": 157.12199999999999,
+       "unit": 11907,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf39i",
+       "type": "parts",
+       "auto": true,
+       "unit": 11907,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 109.15499999999999,
+       "h": 46.77465
+      },
+      {
+       "id": "bmvjtsgf39j",
+       "type": "hardware",
+       "auto": true,
+       "unit": 11907,
+       "offset": 0,
+       "x": 26,
+       "y": 182.3093,
+       "w": 109.15499999999999,
+       "h": 89.69069999999999
+      },
+      {
+       "id": "bmvjtsgf39k",
+       "type": "linear",
+       "auto": true,
+       "unit": 11907,
+       "offset": 0,
+       "x": 26,
+       "y": 57.77465,
+       "w": 109.15499999999999,
+       "h": 124.53465000000001
+      }
+     ],
+     "unit": 11907
+    },
+    {
+     "id": "smvjtsgf49l",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "spec",
+     "title": "4.0.0 Podpora",
+     "blocks": [
+      {
+       "id": "bmvjtsgf49m",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjtsgf49n",
+       "type": "hardware",
+       "unit": 11907,
+       "offset": 5,
+       "x": 26,
+       "y": 11,
+       "w": 383,
+       "h": 100.58999999999999
+      }
+     ],
+     "unit": 11907
+    },
+    {
+     "id": "smvjtsgf49o",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "5.0.0 Blat",
+     "blocks": [
+      {
+       "id": "bmvjtsgf49p",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjtsgf49q",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 10614,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf49r",
+       "type": "view",
+       "x": 226.4366666666666,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 10614,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf49s",
+       "type": "view",
+       "x": 317.71833333333325,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 10614,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf49t",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 114.878,
+       "w": 273.845,
+       "h": 157.12199999999999,
+       "unit": 10614,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf49u",
+       "type": "parts",
+       "auto": true,
+       "unit": 10614,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 109.15499999999999,
+       "h": 31.77465
+      },
+      {
+       "id": "bmvjtsgf49v",
+       "type": "units",
+       "auto": true,
+       "unit": 10614,
+       "offset": 0,
+       "x": 26,
+       "y": 80.5093,
+       "w": 109.15499999999999,
+       "h": 26.374650000000003
+      },
+      {
+       "id": "bmvjtsgf49w",
+       "type": "hardware",
+       "auto": true,
+       "unit": 10614,
+       "offset": 0,
+       "x": 26,
+       "y": 106.88395,
+       "w": 109.15499999999999,
+       "h": 68.41465
+      },
+      {
+       "id": "bmvjtsgf49x",
+       "type": "linear",
+       "auto": true,
+       "unit": 10614,
+       "offset": 0,
+       "x": 26,
+       "y": 42.77465,
+       "w": 109.15499999999999,
+       "h": 37.73465
+      }
+     ],
+     "unit": 10614
+    },
+    {
+     "id": "smvjtsgf59y",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "5.1.0 Podkład pod blat",
+     "blocks": [
+      {
+       "id": "bmvjtsgf59z",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvjtsgf5a0",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 14330,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf5a1",
+       "type": "view",
+       "x": 226.4366666666666,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 14330,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf5a2",
+       "type": "view",
+       "x": 317.71833333333325,
+       "y": 11,
+       "w": 91.28166666666665,
+       "h": 103.878,
+       "unit": 14330,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf5a3",
+       "type": "view",
+       "x": 135.15499999999997,
+       "y": 114.878,
+       "w": 273.845,
+       "h": 157.12199999999999,
+       "unit": 14330,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvjtsgf5a4",
+       "type": "parts",
+       "auto": true,
+       "unit": 14330,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 109.15499999999999,
+       "h": 70.77465
+      }
+     ],
+     "unit": 14330
+    }
+   ]
+  }
  },
  "controls": {
   "panels": true,
@@ -661,9 +3835,9 @@
  },
  "camera": {
   "position": [
-   -933.73005250151,
-   1803.618460071837,
-   2836.0596297930806
+   -1099.3620196666523,
+   2062.62209533065,
+   3457.4709015792287
   ],
   "target": [
    1626.3187211998973,
