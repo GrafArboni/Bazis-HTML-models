@@ -263,6 +263,402 @@
     "visualizer/templates/interactive_model_template.html"
    ]
   },
+  "drawings.addDimension": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.addExplode": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "＋ Взрыв-схема",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.addGapDimension": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.addHardware": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "＋ Фурнитура",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.addInfo": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "＋ Рамка изделия",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.addLinear": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "＋ Погонаж",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.addNote": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.addParts": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "＋ Детали",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.addSheet": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "＋ Лист",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.addText": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "＋ Текст",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.addView": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "＋ Вид",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.buildKit": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "Собрать комплект",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.close": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "✕ Закрыть",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.exclude": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "Исключения",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.history": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "История действий",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.historyClose": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "Закрыть",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.historyRestore": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.keyEnter": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "Ввести ключ",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.keyForget": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "Забыть ключ",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.kitSettings": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.moveParts": {
+   "module": "drawings",
+   "kind": "setting",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.open": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "Чертежи",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.print": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "Печать / PDF",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.redo": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "↷ Повторить",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.sheet": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.tplHardware": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "Фурнитура",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.tplLinear": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "Погонаж",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.tplParts": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "Спецификация",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.tplStamp": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "Рамка",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.tplTitle": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "Титул",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.tplUnit": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "Лист единицы",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.undo": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "↶ Отменить",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.zones": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "Зоны листа",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.zoomFit": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "По размеру",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.zoomIn": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "＋",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.zoomOut": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "−",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
   "finish.edges": {
    "module": "finish",
    "kind": "setting",
@@ -305,6 +701,15 @@
    ],
    "files": [
     "visualizer/features/github_save/markup.html"
+   ]
+  },
+  "graphics.safe": {
+   "module": "usage",
+   "kind": "setting",
+   "label": "Совместимая графика",
+   "via": [],
+   "files": [
+    "visualizer/features/usage/adapter.js"
    ]
   },
   "guide.close": {
