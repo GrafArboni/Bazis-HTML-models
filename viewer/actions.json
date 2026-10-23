@@ -494,6 +494,50 @@
     "visualizer/features/drawings/adapter.js"
    ]
   },
+  "drawings.moveToNewSheet": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.moveToSheet": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.moveToSheetDrag": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "Перенос блока на лист перетаскиванием",
+   "via": [
+    "drag"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.moveToSheetPick": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
   "drawings.open": {
    "module": "drawings",
    "kind": "nav",
@@ -530,6 +574,28 @@
   "drawings.sheet": {
    "module": "drawings",
    "kind": "nav",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.sheetZonesReset": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.sheetZonesToTemplate": {
+   "module": "drawings",
+   "kind": "action",
    "label": "",
    "via": [
     "click"
@@ -624,6 +690,17 @@
    ],
    "files": [
     "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.zonesFollowTemplate": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
    ]
   },
   "drawings.zoomFit": {
