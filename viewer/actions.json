@@ -263,6 +263,39 @@
     "visualizer/templates/interactive_model_template.html"
    ]
   },
+  "displayModes.solid": {
+   "module": "display_modes",
+   "kind": "setting",
+   "label": "Обычный",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/display_modes/markup.html"
+   ]
+  },
+  "displayModes.wire": {
+   "module": "display_modes",
+   "kind": "setting",
+   "label": "Каркас",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/display_modes/markup.html"
+   ]
+  },
+  "displayModes.xray": {
+   "module": "display_modes",
+   "kind": "setting",
+   "label": "Рентген",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/display_modes/markup.html"
+   ]
+  },
   "drawings.addDimension": {
    "module": "drawings",
    "kind": "action",
@@ -855,6 +888,19 @@
     "visualizer/features/hardware_types/markup.html"
    ]
   },
+  "hotkeys.list": {
+   "module": "hotkeys",
+   "kind": "nav",
+   "label": "Горячие клавиши",
+   "via": [
+    "click",
+    "key"
+   ],
+   "files": [
+    "visualizer/features/hotkeys/adapter.js",
+    "visualizer/features/hotkeys/markup.html"
+   ]
+  },
   "i18n.language": {
    "module": "i18n",
    "kind": "setting",
@@ -1009,15 +1055,15 @@
     "visualizer/templates/interactive_model_template.html"
    ]
   },
-  "menu.more": {
-   "module": "template",
-   "kind": "nav",
-   "label": "Ещё",
+  "menu.developer": {
+   "module": "toolbar",
+   "kind": "action",
+   "label": "",
    "via": [
     "click"
    ],
    "files": [
-    "visualizer/templates/interactive_model_template.html"
+    "visualizer/features/toolbar/adapter.js"
    ]
   },
   "menu.open": {
@@ -1351,6 +1397,17 @@
    "files": [
     "visualizer/features/toolbar/markup.html",
     "visualizer/templates/interactive_model_template.html"
+   ]
+  },
+  "toolbar.hidePanel": {
+   "module": "toolbar",
+   "kind": "nav",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/toolbar/adapter.js"
    ]
   },
   "tree.down": {
