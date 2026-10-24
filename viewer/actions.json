@@ -1290,7 +1290,7 @@
   "section.more": {
    "module": "section",
    "kind": "nav",
-   "label": "⋯",
+   "label": "Дополнительно",
    "via": [
     "click"
    ],
