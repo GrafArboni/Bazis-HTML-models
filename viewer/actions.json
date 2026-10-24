@@ -877,10 +877,33 @@
     "visualizer/features/guide/adapter.js"
    ]
   },
+  "hardwareColor.bazis": {
+   "module": "hardware_mono",
+   "kind": "setting",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/hardware_mono/adapter.js",
+    "visualizer/features/hardware_types/adapter.js"
+   ]
+  },
+  "hardwareMono.toggle": {
+   "module": "hardware_mono",
+   "kind": "setting",
+   "label": "Однотонно",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/hardware_mono/markup.html"
+   ]
+  },
   "hardwareTypes.toggle": {
    "module": "hardware_types",
    "kind": "setting",
-   "label": "Фурнитура по типам",
+   "label": "По типам",
    "via": [
     "click"
    ],
@@ -921,6 +944,28 @@
    ],
    "files": [
     "visualizer/features/i18n/markup.html"
+   ]
+  },
+  "iconControls.icons": {
+   "module": "icon_controls",
+   "kind": "setting",
+   "label": "Значки",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/icon_controls/markup.html"
+   ]
+  },
+  "iconControls.labels": {
+   "module": "icon_controls",
+   "kind": "setting",
+   "label": "Подписи",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/icon_controls/markup.html"
    ]
   },
   "materialLabels.all": {
@@ -970,7 +1015,7 @@
   "materials.editor": {
    "module": "materials",
    "kind": "nav",
-   "label": "Редактор материалов",
+   "label": "Правка по сноскам",
    "via": [
     "click"
    ],
@@ -981,7 +1026,7 @@
   "materials.list": {
    "module": "materials",
    "kind": "nav",
-   "label": "Все материалы",
+   "label": "Назначение материалов",
    "via": [
     "click"
    ],
@@ -1036,7 +1081,7 @@
   "measure.open": {
    "module": "toolbar",
    "kind": "nav",
-   "label": "Замеры",
+   "label": "Отображение",
    "via": [
     "click"
    ],
@@ -1069,7 +1114,7 @@
   "menu.open": {
    "module": "toolbar",
    "kind": "nav",
-   "label": "☰",
+   "label": "Меню",
    "via": [
     "click"
    ],
@@ -1158,7 +1203,7 @@
   "projection.parallel": {
    "module": "projection",
    "kind": "setting",
-   "label": "Параллельная проекция",
+   "label": "Параллельная",
    "via": [
     "click"
    ],
@@ -1199,32 +1244,10 @@
     "visualizer/features/scene_theme/markup.html"
    ]
   },
-  "section.alignView": {
+  "section.add": {
    "module": "section",
    "kind": "action",
-   "label": "Вид на сечение",
-   "via": [
-    "click"
-   ],
-   "files": [
-    "visualizer/features/section/markup.html"
-   ]
-  },
-  "section.axis": {
-   "module": "section",
-   "kind": "setting",
-   "label": "Плоскость сечения",
-   "via": [
-    "click"
-   ],
-   "files": [
-    "visualizer/features/section/markup.html"
-   ]
-  },
-  "section.chooseFace": {
-   "module": "section",
-   "kind": "action",
-   "label": "Выбрать грань",
+   "label": "Добавить сечение",
    "via": [
     "click"
    ],
@@ -1243,54 +1266,10 @@
     "visualizer/features/section/markup.html"
    ]
   },
-  "section.coordinate": {
-   "module": "section",
-   "kind": "setting",
-   "label": "",
-   "via": [
-    "click"
-   ],
-   "files": [
-    "visualizer/features/section/markup.html"
-   ]
-  },
-  "section.enable": {
-   "module": "section",
-   "kind": "setting",
-   "label": "",
-   "via": [
-    "click"
-   ],
-   "files": [
-    "visualizer/features/section/markup.html"
-   ]
-  },
   "section.help": {
    "module": "section",
    "kind": "nav",
    "label": "?",
-   "via": [
-    "click"
-   ],
-   "files": [
-    "visualizer/features/section/markup.html"
-   ]
-  },
-  "section.middle": {
-   "module": "section",
-   "kind": "action",
-   "label": "По центру",
-   "via": [
-    "click"
-   ],
-   "files": [
-    "visualizer/features/section/markup.html"
-   ]
-  },
-  "section.more": {
-   "module": "section",
-   "kind": "nav",
-   "label": "Дополнительно",
    "via": [
     "click"
    ],
@@ -1313,7 +1292,7 @@
   "section.position": {
    "module": "section",
    "kind": "setting",
-   "label": "",
+   "label": "Положение сечения",
    "via": [
     "click"
    ],
@@ -1332,21 +1311,10 @@
     "visualizer/features/section/markup.html"
    ]
   },
-  "section.showPlane": {
-   "module": "section",
-   "kind": "setting",
-   "label": "",
-   "via": [
-    "click"
-   ],
-   "files": [
-    "visualizer/features/section/markup.html"
-   ]
-  },
   "sectionViews.list": {
    "module": "section_views",
    "kind": "nav",
-   "label": "Сечения (0)",
+   "label": "Сечения (0) 0",
    "via": [
     "click"
    ],
@@ -1368,7 +1336,18 @@
   "sectionViews.save": {
    "module": "section_views",
    "kind": "action",
-   "label": "＋ Сохранить текущее",
+   "label": "Сохранить текущее",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/section_views/markup.html"
+   ]
+  },
+  "sectionViews.saveFromWindow": {
+   "module": "section_views",
+   "kind": "action",
+   "label": "Сохранить в список сечений",
    "via": [
     "click"
    ],
@@ -1379,7 +1358,7 @@
   "structure.close": {
    "module": "toolbar",
    "kind": "nav",
-   "label": "×",
+   "label": "Закрыть структуру",
    "via": [
     "click"
    ],
