@@ -1,9 +1,8 @@
 {
  "schema": 1,
- "source": "168bc1c2a8b10695fc10cfcb6e4ae56a329c25a717aec94b522a2e3f352147ed",
- "savedAt": "2026-10-21T12:44:46.923Z",
+ "source": "dc3ecef2d4fcd6c01f8354a0220a4234be721cea3e865b3fd75b2b1591ab81d5",
+ "savedAt": "2026-10-26T11:08:39.220Z",
  "features": {
-  "outline": false,
   "section": {
    "active": false,
    "axis": "y",
@@ -19,7 +18,9 @@
   },
   "section_views": null,
   "line_width": 1,
-  "display_modes": null,
+  "display_modes": {
+   "mode": "solid"
+  },
   "finish": "texture",
   "dimension_actions": {
    "colors": []
@@ -32,42 +33,12 @@
   },
   "materials": [
    {
-    "id": "m:ДСП лам. Kronospan K684 PD Блек Трюфель NEW 2800х2070х18мм\r201243",
-    "type": "tex",
-    "name": "ДСП лам. Kronospan K684 PD Блек Трюфель NEW 2800х2070х18мм",
-    "state": {
-     "rot": 0,
-     "mode": "tex",
-     "texKey": "ДСП лам. Kronospan K684 PD Блек Трюфель NEW 2800х2070х18мм\r201243",
-     "texData": null,
-     "color": "#800000",
-     "transparency": 0
-    }
-   },
-   {
-    "id": "m:МДФ Arpa 4548 Alev? / Arpa 4548 Alev? 3050x1300x19\r171653",
-    "type": "tex",
-    "name": "МДФ Arpa 4548 Alev? / Arpa 4548 Alev? 3050x1300x19",
-    "state": {
-     "rot": 0,
-     "mode": "tex",
-     "texKey": "МДФ Arpa 4548 Alev? / Arpa 4548 Alev? 3050x1300x19\r171653",
-     "texData": null,
-     "color": "#625859",
-     "transparency": 0
-    }
-   },
-   {
     "id": "m:Штучний кварцит Avant 7550 Calacatta Cannes Gold\r183206",
     "type": "col",
     "name": "Штучний кварцит Avant 7550 Calacatta Cannes Gold",
     "state": {
-     "rot": 0,
      "mode": "tex",
-     "texKey": null,
-     "texData": "data:image/jpeg;base64,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",
-     "color": "#cccccc",
-     "transparency": 0
+     "texData": "data:image/jpeg;base64,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"
     }
    },
    {
@@ -75,10 +46,6 @@
     "type": "col",
     "name": "Стекло тонированное бронза 4 мм",
     "state": {
-     "rot": 0,
-     "mode": "col",
-     "texKey": null,
-     "texData": null,
      "color": "#c8ad7f",
      "transparency": 0.95
     }
@@ -88,25 +55,7 @@
     "type": "col",
     "name": "Стекло Planibel Bronze 6 мм",
     "state": {
-     "rot": 0,
-     "mode": "col",
-     "texKey": null,
-     "texData": null,
-     "color": "#96765b",
      "transparency": 0.75
-    }
-   },
-   {
-    "id": "m:Врезной проф.- ручка Ferro Fiori M 8030 черный анодир., 18мм\r120664",
-    "type": "col",
-    "name": "Врезной проф.- ручка Ferro Fiori M 8030 черный анодир., 18мм",
-    "state": {
-     "rot": 0,
-     "mode": "col",
-     "texKey": null,
-     "texData": null,
-     "color": "#525252",
-     "transparency": 0
     }
    },
    {
@@ -114,155 +63,7 @@
     "type": "col",
     "name": "Белый",
     "state": {
-     "rot": 0,
-     "mode": "col",
-     "texKey": null,
-     "texData": null,
-     "color": "#cccccc",
-     "transparency": 0
-    }
-   },
-   {
-    "id": "m:Профиль алюминиевый рамочный квадратный R-1 черный матовый /5,0\r43634",
-    "type": "tex",
-    "name": "Профиль алюминиевый рамочный квадратный R-1 черный матовый /5,0",
-    "state": {
-     "rot": 0,
-     "mode": "tex",
-     "texKey": "Профиль алюминиевый рамочный квадратный R-1 черный матовый /5,0\r43634",
-     "texData": null,
-     "color": "#000000",
-     "transparency": 0
-    }
-   },
-   {
-    "id": "m:Порошковая краска черная\r-5413543",
-    "type": "col",
-    "name": "Порошковая краска черная",
-    "state": {
-     "rot": 0,
-     "mode": "col",
-     "texKey": null,
-     "texData": null,
-     "color": "#2d2d2d",
-     "transparency": 0
-    }
-   },
-   {
-    "id": "m:Neon-лента, SMD 2835, 9,6Вт, 12В, IP20, 4х10 мм, теплый свет\r66439",
-    "type": "col",
-    "name": "Neon-лента, SMD 2835, 9,6Вт, 12В, IP20, 4х10 мм, теплый свет",
-    "state": {
-     "rot": 0,
-     "mode": "col",
-     "texKey": null,
-     "texData": null,
-     "color": "#ffff00",
-     "transparency": 0
-    }
-   },
-   {
-    "id": "mm:ДСП бук",
-    "type": "col",
-    "name": "ДСП бук",
-    "state": {
-     "rot": 0,
-     "mode": "col",
-     "texKey": null,
-     "texData": null,
-     "color": "#c0c0c0",
-     "transparency": 0
-    }
-   },
-   {
-    "id": "mm:Ral2004PureOrange",
-    "type": "col",
-    "name": "Ral2004PureOrange",
-    "state": {
-     "rot": 0,
-     "mode": "col",
-     "texKey": null,
-     "texData": null,
-     "color": "#575757",
-     "transparency": 0
-    }
-   },
-   {
-    "id": "mm:__4-ks-hellgrau",
-    "type": "col",
-    "name": "__4-ks-hellgrau",
-    "state": {
-     "rot": 0,
-     "mode": "col",
-     "texKey": null,
-     "texData": null,
-     "color": "#808080",
-     "transparency": 0
-    }
-   },
-   {
-    "id": "mm:__5-ks-dunkelgrau",
-    "type": "col",
-    "name": "__5-ks-dunkelgrau",
-    "state": {
-     "rot": 0,
-     "mode": "col",
-     "texKey": null,
-     "texData": null,
-     "color": "#808080",
-     "transparency": 0
-    }
-   },
-   {
-    "id": "mm:ZincPlated",
-    "type": "col",
-    "name": "ZincPlated",
-    "state": {
-     "rot": 0,
-     "mode": "col",
-     "texKey": null,
-     "texData": null,
-     "color": "#c0c0c0",
-     "transparency": 0
-    }
-   },
-   {
-    "id": "mm:NickelPlated",
-    "type": "col",
-    "name": "NickelPlated",
-    "state": {
-     "rot": 0,
-     "mode": "col",
-     "texKey": null,
-     "texData": null,
-     "color": "#c0c0c0",
-     "transparency": 0
-    }
-   },
-   {
-    "id": "mm:Сталь\rСталь",
-    "type": "col",
-    "name": "Сталь",
-    "state": {
-     "rot": 0,
-     "mode": "col",
-     "texKey": null,
-     "texData": null,
-     "color": "#c0c0c0",
-     "transparency": 0
-    }
-   },
-   {
-    "id": "mm:Белый\r-101",
-    "type": "col",
-    "name": "Белый",
-    "state": {
-     "rot": 0,
-     "mode": "col",
-     "texKey": null,
-     "texData": null,
-     "color": "#c0c0c0",
-     "transparency": 0
+     "color": "#cccccc"
     }
    },
    {
@@ -270,38 +71,8 @@
     "type": "tex",
     "name": "Хром",
     "state": {
-     "rot": 0,
      "mode": "col",
-     "texKey": "Хром",
-     "texData": null,
-     "color": "#888888",
-     "transparency": 0
-    }
-   },
-   {
-    "id": "mm:Сталь",
-    "type": "col",
-    "name": "Сталь",
-    "state": {
-     "rot": 0,
-     "mode": "col",
-     "texKey": null,
-     "texData": null,
-     "color": "#c0c0c0",
-     "transparency": 0
-    }
-   },
-   {
-    "id": "mm:Прозрачность\r-546345634",
-    "type": "col",
-    "name": "Прозрачность",
-    "state": {
-     "rot": 0,
-     "mode": "col",
-     "texKey": null,
-     "texData": null,
-     "color": "#f6b67f",
-     "transparency": 0
+     "color": "#888888"
     }
    },
    {
@@ -309,51 +80,8 @@
     "type": "tex",
     "name": "Алюминий",
     "state": {
-     "rot": 0,
      "mode": "col",
-     "texKey": "Алюминий\r-2",
-     "texData": null,
-     "color": "#888888",
-     "transparency": 0
-    }
-   },
-   {
-    "id": "mm:Hettich Полупрозрачный белый\rHettich Trst",
-    "type": "col",
-    "name": "Hettich Полупрозрачный белый",
-    "state": {
-     "rot": 0,
-     "mode": "col",
-     "texKey": null,
-     "texData": null,
-     "color": "#00ff00",
-     "transparency": 0
-    }
-   },
-   {
-    "id": "mm:Hettich Никель\rHettich NI",
-    "type": "col",
-    "name": "Hettich Никель",
-    "state": {
-     "rot": 0,
-     "mode": "col",
-     "texKey": null,
-     "texData": null,
-     "color": "#383838",
-     "transparency": 0
-    }
-   },
-   {
-    "id": "mm:Порошковая краска черная\r-5413543",
-    "type": "col",
-    "name": "Порошковая краска черная",
-    "state": {
-     "rot": 0,
-     "mode": "col",
-     "texKey": null,
-     "texData": null,
-     "color": "#2d2d2d",
-     "transparency": 0
+     "color": "#888888"
     }
    }
   ],
@@ -367,72 +95,7 @@
   },
   "notes": {
    "enabled": true,
-   "notes": [
-    {
-     "id": "nmvhxef43ojh1",
-     "text": "Что это?\nНужна ли фальш",
-     "point": [
-      61.889,
-      87.106,
-      928.046
-     ],
-     "objectId": 124,
-     "local": [
-      61.889,
-      87.106,
-      928.046
-     ],
-     "element": "Объект_8",
-     "updated": "2026-10-21T09:44:58.664Z",
-     "hidden": false,
-     "thread": [
-      {
-       "id": "nmvi3ttyvwf1k",
-       "role": "owner",
-       "from": "",
-       "at": "2026-10-21T12:44:44.407Z",
-       "kind": "text",
-       "text": "А это тебя е*ать не должно"
-      }
-     ]
-    },
-    {
-     "id": "nmvhxet1ktgmr",
-     "text": "Увеличил карниз из-за вывода провода под потолком",
-     "point": [
-      1930.214,
-      2841.677,
-      583.769
-     ],
-     "objectId": 125,
-     "local": [
-      1930.214,
-      2841.677,
-      583.769
-     ],
-     "element": "Объект_9",
-     "updated": "2026-10-21T09:45:17.308Z",
-     "hidden": false
-    },
-    {
-     "id": "nmvhxf7fuhtrf",
-     "text": "Уменьшил пеналы из-за розетки",
-     "point": [
-      416.895,
-      1121.76,
-      2.214
-     ],
-     "objectId": 7283,
-     "local": [
-      -39.169,
-      11.996,
-      1.216
-     ],
-     "element": "Розетка 160х85",
-     "updated": "2026-10-21T09:45:37.310Z",
-     "hidden": false
-    }
-   ]
+   "notes": []
   },
   "hardware_mono": false,
   "hardware_types": {
@@ -465,7 +128,1676 @@
   "hardware_catalog": {
    "expanded": false
   },
-  "drawings": null
+  "drawings": {
+   "schema": 1,
+   "info": {
+    "product": "",
+    "order": "",
+    "customer": "",
+    "address": "",
+    "designer": "",
+    "company": "",
+    "date": "2026-10-26",
+    "note": ""
+   },
+   "style": {
+    "font": "Arial",
+    "size": 3.5,
+    "stretch": 100,
+    "frame": "gost",
+    "stamp": {
+     "rowH": 7,
+     "rows": [
+      [
+       {
+        "f": "product",
+        "w": 3
+       },
+       {
+        "f": "title",
+        "w": 3
+       },
+       {
+        "f": "scale",
+        "w": 1
+       },
+       {
+        "f": "sheet",
+        "w": 1
+       }
+      ],
+      [
+       {
+        "f": "order",
+        "w": 1
+       },
+       {
+        "f": "customer",
+        "w": 2
+       },
+       {
+        "f": "designer",
+        "w": 1
+       },
+       {
+        "f": "company",
+        "w": 2
+       },
+       {
+        "f": "date",
+        "w": 1
+       }
+      ]
+     ]
+    },
+    "displayOrtho": "ghost",
+    "displayIso": "ghost",
+    "displayDetail": "wire",
+    "calloutsWhich": "all",
+    "modelDimColor": "#1a5d9e",
+    "calloutColor": "#111111",
+    "calloutHalo": false,
+    "lineColor": "",
+    "titleOrient": "landscape",
+    "callouts": "name",
+    "calloutsOn": "iso",
+    "calloutSize": 0,
+    "views": [
+     "front",
+     "left",
+     "top",
+     "iso"
+    ],
+    "zones": {
+     "landscape": {
+      "parts": [
+       0,
+       0,
+       0.43,
+       1
+      ],
+      "units": [
+       0,
+       0.5,
+       0.43,
+       0.5
+      ],
+      "hardware": [
+       0,
+       0.7,
+       0.43,
+       0.3
+      ],
+      "linear": [
+       0,
+       0.25,
+       0.43,
+       0.75
+      ],
+      "views": [
+       0.43,
+       0,
+       0.57,
+       0.31
+      ],
+      "iso": [
+       0.43,
+       0.31,
+       0.57,
+       0.49
+      ],
+      "details": [
+       0.43,
+       0.8,
+       0.57,
+       0.2
+      ]
+     },
+     "portrait": {
+      "parts": [
+       0,
+       0.65,
+       0.59,
+       0.35
+      ],
+      "units": [
+       0,
+       0.85,
+       0.59,
+       0.15
+      ],
+      "hardware": [
+       0.59,
+       0.65,
+       0.41,
+       0.35
+      ],
+      "linear": [
+       0,
+       0.75,
+       0.59,
+       0.25
+      ],
+      "views": [
+       0,
+       0,
+       1,
+       0.21
+      ],
+      "iso": [
+       0,
+       0.21,
+       1,
+       0.31
+      ],
+      "details": [
+       0,
+       0.52,
+       1,
+       0.13
+      ]
+     }
+    },
+    "overviewZones": {
+     "landscape": {
+      "views": [
+       0,
+       0,
+       1,
+       0.35
+      ],
+      "iso": [
+       0,
+       0.35,
+       1,
+       0.65
+      ]
+     },
+     "portrait": {
+      "views": [
+       0,
+       0,
+       1,
+       0.31
+      ],
+      "iso": [
+       0,
+       0.31,
+       1,
+       0.69
+      ]
+     }
+    },
+    "overview": true,
+    "unitLayout": "specs",
+    "partSheets": false,
+    "unitParts": {},
+    "noteStyle": {
+     "size": 0,
+     "color": "#d32f2f",
+     "marker": "dot",
+     "frame": false
+    }
+   },
+   "sheets": [
+    {
+     "id": "smvp5gswy0",
+     "format": "A4",
+     "orient": "landscape",
+     "kind": "title",
+     "title": "",
+     "blocks": [
+      {
+       "id": "bmvp5gswy1",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 191,
+       "w": 272,
+       "h": 14
+      },
+      {
+       "id": "bmvp5gswy2",
+       "type": "title",
+       "x": 26,
+       "y": 11,
+       "w": 260,
+       "h": 26
+      },
+      {
+       "id": "bmvp5gswy3",
+       "type": "view",
+       "x": 26,
+       "y": 37,
+       "w": 260,
+       "h": 148,
+       "unit": null,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "texture",
+       "caption": false,
+       "callouts": "none",
+       "layers": {
+        "hardware": false,
+        "imports": false,
+        "holes": false,
+        "lines": false,
+        "modelDims": false
+       }
+      }
+     ]
+    },
+    {
+     "id": "smvp5gswy4",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "overview",
+     "title": "Модель1",
+     "blocks": [
+      {
+       "id": "bmvp5gswy5",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvp5gswy6",
+       "type": "view",
+       "x": 26,
+       "y": 11,
+       "w": 127.66666666666667,
+       "h": 91.35,
+       "unit": null,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gswy7",
+       "type": "view",
+       "x": 153.66666666666669,
+       "y": 11,
+       "w": 127.66666666666667,
+       "h": 91.35,
+       "unit": null,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gswy8",
+       "type": "view",
+       "x": 281.33333333333337,
+       "y": 11,
+       "w": 127.66666666666667,
+       "h": 91.35,
+       "unit": null,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gswy9",
+       "type": "view",
+       "x": 26,
+       "y": 102.35,
+       "w": 383,
+       "h": 169.65,
+       "unit": null,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      }
+     ],
+     "unit": null,
+     "main": true
+    },
+    {
+     "id": "smvp5gswza",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "Тумба",
+     "blocks": [
+      {
+       "id": "bmvp5gswzb",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvp5gswzc",
+       "type": "view",
+       "x": 190.69,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 7285,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gswzd",
+       "type": "view",
+       "x": 263.46,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 7285,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gswze",
+       "type": "view",
+       "x": 336.23,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 7285,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gswzf",
+       "type": "view",
+       "x": 190.69,
+       "y": 91.91,
+       "w": 218.31000000000003,
+       "h": 180.08999999999997,
+       "unit": 7285,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gswzg",
+       "type": "parts",
+       "auto": true,
+       "unit": 7285,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 164.69,
+       "h": 81.44069999999999
+      },
+      {
+       "id": "bmvp5gswzh",
+       "type": "units",
+       "auto": true,
+       "unit": 7285,
+       "offset": 0,
+       "x": 26,
+       "y": 140.5214,
+       "w": 164.69,
+       "h": 34.0407
+      },
+      {
+       "id": "bmvp5gswzi",
+       "type": "hardware",
+       "auto": true,
+       "unit": 7285,
+       "offset": 0,
+       "x": 26,
+       "y": 174.5621,
+       "w": 164.69,
+       "h": 34.0407
+      },
+      {
+       "id": "bmvp5gswzj",
+       "type": "linear",
+       "auto": true,
+       "unit": 7285,
+       "offset": 0,
+       "x": 26,
+       "y": 92.44069999999999,
+       "w": 164.69,
+       "h": 48.0807
+      }
+     ],
+     "unit": 7285
+    },
+    {
+     "id": "smvp5gsx1k",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "Т СУ 2Я 8030 внутр Подвесная тумба",
+     "blocks": [
+      {
+       "id": "bmvp5gsx1l",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvp5gsx1m",
+       "type": "view",
+       "x": 190.69,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 6054,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx1n",
+       "type": "view",
+       "x": 263.46,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 6054,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx1o",
+       "type": "view",
+       "x": 336.23,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 6054,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx1p",
+       "type": "view",
+       "x": 190.69,
+       "y": 91.91,
+       "w": 218.31000000000003,
+       "h": 180.08999999999997,
+       "unit": 6054,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx1q",
+       "type": "parts",
+       "auto": true,
+       "unit": 6054,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 164.69,
+       "h": 104.8407
+      },
+      {
+       "id": "bmvp5gsx1r",
+       "type": "hardware",
+       "auto": true,
+       "unit": 6054,
+       "offset": 0,
+       "x": 26,
+       "y": 146.5614,
+       "w": 164.69,
+       "h": 125.43860000000001
+      },
+      {
+       "id": "bmvp5gsx1s",
+       "type": "linear",
+       "auto": true,
+       "unit": 6054,
+       "offset": 0,
+       "x": 26,
+       "y": 115.8407,
+       "w": 164.69,
+       "h": 30.7207
+      }
+     ],
+     "unit": 6054
+    },
+    {
+     "id": "smvp5gsx2t",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "spec",
+     "title": "Т СУ 2Я 8030 внутр Подвесная тумба",
+     "blocks": [
+      {
+       "id": "bmvp5gsx2u",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvp5gsx2v",
+       "type": "hardware",
+       "unit": 6054,
+       "offset": 8,
+       "x": 26,
+       "y": 11,
+       "w": 383,
+       "h": 124.58999999999999
+      }
+     ],
+     "unit": 6054
+    },
+    {
+     "id": "smvp5gsx3w",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "Т СУ 2Я 8030 внутр Подвесная тумба",
+     "blocks": [
+      {
+       "id": "bmvp5gsx3x",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvp5gsx3y",
+       "type": "view",
+       "x": 190.69,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 4507,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx3z",
+       "type": "view",
+       "x": 263.46,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 4507,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx310",
+       "type": "view",
+       "x": 336.23,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 4507,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx311",
+       "type": "view",
+       "x": 190.69,
+       "y": 91.91,
+       "w": 218.31000000000003,
+       "h": 180.08999999999997,
+       "unit": 4507,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx312",
+       "type": "parts",
+       "auto": true,
+       "unit": 4507,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 164.69,
+       "h": 104.8407
+      },
+      {
+       "id": "bmvp5gsx313",
+       "type": "hardware",
+       "auto": true,
+       "unit": 4507,
+       "offset": 0,
+       "x": 26,
+       "y": 146.5614,
+       "w": 164.69,
+       "h": 125.43860000000001
+      },
+      {
+       "id": "bmvp5gsx314",
+       "type": "linear",
+       "auto": true,
+       "unit": 4507,
+       "offset": 0,
+       "x": 26,
+       "y": 115.8407,
+       "w": 164.69,
+       "h": 30.7207
+      }
+     ],
+     "unit": 4507
+    },
+    {
+     "id": "smvp5gsx415",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "spec",
+     "title": "Т СУ 2Я 8030 внутр Подвесная тумба",
+     "blocks": [
+      {
+       "id": "bmvp5gsx416",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvp5gsx417",
+       "type": "hardware",
+       "unit": 4507,
+       "offset": 8,
+       "x": 26,
+       "y": 11,
+       "w": 383,
+       "h": 124.58999999999999
+      }
+     ],
+     "unit": 4507
+    },
+    {
+     "id": "smvp5gsx418",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "Средняя часть",
+     "blocks": [
+      {
+       "id": "bmvp5gsx419",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvp5gsx41a",
+       "type": "view",
+       "x": 190.69,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 6507,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx41b",
+       "type": "view",
+       "x": 263.46,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 6507,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx41c",
+       "type": "view",
+       "x": 336.23,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 6507,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx41d",
+       "type": "view",
+       "x": 190.69,
+       "y": 91.91,
+       "w": 218.31000000000003,
+       "h": 180.08999999999997,
+       "unit": 6507,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx41e",
+       "type": "parts",
+       "auto": true,
+       "unit": 6507,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 164.69,
+       "h": 63.4407
+      },
+      {
+       "id": "bmvp5gsx41f",
+       "type": "hardware",
+       "auto": true,
+       "unit": 6507,
+       "offset": 0,
+       "x": 26,
+       "y": 74.44069999999999,
+       "w": 164.69,
+       "h": 46.0407
+      }
+     ],
+     "unit": 6507
+    },
+    {
+     "id": "smvp5gsx51g",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "Пенал правый",
+     "blocks": [
+      {
+       "id": "bmvp5gsx51h",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvp5gsx51i",
+       "type": "view",
+       "x": 190.69,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 7298,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx51j",
+       "type": "view",
+       "x": 263.46,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 7298,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx51k",
+       "type": "view",
+       "x": 336.23,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 7298,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx51l",
+       "type": "view",
+       "x": 190.69,
+       "y": 91.91,
+       "w": 218.31000000000003,
+       "h": 180.08999999999997,
+       "unit": 7298,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx51m",
+       "type": "units",
+       "auto": true,
+       "unit": 7298,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 164.69,
+       "h": 34.0407
+      }
+     ],
+     "unit": 7298
+    },
+    {
+     "id": "smvp5gsx51n",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "Модуль нижний",
+     "blocks": [
+      {
+       "id": "bmvp5gsx51o",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvp5gsx51p",
+       "type": "view",
+       "x": 190.69,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 742,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx51q",
+       "type": "view",
+       "x": 263.46,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 742,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx51r",
+       "type": "view",
+       "x": 336.23,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 742,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx51s",
+       "type": "view",
+       "x": 190.69,
+       "y": 91.91,
+       "w": 218.31000000000003,
+       "h": 180.08999999999997,
+       "unit": 742,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx51t",
+       "type": "parts",
+       "auto": true,
+       "unit": 742,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 164.69,
+       "h": 98.8407
+      },
+      {
+       "id": "bmvp5gsx51u",
+       "type": "hardware",
+       "auto": true,
+       "unit": 742,
+       "offset": 0,
+       "x": 26,
+       "y": 109.8407,
+       "w": 164.69,
+       "h": 162.1593
+      }
+     ],
+     "unit": 742
+    },
+    {
+     "id": "smvp5gsx61v",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "spec",
+     "title": "Модуль нижний",
+     "blocks": [
+      {
+       "id": "bmvp5gsx61w",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvp5gsx61x",
+       "type": "hardware",
+       "unit": 742,
+       "offset": 11,
+       "x": 26,
+       "y": 11,
+       "w": 383,
+       "h": 100.58999999999999
+      }
+     ],
+     "unit": 742
+    },
+    {
+     "id": "smvp5gsx71y",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "Модуль верхний",
+     "blocks": [
+      {
+       "id": "bmvp5gsx71z",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvp5gsx720",
+       "type": "view",
+       "x": 190.69,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 944,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx721",
+       "type": "view",
+       "x": 263.46,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 944,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx722",
+       "type": "view",
+       "x": 336.23,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 944,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx723",
+       "type": "view",
+       "x": 190.69,
+       "y": 91.91,
+       "w": 218.31000000000003,
+       "h": 180.08999999999997,
+       "unit": 944,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx724",
+       "type": "parts",
+       "auto": true,
+       "unit": 944,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 164.69,
+       "h": 127.04070000000002
+      },
+      {
+       "id": "bmvp5gsx725",
+       "type": "hardware",
+       "auto": true,
+       "unit": 944,
+       "offset": 0,
+       "x": 26,
+       "y": 180.8014,
+       "w": 164.69,
+       "h": 91.1986
+      },
+      {
+       "id": "bmvp5gsx726",
+       "type": "linear",
+       "auto": true,
+       "unit": 944,
+       "offset": 0,
+       "x": 26,
+       "y": 138.04070000000002,
+       "w": 164.69,
+       "h": 42.7607
+      }
+     ],
+     "unit": 944
+    },
+    {
+     "id": "smvp5gsx827",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "spec",
+     "title": "Модуль верхний",
+     "blocks": [
+      {
+       "id": "bmvp5gsx828",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvp5gsx829",
+       "type": "hardware",
+       "unit": 944,
+       "offset": 5,
+       "x": 26,
+       "y": 11,
+       "w": 383,
+       "h": 160.59
+      }
+     ],
+     "unit": 944
+    },
+    {
+     "id": "smvp5gsx82a",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "Пенал левый",
+     "blocks": [
+      {
+       "id": "bmvp5gsx82b",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvp5gsx82c",
+       "type": "view",
+       "x": 190.69,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 7308,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx82d",
+       "type": "view",
+       "x": 263.46,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 7308,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx82e",
+       "type": "view",
+       "x": 336.23,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 7308,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx82f",
+       "type": "view",
+       "x": 190.69,
+       "y": 91.91,
+       "w": 218.31000000000003,
+       "h": 180.08999999999997,
+       "unit": 7308,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx82g",
+       "type": "units",
+       "auto": true,
+       "unit": 7308,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 164.69,
+       "h": 34.0407
+      }
+     ],
+     "unit": 7308
+    },
+    {
+     "id": "smvp5gsx92h",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "Модуль нижний",
+     "blocks": [
+      {
+       "id": "bmvp5gsx92i",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvp5gsx92j",
+       "type": "view",
+       "x": 190.69,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 3309,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx92k",
+       "type": "view",
+       "x": 263.46,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 3309,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx92l",
+       "type": "view",
+       "x": 336.23,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 3309,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx92m",
+       "type": "view",
+       "x": 190.69,
+       "y": 91.91,
+       "w": 218.31000000000003,
+       "h": 180.08999999999997,
+       "unit": 3309,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsx92n",
+       "type": "parts",
+       "auto": true,
+       "unit": 3309,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 164.69,
+       "h": 98.8407
+      },
+      {
+       "id": "bmvp5gsx92o",
+       "type": "hardware",
+       "auto": true,
+       "unit": 3309,
+       "offset": 0,
+       "x": 26,
+       "y": 109.8407,
+       "w": 164.69,
+       "h": 162.1593
+      }
+     ],
+     "unit": 3309
+    },
+    {
+     "id": "smvp5gsx92p",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "spec",
+     "title": "Модуль нижний",
+     "blocks": [
+      {
+       "id": "bmvp5gsx92q",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvp5gsx92r",
+       "type": "hardware",
+       "unit": 3309,
+       "offset": 11,
+       "x": 26,
+       "y": 11,
+       "w": 383,
+       "h": 112.58999999999999
+      }
+     ],
+     "unit": 3309
+    },
+    {
+     "id": "smvp5gsxa2s",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "sheet",
+     "title": "Модуль верхний",
+     "blocks": [
+      {
+       "id": "bmvp5gsxa2t",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvp5gsxa2u",
+       "type": "view",
+       "x": 190.69,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 3557,
+       "dir": "front",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsxa2v",
+       "type": "view",
+       "x": 263.46,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 3557,
+       "dir": "left",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsxa2w",
+       "type": "view",
+       "x": 336.23,
+       "y": 11,
+       "w": 72.77,
+       "h": 80.91,
+       "unit": 3557,
+       "dir": "top",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsxa2x",
+       "type": "view",
+       "x": 190.69,
+       "y": 91.91,
+       "w": 218.31000000000003,
+       "h": 180.08999999999997,
+       "unit": 3557,
+       "dir": "iso",
+       "az": 35,
+       "el": 25,
+       "scale": "auto",
+       "style": "inherit",
+       "caption": true,
+       "callouts": "inherit",
+       "auto": true
+      },
+      {
+       "id": "bmvp5gsxa2y",
+       "type": "parts",
+       "auto": true,
+       "unit": 3557,
+       "offset": 0,
+       "x": 26,
+       "y": 11,
+       "w": 164.69,
+       "h": 127.04070000000002
+      },
+      {
+       "id": "bmvp5gsxa2z",
+       "type": "hardware",
+       "auto": true,
+       "unit": 3557,
+       "offset": 0,
+       "x": 26,
+       "y": 180.8014,
+       "w": 164.69,
+       "h": 91.1986
+      },
+      {
+       "id": "bmvp5gsxa30",
+       "type": "linear",
+       "auto": true,
+       "unit": 3557,
+       "offset": 0,
+       "x": 26,
+       "y": 138.04070000000002,
+       "w": 164.69,
+       "h": 42.7607
+      }
+     ],
+     "unit": 3557
+    },
+    {
+     "id": "smvp5gsxb31",
+     "format": "A3",
+     "orient": "landscape",
+     "kind": "spec",
+     "title": "Модуль верхний",
+     "blocks": [
+      {
+       "id": "bmvp5gsxb32",
+       "type": "stamp",
+       "dock": true,
+       "x": 20,
+       "y": 278,
+       "w": 395,
+       "h": 14
+      },
+      {
+       "id": "bmvp5gsxb33",
+       "type": "hardware",
+       "unit": 3557,
+       "offset": 5,
+       "x": 26,
+       "y": 11,
+       "w": 383,
+       "h": 160.59
+      }
+     ],
+     "unit": 3557
+    }
+   ],
+   "drawingHistory": {
+    "schema": 1,
+    "cursor": 0,
+    "entries": [
+     {
+      "state": "{\"schema\":1,\"info\":{\"product\":\"\",\"order\":\"\",\"customer\":\"\",\"address\":\"\",\"designer\":\"\",\"company\":\"\",\"date\":\"2026-10-26\",\"note\":\"\"},\"style\":{\"font\":\"Arial\",\"size\":3.5,\"stretch\":100,\"frame\":\"gost\",\"stamp\":{\"rowH\":7,\"rows\":[[{\"f\":\"product\",\"w\":3},{\"f\":\"title\",\"w\":3},{\"f\":\"scale\",\"w\":1},{\"f\":\"sheet\",\"w\":1}],[{\"f\":\"order\",\"w\":1},{\"f\":\"customer\",\"w\":2},{\"f\":\"designer\",\"w\":1},{\"f\":\"company\",\"w\":2},{\"f\":\"date\",\"w\":1}]]},\"displayOrtho\":\"ghost\",\"displayIso\":\"ghost\",\"displayDetail\":\"wire\",\"calloutsWhich\":\"all\",\"modelDimColor\":\"#1a5d9e\",\"calloutColor\":\"#111111\",\"calloutHalo\":false,\"lineColor\":\"\",\"titleOrient\":\"landscape\",\"callouts\":\"name\",\"calloutsOn\":\"iso\",\"calloutSize\":0,\"views\":[\"front\",\"left\",\"top\",\"iso\"],\"zones\":{\"landscape\":{\"parts\":[0,0,0.43,1],\"units\":[0,0.5,0.43,0.5],\"hardware\":[0,0.7,0.43,0.3],\"linear\":[0,0.25,0.43,0.75],\"views\":[0.43,0,0.57,0.31],\"iso\":[0.43,0.31,0.57,0.49],\"details\":[0.43,0.8,0.57,0.2]},\"portrait\":{\"parts\":[0,0.65,0.59,0.35],\"units\":[0,0.85,0.59,0.15],\"hardware\":[0.59,0.65,0.41,0.35],\"linear\":[0,0.75,0.59,0.25],\"views\":[0,0,1,0.21],\"iso\":[0,0.21,1,0.31],\"details\":[0,0.52,1,0.13]}},\"overviewZones\":{\"landscape\":{\"views\":[0,0,1,0.35],\"iso\":[0,0.35,1,0.65]},\"portrait\":{\"views\":[0,0,1,0.31],\"iso\":[0,0.31,1,0.69]}},\"overview\":true,\"unitLayout\":\"specs\",\"partSheets\":false,\"unitParts\":{},\"noteStyle\":{\"size\":0,\"color\":\"#d32f2f\",\"marker\":\"dot\",\"frame\":false},\"sectionZones\":{\"landscape\":{\"sections\":[0,0,1,0.72],\"details\":[0,0.72,1,0.28]},\"portrait\":{\"sections\":[0,0,1,0.75],\"details\":[0,0.75,1,0.25]}}},\"sheets\":[{\"id\":\"smvp5gswy0\",\"format\":\"A4\",\"orient\":\"landscape\",\"kind\":\"title\",\"title\":\"\",\"unit\":null,\"display\":null,\"calloutsWhich\":null,\"calloutsOn\":null,\"commonScale\":null,\"viewLinks\":null,\"callouts\":null,\"views\":null,\"blocks\":[{\"id\":\"bmvp5gswy1\",\"type\":\"stamp\",\"dock\":true,\"x\":20,\"y\":191,\"w\":272,\"h\":14},{\"id\":\"bmvp5gswy2\",\"type\":\"title\",\"x\":26,\"y\":11,\"w\":260,\"h\":26},{\"id\":\"bmvp5gswy3\",\"type\":\"view\",\"x\":26,\"y\":37,\"w\":260,\"h\":148,\"unit\":null,\"dir\":\"iso\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"texture\",\"caption\":false,\"callouts\":\"none\",\"layers\":{\"hardware\":false,\"imports\":false,\"holes\":false,\"lines\":false,\"modelDims\":false}}]},{\"id\":\"smvp5gswy4\",\"format\":\"A3\",\"orient\":\"landscape\",\"kind\":\"overview\",\"title\":\"Модель1\",\"unit\":null,\"main\":true,\"display\":null,\"calloutsWhich\":null,\"calloutsOn\":null,\"commonScale\":null,\"viewLinks\":null,\"callouts\":null,\"views\":null,\"blocks\":[{\"id\":\"bmvp5gswy5\",\"type\":\"stamp\",\"dock\":true,\"x\":20,\"y\":278,\"w\":395,\"h\":14},{\"id\":\"bmvp5gswy6\",\"type\":\"view\",\"x\":26,\"y\":11,\"w\":127.66666666666667,\"h\":91.35,\"unit\":null,\"dir\":\"front\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gswy7\",\"type\":\"view\",\"x\":153.66666666666669,\"y\":11,\"w\":127.66666666666667,\"h\":91.35,\"unit\":null,\"dir\":\"left\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gswy8\",\"type\":\"view\",\"x\":281.33333333333337,\"y\":11,\"w\":127.66666666666667,\"h\":91.35,\"unit\":null,\"dir\":\"top\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gswy9\",\"type\":\"view\",\"x\":26,\"y\":102.35,\"w\":383,\"h\":169.65,\"unit\":null,\"dir\":\"iso\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true}]},{\"id\":\"smvp5gswza\",\"format\":\"A3\",\"orient\":\"landscape\",\"kind\":\"sheet\",\"title\":\"Тумба\",\"unit\":7285,\"display\":null,\"calloutsWhich\":null,\"calloutsOn\":null,\"commonScale\":null,\"viewLinks\":null,\"callouts\":null,\"views\":null,\"blocks\":[{\"id\":\"bmvp5gswzb\",\"type\":\"stamp\",\"dock\":true,\"x\":20,\"y\":278,\"w\":395,\"h\":14},{\"id\":\"bmvp5gswzc\",\"type\":\"view\",\"x\":190.69,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":7285,\"dir\":\"front\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gswzd\",\"type\":\"view\",\"x\":263.46,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":7285,\"dir\":\"left\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gswze\",\"type\":\"view\",\"x\":336.23,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":7285,\"dir\":\"top\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gswzf\",\"type\":\"view\",\"x\":190.69,\"y\":91.91,\"w\":218.31000000000003,\"h\":180.08999999999997,\"unit\":7285,\"dir\":\"iso\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gswzg\",\"type\":\"parts\",\"auto\":true,\"unit\":7285,\"offset\":0,\"x\":26,\"y\":11,\"w\":164.69,\"h\":81.44069999999999},{\"id\":\"bmvp5gswzh\",\"type\":\"units\",\"auto\":true,\"unit\":7285,\"offset\":0,\"x\":26,\"y\":140.5214,\"w\":164.69,\"h\":34.0407},{\"id\":\"bmvp5gswzi\",\"type\":\"hardware\",\"auto\":true,\"unit\":7285,\"offset\":0,\"x\":26,\"y\":174.5621,\"w\":164.69,\"h\":34.0407},{\"id\":\"bmvp5gswzj\",\"type\":\"linear\",\"auto\":true,\"unit\":7285,\"offset\":0,\"x\":26,\"y\":92.44069999999999,\"w\":164.69,\"h\":48.0807}]},{\"id\":\"smvp5gsx1k\",\"format\":\"A3\",\"orient\":\"landscape\",\"kind\":\"sheet\",\"title\":\"Т СУ 2Я 8030 внутр Подвесная тумба\",\"unit\":6054,\"display\":null,\"calloutsWhich\":null,\"calloutsOn\":null,\"commonScale\":null,\"viewLinks\":null,\"callouts\":null,\"views\":null,\"blocks\":[{\"id\":\"bmvp5gsx1l\",\"type\":\"stamp\",\"dock\":true,\"x\":20,\"y\":278,\"w\":395,\"h\":14},{\"id\":\"bmvp5gsx1m\",\"type\":\"view\",\"x\":190.69,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":6054,\"dir\":\"front\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx1n\",\"type\":\"view\",\"x\":263.46,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":6054,\"dir\":\"left\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx1o\",\"type\":\"view\",\"x\":336.23,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":6054,\"dir\":\"top\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx1p\",\"type\":\"view\",\"x\":190.69,\"y\":91.91,\"w\":218.31000000000003,\"h\":180.08999999999997,\"unit\":6054,\"dir\":\"iso\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx1q\",\"type\":\"parts\",\"auto\":true,\"unit\":6054,\"offset\":0,\"x\":26,\"y\":11,\"w\":164.69,\"h\":104.8407},{\"id\":\"bmvp5gsx1r\",\"type\":\"hardware\",\"auto\":true,\"unit\":6054,\"offset\":0,\"x\":26,\"y\":146.5614,\"w\":164.69,\"h\":125.43860000000001},{\"id\":\"bmvp5gsx1s\",\"type\":\"linear\",\"auto\":true,\"unit\":6054,\"offset\":0,\"x\":26,\"y\":115.8407,\"w\":164.69,\"h\":30.7207}]},{\"id\":\"smvp5gsx2t\",\"format\":\"A3\",\"orient\":\"landscape\",\"kind\":\"spec\",\"title\":\"Т СУ 2Я 8030 внутр Подвесная тумба\",\"unit\":6054,\"display\":null,\"calloutsWhich\":null,\"calloutsOn\":null,\"commonScale\":null,\"viewLinks\":null,\"callouts\":null,\"views\":null,\"blocks\":[{\"id\":\"bmvp5gsx2u\",\"type\":\"stamp\",\"dock\":true,\"x\":20,\"y\":278,\"w\":395,\"h\":14},{\"id\":\"bmvp5gsx2v\",\"type\":\"hardware\",\"unit\":6054,\"offset\":8,\"x\":26,\"y\":11,\"w\":383,\"h\":124.58999999999999}]},{\"id\":\"smvp5gsx3w\",\"format\":\"A3\",\"orient\":\"landscape\",\"kind\":\"sheet\",\"title\":\"Т СУ 2Я 8030 внутр Подвесная тумба\",\"unit\":4507,\"display\":null,\"calloutsWhich\":null,\"calloutsOn\":null,\"commonScale\":null,\"viewLinks\":null,\"callouts\":null,\"views\":null,\"blocks\":[{\"id\":\"bmvp5gsx3x\",\"type\":\"stamp\",\"dock\":true,\"x\":20,\"y\":278,\"w\":395,\"h\":14},{\"id\":\"bmvp5gsx3y\",\"type\":\"view\",\"x\":190.69,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":4507,\"dir\":\"front\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx3z\",\"type\":\"view\",\"x\":263.46,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":4507,\"dir\":\"left\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx310\",\"type\":\"view\",\"x\":336.23,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":4507,\"dir\":\"top\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx311\",\"type\":\"view\",\"x\":190.69,\"y\":91.91,\"w\":218.31000000000003,\"h\":180.08999999999997,\"unit\":4507,\"dir\":\"iso\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx312\",\"type\":\"parts\",\"auto\":true,\"unit\":4507,\"offset\":0,\"x\":26,\"y\":11,\"w\":164.69,\"h\":104.8407},{\"id\":\"bmvp5gsx313\",\"type\":\"hardware\",\"auto\":true,\"unit\":4507,\"offset\":0,\"x\":26,\"y\":146.5614,\"w\":164.69,\"h\":125.43860000000001},{\"id\":\"bmvp5gsx314\",\"type\":\"linear\",\"auto\":true,\"unit\":4507,\"offset\":0,\"x\":26,\"y\":115.8407,\"w\":164.69,\"h\":30.7207}]},{\"id\":\"smvp5gsx415\",\"format\":\"A3\",\"orient\":\"landscape\",\"kind\":\"spec\",\"title\":\"Т СУ 2Я 8030 внутр Подвесная тумба\",\"unit\":4507,\"display\":null,\"calloutsWhich\":null,\"calloutsOn\":null,\"commonScale\":null,\"viewLinks\":null,\"callouts\":null,\"views\":null,\"blocks\":[{\"id\":\"bmvp5gsx416\",\"type\":\"stamp\",\"dock\":true,\"x\":20,\"y\":278,\"w\":395,\"h\":14},{\"id\":\"bmvp5gsx417\",\"type\":\"hardware\",\"unit\":4507,\"offset\":8,\"x\":26,\"y\":11,\"w\":383,\"h\":124.58999999999999}]},{\"id\":\"smvp5gsx418\",\"format\":\"A3\",\"orient\":\"landscape\",\"kind\":\"sheet\",\"title\":\"Средняя часть\",\"unit\":6507,\"display\":null,\"calloutsWhich\":null,\"calloutsOn\":null,\"commonScale\":null,\"viewLinks\":null,\"callouts\":null,\"views\":null,\"blocks\":[{\"id\":\"bmvp5gsx419\",\"type\":\"stamp\",\"dock\":true,\"x\":20,\"y\":278,\"w\":395,\"h\":14},{\"id\":\"bmvp5gsx41a\",\"type\":\"view\",\"x\":190.69,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":6507,\"dir\":\"front\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx41b\",\"type\":\"view\",\"x\":263.46,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":6507,\"dir\":\"left\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx41c\",\"type\":\"view\",\"x\":336.23,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":6507,\"dir\":\"top\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx41d\",\"type\":\"view\",\"x\":190.69,\"y\":91.91,\"w\":218.31000000000003,\"h\":180.08999999999997,\"unit\":6507,\"dir\":\"iso\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx41e\",\"type\":\"parts\",\"auto\":true,\"unit\":6507,\"offset\":0,\"x\":26,\"y\":11,\"w\":164.69,\"h\":63.4407},{\"id\":\"bmvp5gsx41f\",\"type\":\"hardware\",\"auto\":true,\"unit\":6507,\"offset\":0,\"x\":26,\"y\":74.44069999999999,\"w\":164.69,\"h\":46.0407}]},{\"id\":\"smvp5gsx51g\",\"format\":\"A3\",\"orient\":\"landscape\",\"kind\":\"sheet\",\"title\":\"Пенал правый\",\"unit\":7298,\"display\":null,\"calloutsWhich\":null,\"calloutsOn\":null,\"commonScale\":null,\"viewLinks\":null,\"callouts\":null,\"views\":null,\"blocks\":[{\"id\":\"bmvp5gsx51h\",\"type\":\"stamp\",\"dock\":true,\"x\":20,\"y\":278,\"w\":395,\"h\":14},{\"id\":\"bmvp5gsx51i\",\"type\":\"view\",\"x\":190.69,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":7298,\"dir\":\"front\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx51j\",\"type\":\"view\",\"x\":263.46,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":7298,\"dir\":\"left\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx51k\",\"type\":\"view\",\"x\":336.23,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":7298,\"dir\":\"top\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx51l\",\"type\":\"view\",\"x\":190.69,\"y\":91.91,\"w\":218.31000000000003,\"h\":180.08999999999997,\"unit\":7298,\"dir\":\"iso\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx51m\",\"type\":\"units\",\"auto\":true,\"unit\":7298,\"offset\":0,\"x\":26,\"y\":11,\"w\":164.69,\"h\":34.0407}]},{\"id\":\"smvp5gsx51n\",\"format\":\"A3\",\"orient\":\"landscape\",\"kind\":\"sheet\",\"title\":\"Модуль нижний\",\"unit\":742,\"display\":null,\"calloutsWhich\":null,\"calloutsOn\":null,\"commonScale\":null,\"viewLinks\":null,\"callouts\":null,\"views\":null,\"blocks\":[{\"id\":\"bmvp5gsx51o\",\"type\":\"stamp\",\"dock\":true,\"x\":20,\"y\":278,\"w\":395,\"h\":14},{\"id\":\"bmvp5gsx51p\",\"type\":\"view\",\"x\":190.69,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":742,\"dir\":\"front\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx51q\",\"type\":\"view\",\"x\":263.46,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":742,\"dir\":\"left\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx51r\",\"type\":\"view\",\"x\":336.23,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":742,\"dir\":\"top\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx51s\",\"type\":\"view\",\"x\":190.69,\"y\":91.91,\"w\":218.31000000000003,\"h\":180.08999999999997,\"unit\":742,\"dir\":\"iso\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx51t\",\"type\":\"parts\",\"auto\":true,\"unit\":742,\"offset\":0,\"x\":26,\"y\":11,\"w\":164.69,\"h\":98.8407},{\"id\":\"bmvp5gsx51u\",\"type\":\"hardware\",\"auto\":true,\"unit\":742,\"offset\":0,\"x\":26,\"y\":109.8407,\"w\":164.69,\"h\":162.1593}]},{\"id\":\"smvp5gsx61v\",\"format\":\"A3\",\"orient\":\"landscape\",\"kind\":\"spec\",\"title\":\"Модуль нижний\",\"unit\":742,\"display\":null,\"calloutsWhich\":null,\"calloutsOn\":null,\"commonScale\":null,\"viewLinks\":null,\"callouts\":null,\"views\":null,\"blocks\":[{\"id\":\"bmvp5gsx61w\",\"type\":\"stamp\",\"dock\":true,\"x\":20,\"y\":278,\"w\":395,\"h\":14},{\"id\":\"bmvp5gsx61x\",\"type\":\"hardware\",\"unit\":742,\"offset\":11,\"x\":26,\"y\":11,\"w\":383,\"h\":100.58999999999999}]},{\"id\":\"smvp5gsx71y\",\"format\":\"A3\",\"orient\":\"landscape\",\"kind\":\"sheet\",\"title\":\"Модуль верхний\",\"unit\":944,\"display\":null,\"calloutsWhich\":null,\"calloutsOn\":null,\"commonScale\":null,\"viewLinks\":null,\"callouts\":null,\"views\":null,\"blocks\":[{\"id\":\"bmvp5gsx71z\",\"type\":\"stamp\",\"dock\":true,\"x\":20,\"y\":278,\"w\":395,\"h\":14},{\"id\":\"bmvp5gsx720\",\"type\":\"view\",\"x\":190.69,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":944,\"dir\":\"front\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx721\",\"type\":\"view\",\"x\":263.46,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":944,\"dir\":\"left\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx722\",\"type\":\"view\",\"x\":336.23,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":944,\"dir\":\"top\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx723\",\"type\":\"view\",\"x\":190.69,\"y\":91.91,\"w\":218.31000000000003,\"h\":180.08999999999997,\"unit\":944,\"dir\":\"iso\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx724\",\"type\":\"parts\",\"auto\":true,\"unit\":944,\"offset\":0,\"x\":26,\"y\":11,\"w\":164.69,\"h\":127.04070000000002},{\"id\":\"bmvp5gsx725\",\"type\":\"hardware\",\"auto\":true,\"unit\":944,\"offset\":0,\"x\":26,\"y\":180.8014,\"w\":164.69,\"h\":91.1986},{\"id\":\"bmvp5gsx726\",\"type\":\"linear\",\"auto\":true,\"unit\":944,\"offset\":0,\"x\":26,\"y\":138.04070000000002,\"w\":164.69,\"h\":42.7607}]},{\"id\":\"smvp5gsx827\",\"format\":\"A3\",\"orient\":\"landscape\",\"kind\":\"spec\",\"title\":\"Модуль верхний\",\"unit\":944,\"display\":null,\"calloutsWhich\":null,\"calloutsOn\":null,\"commonScale\":null,\"viewLinks\":null,\"callouts\":null,\"views\":null,\"blocks\":[{\"id\":\"bmvp5gsx828\",\"type\":\"stamp\",\"dock\":true,\"x\":20,\"y\":278,\"w\":395,\"h\":14},{\"id\":\"bmvp5gsx829\",\"type\":\"hardware\",\"unit\":944,\"offset\":5,\"x\":26,\"y\":11,\"w\":383,\"h\":160.59}]},{\"id\":\"smvp5gsx82a\",\"format\":\"A3\",\"orient\":\"landscape\",\"kind\":\"sheet\",\"title\":\"Пенал левый\",\"unit\":7308,\"display\":null,\"calloutsWhich\":null,\"calloutsOn\":null,\"commonScale\":null,\"viewLinks\":null,\"callouts\":null,\"views\":null,\"blocks\":[{\"id\":\"bmvp5gsx82b\",\"type\":\"stamp\",\"dock\":true,\"x\":20,\"y\":278,\"w\":395,\"h\":14},{\"id\":\"bmvp5gsx82c\",\"type\":\"view\",\"x\":190.69,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":7308,\"dir\":\"front\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx82d\",\"type\":\"view\",\"x\":263.46,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":7308,\"dir\":\"left\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx82e\",\"type\":\"view\",\"x\":336.23,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":7308,\"dir\":\"top\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx82f\",\"type\":\"view\",\"x\":190.69,\"y\":91.91,\"w\":218.31000000000003,\"h\":180.08999999999997,\"unit\":7308,\"dir\":\"iso\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx82g\",\"type\":\"units\",\"auto\":true,\"unit\":7308,\"offset\":0,\"x\":26,\"y\":11,\"w\":164.69,\"h\":34.0407}]},{\"id\":\"smvp5gsx92h\",\"format\":\"A3\",\"orient\":\"landscape\",\"kind\":\"sheet\",\"title\":\"Модуль нижний\",\"unit\":3309,\"display\":null,\"calloutsWhich\":null,\"calloutsOn\":null,\"commonScale\":null,\"viewLinks\":null,\"callouts\":null,\"views\":null,\"blocks\":[{\"id\":\"bmvp5gsx92i\",\"type\":\"stamp\",\"dock\":true,\"x\":20,\"y\":278,\"w\":395,\"h\":14},{\"id\":\"bmvp5gsx92j\",\"type\":\"view\",\"x\":190.69,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":3309,\"dir\":\"front\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx92k\",\"type\":\"view\",\"x\":263.46,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":3309,\"dir\":\"left\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx92l\",\"type\":\"view\",\"x\":336.23,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":3309,\"dir\":\"top\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx92m\",\"type\":\"view\",\"x\":190.69,\"y\":91.91,\"w\":218.31000000000003,\"h\":180.08999999999997,\"unit\":3309,\"dir\":\"iso\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsx92n\",\"type\":\"parts\",\"auto\":true,\"unit\":3309,\"offset\":0,\"x\":26,\"y\":11,\"w\":164.69,\"h\":98.8407},{\"id\":\"bmvp5gsx92o\",\"type\":\"hardware\",\"auto\":true,\"unit\":3309,\"offset\":0,\"x\":26,\"y\":109.8407,\"w\":164.69,\"h\":162.1593}]},{\"id\":\"smvp5gsx92p\",\"format\":\"A3\",\"orient\":\"landscape\",\"kind\":\"spec\",\"title\":\"Модуль нижний\",\"unit\":3309,\"display\":null,\"calloutsWhich\":null,\"calloutsOn\":null,\"commonScale\":null,\"viewLinks\":null,\"callouts\":null,\"views\":null,\"blocks\":[{\"id\":\"bmvp5gsx92q\",\"type\":\"stamp\",\"dock\":true,\"x\":20,\"y\":278,\"w\":395,\"h\":14},{\"id\":\"bmvp5gsx92r\",\"type\":\"hardware\",\"unit\":3309,\"offset\":11,\"x\":26,\"y\":11,\"w\":383,\"h\":112.58999999999999}]},{\"id\":\"smvp5gsxa2s\",\"format\":\"A3\",\"orient\":\"landscape\",\"kind\":\"sheet\",\"title\":\"Модуль верхний\",\"unit\":3557,\"display\":null,\"calloutsWhich\":null,\"calloutsOn\":null,\"commonScale\":null,\"viewLinks\":null,\"callouts\":null,\"views\":null,\"blocks\":[{\"id\":\"bmvp5gsxa2t\",\"type\":\"stamp\",\"dock\":true,\"x\":20,\"y\":278,\"w\":395,\"h\":14},{\"id\":\"bmvp5gsxa2u\",\"type\":\"view\",\"x\":190.69,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":3557,\"dir\":\"front\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsxa2v\",\"type\":\"view\",\"x\":263.46,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":3557,\"dir\":\"left\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsxa2w\",\"type\":\"view\",\"x\":336.23,\"y\":11,\"w\":72.77,\"h\":80.91,\"unit\":3557,\"dir\":\"top\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsxa2x\",\"type\":\"view\",\"x\":190.69,\"y\":91.91,\"w\":218.31000000000003,\"h\":180.08999999999997,\"unit\":3557,\"dir\":\"iso\",\"az\":35,\"el\":25,\"scale\":\"auto\",\"style\":\"inherit\",\"caption\":true,\"callouts\":\"inherit\",\"auto\":true},{\"id\":\"bmvp5gsxa2y\",\"type\":\"parts\",\"auto\":true,\"unit\":3557,\"offset\":0,\"x\":26,\"y\":11,\"w\":164.69,\"h\":127.04070000000002},{\"id\":\"bmvp5gsxa2z\",\"type\":\"hardware\",\"auto\":true,\"unit\":3557,\"offset\":0,\"x\":26,\"y\":180.8014,\"w\":164.69,\"h\":91.1986},{\"id\":\"bmvp5gsxa30\",\"type\":\"linear\",\"auto\":true,\"unit\":3557,\"offset\":0,\"x\":26,\"y\":138.04070000000002,\"w\":164.69,\"h\":42.7607}]},{\"id\":\"smvp5gsxb31\",\"format\":\"A3\",\"orient\":\"landscape\",\"kind\":\"spec\",\"title\":\"Модуль верхний\",\"unit\":3557,\"display\":null,\"calloutsWhich\":null,\"calloutsOn\":null,\"commonScale\":null,\"viewLinks\":null,\"callouts\":null,\"views\":null,\"blocks\":[{\"id\":\"bmvp5gsxb32\",\"type\":\"stamp\",\"dock\":true,\"x\":20,\"y\":278,\"w\":395,\"h\":14},{\"id\":\"bmvp5gsxb33\",\"type\":\"hardware\",\"unit\":3557,\"offset\":5,\"x\":26,\"y\":11,\"w\":383,\"h\":160.59}]}]}",
+      "label": "Начальное состояние",
+      "time": "2026-10-26T11:04:59.252Z"
+     }
+    ]
+   }
+  }
  },
  "controls": {
   "panels": true,
@@ -483,24 +1815,21 @@
   "nativeDimensions": true,
   "manualDimensions": true,
   "githubTokenRemember": true,
-  "sectionEnabled": false,
-  "sectionShowPlane": true,
   "sectionPosition": "1432.49999994055",
   "sectionReverse": false,
   "sectionViewsMarks": true,
   "lineWidth": "1",
-  "displayModesEnabled": false,
   "dimensionFontSize": "16",
   "dimensionUnit": false,
   "dimensionBox": false,
   "notesShow": true,
   "noteEditorMany": false,
   "noteEditorSphere": false,
-  "noteEditorDiameter": "60",
   "noteEditorWindow": false,
   "noteEditorWindowReverse": false,
-  "noteEditorWindowDepth": "50",
   "noteEditorIsolate": false,
+  "noteEditorDiameter": "60",
+  "noteEditorWindowDepth": "50",
   "assemblerSeparation": "250",
   "assemblerLabelPosition": true,
   "assemblerLabelName": true,
