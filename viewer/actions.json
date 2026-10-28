@@ -1355,6 +1355,27 @@
     "visualizer/features/section_views/markup.html"
    ]
   },
+  "selection.many": {
+   "module": "multi_select",
+   "kind": "action",
+   "label": "Выбрать несколько",
+   "via": [],
+   "files": [
+    "visualizer/features/multi_select/adapter.js"
+   ]
+  },
+  "selection.multi": {
+   "module": "multi_select",
+   "kind": "setting",
+   "label": "Мультивыбор",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/multi_select/adapter.js",
+    "visualizer/features/multi_select/markup.html"
+   ]
+  },
   "structure.close": {
    "module": "toolbar",
    "kind": "nav",
@@ -1411,6 +1432,15 @@
     "visualizer/features/tree_keys/adapter.js"
    ]
   },
+  "treeFolders.layer": {
+   "module": "tree_folders",
+   "kind": "setting",
+   "label": "Видимость слоя",
+   "via": [],
+   "files": [
+    "visualizer/features/tree_folders/adapter.js"
+   ]
+  },
   "view.fit": {
    "module": "template",
    "kind": "action",
@@ -1420,6 +1450,18 @@
    ],
    "files": [
     "visualizer/templates/interactive_model_template.html"
+   ]
+  },
+  "visibility.assemblyUnit": {
+   "module": "visibility",
+   "kind": "action",
+   "label": "Сборочная единица",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/visibility/adapter.js",
+    "visualizer/features/visibility/markup.html"
    ]
   },
   "visibility.hideBlock": {
