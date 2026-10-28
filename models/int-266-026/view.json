@@ -1,0 +1,547 @@
+{
+ "schema": 1,
+ "source": "0efddad3e19ecd6f02af7bde68b238ca654dc9b3334512dbd3c9d02264a6c477",
+ "savedAt": "2026-10-28T13:37:46.141Z",
+ "features": {
+  "section": {
+   "active": false,
+   "axis": "y",
+   "position": 1333.2063918178967,
+   "reversed": false,
+   "showPlane": true,
+   "chosen": false,
+   "normal": [
+    0,
+    1,
+    0
+   ]
+  },
+  "section_views": null,
+  "line_width": 1,
+  "display_modes": {
+   "mode": "solid"
+  },
+  "finish": "texture",
+  "dimension_actions": {
+   "colors": []
+  },
+  "dimensions": {
+   "size": 16,
+   "color": "#e60000",
+   "unit": false,
+   "box": false
+  },
+  "materials": [
+   {
+    "id": "m:Белый\r-101",
+    "type": "col",
+    "name": "Белый",
+    "state": {
+     "color": "#cccccc"
+    }
+   },
+   {
+    "id": "m:Графит матовый",
+    "type": "col",
+    "name": "Графит матовый",
+    "state": {
+     "color": "#cccccc"
+    }
+   },
+   {
+    "id": "m:Фасад Духового шкафа\rДуховой шкаф",
+    "type": "tex",
+    "name": "Фасад Духового шкафа",
+    "state": {
+     "mode": "col",
+     "color": "#444444"
+    }
+   },
+   {
+    "id": "m:Хромк\r-5",
+    "type": "col",
+    "name": "Хромк",
+    "state": {
+     "color": "#888888"
+    }
+   },
+   {
+    "id": "m:Алюминий\r-2",
+    "type": "tex",
+    "name": "Алюминий",
+    "state": {
+     "mode": "col",
+     "color": "#888888"
+    }
+   },
+   {
+    "id": "m:матовый хром\rмат хром",
+    "type": "col",
+    "name": "матовый хром",
+    "state": {
+     "color": "#cccccc"
+    }
+   },
+   {
+    "id": "m:Врезной проф.- ручка Ferro Fiori M 8030 черный анодир., 18мм\r120664",
+    "type": "col",
+    "name": "Врезной проф.- ручка Ferro Fiori M 8030 черный анодир., 18мм",
+    "state": {
+     "color": "#000000"
+    }
+   },
+   {
+    "id": "m:Светодиодная лента Smart 2835 SMD, 120 светодиодов/м, 9,6 Вт, 12 В, дневной свет, 4000 К\r223709",
+    "type": "col",
+    "name": "Светодиодная лента Smart 2835 SMD, 120 светодиодов/м, 9,6 Вт, 12 В, дневной свет, 4000 К",
+    "state": {
+     "color": "#000000"
+    }
+   },
+   {
+    "id": "m:Структурный графит",
+    "type": "tex",
+    "name": "Структурный графит",
+    "state": {
+     "mode": "col",
+     "color": "#232323"
+    }
+   },
+   {
+    "id": "mm:Алюминий\r-2",
+    "type": "tex",
+    "name": "Алюминий",
+    "state": {
+     "mode": "col",
+     "color": "#888888"
+    }
+   },
+   {
+    "id": "mm:far-ob_dg",
+    "type": "col",
+    "name": "far-ob_dg",
+    "state": {
+     "color": "#444444"
+    }
+   },
+   {
+    "id": "mm:fa-rwh",
+    "type": "col",
+    "name": "fa-rwh",
+    "state": {
+     "color": "#444444"
+    }
+   },
+   {
+    "id": "mm:DeepGrey",
+    "type": "col",
+    "name": "DeepGrey",
+    "state": {
+     "color": "#444444"
+    }
+   },
+   {
+    "id": "mm:StainlessSteelLongsideBrushed",
+    "type": "col",
+    "name": "StainlessSteelLongsideBrushed",
+    "state": {
+     "color": "#cccccc"
+    }
+   },
+   {
+    "id": "mm:White",
+    "type": "col",
+    "name": "White",
+    "state": {
+     "color": "#ffffff"
+    }
+   },
+   {
+    "id": "mm:__2-st-nickel",
+    "type": "col",
+    "name": "__2-st-nickel",
+    "state": {
+     "color": "#444444"
+    }
+   },
+   {
+    "id": "mm:nickelplated",
+    "type": "col",
+    "name": "nickelplated",
+    "state": {
+     "color": "#888888"
+    }
+   },
+   {
+    "id": "mm:Структурный графит",
+    "type": "tex",
+    "name": "Структурный графит",
+    "state": {
+     "mode": "col",
+     "color": "#232323"
+    }
+   },
+   {
+    "id": "mm:Никель",
+    "type": "col",
+    "name": "Никель",
+    "state": {
+     "color": "#f0dfb0"
+    }
+   },
+   {
+    "id": "mm:Хром",
+    "type": "tex",
+    "name": "Хром",
+    "state": {
+     "mode": "col",
+     "color": "#888888"
+    }
+   }
+  ],
+  "texture_fit": {
+   "schema": 2,
+   "modes": {}
+  },
+  "material_labels": {
+   "enabled": false,
+   "changedAt": "2026-10-28T13:34:38.264Z"
+  },
+  "notes": {
+   "enabled": true,
+   "notes": [
+    {
+     "id": "nmvs5clu290qw",
+     "text": "Желтая линия - уровень по 3д замеру\nГолубая линия - уровень по фактическому замеру",
+     "point": [
+      62.553,
+      860.177,
+      54.134
+     ],
+     "objectId": 689,
+     "local": [
+      -651.054,
+      165.873,
+      11.964
+     ],
+     "element": "Столешница · поз. 0.1",
+     "view": {
+      "position": [
+       705.179,
+       1215.815,
+       897.501
+      ],
+      "target": [
+       62.553,
+       860.177,
+       54.134
+      ],
+      "up": [
+       0,
+       1,
+       0
+      ],
+      "orthographic": false
+     },
+     "sphere": {
+      "diameter": 510
+     },
+     "updated": "2026-10-28T13:25:50.612Z"
+    },
+    {
+     "id": "nmvs5etkga8t1",
+     "text": "Желтая линия 3д замер\nГолубая - фактический замер",
+     "point": [
+      3811.745,
+      860.177,
+      412.656
+     ],
+     "objectId": 689,
+     "local": [
+      3098.138,
+      -192.649,
+      11.964
+     ],
+     "element": "Столешница · поз. 0.1",
+     "view": {
+      "position": [
+       5086.8,
+       1280.25,
+       791.015
+      ],
+      "target": [
+       3015.672,
+       529.474,
+       154.075
+      ],
+      "up": [
+       0,
+       1,
+       0
+      ],
+      "orthographic": false
+     },
+     "sphere": {
+      "diameter": 930
+     },
+     "updated": "2026-10-28T13:27:07.255Z"
+    },
+    {
+     "id": "nmvs5hxuw9blg",
+     "text": "Стык Голы и ручки 8030.",
+     "point": [
+      1237.215,
+      817.889,
+      591.176
+     ],
+     "objectId": 2499,
+     "local": [
+      589.732,
+      706.5,
+      10.657
+     ],
+     "element": "Фасад левый · поз. 3.10",
+     "view": {
+      "position": [
+       1075.28,
+       857.479,
+       746.777
+      ],
+      "target": [
+       1237.215,
+       817.889,
+       591.176
+      ],
+      "up": [
+       0,
+       1,
+       0
+      ],
+      "orthographic": false
+     },
+     "sphere": {
+      "diameter": 150
+     },
+     "updated": "2026-10-28T13:30:50.044Z"
+    },
+    {
+     "id": "nmvs5kftacu7x",
+     "text": "Так как были вопросы к замеру, то предлагаю карнизы дозаказать после монтажа кухни",
+     "point": [
+      508.3,
+      2446.724,
+      1494.134
+     ],
+     "objectId": 21307,
+     "local": [
+      491.721,
+      12.072,
+      18
+     ],
+     "element": "Карниз · поз. 0.17",
+     "updated": "2026-10-28T13:31:37.577Z"
+    },
+    {
+     "id": "nmvs5nl8zd77h",
+     "text": "Лоток поменял на 800.\nЛоток 900 слишком большой для этого модуля.\n800 будет с небольшим отступом от края.\nНужно либо уменьшать, либо увеличивать модуль",
+     "point": [
+      2543.136,
+      677.913,
+      334.233
+     ],
+     "objectId": 25445,
+     "local": [
+      -653.652,
+      243.246,
+      15.976
+     ],
+     "element": "Дно ящика · поз. 5.10",
+     "view": {
+      "position": [
+       1784.443,
+       1386.982,
+       1478.314
+      ],
+      "target": [
+       2436.816,
+       574.992,
+       152.872
+      ],
+      "up": [
+       0,
+       1,
+       0
+      ],
+      "orthographic": false
+     },
+     "isolate": true,
+     "updated": "2026-10-28T13:34:19.396Z"
+    },
+    {
+     "id": "nmvs5p9whht7w",
+     "text": "Поставил на фасад 155 петли для нормального доступа с учетом холодильника",
+     "point": [
+      3136.128,
+      1815.37,
+      373.154
+     ],
+     "objectId": 8446,
+     "local": [
+      108.645,
+      360.718,
+      18
+     ],
+     "element": "Фасад левый · поз. 8.6",
+     "view": {
+      "position": [
+       3829.793,
+       1043.979,
+       441.014
+      ],
+      "target": [
+       3089.368,
+       1713.468,
+       291.773
+      ],
+      "up": [
+       0,
+       1,
+       0
+      ],
+      "orthographic": false
+     },
+     "window": {
+      "mode": "cut",
+      "normal": [
+       1,
+       0,
+       0
+      ],
+      "depth": 25,
+      "width": 300,
+      "height": 760,
+      "du": 0,
+      "dv": -2,
+      "reverse": true
+     },
+     "updated": "2026-10-28T13:36:10.760Z"
+    },
+    {
+     "id": "nmvs5reqqqre6",
+     "text": "Дистанционная проставка для навесов.\nНужна так как модуль перекрывают плитку",
+     "point": [
+      1568.684,
+      1967.737,
+      6.63
+     ],
+     "objectId": 26177,
+     "local": [
+      922.701,
+      71.954,
+      -0.024
+     ],
+     "element": "Подложка · поз. 0.25",
+     "updated": "2026-10-28T13:36:56.470Z"
+    }
+   ]
+  },
+  "hardware_mono": false,
+  "hardware_types": false,
+  "visibility": {
+   "hidden": [],
+   "objectMode": true
+  },
+  "tree_folders": {
+   "layersOff": []
+  },
+  "multi_select": {
+   "multi": false
+  },
+  "panel_hardware": {
+   "active": false,
+   "selectedPanelId": null
+  },
+  "assembler": {
+   "active": false,
+   "exploded": false,
+   "separation": 250,
+   "unitId": null,
+   "partDimensionsEnabled": false,
+   "labelPosition": true,
+   "labelName": null,
+   "labelFontSize": 11,
+   "positionsThrough": false,
+   "unitThrough": {},
+   "hiddenUnits": [],
+   "userUnits": []
+  },
+  "hardware_catalog": {
+   "expanded": false
+  },
+  "drawings": null
+ },
+ "controls": {
+  "panels": true,
+  "profiles": true,
+  "edges": true,
+  "textures": true,
+  "imports": true,
+  "hardware": true,
+  "holes": true,
+  "lines": true,
+  "overlay": false,
+  "opacity": "100",
+  "nativeDimensions": true,
+  "manualDimensions": true,
+  "githubTokenRemember": true,
+  "sectionPosition": "1333.19978363579",
+  "sectionReverse": false,
+  "sectionViewsMarks": true,
+  "lineWidth": "1",
+  "dimensionFontSize": "16",
+  "dimensionUnit": false,
+  "dimensionBox": false,
+  "notesShow": true,
+  "noteEditorMany": false,
+  "noteEditorSphere": false,
+  "noteEditorWindow": false,
+  "noteEditorWindowReverse": false,
+  "noteEditorIsolate": false,
+  "noteEditorDiameter": "600",
+  "noteEditorWindowDepth": "25",
+  "assemblerSeparation": "250",
+  "assemblerLabelPosition": true,
+  "assemblerLabelName": true,
+  "assemblerLabelFontSize": "11",
+  "assemblerLabelsThrough": false,
+  "usageEnabled": true,
+  "guideIntroOnly": false
+ },
+ "layers": [
+  true,
+  true
+ ],
+ "layersByName": {
+  "Вспомогательные контуры": true,
+  "Линии": true
+ },
+ "camera": {
+  "position": [
+   3153.10814663345,
+   2880.4949700394864,
+   4659.292981821118
+  ],
+  "target": [
+   1711.0644660868315,
+   1252.8409681327175,
+   489.9140099025608
+  ],
+  "up": [
+   0,
+   1,
+   0
+  ],
+  "orthographic": false
+ },
+ "dimensions": []
+}
