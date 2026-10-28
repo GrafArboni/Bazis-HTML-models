@@ -1,0 +1,166 @@
+{
+ "schema": 1,
+ "source": "181393287ae56a2e66147df134b1a3263f988145b7726e41c61533da011e6a04",
+ "savedAt": "2026-10-28T18:16:17.407Z",
+ "features": {
+  "section": {
+   "active": false,
+   "axis": "y",
+   "position": 358.0298158461403,
+   "reversed": false,
+   "showPlane": true,
+   "chosen": false,
+   "normal": [
+    0,
+    1,
+    0
+   ]
+  },
+  "section_views": null,
+  "line_width": 1,
+  "display_modes": {
+   "mode": "solid"
+  },
+  "finish": "texture",
+  "dimension_actions": {
+   "colors": []
+  },
+  "dimensions": {
+   "size": 16,
+   "color": "#e60000",
+   "unit": false,
+   "box": false
+  },
+  "materials": [
+   {
+    "id": "mm:Алюминий\r-2",
+    "type": "tex",
+    "name": "Алюминий",
+    "state": {
+     "mode": "col",
+     "color": "#888888"
+    }
+   },
+   {
+    "id": "mm:GTV Zink plated\rGTV Zn",
+    "type": "col",
+    "name": "GTV Zink plated",
+    "state": {
+     "color": "#cccccc"
+    }
+   },
+   {
+    "id": "mm:GTV Anthracite mat\rGTV Anthracite mat",
+    "type": "col",
+    "name": "GTV Anthracite mat",
+    "state": {
+     "color": "#000000"
+    }
+   }
+  ],
+  "texture_fit": {
+   "schema": 2,
+   "modes": {}
+  },
+  "material_labels": {
+   "enabled": true,
+   "changedAt": null
+  },
+  "notes": {
+   "enabled": true,
+   "notes": []
+  },
+  "hardware_mono": false,
+  "hardware_types": false,
+  "visibility": {
+   "hidden": [],
+   "objectMode": true
+  },
+  "tree_folders": {
+   "layersOff": []
+  },
+  "multi_select": {
+   "multi": false
+  },
+  "panel_hardware": {
+   "active": false,
+   "selectedPanelId": null
+  },
+  "assembler": {
+   "active": false,
+   "exploded": false,
+   "separation": 250,
+   "unitId": null,
+   "partDimensionsEnabled": false,
+   "labelPosition": true,
+   "labelName": null,
+   "labelFontSize": 11,
+   "positionsThrough": false,
+   "unitThrough": {},
+   "hiddenUnits": [],
+   "userUnits": []
+  },
+  "hardware_catalog": {
+   "expanded": false
+  },
+  "drawings": null
+ },
+ "controls": {
+  "panels": true,
+  "profiles": true,
+  "edges": true,
+  "textures": true,
+  "imports": true,
+  "hardware": true,
+  "holes": true,
+  "lines": true,
+  "overlay": false,
+  "opacity": "100",
+  "nativeDimensions": true,
+  "manualDimensions": true,
+  "githubTokenRemember": true,
+  "sectionPosition": "357.999577292666",
+  "sectionReverse": false,
+  "sectionViewsMarks": true,
+  "lineWidth": "1",
+  "dimensionFontSize": "16",
+  "dimensionUnit": false,
+  "dimensionBox": false,
+  "notesShow": true,
+  "noteEditorMany": false,
+  "noteEditorSphere": false,
+  "noteEditorWindow": false,
+  "noteEditorWindowReverse": false,
+  "noteEditorIsolate": false,
+  "noteEditorDiameter": "60",
+  "noteEditorWindowDepth": "50",
+  "assemblerSeparation": "250",
+  "assemblerLabelPosition": true,
+  "assemblerLabelName": true,
+  "assemblerLabelFontSize": "11",
+  "assemblerLabelsThrough": false,
+  "usageEnabled": true,
+  "guideIntroOnly": false
+ },
+ "layers": [],
+ "layersByName": {},
+ "camera": {
+  "position": [
+   -230.46967597345633,
+   1441.4721560464686,
+   3162.7248804157643
+  ],
+  "target": [
+   1108.6504590650502,
+   495.83820686805313,
+   -69.62723340272915
+  ],
+  "up": [
+   0,
+   1,
+   0
+  ],
+  "orthographic": false
+ },
+ "dimensions": []
+}
