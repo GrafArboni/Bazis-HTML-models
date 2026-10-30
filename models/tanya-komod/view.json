@@ -1,0 +1,158 @@
+{
+ "schema": 1,
+ "source": "614e570843f92a72e2a87c6bb03923d10959e4454ff581ed9e4e46c6779d0ece",
+ "savedAt": "2026-10-30T11:58:01.780Z",
+ "features": {
+  "section": {
+   "active": false,
+   "axis": "y",
+   "position": 612.3758701860179,
+   "reversed": false,
+   "showPlane": true,
+   "chosen": false,
+   "normal": [
+    0,
+    1,
+    0
+   ]
+  },
+  "section_views": null,
+  "line_width": 1,
+  "display_modes": {
+   "mode": "xray"
+  },
+  "finish": "texture",
+  "dimension_actions": {
+   "colors": []
+  },
+  "dimensions": {
+   "size": 16,
+   "color": "#e60000",
+   "unit": false,
+   "box": false
+  },
+  "materials": [
+   {
+    "id": "m:Прозрачность\r-546345634",
+    "type": "col",
+    "name": "Прозрачность",
+    "state": {
+     "color": "#888888",
+     "transparency": 0
+    }
+   }
+  ],
+  "texture_fit": {
+   "schema": 2,
+   "modes": {}
+  },
+  "material_labels": {
+   "enabled": false,
+   "changedAt": null
+  },
+  "notes": {
+   "enabled": true,
+   "notes": []
+  },
+  "hardware_mono": false,
+  "hardware_types": {
+   "on": true,
+   "focus": null
+  },
+  "visibility": {
+   "hidden": [],
+   "objectMode": true
+  },
+  "tree_folders": {
+   "layersOff": []
+  },
+  "multi_select": {
+   "multi": false
+  },
+  "panel_hardware": {
+   "active": false,
+   "selectedPanelId": null
+  },
+  "assembler": {
+   "active": false,
+   "exploded": false,
+   "separation": 250,
+   "unitId": null,
+   "partDimensionsEnabled": false,
+   "labelPosition": true,
+   "labelName": null,
+   "labelFontSize": 11,
+   "positionsThrough": false,
+   "unitThrough": {},
+   "hiddenUnits": [],
+   "userUnits": []
+  },
+  "hardware_catalog": {
+   "expanded": false
+  },
+  "drawings": null
+ },
+ "controls": {
+  "panels": true,
+  "profiles": true,
+  "edges": true,
+  "textures": true,
+  "imports": true,
+  "hardware": true,
+  "holes": true,
+  "lines": true,
+  "overlay": false,
+  "opacity": "25",
+  "nativeDimensions": true,
+  "manualDimensions": true,
+  "githubTokenRemember": true,
+  "sectionPosition": "612.3998762204",
+  "sectionReverse": false,
+  "sectionViewsMarks": true,
+  "lineWidth": "1",
+  "dimensionFontSize": "16",
+  "dimensionUnit": false,
+  "dimensionBox": false,
+  "notesShow": true,
+  "noteEditorMany": false,
+  "noteEditorSphere": false,
+  "noteEditorWindow": false,
+  "noteEditorWindowReverse": false,
+  "noteEditorIsolate": false,
+  "noteEditorDisplay": false,
+  "noteEditorDiameter": "60",
+  "noteEditorWindowDepth": "50",
+  "assemblerSeparation": "250",
+  "assemblerLabelPosition": true,
+  "assemblerLabelName": true,
+  "assemblerLabelFontSize": "11",
+  "assemblerLabelsThrough": false,
+  "usageEnabled": true,
+  "guideIntroOnly": false
+ },
+ "layers": [
+  true
+ ],
+ "layersByName": {
+  "Линии": true
+ },
+ "camera": {
+  "position": [
+   2796.6638623353633,
+   1706.3076066306598,
+   4138.676180525724
+  ],
+  "target": [
+   1550,
+   612.3758701860181,
+   288.0013982505885
+  ],
+  "up": [
+   0,
+   1,
+   0
+  ],
+  "orthographic": false
+ },
+ "dimensions": []
+}
