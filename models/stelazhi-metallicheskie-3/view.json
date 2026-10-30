@@ -1,0 +1,234 @@
+{
+ "schema": 1,
+ "source": "4e8c928250b8be35aa0bdc434e0365d79e1713894294270b3141c3a918d078a3",
+ "savedAt": "2026-10-30T10:28:22.864Z",
+ "features": {
+  "section": {
+   "active": false,
+   "axis": "y",
+   "position": 1454.9999009858666,
+   "reversed": false,
+   "showPlane": true,
+   "chosen": false,
+   "normal": [
+    0,
+    1,
+    0
+   ]
+  },
+  "section_views": null,
+  "line_width": 1,
+  "display_modes": {
+   "mode": "solid"
+  },
+  "finish": "texture",
+  "dimension_actions": {
+   "colors": []
+  },
+  "dimensions": {
+   "size": 16,
+   "color": "#e60000",
+   "unit": false,
+   "box": false
+  },
+  "materials": [
+   {
+    "id": "m:(kt-stal.com.ua) лист толщина 5мм",
+    "type": "col",
+    "name": "(kt-stal.com.ua) лист толщина 5мм",
+    "state": {
+     "mode": "tex",
+     "texData": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAF6AXcDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAL/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCZAJUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//Z"
+    }
+   },
+   {
+    "id": "m:Прозрачность\r-546345634",
+    "type": "col",
+    "name": "Прозрачность",
+    "state": {
+     "transparency": 0
+    }
+   }
+  ],
+  "texture_fit": {
+   "schema": 2,
+   "modes": {}
+  },
+  "material_labels": {
+   "enabled": true,
+   "changedAt": null
+  },
+  "notes": {
+   "enabled": true,
+   "notes": [
+    {
+     "id": "nmvutm2dmb5q3",
+     "text": "Усиляем снизу доп ножками",
+     "point": [
+      3111.779,
+      84.964,
+      364.743
+     ],
+     "objectId": 2333,
+     "local": [
+      334.743,
+      152.133,
+      17.964
+     ],
+     "element": "Горизонтальная2",
+     "updated": "2026-10-30T10:19:52.789Z"
+    },
+    {
+     "id": "nmvutmlwdlzr6",
+     "text": "Сделали стеллажи составными по высоте.\nСтавим нижние стеллажи, на них сверху ставим  верхние.\nФиксируем винтом",
+     "point": [
+      2643.946,
+      1442.25,
+      560.059
+     ],
+     "objectId": 1443,
+     "local": [
+      -49.714,
+      68.107,
+      1377.25
+     ],
+     "element": "тр20*20*2",
+     "view": {
+      "position": [
+       2837.351,
+       1709.773,
+       1250.265
+      ],
+      "target": [
+       2783.193,
+       1629.071,
+       1027.545
+      ],
+      "up": [
+       0,
+       1,
+       0
+      ],
+      "orthographic": false
+     },
+     "sphere": {
+      "diameter": 200
+     },
+     "updated": "2026-10-30T10:20:53.784Z"
+    },
+    {
+     "id": "nmvuto0gogsms",
+     "text": "Верхние опоры для распорки ставятся на уже готовый стеллаж и прикручиваются снизу. \nДля этих ног пришлось сделать перемычки дополнительные, но зато получится нормальная жесткость конструкции\n\nhttps://viyar.ua/catalog/nizhka-mebleva-regulovana-na-02c00-h-50mm-max-100kg-chorniy/",
+     "point": [
+      2673.76,
+      2913.463,
+      556.023
+     ],
+     "objectId": 3254,
+     "local": [
+      -28.189,
+      7.659,
+      9.463
+     ],
+     "element": "кронштейнВсборе",
+     "updated": "2026-10-30T10:28:19.309Z"
+    }
+   ]
+  },
+  "hardware_mono": false,
+  "hardware_types": {
+   "on": true,
+   "focus": null
+  },
+  "visibility": {
+   "hidden": [],
+   "objectMode": true
+  },
+  "tree_folders": {
+   "layersOff": []
+  },
+  "multi_select": {
+   "multi": false
+  },
+  "panel_hardware": {
+   "active": false,
+   "selectedPanelId": null
+  },
+  "assembler": {
+   "active": false,
+   "exploded": false,
+   "separation": 250,
+   "unitId": null,
+   "partDimensionsEnabled": false,
+   "labelPosition": true,
+   "labelName": null,
+   "labelFontSize": 11,
+   "positionsThrough": false,
+   "unitThrough": {},
+   "hiddenUnits": [],
+   "userUnits": []
+  },
+  "hardware_catalog": {
+   "expanded": false
+  },
+  "drawings": null
+ },
+ "controls": {
+  "panels": true,
+  "profiles": true,
+  "edges": true,
+  "textures": true,
+  "imports": true,
+  "hardware": true,
+  "holes": true,
+  "lines": true,
+  "overlay": false,
+  "opacity": "100",
+  "nativeDimensions": true,
+  "manualDimensions": true,
+  "githubTokenRemember": true,
+  "sectionPosition": "1454.97587619048",
+  "sectionReverse": false,
+  "sectionViewsMarks": true,
+  "lineWidth": "1",
+  "dimensionFontSize": "16",
+  "dimensionUnit": false,
+  "dimensionBox": false,
+  "notesShow": true,
+  "noteEditorMany": false,
+  "noteEditorSphere": false,
+  "noteEditorWindow": false,
+  "noteEditorWindowReverse": false,
+  "noteEditorIsolate": false,
+  "noteEditorDiameter": "200",
+  "noteEditorWindowDepth": "50",
+  "assemblerSeparation": "250",
+  "assemblerLabelPosition": true,
+  "assemblerLabelName": true,
+  "assemblerLabelFontSize": "11",
+  "assemblerLabelsThrough": false,
+  "usageEnabled": true,
+  "guideIntroOnly": false
+ },
+ "layers": [],
+ "layersByName": {},
+ "camera": {
+  "position": [
+   4200.975453571115,
+   4286.515890207818,
+   5990.722782795533
+  ],
+  "target": [
+   1978.0149092688418,
+   1754.4288008718297,
+   1054.4491176823901
+  ],
+  "up": [
+   0,
+   1,
+   0
+  ],
+  "orthographic": false
+ },
+ "dimensions": []
+}
