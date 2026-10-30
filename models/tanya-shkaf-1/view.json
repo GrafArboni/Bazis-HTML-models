@@ -1,0 +1,252 @@
+{
+ "schema": 1,
+ "source": "58674e582a9194c21108c403a10c1dc0153efbcfb85de6b43876a490ef3a9c59",
+ "savedAt": "2026-10-30T16:20:41.595Z",
+ "features": {
+  "section": {
+   "active": false,
+   "axis": "y",
+   "position": 1597.9999381102,
+   "reversed": false,
+   "showPlane": true,
+   "chosen": false,
+   "normal": [
+    0,
+    1,
+    0
+   ]
+  },
+  "section_views": null,
+  "line_width": 1,
+  "display_modes": {
+   "mode": "solid"
+  },
+  "finish": "texture",
+  "dimension_actions": {
+   "colors": []
+  },
+  "dimensions": {
+   "size": 16,
+   "color": "#e60000",
+   "unit": false,
+   "box": false
+  },
+  "materials": [
+   {
+    "id": "m:Прозрачность\r-546345634",
+    "type": "col",
+    "name": "Прозрачность",
+    "state": {
+     "color": "#888888",
+     "transparency": 0
+    }
+   },
+   {
+    "id": "m:LED-2835 SMD лента, 180 LEDs/м, 14.4Вт, 12В, IP20, дневной свет\r85694",
+    "type": "col",
+    "name": "LED-2835 SMD лента, 180 LEDs/м, 14.4Вт, 12В, IP20, дневной свет",
+    "state": {
+     "color": "#000000"
+    }
+   },
+   {
+    "id": "m:Алюминий\r-2",
+    "type": "tex",
+    "name": "Алюминий",
+    "state": {
+     "mode": "col",
+     "color": "#888888"
+    }
+   },
+   {
+    "id": "mm:Алюминий\r-2",
+    "type": "tex",
+    "name": "Алюминий",
+    "state": {
+     "mode": "col",
+     "color": "#888888"
+    }
+   },
+   {
+    "id": "mm:Хром",
+    "type": "tex",
+    "name": "Хром",
+    "state": {
+     "mode": "col",
+     "color": "#888888"
+    }
+   },
+   {
+    "id": "mm:GTV Anthracite\rGTV Anthracite",
+    "type": "col",
+    "name": "GTV Anthracite",
+    "state": {
+     "color": "#000000"
+    }
+   },
+   {
+    "id": "mm:GTV Anthracite mat\rGTV Anthracite mat",
+    "type": "col",
+    "name": "GTV Anthracite mat",
+    "state": {
+     "color": "#000000"
+    }
+   },
+   {
+    "id": "mm:GTV Black\rGTV Black",
+    "type": "col",
+    "name": "GTV Black",
+    "state": {
+     "color": "#000000"
+    }
+   }
+  ],
+  "texture_fit": {
+   "schema": 2,
+   "modes": {}
+  },
+  "material_labels": {
+   "enabled": false,
+   "changedAt": null
+  },
+  "notes": {
+   "enabled": true,
+   "notes": [
+    {
+     "id": "nmvv6hg9rmk6r",
+     "text": "Запасной карниз под подрезку",
+     "point": [
+      1035.004,
+      3210.842,
+      403.255
+     ],
+     "objectId": 2815,
+     "local": [
+      1014.004,
+      63.342,
+      17.976
+     ],
+     "element": "Карниз · поз. 7.3",
+     "updated": "2026-10-30T16:20:17.598Z"
+    },
+    {
+     "id": "nmvv6hzmytvsm",
+     "text": "Опциональные подкладки",
+     "point": [
+      2048,
+      1997.764,
+      371.038
+     ],
+     "objectId": 3183,
+     "local": [
+      150.036,
+      269.113,
+      7
+     ],
+     "element": "Подкладка · поз. 3.8",
+     "updated": "2026-10-30T16:20:37.235Z"
+    }
+   ]
+  },
+  "hardware_mono": false,
+  "hardware_types": {
+   "on": true,
+   "focus": null
+  },
+  "visibility": {
+   "hidden": [],
+   "objectMode": true
+  },
+  "tree_folders": {
+   "layersOff": []
+  },
+  "multi_select": {
+   "multi": false
+  },
+  "panel_hardware": {
+   "active": false,
+   "selectedPanelId": null
+  },
+  "assembler": {
+   "active": false,
+   "exploded": false,
+   "separation": 250,
+   "unitId": null,
+   "partDimensionsEnabled": false,
+   "labelPosition": true,
+   "labelName": null,
+   "labelFontSize": 11,
+   "positionsThrough": false,
+   "unitThrough": {},
+   "hiddenUnits": [],
+   "userUnits": []
+  },
+  "hardware_catalog": {
+   "expanded": false
+  },
+  "drawings": null
+ },
+ "controls": {
+  "panels": true,
+  "profiles": true,
+  "edges": true,
+  "textures": true,
+  "imports": true,
+  "hardware": true,
+  "holes": true,
+  "lines": true,
+  "overlay": false,
+  "opacity": "100",
+  "nativeDimensions": true,
+  "manualDimensions": true,
+  "githubTokenRemember": true,
+  "sectionPosition": "1597.9998762204",
+  "sectionReverse": false,
+  "sectionViewsMarks": true,
+  "lineWidth": "1",
+  "dimensionFontSize": "16",
+  "dimensionUnit": false,
+  "dimensionBox": false,
+  "notesShow": true,
+  "noteEditorMany": false,
+  "noteEditorSphere": false,
+  "noteEditorWindow": false,
+  "noteEditorWindowReverse": false,
+  "noteEditorIsolate": false,
+  "noteEditorDisplay": false,
+  "noteEditorDiameter": "60",
+  "noteEditorWindowDepth": "50",
+  "assemblerSeparation": "250",
+  "assemblerLabelPosition": true,
+  "assemblerLabelName": true,
+  "assemblerLabelFontSize": "11",
+  "assemblerLabelsThrough": false,
+  "usageEnabled": true,
+  "guideIntroOnly": false
+ },
+ "layers": [
+  true
+ ],
+ "layersByName": {
+  "Линии": true
+ },
+ "camera": {
+  "position": [
+   1941.3085771599485,
+   2443.4792199616722,
+   4057.2882289884055
+  ],
+  "target": [
+   1128.4445730164762,
+   1173.3887581550862,
+   483.1743653715984
+  ],
+  "up": [
+   0,
+   1,
+   0
+  ],
+  "orthographic": false
+ },
+ "dimensions": []
+}
