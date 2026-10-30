@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "source": "4e8c928250b8be35aa0bdc434e0365d79e1713894294270b3141c3a918d078a3",
- "savedAt": "2026-10-30T10:32:34.809Z",
+ "savedAt": "2026-10-30T10:34:21.309Z",
  "features": {
   "section": {
    "active": false,
@@ -19,7 +19,7 @@
   "section_views": null,
   "line_width": 1,
   "display_modes": {
-   "mode": "solid"
+   "mode": "xray"
   },
   "finish": "texture",
   "dimension_actions": {
@@ -231,7 +231,7 @@
   "holes": true,
   "lines": true,
   "overlay": false,
-  "opacity": "100",
+  "opacity": "25",
   "nativeDimensions": true,
   "manualDimensions": true,
   "githubTokenRemember": true,
@@ -262,14 +262,14 @@
  "layersByName": {},
  "camera": {
   "position": [
-   3658.573659275302,
-   4212.006657788864,
-   5299.136789700852
+   4091.2352682421206,
+   3103.3663127089167,
+   5185.410600324084
   ],
   "target": [
-   2251.5593824589732,
-   1710.573557743014,
-   732.1731483690261
+   2396.4253754043166,
+   1649.5538318787392,
+   859.7540446924307
   ],
   "up": [
    0,
