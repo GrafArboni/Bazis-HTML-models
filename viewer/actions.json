@@ -310,7 +310,7 @@
   "drawings.addExplode": {
    "module": "drawings",
    "kind": "action",
-   "label": "＋ Взрыв-схема",
+   "label": "Взрыв-схема",
    "via": [
     "click"
    ],
@@ -332,7 +332,7 @@
   "drawings.addHardware": {
    "module": "drawings",
    "kind": "action",
-   "label": "＋ Фурнитура",
+   "label": "Фурнитура",
    "via": [
     "click"
    ],
@@ -343,7 +343,7 @@
   "drawings.addInfo": {
    "module": "drawings",
    "kind": "action",
-   "label": "＋ Рамка изделия",
+   "label": "Рамка изделия",
    "via": [
     "click"
    ],
@@ -354,12 +354,23 @@
   "drawings.addLinear": {
    "module": "drawings",
    "kind": "action",
-   "label": "＋ Погонаж",
+   "label": "Погонаж",
    "via": [
     "click"
    ],
    "files": [
     "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.addMaterialNote": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
    ]
   },
   "drawings.addNote": {
@@ -376,7 +387,7 @@
   "drawings.addParts": {
    "module": "drawings",
    "kind": "action",
-   "label": "＋ Детали",
+   "label": "Детали",
    "via": [
     "click"
    ],
@@ -387,7 +398,7 @@
   "drawings.addSheet": {
    "module": "drawings",
    "kind": "action",
-   "label": "＋ Лист",
+   "label": "Лист",
    "via": [
     "click"
    ],
@@ -398,7 +409,7 @@
   "drawings.addText": {
    "module": "drawings",
    "kind": "action",
-   "label": "＋ Текст",
+   "label": "Текст",
    "via": [
     "click"
    ],
@@ -409,7 +420,7 @@
   "drawings.addView": {
    "module": "drawings",
    "kind": "action",
-   "label": "＋ Вид",
+   "label": "Вид",
    "via": [
     "click"
    ],
@@ -431,7 +442,7 @@
   "drawings.close": {
    "module": "drawings",
    "kind": "nav",
-   "label": "✕ Закрыть",
+   "label": "Закрыть",
    "via": [
     "click"
    ],
@@ -508,6 +519,17 @@
   "drawings.kitSettings": {
    "module": "drawings",
    "kind": "nav",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.logo": {
+   "module": "drawings",
+   "kind": "action",
    "label": "",
    "via": [
     "click"
@@ -596,7 +618,7 @@
   "drawings.redo": {
    "module": "drawings",
    "kind": "action",
-   "label": "↷ Повторить",
+   "label": "Повторить",
    "via": [
     "click"
    ],
@@ -604,9 +626,53 @@
     "visualizer/features/drawings/markup.html"
    ]
   },
+  "drawings.refresh": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "Обновить из модели",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.sectionTemplate": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.setupTab": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
   "drawings.sheet": {
    "module": "drawings",
    "kind": "nav",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.sheetSectionSettings": {
+   "module": "drawings",
+   "kind": "action",
    "label": "",
    "via": [
     "click"
@@ -627,6 +693,39 @@
    ]
   },
   "drawings.sheetZonesToTemplate": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.stampEdit": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.templateViewAdd": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.templateViewDrop": {
    "module": "drawings",
    "kind": "action",
    "label": "",
@@ -706,7 +805,7 @@
   "drawings.undo": {
    "module": "drawings",
    "kind": "action",
-   "label": "↶ Отменить",
+   "label": "Отменить",
    "via": [
     "click"
    ],
