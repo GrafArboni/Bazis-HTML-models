@@ -1,6 +1,17 @@
 {
  "schema": 1,
  "actions": {
+  "account.open": {
+   "module": "site_account",
+   "kind": "action",
+   "label": "Войти через Google",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/site_account/markup.html"
+   ]
+  },
   "assembler.explode": {
    "module": "assembler",
    "kind": "action",
@@ -296,17 +307,6 @@
     "visualizer/features/display_modes/markup.html"
    ]
   },
-  "drawings.addDimension": {
-   "module": "drawings",
-   "kind": "action",
-   "label": "",
-   "via": [
-    "click"
-   ],
-   "files": [
-    "visualizer/features/drawings/adapter.js"
-   ]
-  },
   "drawings.addExplode": {
    "module": "drawings",
    "kind": "action",
@@ -318,21 +318,21 @@
     "visualizer/features/drawings/markup.html"
    ]
   },
-  "drawings.addGapDimension": {
-   "module": "drawings",
-   "kind": "action",
-   "label": "",
-   "via": [
-    "click"
-   ],
-   "files": [
-    "visualizer/features/drawings/adapter.js"
-   ]
-  },
   "drawings.addHardware": {
    "module": "drawings",
    "kind": "action",
    "label": "Фурнитура",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.addImage": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "Картинка",
    "via": [
     "click"
    ],
@@ -360,28 +360,6 @@
    ],
    "files": [
     "visualizer/features/drawings/markup.html"
-   ]
-  },
-  "drawings.addMaterialNote": {
-   "module": "drawings",
-   "kind": "action",
-   "label": "",
-   "via": [
-    "click"
-   ],
-   "files": [
-    "visualizer/features/drawings/adapter.js"
-   ]
-  },
-  "drawings.addNote": {
-   "module": "drawings",
-   "kind": "action",
-   "label": "",
-   "via": [
-    "click"
-   ],
-   "files": [
-    "visualizer/features/drawings/adapter.js"
    ]
   },
   "drawings.addParts": {
@@ -635,6 +613,17 @@
    ],
    "files": [
     "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.replaceImage": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
    ]
   },
   "drawings.sectionTemplate": {
