@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "source": "0efddad3e19ecd6f02af7bde68b238ca654dc9b3334512dbd3c9d02264a6c477",
- "savedAt": "2026-10-28T13:37:46.141Z",
+ "savedAt": "2026-11-02T10:00:13.037Z",
  "features": {
   "section": {
    "active": false,
@@ -225,6 +225,11 @@
       11.964
      ],
      "element": "Столешница · поз. 0.1",
+     "updated": "2026-10-28T13:25:50.612Z",
+     "hidden": false,
+     "sphere": {
+      "diameter": 510
+     },
      "view": {
       "position": [
        705.179,
@@ -242,11 +247,7 @@
        0
       ],
       "orthographic": false
-     },
-     "sphere": {
-      "diameter": 510
-     },
-     "updated": "2026-10-28T13:25:50.612Z"
+     }
     },
     {
      "id": "nmvs5etkga8t1",
@@ -263,6 +264,11 @@
       11.964
      ],
      "element": "Столешница · поз. 0.1",
+     "updated": "2026-10-28T13:27:07.255Z",
+     "hidden": false,
+     "sphere": {
+      "diameter": 930
+     },
      "view": {
       "position": [
        5086.8,
@@ -280,11 +286,7 @@
        0
       ],
       "orthographic": false
-     },
-     "sphere": {
-      "diameter": 930
-     },
-     "updated": "2026-10-28T13:27:07.255Z"
+     }
     },
     {
      "id": "nmvs5hxuw9blg",
@@ -301,6 +303,11 @@
       10.657
      ],
      "element": "Фасад левый · поз. 3.10",
+     "updated": "2026-10-28T13:30:50.044Z",
+     "hidden": false,
+     "sphere": {
+      "diameter": 150
+     },
      "view": {
       "position": [
        1075.28,
@@ -318,11 +325,7 @@
        0
       ],
       "orthographic": false
-     },
-     "sphere": {
-      "diameter": 150
-     },
-     "updated": "2026-10-28T13:30:50.044Z"
+     }
     },
     {
      "id": "nmvs5kftacu7x",
@@ -339,7 +342,18 @@
       18
      ],
      "element": "Карниз · поз. 0.17",
-     "updated": "2026-10-28T13:31:37.577Z"
+     "updated": "2026-10-28T13:31:37.577Z",
+     "hidden": false,
+     "thread": [
+      {
+       "id": "nmvz30ql4oyrl",
+       "role": "client",
+       "from": "Ліза",
+       "at": "2026-11-02T09:54:11.992Z",
+       "kind": "text",
+       "text": "+"
+      }
+     ]
     },
     {
      "id": "nmvs5nl8zd77h",
@@ -356,6 +370,9 @@
       15.976
      ],
      "element": "Дно ящика · поз. 5.10",
+     "updated": "2026-10-28T13:34:19.396Z",
+     "hidden": false,
+     "isolate": true,
      "view": {
       "position": [
        1784.443,
@@ -374,8 +391,16 @@
       ],
       "orthographic": false
      },
-     "isolate": true,
-     "updated": "2026-10-28T13:34:19.396Z"
+     "thread": [
+      {
+       "id": "nmvz31i1syb4w",
+       "role": "client",
+       "from": "Ліза",
+       "at": "2026-11-02T09:54:47.584Z",
+       "kind": "text",
+       "text": "Робимо шухляду потрібно ширини, щоб став лоток на 900 мм"
+      }
+     ]
     },
     {
      "id": "nmvs5p9whht7w",
@@ -392,6 +417,22 @@
       18
      ],
      "element": "Фасад левый · поз. 8.6",
+     "updated": "2026-10-28T13:36:10.760Z",
+     "hidden": false,
+     "window": {
+      "mode": "cut",
+      "normal": [
+       1,
+       0,
+       0
+      ],
+      "depth": 25,
+      "width": 300,
+      "height": 760,
+      "du": 0,
+      "dv": -2,
+      "reverse": true
+     },
      "view": {
       "position": [
        3829.793,
@@ -410,21 +451,16 @@
       ],
       "orthographic": false
      },
-     "window": {
-      "mode": "cut",
-      "normal": [
-       1,
-       0,
-       0
-      ],
-      "depth": 25,
-      "width": 300,
-      "height": 760,
-      "du": 0,
-      "dv": -2,
-      "reverse": true
-     },
-     "updated": "2026-10-28T13:36:10.760Z"
+     "thread": [
+      {
+       "id": "nmvz2r75nw8zw",
+       "role": "client",
+       "from": "Ліза",
+       "at": "2026-11-02T09:46:46.907Z",
+       "kind": "text",
+       "text": "+"
+      }
+     ]
     },
     {
      "id": "nmvs5reqqqre6",
@@ -441,7 +477,8 @@
       -0.024
      ],
      "element": "Подложка · поз. 0.25",
-     "updated": "2026-10-28T13:36:56.470Z"
+     "updated": "2026-10-28T13:36:56.470Z",
+     "hidden": false
     }
    ]
   },
@@ -507,7 +544,7 @@
   "noteEditorWindow": false,
   "noteEditorWindowReverse": false,
   "noteEditorIsolate": false,
-  "noteEditorDiameter": "600",
+  "noteEditorDiameter": "100",
   "noteEditorWindowDepth": "25",
   "assemblerSeparation": "250",
   "assemblerLabelPosition": true,
