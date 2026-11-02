@@ -4,7 +4,7 @@
   "account.open": {
    "module": "site_account",
    "kind": "action",
-   "label": "Войти через Google",
+   "label": "Войти",
    "via": [
     "click"
    ],
