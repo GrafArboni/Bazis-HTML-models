@@ -879,6 +879,28 @@
     "visualizer/features/drawings/markup.html"
    ]
   },
+  "facades.mark": {
+   "module": "facades",
+   "kind": "action",
+   "label": "Это фасад",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/facades/markup.html"
+   ]
+  },
+  "facades.toggle": {
+   "module": "facades",
+   "kind": "setting",
+   "label": "Скрыть фасады",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/facades/markup.html"
+   ]
+  },
   "finish.edges": {
    "module": "finish",
    "kind": "setting",
