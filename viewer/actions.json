@@ -23,6 +23,61 @@
     "visualizer/features/site_account/markup.html"
    ]
   },
+  "ar.close": {
+   "module": "ar",
+   "kind": "action",
+   "label": "Закрыть",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/ar/markup.html"
+   ]
+  },
+  "ar.open": {
+   "module": "ar",
+   "kind": "action",
+   "label": "В комнате",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/ar/markup.html"
+   ]
+  },
+  "ar.pickAll": {
+   "module": "ar",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/ar/adapter.js"
+   ]
+  },
+  "ar.see": {
+   "module": "ar",
+   "kind": "setting",
+   "label": "Прозрачность",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/ar/markup.html"
+   ]
+  },
+  "ar.start": {
+   "module": "ar",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/ar/adapter.js"
+   ]
+  },
   "assembler.explode": {
    "module": "assembler",
    "kind": "action",
