@@ -37,7 +37,7 @@
   "ar.open": {
    "module": "ar",
    "kind": "action",
-   "label": "В комнате",
+   "label": "AR",
    "via": [
     "click"
    ],
@@ -54,6 +54,17 @@
    ],
    "files": [
     "visualizer/features/ar/adapter.js"
+   ]
+  },
+  "ar.real": {
+   "module": "ar",
+   "kind": "action",
+   "label": "1:1",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/ar/markup.html"
    ]
   },
   "ar.see": {
