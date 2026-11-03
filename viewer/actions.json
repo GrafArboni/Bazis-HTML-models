@@ -89,6 +89,28 @@
     "visualizer/features/ar/adapter.js"
    ]
   },
+  "ar.turn": {
+   "module": "ar",
+   "kind": "action",
+   "label": "Другой стороной",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/ar/markup.html"
+   ]
+  },
+  "ar.walls": {
+   "module": "ar",
+   "kind": "action",
+   "label": "Стены",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/ar/markup.html"
+   ]
+  },
   "assembler.explode": {
    "module": "assembler",
    "kind": "action",
