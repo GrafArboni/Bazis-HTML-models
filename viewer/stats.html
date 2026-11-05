@@ -9,7 +9,10 @@
      предложения по улучшению. Данные — у Worker приёмника (GET /stats и выгрузка
      GET /export, ключ администратора — секрет ADMIN_KEY в Cloudflare); адрес Worker —
      из inbox.json рядом, каталог действий — actions.json рядом (кладёт выпуск).
-     Без ключа пусто. Источник — visualizer/features/usage/stats.html. -->
+     На сайте моделей владелец, вошедший через Google, видит статистику без ключа: её
+     отдаёт Worker сайта (/api/stats, /api/export) со своим ключом (RF-027 W-04). Иначе —
+     ключ в поле; он нигде не хранится (localStorage общего адреса прочёл бы любой скрипт
+     сайта). Источник — visualizer/features/usage/stats.html. -->
 <style>
   :root {
     --bg: #0d151b;
@@ -112,10 +115,8 @@
     'feedback:sent': 'отправил предложение'
   };
   const $ = id => document.getElementById(id);
-  const store = {
-    get: k => { try { return localStorage.getItem(k); } catch (e) { return null; } },
-    set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} }
-  };
+  // ключ, сохранённый прежними выпусками этой страницы (W-04), — стереть
+  try { localStorage.removeItem('bazisStatsKey'); } catch (e) {}
   const el = (tag, props = {}, ...kids) => {
     const node = Object.assign(document.createElement(tag), props);
     for (const kid of kids) if (kid != null) node.append(kid);
@@ -131,7 +132,24 @@
   const titleOf = row => SYSTEM[row.name] || row.label || catalog[row.action]?.label || row.action || row.name;
   const roleTag = role => el('span', { className: 'tag ' + role, textContent: role === 'owner' ? 'владелец' : 'клиент' });
   let endpoint = null,
-    catalog = {};
+    catalog = {},
+    // сайт моделей: вошёл владелец — статистика через Worker сайта, без ключа
+    viaSite = false;
+  async function siteOwner() {
+    try {
+      const response = await fetch('../api/me', { credentials: 'same-origin', cache: 'no-store' });
+      const data = response.ok ? await response.json() : null;
+      return !!data?.user?.owner;
+    } catch (e) {
+      return false;
+    }
+  }
+  // запрос к приёмнику: через Worker сайта по входу или напрямую с ключом
+  function ask(kind, query, key) {
+    return viaSite
+      ? fetch('../api/' + kind + '?' + query, { credentials: 'same-origin', cache: 'no-store' })
+      : fetch(endpoint + '/' + kind + '?' + query, { headers: { Authorization: 'Bearer ' + key }, cache: 'no-store' });
+  }
 
   // каталог действий (actions.json рядом): чего ни разу не вызывали
   async function readCatalog() {
@@ -152,13 +170,12 @@
   }
   async function load() {
     const key = $('key').value.trim();
-    if (!key) return ($('status').textContent = 'Введите ключ администратора.');
-    store.set('bazisStatsKey', key);
+    if (!viaSite && !key) return ($('status').textContent = 'Введите ключ администратора.');
     $('status').textContent = 'Загружаю…';
     try {
-      if (!endpoint) await Promise.all([readEndpoint(), readCatalog()]);
+      if (!endpoint && !viaSite) await Promise.all([readEndpoint(), readCatalog()]);
       const query = new URLSearchParams({ days: $('days').value, role: $('role').value, page: $('page').value });
-      const response = await fetch(endpoint + '/stats?' + query, { headers: { Authorization: 'Bearer ' + key }, cache: 'no-store' });
+      const response = await ask('stats', query, key);
       const data = await response.json().catch(() => ({}));
       if (!response.ok || !data.ok) throw new Error(data.error || 'ошибка ' + response.status);
       render(data);
@@ -269,17 +286,17 @@
   // выгрузка для анализа: все события срока постранично, визиты и каталог
   async function exportJson() {
     const key = $('key').value.trim();
-    if (!key) return ($('status').textContent = 'Введите ключ администратора.');
+    if (!viaSite && !key) return ($('status').textContent = 'Введите ключ администратора.');
     $('status').textContent = 'Выгружаю…';
     try {
-      if (!endpoint) await Promise.all([readEndpoint(), readCatalog()]);
+      if (!endpoint && !viaSite) await Promise.all([readEndpoint(), readCatalog()]);
       const filters = { days: $('days').value, role: $('role').value, page: $('page').value },
         out = { schema: 2, exported: new Date().toISOString(), filters, visits: [], events: [], actions: catalog };
       const visits = new Map();
       let after = 0;
       do {
         const query = new URLSearchParams({ ...filters, after });
-        const response = await fetch(endpoint + '/export?' + query, { headers: { Authorization: 'Bearer ' + key }, cache: 'no-store' });
+        const response = await ask('export', query, key);
         const data = await response.json().catch(() => ({}));
         if (!response.ok || !data.ok) throw new Error(data.error || 'ошибка ' + response.status);
         // визиты приходят к своим событиям — на разных страницах бывают одни и те же
@@ -302,14 +319,19 @@
     }
   }
 
-  $('key').value = store.get('bazisStatsKey') || '';
   $('load').onclick = load;
   $('export').onclick = exportJson;
-  for (const id of ['days', 'role', 'page']) $(id).onchange = () => $('key').value && load();
+  for (const id of ['days', 'role', 'page']) $(id).onchange = () => (viaSite || $('key').value) && load();
   $('key').onkeydown = e => {
     if (e.key === 'Enter') load(); // не «&&»: false отменил бы нажатие других клавиш
   };
-  if ($('key').value) load();
+  siteOwner().then(async owner => {
+    if (!owner) return;
+    viaSite = true;
+    $('key').hidden = true;
+    await readCatalog();
+    load();
+  });
 </script>
 </body>
 </html>

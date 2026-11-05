@@ -12,6 +12,17 @@
     "visualizer/features/site_account/markup.html"
    ]
   },
+  "account.importSettings": {
+   "module": "site_account",
+   "kind": "action",
+   "label": "Перенести настройки этого браузера",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/site_account/markup.html"
+   ]
+  },
   "account.open": {
    "module": "site_account",
    "kind": "action",
@@ -103,7 +114,7 @@
   "ar.walls": {
    "module": "ar",
    "kind": "action",
-   "label": "Стены",
+   "label": "Забыть стены",
    "via": [
     "click"
    ],
@@ -454,6 +465,17 @@
    "module": "drawings",
    "kind": "action",
    "label": "Погонаж",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.addMaterials": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "Материалы",
    "via": [
     "click"
    ],
@@ -850,6 +872,17 @@
    "module": "drawings",
    "kind": "nav",
    "label": "Погонаж",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.tplMaterials": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "Материалы",
    "via": [
     "click"
    ],
