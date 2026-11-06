@@ -1814,6 +1814,15 @@
     "visualizer/features/visibility/markup.html"
    ]
   },
+  "visibility.path": {
+   "module": "visibility",
+   "kind": "nav",
+   "label": "Путь в меню",
+   "via": [],
+   "files": [
+    "visualizer/features/visibility/adapter.js"
+   ]
+  },
   "visibility.restoreAll": {
    "module": "visibility",
    "kind": "action",
