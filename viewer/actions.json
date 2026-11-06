@@ -1486,6 +1486,83 @@
     "visualizer/features/range_entry/adapter.js"
    ]
   },
+  "renderMode.backgroundColor": {
+   "module": "render_mode",
+   "kind": "setting",
+   "label": "Цвет",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/render_mode/markup.html"
+   ]
+  },
+  "renderMode.backgroundDark": {
+   "module": "render_mode",
+   "kind": "setting",
+   "label": "Тёмный",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/render_mode/markup.html"
+   ]
+  },
+  "renderMode.backgroundLight": {
+   "module": "render_mode",
+   "kind": "setting",
+   "label": "Светлый",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/render_mode/markup.html"
+   ]
+  },
+  "renderMode.basic": {
+   "module": "render_mode",
+   "kind": "setting",
+   "label": "Базовый",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/render_mode/markup.html"
+   ]
+  },
+  "renderMode.gi": {
+   "module": "render_mode",
+   "kind": "setting",
+   "label": "GI",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/render_mode/markup.html"
+   ]
+  },
+  "renderMode.save": {
+   "module": "render_mode",
+   "kind": "action",
+   "label": "Сохранить картинку",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/render_mode/markup.html"
+   ]
+  },
+  "renderMode.toggle": {
+   "module": "render_mode",
+   "kind": "setting",
+   "label": "Рендер",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/render_mode/markup.html"
+   ]
+  },
   "sceneTheme.light": {
    "module": "scene_theme",
    "kind": "setting",
@@ -1843,6 +1920,72 @@
    ],
    "files": [
     "visualizer/features/visibility/markup.html"
+   ]
+  },
+  "walk.back": {
+   "module": "walk",
+   "kind": "action",
+   "label": "Назад",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/walk/markup.html"
+   ]
+  },
+  "walk.enter": {
+   "module": "walk",
+   "kind": "camera",
+   "label": "Ходьба",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/walk/adapter.js"
+   ]
+  },
+  "walk.exit": {
+   "module": "walk",
+   "kind": "action",
+   "label": "Выйти",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/walk/markup.html"
+   ]
+  },
+  "walk.forward": {
+   "module": "walk",
+   "kind": "action",
+   "label": "Вперёд",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/walk/markup.html"
+   ]
+  },
+  "walk.height": {
+   "module": "walk",
+   "kind": "setting",
+   "label": "Рост, мм",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/walk/markup.html"
+   ]
+  },
+  "walk.toggle": {
+   "module": "walk",
+   "kind": "setting",
+   "label": "Ходьба",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/walk/markup.html"
    ]
   }
  }
