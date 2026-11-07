@@ -67,6 +67,39 @@
     "visualizer/features/ar/adapter.js"
    ]
   },
+  "ar.place": {
+   "module": "ar",
+   "kind": "setting",
+   "label": "К стене",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/ar/markup.html"
+   ]
+  },
+  "ar.placeFloor": {
+   "module": "ar",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/ar/adapter.js"
+   ]
+  },
+  "ar.placeWall": {
+   "module": "ar",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/ar/adapter.js"
+   ]
+  },
   "ar.real": {
    "module": "ar",
    "kind": "action",
@@ -560,6 +593,28 @@
     "visualizer/features/drawings/markup.html"
    ]
   },
+  "drawings.exclusionsTabHardware": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.exclusionsTabMaterials": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
   "drawings.history": {
    "module": "drawings",
    "kind": "nav",
@@ -824,6 +879,39 @@
     "visualizer/features/drawings/adapter.js"
    ]
   },
+  "drawings.slotScaleAuto": {
+   "module": "drawings",
+   "kind": "setting",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.slotScaleDown": {
+   "module": "drawings",
+   "kind": "setting",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.slotScaleUp": {
+   "module": "drawings",
+   "kind": "setting",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
   "drawings.stampEdit": {
    "module": "drawings",
    "kind": "action",
@@ -943,6 +1031,39 @@
    ],
    "files": [
     "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.viewScaleAuto": {
+   "module": "drawings",
+   "kind": "setting",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.viewScaleDown": {
+   "module": "drawings",
+   "kind": "setting",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.viewScaleUp": {
+   "module": "drawings",
+   "kind": "setting",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
    ]
   },
   "drawings.zones": {
