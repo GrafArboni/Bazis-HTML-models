@@ -789,6 +789,17 @@
     "visualizer/features/drawings/adapter.js"
    ]
   },
+  "drawings.pickPoint": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
   "drawings.pickTarget": {
    "module": "drawings",
    "kind": "action",
