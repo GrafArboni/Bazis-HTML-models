@@ -571,6 +571,17 @@
     "visualizer/features/drawings/markup.html"
    ]
   },
+  "drawings.choice": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
   "drawings.close": {
    "module": "drawings",
    "kind": "nav",
@@ -758,6 +769,26 @@
     "visualizer/features/drawings/markup.html"
    ]
   },
+  "drawings.partTitleTemplate": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.pickHole": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "Выбор отверстия на листе детали",
+   "via": [],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
   "drawings.pickTarget": {
    "module": "drawings",
    "kind": "action",
@@ -912,17 +943,6 @@
     "visualizer/features/drawings/adapter.js"
    ]
   },
-  "drawings.stampEdit": {
-   "module": "drawings",
-   "kind": "action",
-   "label": "",
-   "via": [
-    "click"
-   ],
-   "files": [
-    "visualizer/features/drawings/adapter.js"
-   ]
-  },
   "drawings.templateViewAdd": {
    "module": "drawings",
    "kind": "action",
@@ -943,6 +963,17 @@
    ],
    "files": [
     "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.thinLines": {
+   "module": "drawings",
+   "kind": "setting",
+   "label": "Тонкие линии",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
    ]
   },
   "drawings.tplHardware": {
@@ -1518,6 +1549,39 @@
     "visualizer/features/notes/markup.html"
    ]
   },
+  "notes.camera": {
+   "module": "notes",
+   "kind": "action",
+   "label": "Камера",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/notes/markup.html"
+   ]
+  },
+  "notes.claim": {
+   "module": "notes",
+   "kind": "setting",
+   "label": "Рекламация",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/notes/markup.html"
+   ]
+  },
+  "notes.claimFilter": {
+   "module": "notes",
+   "kind": "setting",
+   "label": "Только рекламации",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/notes/markup.html"
+   ]
+  },
   "notes.list": {
    "module": "notes",
    "kind": "nav",
@@ -1545,6 +1609,37 @@
    "module": "notes",
    "kind": "nav",
    "label": "Заметки",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/notes/adapter.js"
+   ]
+  },
+  "notes.pickDelay": {
+   "module": "notes",
+   "kind": "setting",
+   "label": "Список под курсором: задержка",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/notes/markup.html"
+   ]
+  },
+  "notes.pickList": {
+   "module": "notes",
+   "kind": "nav",
+   "label": "Детали под курсором",
+   "via": [],
+   "files": [
+    "visualizer/features/notes/adapter.js"
+   ]
+  },
+  "notes.pickPart": {
+   "module": "notes",
+   "kind": "action",
+   "label": "",
    "via": [
     "click"
    ],
