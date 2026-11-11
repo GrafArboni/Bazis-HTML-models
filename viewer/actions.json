@@ -265,6 +265,28 @@
     "visualizer/features/assembler/markup.html"
    ]
   },
+  "autoDimensions.open": {
+   "module": "auto_dimensions",
+   "kind": "nav",
+   "label": "Размеры",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/auto_dimensions/adapter.js"
+   ]
+  },
+  "autoDimensions.toggle": {
+   "module": "auto_dimensions",
+   "kind": "setting",
+   "label": "Показывать авторазмеры",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/auto_dimensions/markup.html"
+   ]
+  },
   "camera.keys": {
    "module": "navigation",
    "kind": "camera",
