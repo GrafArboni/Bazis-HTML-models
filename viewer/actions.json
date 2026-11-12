@@ -287,6 +287,17 @@
     "visualizer/features/auto_dimensions/markup.html"
    ]
   },
+  "brand.card": {
+   "module": "brand",
+   "kind": "nav",
+   "label": "Визитка BOBUKH",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/brand/markup.html"
+   ]
+  },
   "camera.keys": {
    "module": "navigation",
    "kind": "camera",
