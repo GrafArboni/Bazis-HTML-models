@@ -1702,6 +1702,39 @@
     "visualizer/features/notes/markup.html"
    ]
   },
+  "opening.doors": {
+   "module": "opening",
+   "kind": "setting",
+   "label": "Открыть двери",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/opening/markup.html"
+   ]
+  },
+  "opening.drawers": {
+   "module": "opening",
+   "kind": "setting",
+   "label": "Выдвинуть ящики",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/opening/markup.html"
+   ]
+  },
+  "opening.item": {
+   "module": "opening",
+   "kind": "action",
+   "label": "Открыть",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/opening/markup.html"
+   ]
+  },
   "panelHardware.toggle": {
    "module": "panel_hardware",
    "kind": "setting",
