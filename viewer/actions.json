@@ -604,6 +604,50 @@
     "visualizer/features/drawings/markup.html"
    ]
   },
+  "drawings.apartDown": {
+   "module": "drawings",
+   "kind": "setting",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.apartUp": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.apartView": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.arrangeProjections": {
+   "module": "drawings",
+   "kind": "setting",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
   "drawings.buildKit": {
    "module": "drawings",
    "kind": "action",
@@ -998,6 +1042,39 @@
     "visualizer/features/drawings/adapter.js"
    ]
   },
+  "drawings.stampLabelDown": {
+   "module": "drawings",
+   "kind": "setting",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.stampLabelReset": {
+   "module": "drawings",
+   "kind": "setting",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.stampLabelUp": {
+   "module": "drawings",
+   "kind": "setting",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
   "drawings.templateViewAdd": {
    "module": "drawings",
    "kind": "action",
@@ -1142,6 +1219,17 @@
    ]
   },
   "drawings.viewScaleUp": {
+   "module": "drawings",
+   "kind": "setting",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.viewTurn": {
    "module": "drawings",
    "kind": "setting",
    "label": "",
@@ -1426,6 +1514,182 @@
    ],
    "files": [
     "visualizer/features/icon_controls/markup.html"
+   ]
+  },
+  "labelStyle.box": {
+   "module": "label_style",
+   "kind": "setting",
+   "label": "Подложка под цифрой",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/label_style/markup.html"
+   ]
+  },
+  "labelStyle.digits0": {
+   "module": "label_style",
+   "kind": "setting",
+   "label": "0",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/label_style/markup.html"
+   ]
+  },
+  "labelStyle.digits1": {
+   "module": "label_style",
+   "kind": "setting",
+   "label": "0,0",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/label_style/markup.html"
+   ]
+  },
+  "labelStyle.digits2": {
+   "module": "label_style",
+   "kind": "setting",
+   "label": "0,00",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/label_style/markup.html"
+   ]
+  },
+  "labelStyle.dimensionColor": {
+   "module": "label_style",
+   "kind": "nav",
+   "label": "Цвет размеров",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/label_style/markup.html"
+   ]
+  },
+  "labelStyle.dimensionFont": {
+   "module": "label_style",
+   "kind": "setting",
+   "label": "Поправка размера текста размеров, процентов",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/label_style/markup.html"
+   ]
+  },
+  "labelStyle.endsArrows": {
+   "module": "label_style",
+   "kind": "setting",
+   "label": "Стрелки",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/label_style/markup.html"
+   ]
+  },
+  "labelStyle.endsDots": {
+   "module": "label_style",
+   "kind": "setting",
+   "label": "Точки",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/label_style/markup.html"
+   ]
+  },
+  "labelStyle.endsTicks": {
+   "module": "label_style",
+   "kind": "setting",
+   "label": "Засечки",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/label_style/markup.html"
+   ]
+  },
+  "labelStyle.lineWidth": {
+   "module": "label_style",
+   "kind": "setting",
+   "label": "Толщина линий подписей, пикселей",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/label_style/markup.html"
+   ]
+  },
+  "labelStyle.open": {
+   "module": "label_style",
+   "kind": "nav",
+   "label": "Вид подписей",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/label_style/markup.html"
+   ]
+  },
+  "labelStyle.reset": {
+   "module": "label_style",
+   "kind": "setting",
+   "label": "Как было",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/label_style/markup.html"
+   ]
+  },
+  "labelStyle.textSize": {
+   "module": "label_style",
+   "kind": "setting",
+   "label": "Размер текста подписей, пикселей",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/label_style/markup.html"
+   ]
+  },
+  "labelStyle.units": {
+   "module": "label_style",
+   "kind": "setting",
+   "label": "Единицы «мм»",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/label_style/markup.html"
+   ]
+  },
+  "labelStyle.weightBold": {
+   "module": "label_style",
+   "kind": "setting",
+   "label": "Жирная",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/label_style/markup.html"
+   ]
+  },
+  "labelStyle.weightNormal": {
+   "module": "label_style",
+   "kind": "setting",
+   "label": "Обычная",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/label_style/markup.html"
    ]
   },
   "materialLabels.all": {
@@ -1945,6 +2209,17 @@
     "visualizer/features/section/markup.html"
    ]
   },
+  "section.snap": {
+   "module": "section",
+   "kind": "setting",
+   "label": "Привязка к осям",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/section/markup.html"
+   ]
+  },
   "sectionViews.list": {
    "module": "section_views",
    "kind": "nav",
@@ -1967,6 +2242,17 @@
     "visualizer/features/section_views/markup.html"
    ]
   },
+  "sectionViews.revert": {
+   "module": "section_views",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/section_views/adapter.js"
+   ]
+  },
   "sectionViews.save": {
    "module": "section_views",
    "kind": "action",
@@ -1982,6 +2268,28 @@
    "module": "section_views",
    "kind": "action",
    "label": "Сохранить в список сечений",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/section_views/markup.html"
+   ]
+  },
+  "sectionViews.savePosition": {
+   "module": "section_views",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/section_views/adapter.js"
+   ]
+  },
+  "sectionViews.savePositionFromWindow": {
+   "module": "section_views",
+   "kind": "action",
+   "label": "Сохранить положение",
    "via": [
     "click"
    ],
