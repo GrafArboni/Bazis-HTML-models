@@ -2263,7 +2263,7 @@
     "longpress"
    ],
    "files": [
-    "visualizer/features/notes/adapter.js"
+    "visualizer/features/notes/parts/cards.js"
    ]
   },
   "notes.open": {
@@ -2274,7 +2274,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/notes/adapter.js"
+    "visualizer/features/notes/parts/list.js"
    ]
   },
   "notes.pickDelay": {
@@ -2294,7 +2294,7 @@
    "label": "Детали под курсором",
    "via": [],
    "files": [
-    "visualizer/features/notes/adapter.js"
+    "visualizer/features/notes/parts/place.js"
    ]
   },
   "notes.pickPart": {
@@ -2305,7 +2305,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/notes/adapter.js"
+    "visualizer/features/notes/parts/place.js"
    ]
   },
   "notes.show": {
