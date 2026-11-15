@@ -507,7 +507,7 @@
   },
   "drawings.addImage": {
    "module": "drawings",
-   "kind": "action",
+   "kind": "nav",
    "label": "Картинка",
    "via": [
     "click"
@@ -648,6 +648,28 @@
     "visualizer/features/drawings/adapter.js"
    ]
   },
+  "drawings.blockCopy": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.blockDelete": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
   "drawings.buildKit": {
    "module": "drawings",
    "kind": "action",
@@ -747,6 +769,50 @@
     "visualizer/features/drawings/adapter.js"
    ]
   },
+  "drawings.hwTableInherit": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.imageFitBlock": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.imageFromFile": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.imageFromKit": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
   "drawings.keyEnter": {
    "module": "drawings",
    "kind": "action",
@@ -772,6 +838,28 @@
   "drawings.kitSettings": {
    "module": "drawings",
    "kind": "nav",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.layerDown": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.layerUp": {
+   "module": "drawings",
+   "kind": "action",
    "label": "",
    "via": [
     "click"
@@ -934,7 +1022,7 @@
   },
   "drawings.replaceImage": {
    "module": "drawings",
-   "kind": "action",
+   "kind": "nav",
    "label": "",
    "via": [
     "click"
@@ -1075,6 +1163,205 @@
     "visualizer/features/drawings/adapter.js"
    ]
   },
+  "drawings.templateDeleteCancel": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.templateDeleteOk": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.templateFont": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.templateFontsForNew": {
+   "module": "drawings",
+   "kind": "setting",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.templateForNew": {
+   "module": "drawings",
+   "kind": "setting",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.templateImage": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "Картинка",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.templateLoad": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "Загрузить шаблон…",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.templateLoadBack": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.templateLoadGo": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.templateLoadPick": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.templateMine": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "Мои шаблоны…",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js",
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.templateMode": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "Настройки шаблона",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.templateOpenBlock": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.templateSave": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "Сохранить шаблон…",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
+  "drawings.templateSaveForNew": {
+   "module": "drawings",
+   "kind": "setting",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.templateSaveGo": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.templateSheetFollow": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.templateText": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "Текст",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
+   ]
+  },
   "drawings.templateViewAdd": {
    "module": "drawings",
    "kind": "action",
@@ -1087,6 +1374,61 @@
    ]
   },
   "drawings.templateViewDrop": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.textColor": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.textSizeDown": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.textSizeFrom": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.textSizeReset": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/adapter.js"
+   ]
+  },
+  "drawings.textSizeUp": {
    "module": "drawings",
    "kind": "action",
    "label": "",
@@ -1988,6 +2330,17 @@
     "visualizer/features/opening/markup.html"
    ]
   },
+  "opening.drawerReserve": {
+   "module": "opening",
+   "kind": "setting",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/opening/adapter.js"
+   ]
+  },
   "opening.drawers": {
    "module": "opening",
    "kind": "setting",
@@ -2381,6 +2734,28 @@
    "via": [],
    "files": [
     "visualizer/features/tree_folders/adapter.js"
+   ]
+  },
+  "userSettings.close": {
+   "module": "user_settings",
+   "kind": "nav",
+   "label": "Закрыть",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/user_settings/markup.html"
+   ]
+  },
+  "userSettings.open": {
+   "module": "user_settings",
+   "kind": "nav",
+   "label": "Настройки",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/user_settings/markup.html"
    ]
   },
   "view.fit": {
