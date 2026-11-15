@@ -535,7 +535,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/dims.js"
    ]
   },
   "drawings.addLinear": {
@@ -612,7 +612,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/props_fields.js"
    ]
   },
   "drawings.apartUp": {
@@ -623,7 +623,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/props_fields.js"
    ]
   },
   "drawings.apartView": {
@@ -634,7 +634,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/props_fields.js"
    ]
   },
   "drawings.arrangeProjections": {
@@ -645,7 +645,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/props.js"
    ]
   },
   "drawings.blockCopy": {
@@ -656,7 +656,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/textimg.js"
    ]
   },
   "drawings.blockDelete": {
@@ -667,7 +667,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/textimg.js"
    ]
   },
   "drawings.buildKit": {
@@ -689,7 +689,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/props_fields.js"
    ]
   },
   "drawings.close": {
@@ -722,7 +722,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/exclude.js"
    ]
   },
   "drawings.exclusionsTabMaterials": {
@@ -733,7 +733,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/exclude.js"
    ]
   },
   "drawings.history": {
@@ -766,7 +766,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/edit_history.js"
    ]
   },
   "drawings.hwTableInherit": {
@@ -777,7 +777,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/props_fields.js"
    ]
   },
   "drawings.imageFitBlock": {
@@ -788,7 +788,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/textimg.js"
    ]
   },
   "drawings.imageFromFile": {
@@ -799,7 +799,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/textimg.js"
    ]
   },
   "drawings.imageFromKit": {
@@ -810,7 +810,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/textimg.js"
    ]
   },
   "drawings.keyEnter": {
@@ -843,7 +843,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/sheets.js"
    ]
   },
   "drawings.layerDown": {
@@ -854,7 +854,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/textimg.js"
    ]
   },
   "drawings.layerUp": {
@@ -865,7 +865,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/textimg.js"
    ]
   },
   "drawings.logo": {
@@ -876,7 +876,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/setup.js"
    ]
   },
   "drawings.moveParts": {
@@ -887,7 +887,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/props_fields.js"
    ]
   },
   "drawings.moveToNewSheet": {
@@ -898,7 +898,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/props.js"
    ]
   },
   "drawings.moveToSheet": {
@@ -909,7 +909,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/props.js"
    ]
   },
   "drawings.moveToSheetDrag": {
@@ -920,7 +920,7 @@
     "drag"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/pointer.js"
    ]
   },
   "drawings.moveToSheetPick": {
@@ -931,7 +931,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/props.js"
    ]
   },
   "drawings.open": {
@@ -953,7 +953,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/props.js"
    ]
   },
   "drawings.pickHole": {
@@ -962,7 +962,7 @@
    "label": "Выбор отверстия на листе детали",
    "via": [],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/sheet_draw.js"
    ]
   },
   "drawings.pickPoint": {
@@ -973,7 +973,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/pick.js"
    ]
   },
   "drawings.pickTarget": {
@@ -984,7 +984,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/pick.js"
    ]
   },
   "drawings.print": {
@@ -1028,7 +1028,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/textimg.js"
    ]
   },
   "drawings.sectionTemplate": {
@@ -1039,7 +1039,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/setup.js"
    ]
   },
   "drawings.setupTab": {
@@ -1050,7 +1050,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/setup.js"
    ]
   },
   "drawings.sheet": {
@@ -1061,7 +1061,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/sheets.js"
    ]
   },
   "drawings.sheetSectionSettings": {
@@ -1072,7 +1072,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/sheets.js"
    ]
   },
   "drawings.sheetZonesReset": {
@@ -1083,7 +1083,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/props.js"
    ]
   },
   "drawings.sheetZonesToTemplate": {
@@ -1094,7 +1094,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/props.js"
    ]
   },
   "drawings.slotScaleAuto": {
@@ -1105,7 +1105,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/props_fields.js"
    ]
   },
   "drawings.slotScaleDown": {
@@ -1116,7 +1116,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/props_fields.js"
    ]
   },
   "drawings.slotScaleUp": {
@@ -1127,7 +1127,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/props_fields.js"
    ]
   },
   "drawings.stampLabelDown": {
@@ -1138,7 +1138,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/props_fields.js"
    ]
   },
   "drawings.stampLabelReset": {
@@ -1149,7 +1149,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/props_fields.js"
    ]
   },
   "drawings.stampLabelUp": {
@@ -1160,7 +1160,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/props_fields.js"
    ]
   },
   "drawings.templateDeleteCancel": {
@@ -1171,7 +1171,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/tplmode.js"
    ]
   },
   "drawings.templateDeleteOk": {
@@ -1182,7 +1182,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/tplmode.js"
    ]
   },
   "drawings.templateFont": {
@@ -1193,7 +1193,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/tplmode.js"
    ]
   },
   "drawings.templateFontsForNew": {
@@ -1204,7 +1204,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/tplmode.js"
    ]
   },
   "drawings.templateForNew": {
@@ -1215,7 +1215,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/tplmode.js"
    ]
   },
   "drawings.templateImage": {
@@ -1248,7 +1248,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/tplmode.js"
    ]
   },
   "drawings.templateLoadGo": {
@@ -1259,7 +1259,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/tplmode.js"
    ]
   },
   "drawings.templateLoadPick": {
@@ -1270,7 +1270,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/tplmode.js"
    ]
   },
   "drawings.templateMine": {
@@ -1281,8 +1281,8 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js",
-    "visualizer/features/drawings/markup.html"
+    "visualizer/features/drawings/markup.html",
+    "visualizer/features/drawings/parts/tplmode.js"
    ]
   },
   "drawings.templateMode": {
@@ -1304,7 +1304,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/textimg.js"
    ]
   },
   "drawings.templateSave": {
@@ -1326,7 +1326,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/tplmode.js"
    ]
   },
   "drawings.templateSaveGo": {
@@ -1337,7 +1337,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/tplmode.js"
    ]
   },
   "drawings.templateSheetFollow": {
@@ -1348,7 +1348,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/tplmode.js"
    ]
   },
   "drawings.templateText": {
@@ -1370,7 +1370,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/zones.js"
    ]
   },
   "drawings.templateViewDrop": {
@@ -1381,7 +1381,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/zones.js"
    ]
   },
   "drawings.textColor": {
@@ -1392,7 +1392,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/textimg.js"
    ]
   },
   "drawings.textSizeDown": {
@@ -1403,7 +1403,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/textimg.js"
    ]
   },
   "drawings.textSizeFrom": {
@@ -1414,7 +1414,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/textimg.js"
    ]
   },
   "drawings.textSizeReset": {
@@ -1425,7 +1425,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/textimg.js"
    ]
   },
   "drawings.textSizeUp": {
@@ -1436,7 +1436,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/textimg.js"
    ]
   },
   "drawings.thinLines": {
@@ -1546,7 +1546,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/props_fields.js"
    ]
   },
   "drawings.viewScaleDown": {
@@ -1557,7 +1557,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/props_fields.js"
    ]
   },
   "drawings.viewScaleUp": {
@@ -1568,7 +1568,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/props_fields.js"
    ]
   },
   "drawings.viewTurn": {
@@ -1579,7 +1579,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/props_fields.js"
    ]
   },
   "drawings.zones": {
@@ -1601,7 +1601,7 @@
     "click"
    ],
    "files": [
-    "visualizer/features/drawings/adapter.js"
+    "visualizer/features/drawings/parts/props.js"
    ]
   },
   "drawings.zoomFit": {
