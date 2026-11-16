@@ -1351,6 +1351,17 @@
     "visualizer/features/drawings/parts/tplmode.js"
    ]
   },
+  "drawings.templateSlotZone": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/parts/zones.js"
+   ]
+  },
   "drawings.templateText": {
    "module": "drawings",
    "kind": "action",
