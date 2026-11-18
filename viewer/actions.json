@@ -736,6 +736,28 @@
     "visualizer/features/drawings/parts/exclude.js"
    ]
   },
+  "drawings.gridMark": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/parts/sheet_draw.js"
+   ]
+  },
+  "drawings.gridMarkShow": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/parts/props.js"
+   ]
+  },
   "drawings.history": {
    "module": "drawings",
    "kind": "nav",
@@ -987,6 +1009,17 @@
     "visualizer/features/drawings/parts/pick.js"
    ]
   },
+  "drawings.portraitDefault": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/parts/props.js"
+   ]
+  },
   "drawings.print": {
    "module": "drawings",
    "kind": "action",
@@ -1064,6 +1097,17 @@
     "visualizer/features/drawings/parts/sheets.js"
    ]
   },
+  "drawings.sheetRelayout": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/parts/props.js"
+   ]
+  },
   "drawings.sheetSectionSettings": {
    "module": "drawings",
    "kind": "action",
@@ -1128,6 +1172,17 @@
    ],
    "files": [
     "visualizer/features/drawings/parts/props_fields.js"
+   ]
+  },
+  "drawings.specRelayout": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/parts/props.js"
    ]
   },
   "drawings.stampLabelDown": {
@@ -1593,6 +1648,116 @@
     "visualizer/features/drawings/parts/props_fields.js"
    ]
   },
+  "drawings.zoneEdge": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/parts/sheet_draw.js"
+   ]
+  },
+  "drawings.zoneFreshCancel": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/parts/zones.js"
+   ]
+  },
+  "drawings.zoneHelp": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/parts/props.js"
+   ]
+  },
+  "drawings.zoneLine": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/parts/sheet_draw.js"
+   ]
+  },
+  "drawings.zoneLinePin": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/parts/zones.js"
+   ]
+  },
+  "drawings.zonePick": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/parts/props.js"
+   ]
+  },
+  "drawings.zoneRebuild": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/parts/props.js"
+   ]
+  },
+  "drawings.zoneRebuildGo": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/parts/zones.js"
+   ]
+  },
+  "drawings.zoneRemove": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/parts/zones.js"
+   ]
+  },
+  "drawings.zoneTag": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/parts/sheet_draw.js"
+   ]
+  },
   "drawings.zones": {
    "module": "drawings",
    "kind": "nav",
@@ -1748,7 +1913,7 @@
   "guide.open": {
    "module": "guide",
    "kind": "nav",
-   "label": "Демонстрация",
+   "label": "Справочник",
    "via": [
     "click"
    ],
@@ -2175,28 +2340,6 @@
    ],
    "files": [
     "visualizer/templates/interactive_model_template.html"
-   ]
-  },
-  "menu.developer": {
-   "module": "toolbar",
-   "kind": "action",
-   "label": "",
-   "via": [
-    "click"
-   ],
-   "files": [
-    "visualizer/features/toolbar/adapter.js"
-   ]
-  },
-  "menu.open": {
-   "module": "toolbar",
-   "kind": "nav",
-   "label": "Меню",
-   "via": [
-    "click"
-   ],
-   "files": [
-    "visualizer/features/toolbar/markup.html"
    ]
   },
   "menu.show": {
