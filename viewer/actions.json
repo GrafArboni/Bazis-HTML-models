@@ -210,6 +210,17 @@
     "visualizer/features/assembler/markup.html"
    ]
   },
+  "assembler.links": {
+   "module": "assembler",
+   "kind": "setting",
+   "label": "Линии связи",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/assembler/markup.html"
+   ]
+  },
   "assembler.open": {
    "module": "assembler",
    "kind": "nav",
@@ -241,6 +252,28 @@
    ],
    "files": [
     "visualizer/features/assembler/markup.html"
+   ]
+  },
+  "assembler.partHardware": {
+   "module": "assembler",
+   "kind": "setting",
+   "label": "Фурнитура детали",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/assembler/markup.html"
+   ]
+  },
+  "assembler.partHardwareItem": {
+   "module": "assembler",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/assembler/adapter.js"
    ]
   },
   "assembler.separation": {
@@ -681,6 +714,17 @@
     "visualizer/features/drawings/markup.html"
    ]
   },
+  "drawings.buttonLabels": {
+   "module": "drawings",
+   "kind": "setting",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/parts/tplmode.js"
+   ]
+  },
   "drawings.choice": {
    "module": "drawings",
    "kind": "action",
@@ -1073,6 +1117,17 @@
    ],
    "files": [
     "visualizer/features/drawings/parts/setup.js"
+   ]
+  },
+  "drawings.settings": {
+   "module": "drawings",
+   "kind": "nav",
+   "label": "Настройки чертежей…",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/markup.html"
    ]
   },
   "drawings.setupTab": {
@@ -1794,7 +1849,7 @@
   "drawings.zoomIn": {
    "module": "drawings",
    "kind": "action",
-   "label": "＋",
+   "label": "Увеличить",
    "via": [
     "click"
    ],
@@ -1805,7 +1860,7 @@
   "drawings.zoomOut": {
    "module": "drawings",
    "kind": "action",
-   "label": "−",
+   "label": "Уменьшить",
    "via": [
     "click"
    ],
