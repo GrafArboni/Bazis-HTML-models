@@ -747,6 +747,61 @@
     "visualizer/features/drawings/markup.html"
    ]
   },
+  "drawings.dimSetAddPoint": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/parts/dim_sets.js"
+   ]
+  },
+  "drawings.dimSetBase": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/parts/dim_sets.js"
+   ]
+  },
+  "drawings.dimSetDelete": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/parts/dim_sets.js"
+   ]
+  },
+  "drawings.dimSetLine": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/parts/dim_sets.js"
+   ]
+  },
+  "drawings.dimSetShowLinks": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/parts/dim_sets.js"
+   ]
+  },
   "drawings.exclude": {
    "module": "drawings",
    "kind": "nav",
@@ -990,6 +1045,28 @@
    ]
   },
   "drawings.moveToSheetPick": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/parts/props.js"
+   ]
+  },
+  "drawings.notchDimAuto": {
+   "module": "drawings",
+   "kind": "action",
+   "label": "",
+   "via": [
+    "click"
+   ],
+   "files": [
+    "visualizer/features/drawings/parts/dims.js"
+   ]
+  },
+  "drawings.notchDimsRestore": {
    "module": "drawings",
    "kind": "action",
    "label": "",
